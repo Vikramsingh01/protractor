@@ -1,0 +1,34 @@
+export class InstitutionalReport {
+       institutionalReportId: any;
+      eventId: any;
+      requestedDate: any;
+      requiredByDate: any;
+      allocatedDate: any;
+      videoLinkYesNoId: any;
+      spgVersion: any;
+      spgUpdateUser: any;
+      requestedReportTypeId: any;
+      completedDate: any;
+      institutionId: any;
+      deliveredToEstablishment: any;
+      dateAbandoned: any;
+      institutionalReportProviderId: any;
+      institutionalReportTeam: any;
+      institutionalReportOfficer: any;
+      note: any;
+      spgInstitutionalReportId: any;
+      createdBy: any;
+      createdByUserId: any;
+      createdDate: any;
+      modifiedBy: any;
+      modifiedByUserId: any;
+      modifiedDate: any;
+      deleted: any;
+      deletedBy: any;
+      deletedByUserId: any;
+      deletedDate: any;
+      locked: any;
+      version: any;
+      profileId:number;
+      documents:any;
+  }

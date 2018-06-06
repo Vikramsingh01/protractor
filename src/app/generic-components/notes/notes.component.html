@@ -1,0 +1,10 @@
+
+<div [formGroup]="form" class="form-group">
+  <label for="note" title="{{label}}">{{label}} </label>
+  <textarea [formControlName]="controlName" class="form-control" id="note"></textarea>
+</div>
+<div [formGroup]="form" *ngIf="action == 'Update'">
+  <label for="OldNote" title="Previous {{label}}">Previous {{label}} </label>
+    <textarea class="form-control detail-value-note ng-untouched ng-pristine ng-valid"  id="OldNote" onscroll="true" readonly="" ng-reflect-name="note">{{previousNotes}}</textarea>
+  </div>
+ 

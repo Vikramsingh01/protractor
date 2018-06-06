@@ -1,0 +1,129 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title">Pending Transfer</h2>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Pending Transfer" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button class="btn btn-default btn-white pull-right" [routerLink]="['new']">Add</button>
+						</div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter" [selected]="false">
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+
+									<form [formGroup]="filterForm" (ngSubmit)="onSubmit()" autocomplete="off">
+										<div class="row">
+											<div class="form-group col-sm-6">
+												<label for="dateFrom">From Date</label>
+												<date-picker [controlName]="'dateFrom'" [form]="filterForm" [id]="dateFrom"></date-picker>
+												<control-messages [control]="filterForm.controls.dateFrom"></control-messages>
+											</div>
+											<div class="form-group col-sm-6">
+												<label for="dateTo">To Date</label>
+												<date-picker [controlName]="'dateTo'" [form]="filterForm" [id]="dateTo"></date-picker>
+												<control-messages [control]="filterForm.controls.dateTo"></control-messages>
+											</div>
+											<div class="form-group col-sm-6">
+												<label for="transferReason">Transfer Reason</label>
+												<select class="form-control" formControlName="transferReason" id="transferReason">
+													<option [value]="null">- Select - </option>
+													<option *ngFor="let omTransferReason of omTransferReasonList" value="{{omTransferReason?.transferReason}}">{{omTransferReason?.transferReason}}</option>
+												</select>
+											</div>
+												</div>
+													<div class="row">
+														<div class="form-group col-sm-6">
+															<label for="sendingAuthority">Sending Authority</label>
+															<select class="form-control" formControlName="sendingAuthority" id="sendingAuthority">
+													<option [value]="null">- Select - </option>
+													<option *ngFor="let provider of sendingAuthorityList" [value]="provider.value">{{provider.value}}</option>
+												</select>
+											</div>
+											<div class="form-group col-sm-8 text-right">
+												<button class="btn btn-default btn-purple mt28" type="submit">Search</button>
+												<button type="button" class="btn btn-default btn-purple mt28" (click)="reset()">Reset</button>
+
+											</div>
+										</div>
+									</form>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th trSortBy="transferDate" class="text-center">
+												<span class="th-div">RoSH</span>
+											</th>
+											<th trSortBy="transferDate" class="text-center">
+												<span class="th-div">RSR</span>
+											</th>
+											<th trSortBy="transferDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Date Received<span *ngIf="sortFilterPaginationObj.sortObj.field == 'transferDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th trSortBy="caseReferenceNumber" (sortCommand)="sort($event)" class="text-center"><span class="th-div">CRN<span *ngIf="sortFilterPaginationObj.sortObj.field == 'caseReferenceNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th trSortBy="offenderName" (sortCommand)="sort($event)"><span class="th-div">Service User Name<span *ngIf="sortFilterPaginationObj.sortObj.field == 'offenderName'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th trSortBy="omTransferFromProvider" (sortCommand)="sort($event)"><span class="th-div">Sender<span *ngIf="sortFilterPaginationObj.sortObj.field == 'omTransferFromProvider'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th trSortBy="omTransferReason" (sortCommand)="sort($event)"><span class="th-div">Target<span *ngIf="sortFilterPaginationObj.sortObj.field == 'omTransferReason'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th trSortBy="isLao" (sortCommand)="sort($event)"><span class="th-div">Type<span *ngIf="sortFilterPaginationObj.sortObj.field == 'isLao'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let offenderProfile of offenderProfiles">
+											<td class="text-center"><span class="red-circle"></span></td>
+											<td class="text-center">6.9</td>
+											<td class="text-center">{{offenderProfile?.transferDate}}</td>
+											<td class="text-center">{{offenderProfile?.caseReferenceNumber}}</td>
+											<td>{{offenderProfile?.offenderName}}</td>
+											<td>{{offenderProfile?.omTransferFromProvider}}</td>
+											<td>{{offenderProfile?.omTransferReason}}</td>
+											<td>{{offenderProfile?.isLao}}</td>
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="[offenderProfile?.profileId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="offenderProfiles?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'offenderProfiles'" *ngIf="offenderProfiles?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

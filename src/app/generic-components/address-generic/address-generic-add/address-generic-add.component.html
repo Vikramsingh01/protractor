@@ -1,0 +1,41 @@
+<div *ngIf="form" [formGroup]="form">
+  <div formGroupName="{{formGroupName}}">
+    <div class="form-group col-sm-6">
+      <label for="telephoneNumber" title="Telephone Number">Telephone Number</label>
+      <input type="text" formControlName="telephoneNumber" id="telephoneNumber" class="form-control" placeholder="Telephone Number" />
+      <control-messages [control]="form.controls[formGroupName].controls['telephoneNumber']"></control-messages>
+    </div>
+        <div class="form-group col-sm-6">
+          <label for="buildingname" title="Building Name">Building Name</label>
+          <input type="text" formControlName="buildingname" id="buildingname" class="form-control" placeholder="Building Name" />
+          <control-messages [control]="form.controls[formGroupName].controls['buildingname']"></control-messages>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="houseNumber" title="Building Number">Building Number</label>
+          <input type="text" formControlName="houseNumber" id="houseNumber" class="form-control" placeholder="House Number" />
+          <control-messages [control]="form.controls[formGroupName].controls['houseNumber']"></control-messages>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="street Name" title="Street Name">Street Name</label>
+          <input type="text" formControlName="streetName" id="streetName" class="form-control" placeholder="Street Name" />
+          <control-messages [control]="form.controls[formGroupName].controls['streetName']"></control-messages>
+        </div>
+    <div class="form-group col-sm-6">
+      <label for="townCity" title="Town/City">Town/City</label>
+      <input type="text" formControlName="townCity" id="townCity" class="form-control" placeholder="Town City" />
+      <control-messages [control]="form.controls[formGroupName].controls['townCity']"></control-messages>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <label for="country" title="County">County</label>
+      <input type="text" formControlName="country" id="country" class="form-control" placeholder="Country" />
+      <control-messages [control]="form.controls[formGroupName].controls['country']"></control-messages>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <label for="postcode" title="Postcode">Postcode</label>
+      <input type="text" formControlName="postcode" id="postcode" class="form-control" placeholder="Post Code" />
+      <control-messages [control]="form.controls[formGroupName].controls['postcode']"></control-messages>
+    </div>
+  </div>
+</div>

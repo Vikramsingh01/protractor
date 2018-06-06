@@ -1,0 +1,88 @@
+<div class="list-view-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'Event'"></tr-tabs>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Court Appearances" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['new']" id="courtAppearance_addButton" class="btn btn-default btn-small"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="wid350" *ngIf="isFeildAuthorized('courtId')" id="courtId" trSortBy="courtId" (sortCommand)="sort($event)"><span class="th-div">Court<span *ngIf="sortSearchPaginationObj.sortObj.field == 'courtId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid350" *ngIf="isFeildAuthorized('courtAppearanceTypeId')" id="courtAppearanceTypeId" trSortBy="courtAppearanceTypeId"
+												(sortCommand)="sort($event)"><span class="th-div">Appearance Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'courtAppearanceTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid230 text-center" *ngIf="isFeildAuthorized('courtDate')" id="courtDate" trSortBy="courtDate" (sortCommand)="sort($event)"><span class="th-div">Appearance Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'courtDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid350" *ngIf="isFeildAuthorized('outcomeId')" id="outcomeId" trSortBy="outcomeId" (sortCommand)="sort($event)"><span class="th-div">Sentence<span *ngIf="sortSearchPaginationObj.sortObj.field == 'outcomeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isAuthorized('Read')" class="text-center wid80"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let courtAppearance of courtAppearanceList; let i = index">
+											<td class="wid350" *ngIf="isFeildAuthorized('courtId')">
+												<span *ngFor="let courtId of courtIdList | filter :'key' : courtAppearance?.courtId">{{courtId.value}}</span>
+											</td>
+											<td class="wid350" *ngIf="isFeildAuthorized('courtAppearanceTypeId')">
+												<span *ngFor="let courtAppearanceTypeId of courtAppearanceTypeIdList | filter :'key' : courtAppearance?.courtAppearanceTypeId">{{courtAppearanceTypeId.value}}</span>
+											</td>
+											<td class="wid230  text-center" *ngIf="isFeildAuthorized('courtDate')">{{courtAppearance?.courtDate}}</td>
+											<td class="wid350" *ngIf="isFeildAuthorized('outcomeId')">
+												<span *ngFor="let outcomeId of outcomeIdList | filter :'key' : courtAppearance?.outcomeId">{{outcomeId.value}}</span>
+											</td>
+											<td class="text-center">
+
+												<span *ngIf="isAuthorized('Read')">
+                                            	<button class="btn btn-default btn-small" id="courtAppearance_view{{i}}" [routerLink]="[courtAppearance?.courtAppearanceId]" title="View Record">
+                                               		<span class="glyphicon glyphicon-search">aa</span>
+												</button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+                                                <button id="courtAppearance_edit{{i}}" class="btn btn-default btn-small" *ngIf="courtAppearance?.locked" title="Edit record is locked.">
+                                                   <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!courtAppearance?.locked" [routerLink]="['edit', courtAppearance?.courtAppearanceId]" id="courtAppearance_edit{{i}}"
+													class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+                                            	<button id="courtAppearance_delete{{i}}" class="btn btn-default btn-small" *ngIf="courtAppearance?.locked" title="Delete record is locked.">
+                                                   <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!courtAppearance?.locked" (click)="delete(courtAppearance?.courtAppearanceId)" id="courtAppearance_delete{{i}}"
+													class="btn btn-default btn-small" title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="courtAppearanceList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'courtAppearanceList'" *ngIf="courtAppearanceList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

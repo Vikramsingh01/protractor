@@ -1,0 +1,34 @@
+export class TransferOutRequest {
+     transferOutRequestId: any;
+      familyName:any;
+      firstName:any;
+      statusId: any;
+      profileId: any;
+      dataId: any;
+      tableId: any;
+      transferToTeam: any;
+      transferToOfficer: any;
+      transferWithdrawnReasonId: any;
+      createdBy: any;
+      createdByUserId: any;
+      createdDate: any;
+      modifiedBy: any;
+      modifiedByUserId: any;
+      modifiedDate: any;
+      deleted: any;
+      deletedBy: any;
+      deletedByUserId: any;
+      deletedDate: any;
+      locked: any;
+      version: any;
+      type: any;
+      descriptionId: any;
+      teamId:number;
+      transferFromProviderId: any;
+      transferToProviderId: any;
+      transferReasonId: any;
+      requestDate:any;
+      requestEndDate:any;
+      rejectionReason:any;
+      endDate:any;
+  }

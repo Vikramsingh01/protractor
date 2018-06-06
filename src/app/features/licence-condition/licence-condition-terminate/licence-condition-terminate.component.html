@@ -1,0 +1,55 @@
+<div class="edit-view-layout one-line-view">
+
+	<div class="grid-style shrink-view grey-bg" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Terminate Licence Condition" [selected]="false">
+				<div class="grid-head">
+					<div class="pull-right"><button class="btn btn-default btn-small" *ngIf="locked" title="The record is locked."><span class="glyphicon glyphicon-lock "></span></button></div>
+				</div>
+
+				<!--<h2 class="page-title" *ngIf="action == 'Update'">Terminate Licence Condition</h2>-->
+
+				<form [formGroup]="licenceConditionAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+					<fieldset class="three-column">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Licence Condition </legend>
+						<div class="row">
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('actualEndDate')">
+								<label for="actualEndDate" title="Termination Date">Termination Date<span class="mand-text">*</span></label>
+								<date-picker [controlName]="'actualEndDate'" [form]="licenceConditionAddForm"></date-picker>
+								<control-messages [control]="licenceConditionAddForm.controls.actualEndDate"></control-messages>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('terminationReasonId')">
+								<label for="terminationReasonId" title="Termination Reason">Termination Reason<span class="mand-text">*</span></label>
+								<tr-dropdown [operation] = "action" [tableId]="156" [list]="childAnswers[156]" [controlName]="'terminationReasonId'" [dropdown]="licenceConditionAddForm"></tr-dropdown>
+								<control-messages [control]="licenceConditionAddForm.controls.terminationReasonId"></control-messages>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('attendanceCount') && nsrdData['attendanceCount']?.active">
+								<label for="attendanceCount" title="Attendance Count">Attendance Count<span *ngIf="nsrdData['attendanceCount']?.mandatory" class="mand-text">*</span></label>
+								<input type="text" formControlName="attendanceCount" id="attendanceCount" class="form-control" placeholder="Attendance Count"/>
+								<control-messages [control]="licenceConditionAddForm.controls.attendanceCount"></control-messages>
+							</div>
+
+							<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+								<label for="terminate-note" title="Notes ">Notes </label>
+								<textarea formControlName="note" id="terminate-note" class="form-control"></textarea>
+								<control-messages [control]="licenceConditionAddForm.controls.note"></control-messages>
+							</div>
+
+							<div class="form-group col-sm-12 text-right">
+								<button *ngIf="terminated==false" class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="licenceConditionAddForm" [disabled]="terminated">Submit</button>
+								<button *ngIf="terminated && !locked" class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="licenceConditionAddForm">Unterminate</button>
+								<button *ngIf="terminated && locked" class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="licenceConditionAddForm" [disabled]="terminated">Unterminate</button>
+								<button type="button" *ngIf="action == 'Update'" (click)="licenceConditionAddForm.reset()" id="cancelButton" class="btn btn-default btn-white" [disabled]="terminated">Cancel</button>
+							</div>
+						</div>
+					</fieldset>
+
+				</form>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<!--<div *ngIf="!authorizedFlag">Not Authorized</div>-->
+</div>

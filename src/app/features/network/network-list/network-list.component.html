@@ -1,0 +1,96 @@
+<div class="list-view-layout">
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Network" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['network', 'new']" class="btn btn-default btn-small pull-right" title="View Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('relationshipToOffenderId')" trSortBy="relationshipToOffenderId" (sortCommand)="sort($event)"><span class="th-div">Relationship To SU<span *ngIf="sortSearchPaginationObj.sortObj.field == 'relationshipToOffenderId'"
+							    				[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+
+											<th *ngIf="isFeildAuthorized('firstName')" trSortBy="firstName" (sortCommand)="sort($event)"><span class="th-div">First Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('familyName')" trSortBy="familyName" (sortCommand)="sort($event)"><span class="th-div">Family Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'familyName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('postCode')" trSortBy="postCode" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Post Code<span *ngIf="sortSearchPaginationObj.sortObj.field == 'postCode'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('telephoneNumber')" trSortBy="telephoneNumber" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Telephone Number<span *ngIf="sortSearchPaginationObj.sortObj.field == 'telephoneNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('emailAddress')" trSortBy="emailAddress" (sortCommand)="sort($event)"><span class="th-div">Email Address<span *ngIf="sortSearchPaginationObj.sortObj.field == 'emailAddress'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="text-center"><span class="hidden">View</span></th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let network of networkList; let i = index">
+											<td *ngIf="isFeildAuthorized('relationshipToOffenderId')">{{network.relationshipToOffenderId}}</td>
+											<td *ngIf="isFeildAuthorized('firstName')">{{network.firstName}}</td>
+											<td *ngIf="isFeildAuthorized('familyName')">{{network.familyName}}</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('postCode')">{{network.postCode}}</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('telephoneNumber')">{{network.telephoneNumber}}</td>
+											<td *ngIf="isFeildAuthorized('emailAddress')">{{network.emailAddress}}</td>
+
+											<!--<td *ngIf="isFeildAuthorized('relationshipToOffenderId')">      
+                                       <span *ngFor="let relationshipToOffenderId of relationshipIdList | filter :'key' : network?.relationshipToOffenderId">{{relationshipToOffenderId.value}}</span>
+								  
+								       <td *ngIf="isFeildAuthorized('genderId')">
+                                     <span *ngFor="let genderId of genderIdList | filter :'key' : network?.genderId">{{genderId.value}}</span>
+                                     </td>
+                                                                                                                                                                        
+                                    <td *ngIf="isFeildAuthorized('titleId')">
+                                  <span *ngFor="let titleId of titleIdList | filter :'key' : network?.titleId">{{titleId.value}}</span>
+                                     </td>-->
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+												<button id="network_view{{i}}" [routerLink]="['network',network?.personalContactId]" class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+													<button id="network_edit{{i}}"  class="btn btn-default btn-small" *ngIf="network?.locked" title="Edit record is locked.">
+                                                                                                <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button id="network_edit{{i}}" *ngIf="!network?.locked" [routerLink]="['network', 'edit', network?.personalContactId]" class="btn btn-default btn-small"
+													title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+													<button id="network_delete{{i}}" class="btn btn-default btn-small" *ngIf="network?.locked" title="Delete record is locked.">
+                                                                                                <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button id="network_delete{{i}}" *ngIf="!network?.locked" (click)="delete(network?.personalContactId)" class="btn btn-default btn-small"
+													title="Delete Record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="networkList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'networkList'" *ngIf="networkList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	
+</div>

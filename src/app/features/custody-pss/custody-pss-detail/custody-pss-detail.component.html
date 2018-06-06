@@ -1,0 +1,57 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Post Sentence Supervision (PSS)</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Post Sentence Supervision (PSS)" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Post Sentence Supervision (PSS) </legend>
+                    <div class="row">
+
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" id="label_sentence" title="sentence">Sentence<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="sentence">{{custodyPss?.sentence}}</div>
+                        </div>
+                        
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" id="label_sentenceDate" title="sentenceDate">Sentence Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="sentenceDate">{{custodyPss?.sentenceDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" >
+                            <div class="view-title col-sm-5" id="label_sentenceExpiryDate" title="sentenceExpiryDate">Sentence Expiry Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="sentenceExpiryDate">{{custodyPss?.sentenceExpiryDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" >
+                            <div class="view-title col-sm-5" id="label_licenceExpiryDate" title="licenceExpiryDate">Licence Expiry Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="licenceExpiryDate">{{custodyPss?.licenceExpiryDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" >
+                            <div class="view-title col-sm-5" id="label_latestReleaseDate" title="latestReleaseDate">Latest Release Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="latestReleaseDate">{{custodyPss?.latestReleaseDate}}</div>
+                        </div>
+                        
+                        <div class="form-field-div col-sm-6" >
+                            <div class="view-title col-sm-5" id="label_actualStartDate" title="Actual Start Date">Commencement Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="actualStartDate">{{custodyPss?.commencementDate}}</div>
+                        </div>
+                        
+                        <div class="form-field-div col-sm-6" >
+                            <div class="view-title col-sm-5" id="label_PSSExpiryDate" title="Actual End Date">PSS expiry Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="PSSExpiryDate">{{custodyPss?.PSSExpiryDate}}</div>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

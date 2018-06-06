@@ -1,0 +1,32 @@
+export class Address {
+       offenderAddressId: any;
+      profileId: any;
+      spgVersion: any;
+      spgUpdateUser: any;
+      addressStatusId: any;
+      buildingName: any;
+      houseNumber: any;
+      streetName: any;
+      district: any;
+      townCity: any;
+      county: any;
+      postcode: any;
+      telephoneNumber: any;
+      startDate: any;
+      endDate: any;
+      note: any;
+      noFixedAbodeYesNoId: any;
+      spgOffenderAddressId: any;
+      createdBy: any;
+      createdByUserId: any;
+      createdDate: any;
+      modifiedBy: any;
+      modifiedByUserId: any;
+      modifiedDate: any;
+      deleted: any;
+      deletedBy: any;
+      deletedByUserId: any;
+      deletedDate: any;
+      locked: any;
+      version: any;
+  }

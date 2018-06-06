@@ -1,0 +1,90 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="PSS Requirement Manager" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['pss-requirement-manager', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<!--<th *ngIf="isFeildAuthorized('pssRequirementManagerId')">pss Requirement Manager</th>
+						<th *ngIf="isFeildAuthorized('pssRequirementId')">pss Requirement</th>-->
+											<th *ngIf="isFeildAuthorized('allocationDate')" trSortBy="allocationDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">allocation Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'allocationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('responsibleTeam')" trSortBy="responsibleTeam" (sortCommand)="sort($event)"><span class="th-div">responsible Team<span *ngIf="sortFilterPaginationObj.sortObj.field == 'responsibleTeam'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('allocationReasonId')">allocation Reason</th>-->
+											<!--<th *ngIf="isFeildAuthorized('endDate')">end Date</th>
+						<th *ngIf="isFeildAuthorized('providerId')">provider</th>-->
+											<th *ngIf="isFeildAuthorized('responsibleOfficer')" class="wid150" trSortBy="responsibleOfficer" (sortCommand)="sort($event)"><span class="th-div">responsible Officer<span *ngIf="sortFilterPaginationObj.sortObj.field == 'responsibleOfficer'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('spgPssRequirementManagerId')">SPG Pss Requirement Manager</th>-->
+											<!--<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+						<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>-->
+											<!--<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+						<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+						<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+						<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+						<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+						<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+						<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+						<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+						<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+						<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+						<th *ngIf="isFeildAuthorized('locked')">locked</th>
+						<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let pssRequirementManager of pssRequirementManagers">
+											<!--<td *ngIf="isFeildAuthorized('pssRequirementManagerId')">{{pssRequirementManager.pssRequirementManagerId}}</td>
+						<td *ngIf="isFeildAuthorized('pssRequirementId')">{{pssRequirementManager.pssRequirementId}}</td>-->
+											<td class="text-center" *ngIf="isFeildAuthorized('allocationDate')">{{pssRequirementManager.allocationDate}}</td>
+											<td *ngIf="isFeildAuthorized('responsibleTeam')">{{pssRequirementManager.responsibleTeam}}</td>
+											<!--<td *ngIf="isFeildAuthorized('allocationReasonId')"><span *ngFor="let allocationReasonId of allocationreasonList| filter :'key' : pssRequirementManager.allocationReasonId">{{allocationReasonId.value}}</span></td>-->
+											<!--<td *ngIf="isFeildAuthorized('endDate')">{{pssRequirementManager.endDate}}</td>
+						<td *ngIf="isFeildAuthorized('providerId')">{{pssRequirementManager.providerId}}</td>-->
+											<td *ngIf="isFeildAuthorized('responsibleOfficer')" class="wid150">{{pssRequirementManager.responsibleOfficer}}</td>
+											<!--<td *ngIf="isFeildAuthorized('spgPssRequirementManagerId')">{{pssRequirementManager.spgPssRequirementManagerId}}</td>-->
+											<!--<td *ngIf="isFeildAuthorized('spgVersion')">{{pssRequirementManager.spgVersion}}</td>
+						<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{pssRequirementManager.spgUpdateUser}}</td>-->
+											<!--<td *ngIf="isFeildAuthorized('createdDate')">{{pssRequirementManager.createdDate}}</td>
+						<td *ngIf="isFeildAuthorized('createdBy')">{{pssRequirementManager.createdBy}}</td>
+						<td *ngIf="isFeildAuthorized('createdByUserId')">{{pssRequirementManager.createdByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedDate')">{{pssRequirementManager.modifiedDate}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedBy')">{{pssRequirementManager.modifiedBy}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{pssRequirementManager.modifiedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('deleted')">{{pssRequirementManager.deleted}}</td>
+						<td *ngIf="isFeildAuthorized('deletedDate')">{{pssRequirementManager.deletedDate}}</td>
+						<td *ngIf="isFeildAuthorized('deletedBy')">{{pssRequirementManager.deletedBy}}</td>
+						<td *ngIf="isFeildAuthorized('deletedByUserId')">{{pssRequirementManager.deletedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('locked')">{{pssRequirementManager.locked}}</td>
+						<td *ngIf="isFeildAuthorized('version')">{{pssRequirementManager.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['pss-requirement-manager', pssRequirementManager.pssRequirementManagerId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['pss-requirement-manager', pssRequirementManager.pssRequirementManagerId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button></td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(pssRequirementManager.pssRequirementManagerId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="pssRequirementManagers?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'pssRequirementManagers'" *ngIf="pssRequirementManagers?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

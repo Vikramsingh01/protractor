@@ -1,0 +1,58 @@
+<div class="detail-view-layout one-line-view">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="page-title pull-left">VIEW Referral</h2>
+      <div class="pull-right">
+         <button [routerLink]="['../']" class="btn btn-default btn-purple pull-right">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="double-divider-purple mt10"></div>
+  <div class="grid-style" *ngIf="authorizedFlag">
+    <tr-accordion>
+      <tr-accordionTab header="Referral" [selected]="true">
+        <div class="grid-head"></div>
+        <fieldset class="three-column shrink-view">
+          <legend><span class="glyphicon glyphicon-flash"></span> Referral</legend>
+          <div class="row">
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralTypeId')">
+              <div class="view-title col-sm-5" title="Referral Type" id="label_referralTypeId">Referral Type <span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="referralTypeId">
+                <tr-list-label *ngIf="referral?.referralTypeId" [tableId]="203"
+                               [pkValue]="referral?.referralTypeId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralDate')">
+              <div class="view-title col-sm-5" title="Referral Date" id="label_referralDate">Referral Date <span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="referralDate">{{referral?.referralDate}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralOutcomeId')">
+              <div class="view-title col-sm-5" title="Referral Outcome" id="label_referralOutcomeId">Referral Outcome <span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="referralOutcomeId">
+                <tr-list-label *ngIf="referral?.referralOutcomeId" [tableId]="131"
+                               [pkValue]="referral?.referralOutcomeId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralSourceId')">
+              <div class="view-title col-sm-5" title="Referral Source" id="label_referralSourceId">Referral Source <span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="referralSourceId">
+                <tr-list-label *ngIf="referral?.referralSourceId" [tableId]="202"
+                               [pkValue]="referral?.referralSourceId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+              <div class="view-title col-sm-5" title="Notes" id="label_note">Notes <span class="pull-right">:</span></div>
+              <div class="detail-value-note col-sm-7">{{referral?.note}}</div>
+            </div>
+          </div>
+        </fieldset>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>
+<tr-assessment></tr-assessment>
+<div *ngIf="show">
+  <tr-drug-test-profile-detail (drugTestProfileAvailableFlag)="isDrugTestProfileAvailable($event)"></tr-drug-test-profile-detail>
+  <tr-drug-test [drugTestProfileAvailableFlag]="drugTestProfileAvailableFlag"></tr-drug-test>
+</div>

@@ -1,0 +1,271 @@
+<div class="detail-view-layout">
+	<h2 class="page-title">VIEW approved Premises Referral</h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']">Back</button>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Approved Premises Referral" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column">
+					<legend> <span class="glyphicon glyphicon-flash"></span> approved Premises Referral </legend>
+					<div class="row">
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseReferralId')">
+								<div class="view-title col-sm-5">approved Premise Referral </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.approvedPremiseReferralId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedArrivalDate')">
+								<div class="view-title col-sm-5">expected Arrival Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.expectedArrivalDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedDepartureDate')">
+								<div class="view-title col-sm-5">expected Departure Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.expectedDepartureDate}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('rejectReasonId')">
+								<div class="view-title col-sm-5">reject Reason </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.rejectReasonId" [tableId]="94" [pkValue]="approvedPremisesReferral?.rejectReasonId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralGroupId')">
+								<div class="view-title col-sm-5">referral Group </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.referralGroupId" [tableId]="93" [pkValue]="approvedPremisesReferral?.referralGroupId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referringProviderId')">
+								<div class="view-title col-sm-5">referring Provider </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.referringProviderId" [tableId]="193" [pkValue]="approvedPremisesReferral?.referringProviderId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('nonArrivalDate')">
+								<div class="view-title col-sm-5">non Arrival Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.nonArrivalDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('nonArrivalReasonId')">
+								<div class="view-title col-sm-5">non Arrival Reason </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.nonArrivalReasonId" [tableId]="91" [pkValue]="approvedPremisesReferral?.nonArrivalReasonId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sourceTypeId')">
+								<div class="view-title col-sm-5">source Type </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.sourceTypeId" [tableId]="221" [pkValue]="approvedPremisesReferral?.sourceTypeId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referringOfficer')">
+								<div class="view-title col-sm-5">referring Officer </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.referringOfficer}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('decisionProviderId')">
+								<div class="view-title col-sm-5">decision Provider </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.decisionProviderId" [tableId]="193" [pkValue]="approvedPremisesReferral?.decisionProviderId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralCategoryId')">
+								<div class="view-title col-sm-5">referral Category </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.referralCategoryId" [tableId]="92" [pkValue]="approvedPremisesReferral?.referralCategoryId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralDecisionId')">
+								<div class="view-title col-sm-5">referral Decision </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.referralDecisionId" [tableId]="201" [pkValue]="approvedPremisesReferral?.referralDecisionId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('decisionTeam')">
+								<div class="view-title col-sm-5">decision Team </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.decisionTeam}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('decisionOfficer')">
+								<div class="view-title col-sm-5">decision Officer </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.decisionOfficer}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralDate')">
+								<div class="view-title col-sm-5">referral Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.referralDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('decisionDate')">
+								<div class="view-title col-sm-5">decision Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.decisionDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('apReferralSourceId')">
+								<div class="view-title col-sm-5">AP Referral Source </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.apReferralSourceId" [tableId]="202" [pkValue]="approvedPremisesReferral?.apReferralSourceId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseId')">
+								<div class="view-title col-sm-5">approved Premise </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="approvedPremisesReferral?.approvedPremiseId" [tableId]="132" [pkValue]="approvedPremisesReferral?.approvedPremiseId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referringTeam')">
+								<div class="view-title col-sm-5">referring Team </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.referringTeam}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgApprovedPremiseReferralId')">
+								<div class="view-title col-sm-5">SPG Approved Premise Referral </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.spgApprovedPremiseReferralId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+								<div class="view-title col-sm-5">SPG Version </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.spgVersion}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+								<div class="view-title col-sm-5">SPG Update User </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.spgUpdateUser}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+								<div class="view-title col-sm-5">created Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.createdDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+								<div class="view-title col-sm-5">created By </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.createdBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+								<div class="view-title col-sm-5">created By User </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.createdByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+								<div class="view-title col-sm-5">modified Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.modifiedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+								<div class="view-title col-sm-5">modified By </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.modifiedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+								<div class="view-title col-sm-5">modified By User </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.modifiedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+								<div class="view-title col-sm-5">deleted </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.deleted}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+								<div class="view-title col-sm-5">deleted Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.deletedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+								<div class="view-title col-sm-5">deleted By </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.deletedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+								<div class="view-title col-sm-5">deleted By User </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.deletedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+								<div class="view-title col-sm-5">locked </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.locked}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+								<div class="view-title col-sm-5">version </div>
+								<div class="detail-value col-sm-7">{{approvedPremisesReferral?.version}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-12" *ngIf="isFeildAuthorized('referralNote')">
+								<div class="view-title col-sm-5">referral Notes </div>
+								<div class="detail-value text-box">{{approvedPremisesReferral?.referralNote}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-12" *ngIf="isFeildAuthorized('nonArrivalNote')">
+								<div class="view-title col-sm-5">non Arrival Notes </div>
+								<div class="detail-value text-box">{{approvedPremisesReferral?.nonArrivalNote}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-12" *ngIf="isFeildAuthorized('decisionNote')">
+								<div class="view-title col-sm-5">decision Notes </div>
+								<div class="detail-value text-box">{{approvedPremisesReferral?.decisionNote}}</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>
+<tr-approvedpremiseresidence></tr-approvedpremiseresidence>

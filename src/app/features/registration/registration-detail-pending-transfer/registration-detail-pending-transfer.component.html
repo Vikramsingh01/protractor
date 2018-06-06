@@ -1,0 +1,40 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-bordered" id="registrationTable">
+					<thead>
+						<tr>
+							<th *ngIf="isFeildAuthorized('registrationDate')" id="registrationDate" class="text-center"><span class="th-div">Date<span class="glyphicon"></span></span>
+							</th>
+
+							<th *ngIf="isFeildAuthorized('registerTypeId')" id="registerFlagId"><span class="th-div">TYPE<span *ngIf="sortSearchPaginationObj.sortObj.field == 'registerTypeId'" class="glyphicon"></span></span>
+							</th>
+
+							<th *ngIf="isFeildAuthorized('registrationCategoryId')" id="registrationCategoryId"><span class="th-div">CATEGORY<span class="glyphicon"></span></span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let registration of registrationList; let i = index" id="registrationRow-{{i+1}}">
+
+
+							<td class="text-center" *ngIf="isFeildAuthorized('registrationDate')">{{registration?.registrationDate}}</td>
+
+							<td *ngIf="isFeildAuthorized('registerTypeId')">
+								<span *ngFor="let registerTypeId of registerTypeIdList | filter :'key' : registration?.registerTypeId">{{registerTypeId.value}}</span>
+							</td>
+
+							<td *ngIf="isFeildAuthorized('registrationCategoryId')">
+								<span *ngFor="let registrationCategoryId of registrationCategoryIdList | filter :'key' : registration?.registrationCategoryId">{{registrationCategoryId.value}}</span>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+				<div *ngIf="registrationList?.length<=0" class="no-records">No Records Found</div>
+			</div>
+			<tr-pagination [name]="'registrationList'" *ngIf="registrationList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+			
+		</div>
+</div>	

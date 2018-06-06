@@ -1,0 +1,75 @@
+<div class="detail-view-layout one-line-view one-line-view">
+	<div class="row hide-heading">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Pss Requirement</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Pss Requirement" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> PssRequirement </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('pssRequirementTypeMainCategoryId')">
+							<div class="view-title col-sm-5" title="PSS Requirement Main Type" id="label_pssRequirementTypeMainCategoryId">PSS Requirement Main Type <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="pssRequirementTypeMainCategoryId">
+								<tr-list-label *ngIf="pssRequirement?.pssRequirementTypeMainCategoryId" [tableId]="197" [pkValue]="pssRequirement?.pssRequirementTypeMainCategoryId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('pssRequirementTypeSubCategoryId')">
+							<div class="view-title col-sm-5" title="PSS Requirement Sub Type" id="label_pssRequirementTypeSubCategoryId">PSS Requirement Sub Type <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="pssRequirementTypeSubCategoryId">
+								<tr-list-label *ngIf="pssRequirement?.pssRequirementTypeSubCategoryId" [tableId]="198" [pkValue]="pssRequirement?.pssRequirementTypeSubCategoryId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('length')">
+							<div class="view-title col-sm-5" title="Length" id="label_length">Length <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="length">{{pssRequirement?.length}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('imposedDate')">
+							<div class="view-title col-sm-5" title="Imposed Date" id="label_imposedDate">Imposed Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="imposedDate">{{pssRequirement?.imposedDate}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedStartDate')">
+							<div class="view-title col-sm-5" title="Expected Start Date" id="label_expectedStartDate">Expected Start Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="expectedStartDate">{{pssRequirement?.expectedStartDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('actualStartDate')">
+							<div class="view-title col-sm-5" title="Actual Start Date" id="label_actualStartDate">Actual Start Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="actualStartDate">{{pssRequirement?.actualStartDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+							<div class="view-title col-sm-5" title="Expected End Date" id="label_expectedEndDate">Expected End Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="expectedEndDate">{{pssRequirement?.expectedEndDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('psResponsibleTeam')">
+							<div class="view-title col-sm-5" title="Team" id="psResponsibleTeam">Team<span class="pull-right">:</span></div>
+							<p class="detail-value col-sm-7" id="psResponsibleTeam">{{pssRequirement?.psResponsibleTeam?.split("/")[1].split("(")[0].split("[")[0]}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('psResponsibleOfficer')">
+							<div class="view-title col-sm-5" title="Officer" id="psResponsibleOfficer">Officer<span class="pull-right">:</span></div>
+							<p class="detail-value col-sm-7" id="psResponsibleOfficer">{{parseOfficer(pssRequirement?.psResponsibleOfficer)}}</p>
+						</div>
+						<div class="col-sm-12 nopadding">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('notes')">
+								<div class="view-title col-sm-5" title="Notes" id="label_pssnotes">Notes <span class="pull-right">:</span></div>
+								<div class="detail-value-note col-sm-7" id="pssnotes">{{pssRequirement?.notes}}</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>
+<tr-pss-requirement-terminate></tr-pss-requirement-terminate>

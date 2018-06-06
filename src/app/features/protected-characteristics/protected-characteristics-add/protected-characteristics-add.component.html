@@ -1,0 +1,103 @@
+<div class="edit-view-layout">
+
+    <!--<a *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" class="pull-right">
+        <button class="btn btn-default btn-custom ">Back</button>
+    </a>
+    <a *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="pull-right">
+        <button class="btn btn-default btn-custom ">Back</button>
+    </a>-->
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+      <h2 class="page-title" *ngIf="action == 'Update'">Edit Equality & Diversity</h2>
+    <h2 class="page-title" *ngIf="action == 'Create'">Add Equality & Diversity</h2>
+                <form [formGroup]="protectedCharacteristicsAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <fieldset class="three-column">
+                        <legend> <span class="glyphicon glyphicon-flash"></span> Protected Characteristics </legend>
+                        <div class="row">
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('sexualOrientationId')">
+                                <label for="sexualOrientationId" title="Sexual Orientation " id="label_sexualOrientationId">Sexual Orientation</label>
+                                <tr-dropdown [operation] = "action" [tableId]="220" [controlName]="'sexualOrientationId'" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.sexualOrientationId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transGenderProcessId')">
+                                    <label for="transGenderProcessId" title="Gender Reassignment ">Gender Reassignment
+                                        </label>
+                                <tr-dropdown [operation] = "action" [isNsrd]="true" (updateNsrd)="updateNsrd($event)" [tableId]="231" [controlName]="'transGenderProcessId'"  [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.transGenderProcessId"></control-messages>
+                            </div>
+
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transGenderDiscloseConsentYesNoId') && nsrdData['transGenderDiscloseConsentYesNoId']?.active">
+                                <label for="transGenderDiscloseConsentYesNoId" title="Consent to disclose ">Consent to disclose
+                                    <span *ngIf="nsrdData['transGenderDiscloseConsentYesNoId']?.mandatory" class="mand-text">*</span>
+                                </label>
+                                <tr-dropdown [operation] = "action" [tableId]="244" [excludeCodes]="['U']"  [controlName]="'transGenderDiscloseConsentYesNoId'" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.transGenderDiscloseConsentYesNoId"></control-messages>
+                            </div>
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('ethnicityId')">
+                                <label for="ethnicityId" title="Ethnicity ">Ethnicity
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [tableId]="68" [lookup]=1 [controlName]="'ethnicityId'" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.ethnicityId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('nationalityId')">
+                                <label for="nationalityId" title="Nationality ">Nationality
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [tableId]="165" [excludeDependency]="true" [controlName]="'nationalityId'"  (updateAd)="updateAd($event)" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.nationalityId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('secondNationalityId')">
+                                <label for="secondNationalityId" title="Second Nationality">Second Nationality
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [controlName]="'secondNationalityId'" [list]="childAnswers" [dropdown]="protectedCharacteristicsAddForm" ></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.secondNationalityId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('languageId')">
+                                <label for="languageId" title="Preferred Language ">Preferred Language
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [tableId]="73" [controlName]="'languageId'" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.languageId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('interpreterRequiredYesNoId')">
+                                <label for="interpreterRequiredYesNoId" title="Interpreter Required">Interpreter Required
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'interpreterRequiredYesNoId'" [dropdown]="protectedCharacteristicsAddForm" [excludeCodes]="['U']"></tr-dropdown>
+
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.interpreterRequiredYesNoId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('immigrationStatusId')">
+                                <label for="immigrationStatusId" title="Immigration Status">Immigration Status
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [tableId]="134" [controlName]="'immigrationStatusId'" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.immigrationStatusId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="immigrationNumber" title="Immigration Number">Immigration Number
+                                                                </label>
+                                <input type="text" formControlName="immigrationNumber" id="immigrationNumber" class="form-control" placeholder="Immigration Number"
+                                />
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.immigrationNumber"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('religionId')">
+                                <label for="religionId" title="Religion or Belief">Religion or Belief</label>
+                                <tr-dropdown [operation] = "action" [tableId]="212" [controlName]="'religionId'" [dropdown]="protectedCharacteristicsAddForm"></tr-dropdown>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.religionId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('equalityMonitoringNote')">
+                                <tr-notes [controlName]="'equalityMonitoringNote'" [form]="protectedCharacteristicsAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                                <control-messages [control]="protectedCharacteristicsAddForm.controls.equalityMonitoringNote"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-12 text-right">
+                                <button class="btn btn-default btn-purple" fromServerMessageValidator [form]="protectedCharacteristicsAddForm">Submit</button>
+
+                                <button type="button" (click)="navigateTo(['..'])" class="btn btn-default btn-white" id="cancelButton">Cancel</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+    </div>
+
+</div>

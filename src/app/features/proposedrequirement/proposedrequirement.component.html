@@ -1,0 +1,92 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Proposed Requirement" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="cust-inline"><button class="btn btn-default btn-white pull-right" [routerLink]="['proposedrequirement', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+
+											<th *ngIf="isFeildAuthorized('requirementTypeMainCategoryId')" trSortBy="requirementTypeMainCategoryId" (sortCommand)="sort($event)"><span class="th-div">requirement Type Main Category<span *ngIf="sortFilterPaginationObj.sortObj.field == 'requirementTypeMainCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('requirementTypeSubCategoryId')" class="wid230" trSortBy="requirementTypeSubCategoryId" (sortCommand)="sort($event)"><span class="th-div">requirement Type Sub Category<span *ngIf="sortFilterPaginationObj.sortObj.field == 'requirementTypeSubCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('proposedRequirementId')">proposed Requirement</th>
+						<th *ngIf="isFeildAuthorized('additionalRequirementTypeMainCategoryId')">additional Requirement Type Main Category</th>
+						<th *ngIf="isFeildAuthorized('additionalRequirementTypeSubCategoryId')">additional Requirement Type Sub Category</th>
+						<th *ngIf="isFeildAuthorized('courtReportId')">court Report</th>
+						<th *ngIf="isFeildAuthorized('length')">length</th>
+						<th *ngIf="isFeildAuthorized('spgProposedRequirementId')">SPG Proposed Requirement</th>
+						<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+						<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+						<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+						<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+						<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+						<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+						<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+						<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+						<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+						<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+						<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+						<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+						<th *ngIf="isFeildAuthorized('locked')">locked</th>
+						<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let proposedRequirement of proposedRequirements">
+											<td *ngIf="isFeildAuthorized('requirementTypeMainCategoryId')"><span *ngFor="let requirementTypeMainCategoryId of requirementTypeMainCategoryList | filter :'key' :proposedRequirement?.requirementTypeMainCategoryId">{{requirementTypeMainCategoryId.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('requirementTypeSubCategoryId')" class="wid230"><span *ngFor="let requirementTypeSubCategoryId of requirementTypeSubCategoryList | filter :'key' :proposedRequirement?.requirementTypeSubCategoryId">{{requirementTypeSubCategoryId.value}}</span></td>
+											<!--<td *ngIf="isFeildAuthorized('additionalRequirementTypeMainCategoryId')"><span *ngFor="let additionalRequirementTypeMainCategoryId of addRequirementTypeMainCategoryList | filter :'key' :proposedRequirement?.additionalRequirementTypeMainCategoryId">{{additionalRequirementTypeMainCategoryId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('additionalRequirementTypeSubCategoryId')"><span *ngFor="let additionalRequirementTypeSubCategoryId of addRequirementTypeSubCategoryList | filter :'key' :proposedRequirement?.additionalRequirementTypeSubCategoryId">{{additionalRequirementTypeSubCategoryId.value}}</span></td>-->
+
+											<!--<td *ngIf="isFeildAuthorized('spgProposedRequirementId')">{{proposedRequirement.spgProposedRequirementId}}</td>
+						<td *ngIf="isFeildAuthorized('proposedRequirementId')">{{proposedRequirement.proposedRequirementId}}</td>
+						<td *ngIf="isFeildAuthorized('additionalRequirementTypeMainCategoryId')">{{proposedRequirement.additionalRequirementTypeMainCategoryId}}</td>
+						<td *ngIf="isFeildAuthorized('additionalRequirementTypeSubCategoryId')">{{proposedRequirement.additionalRequirementTypeSubCategoryId}}</td>
+						<td *ngIf="isFeildAuthorized('courtReportId')">{{proposedRequirement.courtReportId}}</td>
+						<td *ngIf="isFeildAuthorized('length')">{{proposedRequirement.length}}</td>
+						<td *ngIf="isFeildAuthorized('spgVersion')">{{proposedRequirement.spgVersion}}</td>
+						<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{proposedRequirement.spgUpdateUser}}</td>
+						<td *ngIf="isFeildAuthorized('createdDate')">{{proposedRequirement.createdDate}}</td>
+						<td *ngIf="isFeildAuthorized('createdBy')">{{proposedRequirement.createdBy}}</td>
+						<td *ngIf="isFeildAuthorized('createdByUserId')">{{proposedRequirement.createdByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedDate')">{{proposedRequirement.modifiedDate}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedBy')">{{proposedRequirement.modifiedBy}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{proposedRequirement.modifiedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('deleted')">{{proposedRequirement.deleted}}</td>
+						<td *ngIf="isFeildAuthorized('deletedDate')">{{proposedRequirement.deletedDate}}</td>
+						<td *ngIf="isFeildAuthorized('deletedBy')">{{proposedRequirement.deletedBy}}</td>
+						<td *ngIf="isFeildAuthorized('deletedByUserId')">{{proposedRequirement.deletedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('locked')">{{proposedRequirement.locked}}</td>
+						<td *ngIf="isFeildAuthorized('version')">{{proposedRequirement.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['proposedrequirement', proposedRequirement.proposedRequirementId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="proposedrequirement?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small" *ngIf="!proposedrequirement?.locked" [routerLink]="['proposedrequirement', proposedRequirement.proposedRequirementId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(proposedRequirement.proposedRequirementId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="proposedRequirements?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'proposedRequirements'" *ngIf="proposedRequirements?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

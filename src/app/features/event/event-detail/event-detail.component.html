@@ -1,0 +1,448 @@
+<router-outlet></router-outlet>
+<div class="detail-view-layout one-line-view">
+
+	<!--<h2 class="page-title">Event Details <span class="user-name"> - {{event?.eventNumber}} and <tr-list-label *ngIf="event?.orderTypeDisposalTypeId" [tableId]="421" [pkValue]="event?.orderTypeDisposalTypeId"></tr-list-label></span></h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']">Back</button>
+	<div class="double-divider-purple"></div>-->
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'Event'"></tr-tabs>	
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Event Details" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> events </legend>
+					<div class="detail-screen">
+						<div class="row">
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('orderTypeeventTypeId')">
+									<div class="view-title col-sm-5" title="Sentence Type">Sentence Type<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.orderTypeDisposalTypeId" [tableId]="421" [pkValue]="event?.orderTypeDisposalTypeId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sentenceDate')">
+									<div class="view-title col-sm-5" title="sentence Date">sentence Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.sentenceDate}}</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6">
+									<div class="view-title col-sm-5" title="Additional Sentence">Additional Sentence<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										{{additionalSentence}}
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenceDate')">
+									<div class="view-title col-sm-5" title="offence Date">offence Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.offenceDate}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('rsrScore')">
+									<div class="view-title col-sm-5" title="RSR Score">RSR Score<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.rsrScore}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenceCodeId')">
+									<div class="view-title col-sm-5" title="Main Offence">Main Offence<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.offenceCodeId" [tableId]="173" [pkValue]="event?.offenceCodeId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('rsrDate')">
+									<div class="view-title col-sm-5" title="RSR Date">RSR Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.rsrDate}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenceCount')">
+									<div class="view-title col-sm-5" title="offence Count">offence Count<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.offenceCount}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('rsrProviderId')">
+									<div class="view-title col-sm-5" title="RSR Provider">RSR Provider<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.rsrProviderId" [tableId]="193" [pkValue]="event?.rsrProviderId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6">
+									<div class="view-title col-sm-5" title="TICS">TICS<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<!--<tr-list-label *ngIf="event?.takenIntoConsideration" [tableId]="244" [pkValue]="event?.takenIntoConsideration"></tr-list-label>-->
+										{{event?.takenIntoConsideration}}
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationDecisionId')">
+									<div class="view-title col-sm-5" title="allocation Decision">allocation Decision<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.allocationDecisionId" [tableId]="84" [pkValue]="event?.allocationDecisionId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('length')">
+									<div class="view-title col-sm-5" title="length">length<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.length}} <tr-list-label *ngIf="event?.lengthUnitId" [tableId]="233" [pkValue]="event?.lengthUnitId"></tr-list-label> </div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationDate')">
+									<div class="view-title col-sm-5" title="allocation Date">allocation Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.allocationDate}}</div>
+								</div>
+							</div>
+							<div class="" *ngIf="event?.secondLength">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('secondLength')">
+									<div class="view-title col-sm-5" title="second Length">second Length<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.secondLength}} <tr-list-label *ngIf="event?.secondLengthUnitId" [tableId]="233" [pkValue]="event?.secondLengthUnitId"></tr-list-label></div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('decisionProviderId')">
+									<div class="view-title col-sm-5" title="decision Provider">decision Provider<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.decisionProviderId" [tableId]="193" [pkValue]="event?.decisionProviderId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocatedProviderId')">
+									<div class="view-title col-sm-5" title="allocated Provider">allocated Provider<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.allocatedProviderId" [tableId]="193" [pkValue]="event?.allocatedProviderId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+									<div class="view-title col-sm-5" title="expected End Date">expected End Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.expectedEndDate}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('osResponsibleTeam')">
+									<div class="view-title col-sm-5" title="Team">Team<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.osResponsibleTeam}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('osResponsibleOfficer')">
+									<div class="view-title col-sm-5" title="Case Manager">Case Manager<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.osResponsibleOfficer}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('lengthDays')">
+									<div class="view-title col-sm-5" title="Length Days">Length Days<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.lengthDays}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('ogrs2Score')">
+									<div class="view-title col-sm-5" title="OGRS 2 Score">OGRS 2 Score<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.ogrs2Score}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('ogrs3Score1')">
+									<div class="view-title col-sm-5" title="OGRS 3 Score 1">OGRS 3 Score 1<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.ogrs3Score1}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('ogrs3Score2')">
+									<div class="view-title col-sm-5" title="OGRS 3 Score 2">OGRS 3 Score 2<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.ogrs3Score2}}</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('convictionDate')">
+									<div class="view-title col-sm-5" title="Conviction Date">Conviction Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.convictionDate}}</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralDate')">
+									<div class="view-title col-sm-5" title="Referral Date">Referral Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.referralDate}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('terminationDate')">
+									<div class="view-title col-sm-5" title="termination Date">termination Date<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.terminationDate}}</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('terminationReasonId')">
+									<div class="view-title col-sm-5" title="termination Reason">termination Reason<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.terminationReasonId" [tableId]="116" [pkValue]="event?.terminationReasonId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<!--<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+					<div class="view-title col-sm-5">event </div>
+					<div class="detail-value col-sm-7">{{event?.eventId}}</div>
+				</div>
+			</div>-->
+
+							<!--<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventNumber')">
+									<div class="view-title col-sm-5" title="event Number">event Number<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.eventNumber}}</div>
+								</div>
+							</div>
+
+
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sentenceValue')">
+									<div class="view-title col-sm-5" title="Value">Value<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.sentenceValue}}</div>
+								</div>
+							</div>
+
+
+
+
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('osProviderId')">
+									<div class="view-title col-sm-5" title="OS Provider">OS Provider<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.osProviderId" [tableId]="193" [pkValue]="event?.osProviderId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('lengthUnitId')">
+									<div class="view-title col-sm-5" title="length Unit">length Unit<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.lengthUnitId" [tableId]="233" [pkValue]="event?.lengthUnitId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('enteredLength')">
+									<div class="view-title col-sm-5" title="entered Length">entered Length<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">{{event?.enteredLength}}</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('enteredLengthUnitId')">
+									<div class="view-title col-sm-5" title="entered Length Unit">entered Length Unit<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.enteredLengthUnitId" [tableId]="233" [pkValue]="event?.enteredLengthUnitId"></tr-list-label>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('secondLengthUnitId')">
+									<div class="view-title col-sm-5" title="second Length Unit">second Length Unit<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.secondLengthUnitId" [tableId]="233" [pkValue]="event?.secondLengthUnitId"></tr-list-label>
+									</div>
+								</div>
+							</div>-->
+
+
+
+							<!--<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationInformationId')">
+					<div class="view-title col-sm-5">allocation Information </div>
+					<div class="detail-value col-sm-7">{{event?.allocationInformationId}}</div>
+				</div>
+			</div>-->
+
+
+
+
+
+							<!--<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('ogrsAssessmentId')">
+					<div class="view-title col-sm-5">OGRS Assessment </div>
+					<div class="detail-value col-sm-7">{{event?.ogrsAssessmentId}}</div>
+				</div>
+			</div>-->
+
+							<!---->
+
+							<!-- Disposal fields start -->
+							<!--<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('disposalId')">
+					<div class="view-title col-sm-5">Disposal </div>
+					<div class="detail-value col-sm-7">{{event?.disposalId}}</div>
+				</div>
+			</div>-->
+
+
+							<!--<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgEventId')">
+					<div class="view-title col-sm-5">SPG Event </div>
+					<div class="detail-value col-sm-7">{{event?.spgEventId}}</div>
+				</div>
+			</div>
+
+
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+					<div class="view-title col-sm-5">SPG Version </div>
+					<div class="detail-value col-sm-7">{{event?.spgVersion}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+					<div class="view-title col-sm-5">SPG Update User </div>
+					<div class="detail-value col-sm-7">{{event?.spgUpdateUser}}</div>
+				</div>
+			</div>-->
+							<!-- event fields end -->
+
+							<!--<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('takenIntoConsideration')">
+									<div class="view-title col-sm-5" title="taken Into Consideration">taken Into Consideration<span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7">
+										<tr-list-label *ngIf="event?.takenIntoConsideration" [tableId]="244" [pkValue]="event?.takenIntoConsideration"></tr-list-label>
+									</div>
+								</div>
+							</div>-->
+
+							<!--<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('mainOffenceId')">
+					<div class="view-title col-sm-5">main Offence </div>
+					<div class="detail-value col-sm-7">{{event?.mainOffenceId}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+					<div class="view-title col-sm-5">created Date </div>
+					<div class="detail-value col-sm-7">{{event?.createdDate}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+					<div class="view-title col-sm-5">created By </div>
+					<div class="detail-value col-sm-7">{{event?.createdBy}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+					<div class="view-title col-sm-5">created By User </div>
+					<div class="detail-value col-sm-7">{{event?.createdByUserId}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+					<div class="view-title col-sm-5">modified Date </div>
+					<div class="detail-value col-sm-7">{{event?.modifiedDate}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+					<div class="view-title col-sm-5">modified By </div>
+					<div class="detail-value col-sm-7">{{event?.modifiedBy}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+					<div class="view-title col-sm-5">modified By User </div>
+					<div class="detail-value col-sm-7">{{event?.modifiedByUserId}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+					<div class="view-title col-sm-5">deleted </div>
+					<div class="detail-value col-sm-7">{{event?.deleted}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+					<div class="view-title col-sm-5">deleted Date </div>
+					<div class="detail-value col-sm-7">{{event?.deletedDate}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+					<div class="view-title col-sm-5">deleted By </div>
+					<div class="detail-value col-sm-7">{{event?.deletedBy}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+					<div class="view-title col-sm-5">deleted By User </div>
+					<div class="detail-value col-sm-7">{{event?.deletedByUserId}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+					<div class="view-title col-sm-5">locked </div>
+					<div class="detail-value col-sm-7">{{event?.locked}}</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+					<div class="view-title col-sm-5">version </div>
+					<div class="detail-value col-sm-7">{{event?.version}}</div>
+				</div>
+			</div>-->
+							<div class="col-sm-12 nopadding">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('notes')">
+									<div class="view-title col-sm-5" title="Notes">Notes<span class="pull-right">:</span></div>
+									<div class="detail-value-note col-sm-7 text-box">{{event?.notes}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<!--<div class="divider-grey nomarbtm"></div>
+				<div class="pad15 nopadbtm">
+					<tr-licence-condition></tr-licence-condition>
+					<tr-communityrequirement></tr-communityrequirement>
+					<tr-pss-requirement></tr-pss-requirement>
+					<tr-additional-offence></tr-additional-offence>
+					<tr-offender-additional-sentence></tr-offender-additional-sentence>
+					<tr-terminate-sentence></tr-terminate-sentence>
+					<tr-cohort></tr-cohort>
+					<tr-ordermanager></tr-ordermanager>
+
+					<tr-recall></tr-recall>
+					<tr-release></tr-release>
+					<tr-drug-test></tr-drug-test>
+					<tr-approvedpremisesreferral></tr-approvedpremisesreferral>
+					<tr-psscontact></tr-psscontact>
+				</div>-->
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>
+
+<tr-terminate-event-add></tr-terminate-event-add>
+<tr-licence-condition></tr-licence-condition>
+<tr-pss-requirement></tr-pss-requirement>
+<tr-community-requirement></tr-community-requirement>
+

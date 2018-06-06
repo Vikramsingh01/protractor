@@ -1,0 +1,66 @@
+<router-outlet></router-outlet>
+<tr-main-tabs></tr-main-tabs>
+<div class="list-view-layout">
+	<div class="grid-grey">
+		<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortFilterPaginationObj?.filterObj, sortFilterPaginationObj?.paginationObj, sortFilterPaginationObj?.sortObj)"></tr-list-refresh>
+		<h2>List of Events</h2>
+				<!--<div class="grid-head">
+					<tr-accordion-header>
+						<div class="pull-right">
+							<div *ngIf="isAuthorized('Create')"><button class="btn btn-default btn-white pull-right" [routerLink]="['new']">Add</button></div>
+						</div>
+					</tr-accordion-header>
+				</div>-->
+				<div class="mt20">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr><th *ngIf="isFeildAuthorized('eventNumber')" class="wid80 text-center" ><span >No.</span></th>
+											<th class="wid150 text-center"><span >Appearance Date</span></th>	
+											<th ><span >Main Offence</span></th>
+											<th class="wid230"><span >Sentence</span></th>
+											<th class="wid120 text-center"><span >Cohort</span></th>
+											<th class="wid150 text-center"><span >Termination Date</span></th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+											<!-- <th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+											<th class="text-center">Action</th>-->
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let event of events; let i = index" [ngClass]="{'event-red': event.terminationDate != null, 'event-green': event.terminationDate == null}" >
+											<td class="text-center" >{{event.eventNumber}}</td>
+											<td class="text-center" >{{event.referralDate}}</td>
+											<td ><span *ngFor="let item of listMainOffence | filter :'key' : event?.offenceCodeId">{{item.value}}</span></td>
+											<td ><span *ngFor="let item of lisOfOrderType | filter :'key' : event?.orderTypeDisposalTypeId">{{item.value}}</span></td>
+											<td class="text-center" >{{event.cohortCode}}</td>
+											<td class="text-center" >{{event.terminationDate}}</td>
+											<td  class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+												<button id="event_view{{i}}" class="btn btn-default btn-small" [routerLink]="[event?.eventId, 'event-details']" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+												<!--<span *ngIf="isAuthorized('Update')">
+													<button class="btn btn-default btn-small" *ngIf="event?.locked && event.terminationDate == null "><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small" *ngIf="!event?.locked && event.terminationDate == null" [routerLink]="[event?.eventId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>-->
+											</td>
+											
+											<!-- <td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(event.eventId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+											<td class="text-center">
+												<a *ngIf="event?.terminationDate == null && !event?.locked" [routerLink]="[event?.eventId, 'terminate-sentence', 'new']">Terminate</a>
+												<p *ngIf="event?.terminationDate != null && !event?.locked">Terminated</p>
+												<button class="btn btn-default btn-small" *ngIf="event?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+											</td>-->
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="events?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'events'" *ngIf="events?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+	</div>
+</div>

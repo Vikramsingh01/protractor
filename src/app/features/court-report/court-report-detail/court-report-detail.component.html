@@ -1,0 +1,217 @@
+<div class="detail-view-layout">
+	<div class="row hide-heading">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Court Reports</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Court Reports" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> Court Reports </legend>
+					<div class="row">
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requestedDate')">
+							<div class="view-title col-sm-5" id="label_requestedDate" title="Requested Date">Requested Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="requestedDate">{{courtReport?.requestedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requiredByCourtId')">
+							<div class="view-title col-sm-5" id="label_requiredByCourtId" title="Required By Court Id">Required By Court<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="courtReport?.requiredByCourtId" [tableId]="105" [pkValue]="courtReport?.requiredByCourtId"></tr-list-label>
+							</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requiredByDate')">
+							<div class="view-title col-sm-5" id="label_requiredByDate" title="Required By Date">Required By Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="requiredByDate">{{courtReport?.requiredByDate}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requestedReportTypeId')">
+							<div class="view-title col-sm-5" id="label_requestedReportTypeId" title="Requested Report Type Id">Requested Report Type<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+
+								<!--<div class="detail-value col-sm-7" id="requestedReportTypeId">{{courtReport?.requestedReportTypeId}}</div>-->
+								<tr-list-label *ngIf="courtReport?.requestedReportTypeId" [tableId]="108" [pkValue]="courtReport?.requestedReportTypeId"></tr-list-label>
+							</div>
+						</div>
+						
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationDate')">
+							<div class="view-title col-sm-5" id="label_allocationDate" title="Allocation Date">Allocated Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="allocationDate">{{courtReport?.allocationDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('completedDate')">
+							<div class="view-title col-sm-5" id="label_completedDate" title="Completed Date">Completed Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="completedDate">{{courtReport?.completedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sentToCourtDate')">
+							<div class="view-title col-sm-5" id="label_sentToCourtDate" title="Sent To Court Date">Sent To Court Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="sentToCourtDate">{{courtReport?.sentToCourtDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('receivedByCourtDate')">
+							<div class="view-title col-sm-5" id="label_receivedByCourtDate" title="Received By Court Date">Received By Court Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="receivedByCourtDate">{{courtReport?.receivedByCourtDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deliveredReportTypeId')">
+							<div class="view-title col-sm-5" id="label_deliveredReportTypeId" title="Delivered Report Type Id">Delivered Report Type<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+
+								<!--<div class="detail-value col-sm-7" id="deliveredReportTypeId">{{courtReport?.deliveredReportTypeId}}</div>-->
+								<tr-list-label *ngIf="courtReport?.deliveredReportTypeId" [tableId]="108" [pkValue]="courtReport?.deliveredReportTypeId"></tr-list-label>
+							</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deliveredReportReasonId')">
+							<div class="view-title col-sm-5" id="label_deliveredReportReasonId" title="Delivered Report Reason Id">Delivered Report Reason<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+
+								<!--<div class="detail-value col-sm-7" id="deliveredReportReasonId">{{courtReport?.deliveredReportReasonId}}</div>-->
+								<tr-list-label *ngIf="courtReport?.deliveredReportReasonId" [tableId]="113" [pkValue]="courtReport?.deliveredReportReasonId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('proposalTypeId')">
+							<div class="view-title col-sm-5" id="label_proposalTypeId" title="Proposal Type Id">Proposal Type<span class="pull-right">:</span></div>
+							<!--<div class="detail-value col-sm-7" id="proposalTypeId">{{courtReport?.proposalTypeId}}</div>-->
+							<div class="detail-value col-sm-7">
+
+								<!--<div class="detail-value col-sm-7" id="deliveredReportReasonId">{{courtReport?.deliveredReportReasonId}}</div>-->
+								<tr-list-label *ngIf="courtReport?.proposalTypeId" [tableId]="421" [pkValue]="courtReport?.proposalTypeId"></tr-list-label>
+							</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('length')">
+							<div class="view-title col-sm-5" id="label_length" title="Length">Length<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="length">{{courtReport?.length}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('amount')">
+							<div class="view-title col-sm-5" id="label_amount" title="Amount">Amount<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="amount">{{courtReport?.amount}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtReportProviderId')">
+							<div class="view-title col-sm-5" id="label_courtReportProviderId" title="CRC / NPS Division">Provider<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="courtReport?.courtReportProviderId" [tableId]="193" [pkValue]="courtReport?.courtReportProviderId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtReportTeam')">
+							<div class="view-title col-sm-5" id="label_courtReportTeam" title="Team">Team<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="courtReportTeam">{{courtReport?.courtReportTeam}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtReportOfficer')">
+							<div class="view-title col-sm-5" id="label_courtReportOfficer" title="Officer">Officer<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="courtReportOfficer">{{parseOfficer(courtReport?.courtReportOfficer)}}</div>
+						</div>
+
+                        <div class="col-sm-12 nopadding">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+							<div class="view-title col-sm-5" id="label_note" title="Notes">Notes<span class="pull-right">:</span></div>
+							<div class="detail-value-note col-sm-7" id="note">{{courtReport?.note}}</div>
+						</div>
+                        </div>
+
+
+
+
+
+
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtReportId')">
+							<div class="view-title col-sm-5" id="label_courtReportId" title="Court Reports Id">Court Reports Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="courtReportId">{{courtReport?.courtReportId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtAppearanceId')">
+							<div class="view-title col-sm-5" id="label_courtAppearanceId" title="Court Appearance Id">Court Appearance Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="courtAppearanceId">{{courtReport?.courtAppearanceId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" id="label_spgVersion" title="Spg Version">Spg Version<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgVersion">{{courtReport?.spgVersion}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" id="label_spgUpdateUser" title="Spg Update User">Spg Update User<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgUpdateUser">{{courtReport?.spgUpdateUser}}</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgCourtReportId')">
+							<div class="view-title col-sm-5" id="label_spgCourtReportId" title="Spg Court Report Id">Spg Court Report Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgCourtReportId">{{courtReport?.spgCourtReportId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" id="label_createdBy" title="Created By">Created By<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdBy">{{courtReport?.createdBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" id="label_createdByUserId" title="Created By User Id">Created By User Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdByUserId">{{courtReport?.createdByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" id="label_createdDate" title="Created Date">Created Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdDate">{{courtReport?.createdDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" id="label_modifiedBy" title="Modified By">Modified By<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedBy">{{courtReport?.modifiedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" id="label_modifiedByUserId" title="Modified By User Id">Modified By User Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedByUserId">{{courtReport?.modifiedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" id="label_modifiedDate" title="Modified Date">Modified Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedDate">{{courtReport?.modifiedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" id="label_deleted" title="Deleted">Deleted<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deleted">{{courtReport?.deleted}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" id="label_deletedBy" title="Deleted By">Deleted By<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedBy">{{courtReport?.deletedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" id="label_deletedByUserId" title="Deleted By User Id">Deleted By User Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedByUserId">{{courtReport?.deletedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" id="label_deletedDate" title="Deleted Date">Deleted Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedDate">{{courtReport?.deletedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" id="label_locked" title="Locked">Locked<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="locked">{{courtReport?.locked}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" id="label_version" title="Version">Version<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="version">{{courtReport?.version}}</div>
+						</div>
+
+
+
+
+
+
+
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

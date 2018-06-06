@@ -1,0 +1,215 @@
+<router-outlet></router-outlet>
+<h2 class="page-title">Document List</h2>
+<tr-main-tabs></tr-main-tabs>
+<tr-tabs [structure]="'SU'"></tr-tabs>
+<button class="btn btn-default btn-purple pull-right" [routerLink]="['..']">Back</button>
+<div class="double-divider-purple mt10"></div>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Document" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Upload')" class="pull-right">
+							<button [routerLink]="['new']" class="btn btn-default btn-small pull-right" id="document_addButton" title="Add Document"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="paginate(sortSearchPaginationObj?.paginationObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+									<form [formGroup]="documentSearchForm" (ngSubmit)="onSubmit()" autocomplete="off">
+										<fieldset class="three-column">
+											<legend> <span class="glyphicon glyphicon-flash"></span>Document</legend>
+
+											<div class="row">
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('entityType')">
+													<label for="entityType" title="Linked To">Linked To</label>
+													<select formControlName="entityType" id="entityType" class="form-control" (change)="updateLinkedToField($event.target.value)">
+                                   						<option value=''>- Select -</option>
+                                  						<option *ngFor="let entityType of entityTypes" value="{{entityType?.code}}">{{entityType?.value}}</option>
+                               					 	</select>
+												</div>
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('docType')">
+													<label for="docType" title="Document Type">Document Type</label>
+													<select formControlName="docType" id="docType" class="form-control">
+														<option value=''>- Select -</option>
+														<option *ngFor="let documentType of documentTypes" value="{{documentType?.value}}">{{documentType?.value}}</option>
+                                				   </select>
+												</div>
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('fromDate')">
+													<label for="fromDate" title="fromDate">from Date</label>
+													<date-picker [controlName]="'fromDate'" [form]="documentSearchForm"></date-picker>
+													<control-messages [control]="documentSearchForm.controls.fromDate"></control-messages>
+												</div>
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('toDate')">
+													<label for="toDate" title="toDate">to Date</label>
+													<date-picker [controlName]="'toDate'" [form]="documentSearchForm"></date-picker>
+													<control-messages [control]="documentSearchForm.controls.toDate"></control-messages>
+												</div>
+												<div class="form-group col-sm-12 text-right">
+													<button class="btn btn-default btn-purple" id="submitButton" fromServerMessageValidator [form]="documentSearchForm">Submit</button>
+													<button *ngIf="showResetButton" type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+												</div>
+											</div>
+										</fieldset>
+									</form>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="wid50 text-center" id="alfrescoMetaDataId" trSortBy="alfrescoMetaDataId" (sortCommand)="sort($event)">ID</th>
+											<th id="docTypehead" trSortBy="docType" (sortCommand)="sort($event)">Document Type</th>
+											<th id="documentName" class="wid150" trSortBy="documentName" (sortCommand)="sort($event)">Name</th>
+											<th id="entityTypehead" trSortBy="entityType" (sortCommand)="sort($event)">Entity Type</th>
+											<th id="linkedTohead" class="wid150" >Linked To</th>
+											<th>Reserved Status</th>
+											<th id="author" trSortBy="author" (sortCommand)="sort($event)">Author</th>
+											<th id="lastModifiedDate" class="wid110 text-center" trSortBy="lastModifiedDate" (sortCommand)="sort($event)">Updated Date</th>
+											<th *ngIf="isAuthorized('Fetch')" id="downloadBtn" class="text-center">Download</th>
+											<th *ngIf="isAuthorized('Fetch') && isAuthorized('Reserve')" id="downloadBtnEdit" class="text-center">Reserve &amp; Edit</th>
+											<th *ngIf="isAuthorized('Delete')" id="deleteBtn" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr *ngIf="error">
+											<td colspan="9">Failed to connect to DRS. Please contact the system administrator.</td>
+										</tr>
+										<tr *ngIf="dataNotFound">
+											<td colspan="9" class="text-danger"> No Records Found </td>
+										</tr>
+
+										<tr *ngFor="let document of documents; let i = index" [ngClass]="{'text-red': !document.synced, 'text-green': document.synced}">
+											<td class="wid50 text-center">{{document.alfrescoMetaDataId}}</td>
+											<td>{{document.docType}}</td>
+											<td>{{document.documentName}}</td>
+											<td *ngIf="document.entityType == 'OFFENDER'">SERVICE USER</td>
+											<td *ngIf="document.entityType != 'OFFENDER'">{{document.entityType}}</td>
+											<td>{{document.linkedTo}}</td>
+											<td>{{document.reserved}}</td>
+											<td class="wid150">{{document.author}}</td>
+											<td class="wid150 text-center">{{document.lastModifiedDate | slice: 0:19 | date:'dd/MM/yyyy'}}</td>
+											<td class="text-center" *ngIf="isAuthorized('Fetch')">
+												<div *ngIf="document.synced">
+													<button class="btn btn-default btn-small" (click)="downloadDocument(document.alfrescoDocId, document.reserved, document.lastReserveRequestedUserId)"
+														id="downloadSync{{i}}" title="Download">
+														<span class="glyphicon glyphicon-download-alt">Download</span>
+													</button>
+												</div>
+												<div *ngIf="!document.synced">
+													<button class="btn btn-default btn-small" id="downloadUnSync{{i}}" title="Download">
+														<span class="cross-mark">/</span>
+														<span class="glyphicon glyphicon-download-alt">Download</span>
+													</button>
+												</div>
+											</td>
+											<td class="text-center" *ngIf="isAuthorized('Fetch') && isAuthorized('Reserve')">
+												<div *ngIf="document.synced">
+													<div *ngIf="document.reserved && document.lastReserveRequestedUserId != null && loggedInUserId == document.lastReserveRequestedUserId">
+														<button class="btn btn-default btn-small" id="document_sync_share{{i}}" title="Unreserve" (click)="showReleaseDocPopup(document.alfrescoDocId, document.reserved, document.lastReserveRequestedUserId)">
+															<span class="glyphicon glyphicon-share">aa</span>
+														</button>
+													</div>
+													<div *ngIf="document.reserved && document.lastReserveRequestedUserId != null && loggedInUserId != document.lastReserveRequestedUserId">
+														<button class="btn btn-default btn-small" id="document_sync_lock{{i}}" title="Reservation Locked">
+															<span class="glyphicon glyphicon-lock">aa</span>
+														</button>
+													</div>
+													<div *ngIf="!document.reserved">
+														<button id="document_unreserve_edit{{i}}" class="btn btn-default btn-small" title="Reserve & Edit" (click)="reserveDocument(document.alfrescoDocId)">
+															<span class="glyphicon glyphicon-pencil">aa</span>
+														</button>
+													</div>
+												</div>
+												<div *ngIf="!document.synced">
+													<button class="btn btn-default btn-small" id="document_unsync_edit{{i}}" title="Reserve & Edit">
+														<span class="cross-mark">/</span>
+														<span class="glyphicon glyphicon-download-alt">aa</span>
+													</button>
+												</div>
+											</td>
+											<td class="text-center" *ngIf="isAuthorized('Delete')">
+												<div *ngIf="document.synced">
+													<div *ngIf="document.reserved && document.lastReserveRequestedUserId != null && loggedInUserId == document.lastReserveRequestedUserId">
+														<button id="document_delete_sync{{i}}" (click)="delete(document.alfrescoDocId)" class="btn btn-default btn-small" title="Delete">
+															<span class="glyphicon glyphicon-trash">Delete</span>
+														</button>
+													</div>
+													<div *ngIf="document.reserved && document.lastReserveRequestedUserId != null && loggedInUserId != document.lastReserveRequestedUserId">
+														<button id="document_delete_reserve{{i}}" class="btn btn-default btn-small"
+														title="Deletion Locked">
+															<span class="glyphicon glyphicon-lock">aa</span>
+														</button>
+													</div>
+													<div *ngIf="!document.reserved">
+														<button id="document_delete_unreserve{{i}}" (click)="delete(document.alfrescoDocId)" class="btn btn-default btn-small"
+														title="Delete">
+															<span class="glyphicon glyphicon-trash">Delete</span>
+														</button>
+													</div>
+												</div>
+												<div *ngIf="!document.synced">
+													<button *ngIf="!document.synced" id="document_delete_unsync{{i}}" class="btn btn-default btn-small" title="Delete">
+														<span class="cross-mark">/</span>
+														<span class="glyphicon glyphicon-trash">Delete</span>
+													</button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<tr-pagination [name]="'documents'" *ngIf="documents?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>
+
+<div [style.display]="visible ? 'block' : 'none'">
+	<div class="modal show" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					Upload and Unreserve
+				</div>
+				<div class="modal-body su-upload-div">
+					<div class="text-red">
+						{{urErrorMessage}}
+					</div>
+					<div class="radio-group-list white-bg">
+						<input #urFile type="file" id="urfile" [disabled]="urfileDisabled" (change)=releaseDocumentChangeEvent($event) />
+					</div>
+					<label for="urfile" title="Upload">Upload the new version of document</label>
+					<div>
+					<p><b>OR</b></p>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="prevVersion" [checked]=prevVersionChecked (change)=prevVersionChangeEvent($event)> Use the previous version and unreserve
+						</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-white" (click)="release()">Ok</button>
+					<button type="button" class="btn btn-default btn-white" (click)="hideReleaseDocPopup()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

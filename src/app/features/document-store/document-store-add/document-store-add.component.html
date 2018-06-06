@@ -1,0 +1,62 @@
+<div class="edit-view-layout">
+
+	<!--{{action}}-->
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Document</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Document Upload</h2>
+		<form [formGroup]="documentStoreForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span>Document</legend>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('entityType')">
+						<label for="entityType" title="Entity Type">Entity Type
+                                    <span class="mand-text">*</span>
+                                </label>
+						<select formControlName="entityType" id="entityType" class="form-control" (change)="updateLinkedToField($event.target.value)">
+                                    <option value=''>- Select -</option>
+                                    <option *ngFor="let entityType of entityTypes" value="{{entityType | json}}">{{entityType?.value}}</option>
+                                </select>
+						<control-messages [control]="documentStoreForm.controls.entityType"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('linkedToId')">
+						<label for="linkedToId" title="Linked To">Linked To
+                                    <span class="mand-text">*</span>
+                                </label>
+						<select formControlName="linkedToId" id="linkedToId" class="form-control">
+                                    <option value=''>- Select -</option>
+                                    <option *ngFor="let linkedToType of linkedToTypes" value="{{linkedToType?.key}}">{{linkedToType?.value}}</option>
+                                </select>
+						<control-messages [control]="documentStoreForm.controls.linkedToId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('documentName')">
+						<label for="documentName" title="Document Name">Document Name
+                                    <span class="mand-text">*</span>
+                                </label>
+						<input type="text" formControlName="documentName" id="documentName" class="form-control" placeholder="Document Name" />
+						<control-messages [control]="documentStoreForm.controls.documentName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('file')">
+						<label for="file" title="Document">Document</label>
+						<div class="radio-group-list white-bg">
+							<input type="file" (change)=fileChangeEvent($event) formControlName="file" id="file" />
+						</div>
+						<control-messages [control]="documentStoreForm.controls.file"></control-messages>
+					</div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('isReadOnly')">
+                        <div class="checkbox checkbox-readonly">
+							<label>
+                                <input type="checkbox" formControlName="isReadOnly" id="isReadOnly"> Mark it read only
+                                </label>
+						</div>
+                    </div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" id="submitButton" fromServerMessageValidator [form]="documentStoreForm">Submit</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="btn btn-default btn-white" id="cancelButton">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" class="btn btn-default btn-white" id="cancelButton">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

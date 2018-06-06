@@ -1,0 +1,50 @@
+<div class="detail-view-layout">
+    <tr-main-tabs></tr-main-tabs>
+    <tr-tabs [structure]="'SU'"></tr-tabs>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Details" [selected]="true">
+
+                <div class="grid-head">
+                    <tr-accordion-header>
+                          <button *ngIf="isAuthorized('Update')  && action=='Add' && !contactinformation?.locked"  class="btn btn-default btn-small pull-right" [routerLink]="['new']" id="contactinformation_addButton" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+                        <button *ngIf="isAuthorized('Update')  && action=='Edit' && !contactinformation?.locked" class="btn btn-default btn-small pull-right"
+                            [routerLink]="['edit']" id="contactinformation_editButton" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+                        <div class="pull-right"><button class="btn btn-default btn-small" *ngIf="contactinformation?.locked" title="The record is locked."><span class="glyphicon glyphicon-lock ">aa</span></button></div>
+                    </tr-accordion-header>
+                </div>
+
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Contact Information </legend>
+                    <div class="row">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('telephoneNumber')">
+                            <div class="view-title col-sm-5" title="Telephone Number" id="label_telephoneNumber">Telephone Number <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="telephoneNumber">{{contactinformation?.telephoneNumber}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('mobileNumber')">
+                            <div class="view-title col-sm-5" title="Mobile No." id="label_mobileNumber">Mobile No. <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="mobileNumber">{{contactinformation?.mobileNumber}}</div>
+                        </div>
+
+
+				   <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allowSmsYesNoId')">
+                            <div class="view-title col-sm-5" title="SMS Allowed?" id="label_allowSmsYesNoId">SMS Allowed? <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="contactinformation?.allowSmsYesNoId" [tableId]="244" [pkValue]="contactinformation?.allowSmsYesNoId"></tr-list-label>
+                            </div>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('emailAddress')">
+                            <div class="view-title col-sm-5" title="Email Address" id="label_emailAddress">Email Address <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="emailAddress">{{contactinformation?.emailAddress}}</div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>
+<tr-address></tr-address>
+ <tr-network></tr-network>

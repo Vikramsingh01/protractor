@@ -1,0 +1,52 @@
+<div *ngIf="showStructure" class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'"></h2>
+        <h2 class="page-title" *ngIf="action == 'Create'"></h2>
+
+
+      <label> Drug(s) To be tested for </label>
+<form [formGroup]="drugTestResultAddForm " (ngSubmit)="onSubmit()" autocomplete="off">
+                    <table class="table table-bordered mt8">
+                        <thead>
+                            <tr>
+                                <th class="wid200">Drug Type </th>
+                                <th class="wid300">Admitted Use ? </th>
+                                <th class="wid300">Test Result  </th>
+                                <th class="wid400">Agreed ? </th>
+                                <!--<th class=""></th>-->
+                            </tr>
+                        </thead>
+                       <tbody formArrayName="drugTestResultList">
+
+                            <tr *ngFor="let drugTestResult of drugTestResultAddForm.controls.drugTestResultList.controls; let i=index" [formGroupName]="i">
+
+                                <td>
+                                    <tr-list-label *ngIf="drugTestResult.controls.drugTypeId?.value" [tableId]="119" [pkValue]="drugTestResult.controls.drugTypeId?.value"></tr-list-label>
+                                </td>
+                                <td>
+                                    <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'admittedUseYesNoId'" [excludeCodes]="['U']" [dropdown]="drugTestResult"></tr-dropdown>
+                                    <control-messages [control]="drugTestResult.controls.admittedUseYesNoId"></control-messages>
+                                </td>
+                                <td>
+                                    <tr-dropdown [operation] = "action" [tableId]="2543" [controlName]="'testResultId'" [dropdown]="drugTestResult"></tr-dropdown>
+                                    <control-messages [control]="drugTestResult.controls.testResultId"></control-messages>
+                                </td>
+                                <td>
+                                    <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'agreedYesNoId'" [excludeCodes]="['U']" [dropdown]="drugTestResult"></tr-dropdown>
+                                    <control-messages [control]="drugTestResult.controls.agreedYesNoId"></control-messages>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="drugTestResultAddForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+
+        </form>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

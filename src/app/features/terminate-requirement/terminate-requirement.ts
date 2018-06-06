@@ -1,0 +1,36 @@
+export class TerminateRequirement {
+       communityRequirementId: any;
+      eventId: any;
+      spgVersion: any;
+      spgUpdateUser: any;
+      requirementTypeMainCategoryId: any;
+      requirementTypeSubCategoryId: any;
+      additionalRequirementTypeMainCategoryId: any;
+      additionalRequirementTypeSubCategoryId: any;
+      imposedDate: any;
+      length: any;
+      expectedStartDate: any;
+      actualStartDate: any;
+      actualEndDate: any;
+      rqProviderId: any;
+      rqResponsibleTeam: any;
+      rqResponsibleOfficer: any;
+      spgCommunityRequirementId: any;
+      createdBy: any;
+      createdByUserId: any;
+      createdDate: any;
+      modifiedBy: any;
+      modifiedByUserId: any;
+      modifiedDate: any;
+      deleted: any;
+      deletedBy: any;
+      deletedByUserId: any;
+      deletedDate: any;
+      locked: any;
+      version: any;
+      expectedEndDate: any;
+      terminationReasonId: any;
+      attendanceCount: any;
+      note: any;
+       profileId:number;
+  }

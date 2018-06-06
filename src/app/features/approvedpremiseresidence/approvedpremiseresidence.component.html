@@ -1,0 +1,116 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Approved Premise Residence" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['approved-premises-residence', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter" [selected]="false">
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="search($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<!--<th *ngIf="isFeildAuthorized('approvedPremiseResidenceId')">approved Premise Residence Residence</th>
+						<th *ngIf="isFeildAuthorized('approvedPremiseReferralId')">approved Premise Referral</th>
+						<th *ngIf="isFeildAuthorized('apReferralId')">ap Referral</th>
+						<th *ngIf="isFeildAuthorized('approvedPremiseKeyWorker')">approved Premise Key Worker</th>
+						<th *ngIf="isFeildAuthorized('approvedPremiseResponsibleOfficer')">approved Premise Responsible Officer</th>
+						<th *ngIf="isFeildAuthorized('approvedPremiseResponsibleTeam')">approved Premise Responsible Team</th>-->
+											<!--<th *ngIf="isFeildAuthorized('approvedPremiseId')">approved Premise</th>-->
+											<th *ngIf="isFeildAuthorized('arrivalDate')" trSortBy="arrivalDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">arrival Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'arrivalDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('arrivalNote')">arrival Notes</th>
+						<th *ngIf="isFeildAuthorized('departureDate')">departure Date</th>
+						<th *ngIf="isFeildAuthorized('departureReasonId')">departure Reason</th>-->
+											<th *ngIf="isFeildAuthorized('expectedDepartureDate')" class="wid230 text-center" trSortBy="expectedDepartureDate" (sortCommand)="sort($event)"><span class="th-div">expected Departure Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'expectedDepartureDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">modified Date</th>
+											<!--<th *ngIf="isFeildAuthorized('moveOnCategoryId')">move On Category</th>
+						<th *ngIf="isFeildAuthorized('spgApprovedPremiseResidenceId')">SPG Approved Premise Residence</th>
+						<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+						<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+						<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+						<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+						<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+						<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+						<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+						<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+						<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+						<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+						<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+						<th *ngIf="isFeildAuthorized('locked')">locked</th>
+						<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let approvedPremiseResidence of approvedPremiseResidences">
+											<!--<td *ngIf="isFeildAuthorized('approvedPremiseResidenceId')">{{approvedPremiseResidence.approvedPremiseResidenceId}}</td>
+						<td *ngIf="isFeildAuthorized('approvedPremiseReferralId')">{{approvedPremiseResidence.approvedPremiseReferralId}}</td>
+						<td *ngIf="isFeildAuthorized('apReferralId')">{{approvedPremiseResidence.apReferralId}}</td>
+                        <td *ngIf="isFeildAuthorized('approvedPremiseKeyWorker')">{{approvedPremiseResidence.approvedPremiseKeyWorker}}</td>
+						<td *ngIf="isFeildAuthorized('approvedPremiseResponsibleOfficer')">{{approvedPremiseResidence.approvedPremiseResponsibleOfficer}}</td>
+						<td *ngIf="isFeildAuthorized('approvedPremiseResponsibleTeam')">{{approvedPremiseResidence.approvedPremiseResponsibleTeam}}</td>-->
+
+											<!--<td *ngIf="isFeildAuthorized('approvedPremiseId')"><span *ngFor="let approvedPremise  of approvedPremisesList | filter :'key' : approvedPremiseResidence?.approvedPremiseId">{{approvedPremise.value}}</span></td>-->
+											<td class="text-center" *ngIf="isFeildAuthorized('arrivalDate')">{{approvedPremiseResidence.arrivalDate}}</td>
+											<!--<td *ngIf="isFeildAuthorized('moveOnCategoryId')"><span *ngFor="let moveOnCategory  of moveOnCategoryList | filter :'key' : approvedPremiseResidence?.moveOnCategoryId">{{moveOnCategory.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('departureReasonId')"><span *ngFor="let departureReason of departureReasonList | filter :'key' : approvedPremiseResidence?.departureReasonId">{{departureReason.value}}</span></td>-->
+											<td class="text-center" *ngIf="isFeildAuthorized('expectedDepartureDate')" class="wid230">{{approvedPremiseResidence.expectedDepartureDate}}</td>
+											<!--<td *ngIf="isFeildAuthorized('arrivalNote')">{{approvedPremiseResidence.arrivalNote}}</td>
+						<td *ngIf="isFeildAuthorized('departureDate')">{{approvedPremiseResidence.departureDate}}</td>-->
+											<td class="text-center" *ngIf="isFeildAuthorized('modifiedDate')">{{approvedPremiseResidence.modifiedDate}}</td>
+											<!--<td *ngIf="isFeildAuthorized('spgApprovedPremiseResidenceId')">{{approvedPremiseResidence.spgApprovedPremiseResidenceId}}</td>-->
+											<!--<td *ngIf="isFeildAuthorized('spgVersion')">{{approvedPremiseResidence.spgVersion}}</td>
+						<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{approvedPremiseResidence.spgUpdateUser}}</td>
+						<td *ngIf="isFeildAuthorized('createdDate')">{{approvedPremiseResidence.createdDate}}</td>
+						<td *ngIf="isFeildAuthorized('createdBy')">{{approvedPremiseResidence.createdBy}}</td>
+						<td *ngIf="isFeildAuthorized('createdByUserId')">{{approvedPremiseResidence.createdByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedDate')">{{approvedPremiseResidence.modifiedDate}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedBy')">{{approvedPremiseResidence.modifiedBy}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{approvedPremiseResidence.modifiedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('deleted')">{{approvedPremiseResidence.deleted}}</td>
+						<td *ngIf="isFeildAuthorized('deletedDate')">{{approvedPremiseResidence.deletedDate}}</td>
+						<td *ngIf="isFeildAuthorized('deletedBy')">{{approvedPremiseResidence.deletedBy}}</td>
+						<td *ngIf="isFeildAuthorized('deletedByUserId')">{{approvedPremiseResidence.deletedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('locked')">{{approvedPremiseResidence.locked}}</td>
+						<td *ngIf="isFeildAuthorized('version')">{{approvedPremiseResidence.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center">
+												<button class="btn btn-default btn-small" [routerLink]="['approved-premises-residence', approvedPremiseResidence.approvedPremiseResidenceId]"><span class="glyphicon glyphicon-search">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="approvedPremiseResidence?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!approvedPremiseResidence?.locked" [routerLink]="['approved-premises-residence', approvedPremiseResidence?.approvedPremiseResidenceId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(approvedPremiseResidence.approvedPremiseResidenceId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="approvedPremiseResidences?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'approvedPremiseResidences'" *ngIf="approvedPremiseResidences?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

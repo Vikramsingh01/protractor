@@ -1,0 +1,74 @@
+<tr-main-tabs></tr-main-tabs>
+<tr-tabs [structure]="'Event'"></tr-tabs>
+<tr-tabs [structure]="'Throughcare'"></tr-tabs>
+<div class="list-view-layout">
+	<h2 class="page-title hide-heading">Release</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Release" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create') && isReleaseAllowed && !isEventTerminated && !isActivePss" class="pull-right">
+							<button *ngIf="(!isActiveRelease || isThisFirstRelease || isActiveRecall) " [routerLink]="['new']" id="release_addButton" class="btn btn-default btn-small" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('releaseDate')" id="releaseDate" trSortBy="releaseDate" (sortCommand)="sort($event)" title="Release Date" class="text-center"><span class="th-div">Release Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'releaseDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('releaseTypeId')" id="releaseTypeId" trSortBy="releaseTypeId" (sortCommand)="sort($event)" title="Release Type Id"><span class="th-div">Release Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'releaseTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let release of releaseList; let i = index">
+											<td class="text-center" *ngIf="isFeildAuthorized('releaseDate')">{{release?.releaseDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('releaseTypeId')">
+												<span *ngFor="let releaseTypeId of releaseTypeIdList | filter :'key' : release?.releaseTypeId">{{releaseTypeId.value}}</span>
+											</td>
+
+
+											<td class="text-center wid100">
+
+													<span *ngIf="isAuthorized('Update') && isActiveRelease && !isActiveRecall && !isEventTerminated && !isActivePss && i===0">
+														<button id="release_edit{{i}}" class="btn btn-default btn-small" *ngIf="release?.locked && !release?.isOldRelease && i === 0" title="Edit record is locked.">
+                                                  <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!release?.locked " [routerLink]="['edit', release?.releaseId]" id="release_edit{{i}}" class="btn btn-default btn-small"
+												 title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive') && isActiveRelease && !isActiveRecall && !isEventTerminated && !isActivePss && i===0">
+													<button id="release_delete{{i}}" class="btn btn-default btn-small" *ngIf="release?.locked" title="Delete record is locked.">
+												 <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!release?.locked" (click)="delete(release?.releaseId)" id="release_delete{{i}}"
+												 class="btn btn-default btn-small" title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="releaseList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'releaseList'" *ngIf="releaseList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

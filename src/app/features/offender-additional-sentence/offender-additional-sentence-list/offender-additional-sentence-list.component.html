@@ -1,0 +1,83 @@
+<div class="list-view-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'Event'"></tr-tabs>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Additional Sentences" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['offender-additional-sentence', 'new']" id="offenderAdditionalSentence_addButton" class="btn btn-default btn-small"
+								title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="wid350" *ngIf="isFeildAuthorized('additionalSentenceId')" id="additionalSentenceId" trSortBy="additionalSentenceId"
+												(sortCommand)="sort($event)" title="Additional Sentence Id"><span class="th-div">Additional Sentence<span *ngIf="sortSearchPaginationObj.sortObj.field == 'additionalSentenceId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid350 text-center" *ngIf="isFeildAuthorized('length')" id="length" trSortBy="length" (sortCommand)="sort($event)" title="Length"><span class="th-div">Length<span *ngIf="sortSearchPaginationObj.sortObj.field == 'length'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid350 text-center" *ngIf="isFeildAuthorized('amount')" id="amount" trSortBy="amount" (sortCommand)="sort($event)" title="Amount"><span class="th-div">Amount<span *ngIf="sortSearchPaginationObj.sortObj.field == 'amount'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isAuthorized('Read')" class="text-center wid80"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="wid350" *ngFor="let offenderAdditionalSentence of offenderAdditionalSentenceList; let i = index">
+											<td *ngIf="isFeildAuthorized('additionalSentenceId')">
+												<span *ngFor="let additionalSentenceId of additionalSentenceIdList | filter :'key' : offenderAdditionalSentence?.additionalSentenceId">{{additionalSentenceId.value}}</span>
+											</td>
+
+											<td class="wid350 text-center" *ngIf="isFeildAuthorized('length')">{{offenderAdditionalSentence?.length}}</td>
+
+											<td class="wid350 text-center" *ngIf="isFeildAuthorized('amount')">{{offenderAdditionalSentence?.amount}}</td>
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+                                                    <button class="btn btn-default btn-small" id="offenderAdditionalSentence_view{{i}}" [routerLink]="[	offenderAdditionalSentence?.offenderAdditionalSentenceId]" title="View Record">
+                                                	<span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+                                                    <button id="offenderAdditionalSentence_edit{{i}}" class="btn btn-default btn-small" *ngIf="offenderAdditionalSentence?.locked" title="Edit record is locked.">
+                                                    <span class="glyphicon glyphicon-lock">aa</span></button>
+
+												<button *ngIf="!offenderAdditionalSentence?.locked" [routerLink]="['offender-additional-sentence', 'edit', offenderAdditionalSentence?.offenderAdditionalSentenceId]"
+													id="offenderAdditionalSentence_edit{{i}}" class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+                                                    <button id="offenderAdditionalSentence_delete{{i}}" class="btn btn-default btn-small" *ngIf="offenderAdditionalSentence?.locked" title="Delete record is locked.">
+                                                    <span class="glyphicon glyphicon-lock">aa</span></button>
+
+												<button *ngIf="!offenderAdditionalSentence?.locked" (click)="delete(offenderAdditionalSentence?.offenderAdditionalSentenceId)"
+													id="offenderAdditionalSentence_delete{{i}}" class="btn btn-default btn-small" title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="offenderAdditionalSentenceList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'offenderAdditionalSentenceList'" *ngIf="offenderAdditionalSentenceList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,38 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Release</h2>
+        <h2 class="page-title" *ngIf="action == 'Create'">Add Release</h2>
+
+        <form [formGroup]="releaseAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Release </legend>
+                <div class="row">
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('releaseDate')">
+                        <label for="releaseDate" title="Release Date">Release Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'releaseDate'" [form]="releaseAddForm"></date-picker>
+                        <control-messages [control]="releaseAddForm.controls.releaseDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('releaseTypeId')">
+                        <label for="releaseTypeId" title="Release Type Id">Release Type
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="211" [controlName]="'releaseTypeId'" [dropdown]="releaseAddForm"></tr-dropdown>
+                        <control-messages [control]="releaseAddForm.controls.releaseTypeId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="releaseAddForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

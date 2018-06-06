@@ -1,0 +1,155 @@
+<router-outlet></router-outlet>
+<div class="sub-menu">
+  <ul *ngIf="action=='Create'">
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'restriction','new'])">
+        Restriction
+      </button>
+    </li>
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'exclusion','new'])">Exclusion
+      </button>
+    </li>
+  </ul>
+  <ul *ngIf="action=='Update'">
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'restriction','edit'])">
+        Restriction
+      </button>
+    </li>
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'exclusion','edit'])">Exclusion
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="edit-view-layout">
+
+  <div class="row">
+    <div class="grid-style shrink-view">
+
+      <h2 class="page-title" *ngIf="action == 'Update'">Edit Restriction</h2>
+      <h2 class="page-title" *ngIf="action == 'Create'">Add Restriction</h2>
+
+      <form [formGroup]="restrictionAddForm" (ngSubmit)="addRestrictionToList()" autocomplete="off">
+        <fieldset class="three-column">
+          <legend><span class="glyphicon glyphicon-flash"></span>Add Restriction</legend>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="restrictedStaffId" title="restrictedStaffId">Restricted Staff<span
+                class="mand-text">*</span></label>
+              <tr-dropdown [operation] = "action" [tableId]="0" [controlName]="'restrictedStaffId'" [dropdown]="restrictionAddForm"
+                           [lookup]="537" [inputParam]="dataService.getLoggedInUserId()"></tr-dropdown>
+              <control-messages [control]="restrictionAddForm.controls.restrictedStaffId"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="restrictionReasonId" title="restrictionReasonId">Restriction Reason<span
+                class="mand-text">*</span></label>
+              <tr-dropdown [operation] = "action" [tableId]="153" [controlName]="'restrictionReasonId'"
+                           [dropdown]="restrictionAddForm"></tr-dropdown>
+              <control-messages [control]="restrictionAddForm.controls.restrictionReasonId"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="restrictionStartDate" title="restrictionStartDate">Restriction Start Date<span
+                class="mand-text">*</span></label>
+              <date-picker [controlName]="'restrictionStartDate'" [form]="restrictionAddForm"></date-picker>
+              <control-messages [control]="restrictionAddForm.controls.restrictionStartDate"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="restrictionEndDate" title="restrictionEndDate">Restriction End Date</label>
+              <date-picker [controlName]="'restrictionEndDate'" [form]="restrictionAddForm"></date-picker>
+              <control-messages [control]="restrictionAddForm.controls.restrictionEndDate"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <div class="col-sm-4 mb10 nopadding">
+                <button class="btn btn-default btn-purple" id="addToListButton" fromServerMessageValidator
+                        [form]="restrictionAddForm">Add To List
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="pad15">
+        <table class="table table-bordered nomargin">
+          <thead>
+          <tr>
+            <th class="" trSortBy="user" (sortCommand)="sort($event)">
+              <span class="th-div">User<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'user'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+            </th>
+            <th class="text-center">Reason</th>
+            <th class="text-center" trSortBy="startDate" (sortCommand)="sort($event)">
+              <span class="th-div">Start Date<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'startDate'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+            </th>
+            <th class="text-center" trSortBy="endDate" (sortCommand)="sort($event)">
+              <span class="th-div">End Date<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'endDate'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+            </th>
+            <th *ngIf="action=='Update'" class="text-center" trSortBy="action" (sortCommand)="sort($event)">
+              <span class="th-div">Action<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'action'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span></th>
+            <th *ngIf="action=='Create'" class="text-center">Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let lasuRestriction of lasuRestrictionList">
+            <td>
+              {{getPersonName(lasuRestriction?.restrictedStaffId)}}
+            </td>
+            <td>
+              <tr-list-label [tableId]="153" [pkValue]="lasuRestriction.restrictionReasonId"></tr-list-label>
+            </td>
+            <td>
+              {{lasuRestriction?.restrictionStartDate.split(' ')[0]}}
+            </td>
+            <td>
+              <span *ngIf="lasuRestriction?.restrictionEndDate">
+              {{lasuRestriction?.restrictionEndDate.split(' ')[0]}}
+              </span>
+            </td>
+            <td class="text-center" *ngIf="action=='Update'">
+              <button type="button" *ngIf="lasuRestriction?.active" class="btn btn-default btn-white"
+                      (click)="endRestriction(lasuRestriction)">End
+              </button>
+            </td>
+            <td class="text-center" *ngIf="action=='Create'">
+              <span *ngIf="lasuRestriction?.active">Active</span>
+              <span *ngIf="!lasuRestriction?.active && lasuRestriction.lasuRestrictionId">Inactive</span>
+              <span *ngIf="!lasuRestriction?.active && !lasuRestriction.lasuRestrictionId">Not Started</span>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+        <div *ngIf="lasuRestrictionList?.length<=0" class="no-records text-center">No Persons Added</div>
+      </div>
+
+      <div class="form-group col-sm-12 text-right">
+        <button class="btn btn-default btn-purple" id="saveButton" (click)="onSubmit()">Submit
+        </button>
+        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../../..'])" id="cancelButton"
+                class="btn btn-default btn-white">Cancel
+        </button>
+        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton"
+                class="btn btn-default btn-white">Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

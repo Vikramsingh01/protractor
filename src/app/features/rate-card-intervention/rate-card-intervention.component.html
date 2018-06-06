@@ -1,0 +1,123 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Rate Card Intervention" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['rate-card-intervention', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+
+											<th trSortBy="interventionProviderId" (sortCommand)="sort($event)"><span class="th-div">Provider<span *ngIf="sortFilterPaginationObj.sortObj.field == 'interventionProviderId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('interventionStatusId')" trSortBy="interventionStatusId" (sortCommand)="sort($event)"><span class="th-div">Status<span *ngIf="sortFilterPaginationObj.sortObj.field == 'interventionStatusId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('interventionStatusDate')" trSortBy="interventionStatusDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Status Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'interventionStatusDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('interventionTypeSubCategoryId')" trSortBy="interventionTypeSubCategoryId" (sortCommand)="sort($event)"><span class="th-div">Intervention Type<span *ngIf="sortFilterPaginationObj.sortObj.field == 'interventionTypeSubCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<!--<th *ngIf="isFeildAuthorized('rateCardInterventionId')">rate Card Intervention</th>
+						<th *ngIf="isFeildAuthorized('actualStartDate')">actual Start Date</th>
+						<th *ngIf="isFeildAuthorized('attendanceCount')">attendance Count</th>
+						<th *ngIf="isFeildAuthorized('expectedEndDate')">expected End Date</th>
+						<th *ngIf="isFeildAuthorized('expectedStartDate')">expected Start Date</th>
+						<th *ngIf="isFeildAuthorized('intendedProviderId')">intended Provider</th>
+						<th *ngIf="isFeildAuthorized('interventionOutcomeId')">intervention Outcome</th>
+						
+						<th *ngIf="isFeildAuthorized('interventionTypeMainCategoryId')">intervention Type Main Category</th>
+						<th *ngIf="isFeildAuthorized('interventionTypeSubCategoryId')">intervention Type Sub Category</th>
+						<th *ngIf="isFeildAuthorized('length')">length</th>
+						<th *ngIf="isFeildAuthorized('note')">note</th>
+						<th *ngIf="isFeildAuthorized('profileId')">profile</th>
+						<th *ngIf="isFeildAuthorized('spgRateCardInterventionId')">SPG Rate Card Intervention</th>
+						<th *ngIf="isFeildAuthorized('actualEndDate')">actual End Date</th>
+						<th *ngIf="isFeildAuthorized('interventionId')">intervention</th>
+						<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+						<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>-->
+											<th *ngIf="isFeildAuthorized('createdDate')" class="text-center">created Date</th>
+											<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+											<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+											<th *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">modified Date</th>
+											<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+											<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+											<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+											<th *ngIf="isFeildAuthorized('deletedDate')" class="text-center">deleted Date</th>
+											<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+											<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+											<th *ngIf="isFeildAuthorized('locked')">locked</th>
+											<th *ngIf="isFeildAuthorized('version')">version</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let rateCardIntervention of rateCardInterventions">
+
+											<td><span *ngFor="let interventionProvider of  interventionProviderList | filter :'key' : rateCardIntervention.interventionProviderId">{{interventionProvider.value}}</span></td>
+											<!--<td *ngIf="isFeildAuthorized('referralDate')">{{rateCardIntervention.referralDate}}</td>-->
+											<td *ngIf="isFeildAuthorized('interventionStatusId')"><span *ngFor="let rateCardInterventionstatus of rateCardInterventionstatusList | filter :'key' : rateCardIntervention?.interventionStatusId">{{rateCardInterventionstatus.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('interventionStatusDate')" class="text-center">{{rateCardIntervention.interventionStatusDate}}</td>
+											<td *ngIf="isFeildAuthorized('interventionTypeSubCategoryId')"><span *ngFor="let interventionTypeSubCategoryId of  rateCardInterventionSubCategoryList | filter :'key' : rateCardIntervention.interventionTypeSubCategoryId">{{interventionTypeSubCategoryId.value}}</span></td>
+											<!--<td *ngIf="isFeildAuthorized('rateCardInterventionId')">{{rateCardIntervention.rateCardInterventionId}}</td>
+						<td *ngIf="isFeildAuthorized('actualStartDate')">{{rateCardIntervention.actualStartDate}}</td>
+						<td *ngIf="isFeildAuthorized('attendanceCount')">{{rateCardIntervention.attendanceCount}}</td>
+						<td *ngIf="isFeildAuthorized('expectedEndDate')">{{rateCardIntervention.expectedEndDate}}</td>
+						<td *ngIf="isFeildAuthorized('expectedStartDate')">{{rateCardIntervention.expectedStartDate}}</td>
+						<td *ngIf="isFeildAuthorized('intendedProviderId')">{{rateCardIntervention.intendedProviderId}}</td>
+						<td *ngIf="isFeildAuthorized('interventionOutcomeId')">{{rateCardIntervention.interventionOutcomeId}}</td>
+						
+						
+						<td *ngIf="isFeildAuthorized('interventionTypeMainCategoryId')">{{rateCardIntervention.interventionTypeMainCategoryId}}</td>
+						<td *ngIf="isFeildAuthorized('interventionTypeSubCategoryId')">{{rateCardIntervention.interventionTypeSubCategoryId}}</td>
+						<td *ngIf="isFeildAuthorized('length')">{{rateCardIntervention.length}}</td>
+						<td *ngIf="isFeildAuthorized('note')">{{rateCardIntervention.note}}</td>
+						<td *ngIf="isFeildAuthorized('profileId')">{{rateCardIntervention.profileId}}</td>
+						
+						<td *ngIf="isFeildAuthorized('spgRateCardInterventionId')">{{rateCardIntervention.spgRateCardInterventionId}}</td>
+						<td *ngIf="isFeildAuthorized('actualEndDate')">{{rateCardIntervention.actualEndDate}}</td>
+						<td *ngIf="isFeildAuthorized('interventionId')">{{rateCardIntervention.interventionId}}</td>
+						<td *ngIf="isFeildAuthorized('spgVersion')">{{rateCardIntervention.spgVersion}}</td>
+						<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{rateCardIntervention.spgUpdateUser}}</td>-->
+											<td *ngIf="isFeildAuthorized('createdDate')" class="text-center">{{rateCardIntervention.createdDate}}</td>
+											<td *ngIf="isFeildAuthorized('createdBy')">{{rateCardIntervention.createdBy}}</td>
+											<td *ngIf="isFeildAuthorized('createdByUserId')">{{rateCardIntervention.createdByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">{{rateCardIntpervention.modifiedDate}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedBy')">{{rateCardIntervention.modifiedBy}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{rateCardIntervention.modifiedByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('deleted')">{{rateCardIntervention.deleted}}</td>
+											<td *ngIf="isFeildAuthorized('deletedDate')" class="text-center">{{rateCardIntervention.deletedDate}}</td>
+											<td *ngIf="isFeildAuthorized('deletedBy')">{{rateCardIntervention.deletedBy}}</td>
+											<td *ngIf="isFeildAuthorized('deletedByUserId')">{{rateCardIntervention.deletedByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('locked')">{{rateCardIntervention.locked}}</td>
+											<td *ngIf="isFeildAuthorized('version')">{{rateCardIntervention.version}}</td>
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['rate-card-intervention', rateCardIntervention.rateCardInterventionId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="rateCardIntervention?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"  *ngIf="!rateCardIntervention?.locked" [routerLink]="['rate-card-intervention', rateCardIntervention.rateCardInterventionId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(rateCardIntervention.rateCardInterventionId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="rateCardInterventions?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'rateCardInterventions'" *ngIf="rateCardInterventions?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

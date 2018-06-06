@@ -1,0 +1,106 @@
+<div class="list-view-layout">
+		<tr-main-tabs></tr-main-tabs>
+		<tr-tabs [structure]="'Event'"></tr-tabs>
+		<div class="grid-style" *ngIf="authorizedFlag">
+			<tr-accordion>
+				<tr-accordionTab header="Referral" [selected]="true">
+					<div class="grid-head">
+						<tr-accordion-header>
+							<div *ngIf="isAuthorized('Create')" class="pull-right">
+								<button [routerLink]="['new']" id="referral_addButton" class="btn btn-default btn-small pull-right" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span>
+              </button>
+							</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+					<div class="pad15">
+						<!--<div class="grid-style filter-div">
+            <tr-accordion>
+              <tr-accordionTab header="filter">
+
+                <div class="grid-head">
+
+                </div>
+                <div class="pad15 nopadbtm">
+                  <tr-search [searchObjs]="searchObjs" (searchCommand)="searchReferral($event)"></tr-search>
+                </div>
+              </tr-accordionTab>
+            </tr-accordion>
+          </div>-->
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-div">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+
+												<th *ngIf="isFeildAuthorized('referralDate')" id="referralDate" trSortBy="referralDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Referral Date<span
+                      *ngIf="sortSearchPaginationObj.sortObj.field == 'referralDate'"
+                      [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                      class="glyphicon"></span></span>
+												</th>
+												<th *ngIf="isFeildAuthorized('referralTypeId')" id="referralTypeId" trSortBy="referralTypeId" (sortCommand)="sort($event)"><span class="th-div">Referral Type<span
+                      *ngIf="sortSearchPaginationObj.sortObj.field == 'referralTypeId'"
+                      [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                      class="glyphicon"></span></span>
+												</th>
+												<th *ngIf="isFeildAuthorized('referralOutcomeId')" id="referralOutcomeId" trSortBy="referralOutcomeId" (sortCommand)="sort($event)"><span class="th-div">Referral Outcome<span
+                      *ngIf="sortSearchPaginationObj.sortObj.field == 'referralOutcomeId'"
+                      [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                      class="glyphicon"></span></span>
+												</th>
+												<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor="let referral of referralList; let i = index">
+												<td class="text-center" *ngIf="isFeildAuthorized('referralDate')">{{referral?.referralDate}}</td>
+												<td *ngIf="isFeildAuthorized('referralTypeId')">
+													<span *ngFor="let referralTypeId of referralTypeIdList | filter :'key' : referral?.referralTypeId">{{referralTypeId.value}}</span>
+												</td>
+
+
+
+												<td *ngIf="isFeildAuthorized('referralOutcomeId')">
+													<span *ngFor="let referralOutcomeId of referralOutcomeIdList | filter :'key' : referral?.referralOutcomeId">{{referralOutcomeId.value}}</span>
+												</td>
+
+												<td class="text-center">
+													<span *ngIf="isAuthorized('Read')">
+                      <button id="referral_view{{i}}" [routerLink]="[ referral?.referralId]" class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span>
+													</button>
+													</span>
+													<span *ngIf="isAuthorized('Update')">
+                        <button id="referral_edit{{i}}" class="btn btn-default btn-small" *ngIf="referral?.locked"
+                              title="Edit record is locked.">
+                        <span class="glyphicon glyphicon-lock">aa</span>
+													</button>
+													<button *ngIf="!referral?.locked" [routerLink]="['edit', referral?.referralId]" id="referral_edit{{i}}" class="btn btn-default btn-small"
+														title="Edit Record"><span
+                        class="glyphicon glyphicon-pencil">aa</span></button>
+													</span>
+													<span *ngIf="isAuthorized('Archive')">
+                        <button id="referral_delete{{i}}" class="btn btn-default btn-small" *ngIf="referral?.locked"
+                              title="Delete record is locked.">
+                        <span class="glyphicon glyphicon-lock">aa</span>
+													</button>
+													<button *ngIf="!referral?.locked" (click)="delete(referral?.referralId)" id="referral_delete{{i}}" class="btn btn-default btn-small"
+														title="Delete Record"><span class="glyphicon glyphicon-trash">aa</span>
+                      </button>
+													</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div *ngIf="referralList?.length<=0" class="no-records">No Records Found</div>
+								</div>
+							</div>
+							<tr-pagination [name]="'referralList'" *ngIf="referralList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+						</div>
+					</div>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		
+	</div>

@@ -1,0 +1,131 @@
+<router-outlet></router-outlet>
+<tr-tabs [structure]="'PendingTransfer'"></tr-tabs>
+<h2 class="page-title">Document List</h2>
+<button class="btn btn-default btn-purple pull-right" [routerLink]="['..']">Back</button>
+<div class="double-divider-purple mt10"></div>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Documents" [selected]="true">
+				<div class="grid-head">
+					<tr-list-refresh (refreshCommand)="paginate(sortSearchPaginationObj?.paginationObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+									<form [formGroup]="documentSearchForm" (ngSubmit)="onSubmit()" autocomplete="off">
+										<fieldset class="three-column">
+											<legend> <span class="glyphicon glyphicon-flash"></span>Document</legend>
+
+											<div class="row">
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('entityType')">
+													<label for="entityType" title="Entity Type">Linked To
+                               
+                            					    </label>
+													<select formControlName="entityType" id="entityType" class="form-control" (change)="updateLinkedToField($event.target.value)">
+                                   					 <option value=''>- Select -</option>
+                                  					  <option *ngFor="let entityType of entityTypes" value="{{entityType?.value}}">{{entityType?.value}}</option>
+                               					 </select>
+
+												</div>
+
+
+
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('docType')">
+													<label for="docType" title="Document Type">Document Type
+                             					   </label>
+													<select formControlName="docType" id="docType" class="form-control">
+                                 			   		<option value=''>- Select -</option>
+                                  			   		<option *ngFor="let documentType of documentTypes" value="{{documentType?.code}}">{{documentType?.value}}</option>
+                                				   </select>
+
+
+												</div>
+
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('fromDate')">
+													<label for="fromDate" title="fromDate">from Date</label>
+													<date-picker [controlName]="'fromDate'" [form]="documentSearchForm"></date-picker>
+													<control-messages [control]="documentSearchForm.controls.fromDate"></control-messages>
+												</div>
+
+												<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('toDate')">
+													<label for="toDate" title="toDate">to Date</label>
+													<date-picker [controlName]="'toDate'" [form]="documentSearchForm"></date-picker>
+													<control-messages [control]="documentSearchForm.controls.toDate"></control-messages>
+												</div>
+
+												<div class="form-group col-sm-12 text-right">
+													<button class="btn btn-default btn-purple" id="submitButton" fromServerMessageValidator [form]="documentSearchForm">Submit</button>
+													<button *ngIf="showResetButton" type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+												</div>
+
+
+											</div>
+										</fieldset>
+									</form>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="wid50 text-center" id="alfrescoMetaDataId" trSortBy="alfrescoMetaDataId" (sortCommand)="sort($event)">ID</th>
+											<th id="docTypehead" trSortBy="docType" (sortCommand)="sort($event)">Document Type</th>
+											<th id="documentName" class="wid50" trSortBy="documentName" (sortCommand)="sort($event)">Name</th>
+											<th id="entityTypehead" trSortBy="entityType" (sortCommand)="sort($event)">Linked To</th>
+											<th id="author" trSortBy="author" (sortCommand)="sort($event)">Author</th>
+											<th id="lastModifiedDate" class="wid100 text-center" trSortBy="lastModifiedDate" (sortCommand)="sort($event)">Updated Date</th>
+											<th id="downloadBtn" class="text-center">View</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr *ngIf="error">
+											<td colspan="9">Failed to connect to DRS. Please contact the system administrator.</td>
+										</tr>
+										<tr *ngIf="dataNotFound">
+											<td colspan="9" class="text-danger"> No Records Found </td>
+										</tr>
+
+										<tr *ngFor="let document of documents; let i = index" [ngClass]="{'text-red': !document.synced, 'text-green': document.synced}">
+											<td class="wid50 text-center">{{document.alfrescoMetaDataId}}</td>
+											<td>{{document.docType}}</td>
+											<td>{{document.documentName}}</td>
+											<td>{{document.entityType}}</td>
+											<td class="wid150">{{document.author}}</td>
+											<td class="wid150 text-center">{{document.lastModifiedDate | slice: 0:19 | date:'dd/MM/yyyy'}}</td>
+											<td class="text-center">
+												<button *ngIf="isAuthorized('Read',document.entityType) && document.synced" class="btn btn-default btn-small" (click)="downloadDocument(document.alfrescoDocId)"
+													id="{{document.alfrescoDocId}}" title="Download">
+                        						    <span class="glyphicon glyphicon-download-alt">Download</span>
+                      							</button>
+												<button *ngIf="!isAuthorized('Read',document.entityType) || !document.synced" class="btn btn-default btn-small" id="{{document.alfrescoDocId}}"
+													title="Download">
+													<span class="cross-mark">/</span>
+                        						    <span class="glyphicon glyphicon-download-alt">Download</span>
+                      							</button>
+											</td>
+										</tr>
+										<tr *ngIf="drsResponseStatus != ''">
+											<td colspan="9">{{drsResponseStatus}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<tr-pagination [name]="'documents'" *ngIf="documents?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

@@ -1,0 +1,206 @@
+<div class="detail-view-layout one-line-view">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW PLAN ENTRY</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right" id="backButton">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="PLAN ENTRY" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> Contact </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+							<div class="view-title col-sm-5" title="Profile Id" id="label_profileId">Profile Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="profileId">{{contact?.profileId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" title="Spg Version" id="label_spgVersion">Spg Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgVersion">{{contact?.spgVersion}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactId')">
+							<div class="view-title col-sm-5" title="Contact Id" id="label_contactId">Contact Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="contactId">{{contact?.contactId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" title="Spg Update User" id="label_spgUpdateUser">Spg Update User <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgUpdateUser">{{contact?.spgUpdateUser}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('relatesTo')">
+							<div class="view-title col-sm-5" title="Relates To" id="label_relatesToId">Relates To <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgUpdateUser">{{contact?.relatesTo}}</div>
+						</div>
+
+						<!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactCategoryId')">
+                            <div class="view-title col-sm-5" title="Entry Category" id="label_contactCategoryId">Entry Category <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="contact?.contactCategoryId" [tableId]="101" [pkValue]="contact?.contactCategoryId"></tr-list-label>
+                            </div>
+                        </div>-->
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactTypeId')">
+							<div class="view-title col-sm-5" title="Entry Type" id="label_contactTypeId">Entry Type <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.contactTypeId" [tableId]="104" [pkValue]="contact?.contactTypeId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('alertYesNoId')">
+							<div class="view-title col-sm-5" title="Alert" id="label_alertYesNoId">Alert <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.alertYesNoId" [tableId]="244" [pkValue]="contact?.alertYesNoId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactDate')">
+							<div class="view-title col-sm-5" title="Date" id="label_contactDate">Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="contactDate">{{contact?.contactDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactStartTime')">
+							<div class="view-title col-sm-5" id="label_contactStartTime">Start Time <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="contactStartTime">{{contact?.contactStartTime}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactEndTime')">
+							<div class="view-title col-sm-5" title="End Time" id="label_contactEndTime">End Time <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="contactEndTime">{{contact?.contactEndTime}}</div>
+						</div>
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('rarDay')">
+							<div class="view-title col-sm-5" title="RAR Day?" id="label_rarDay">RAR Day? <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="rarDay">{{contact?.rarDay}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sensitiveContactYesNoId')">
+							<div class="view-title col-sm-5" title="Sensitive Contact" id="label_sensitiveContactYesNoId">Sensitive Contact <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.sensitiveContactYesNoId" [tableId]="244" [pkValue]="contact?.sensitiveContactYesNoId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('location')">
+							<div class="view-title col-sm-5" title="Location" id="label_location">Location <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.location" [tableId]="2544" [pkValue]="contact?.location"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactOutcomeId')">
+							<div class="view-title col-sm-5" title="Outcome" id="label_contactOutcomeId">Outcome <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.contactOutcomeId" [tableId]="103" [pkValue]="contact?.contactOutcomeId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('enforcementActionId')">
+							<div class="view-title col-sm-5" title="Enforcement Action" id="label_enforcementActionId">Enforcement Action <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.enforcementActionId" [tableId]="121" [pkValue]="contact?.enforcementActionId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Response By" id="label_ResponseBy">Response By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="ResponseBy">{{contact?.responseBy}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('providerId')">
+							<div class="view-title col-sm-5" title="CRC / NPS Division" id="label_providerId">CRC / NPS Division <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="contact?.providerId" [tableId]="193" [pkValue]="contact?.providerId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('team')">
+							<div class="view-title col-sm-5" title="Team" id="label_teamId">Team <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<span>{{contact?.team?.split("/")[1].split("[")[0].split("(")[0]}}</span>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('contactOfficer')">
+							<div class="view-title col-sm-5" title="Case Manager" id="label_contactOfficerId">Case Manager <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<span>{{parseOfficer(contact?.contactOfficer?.split("(")[0])}}</span>
+							</div>
+						</div>
+
+						<div class="col-sm-12 nopadding">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+								<div class="view-title col-sm-5" title="Notes" id="label_note">Notes <span class="pull-right">:</span></div>
+								<div class="detail-value-note col-sm-7" id="note">{{contact?.note}}</div>
+							</div>
+						</div>
+
+
+						<!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('team')">
+                            <div class="view-title col-sm-5" title="Team" id="label_teamId">Team <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                 <span >{{contact?.team?.split("/")[1]}}</span>
+                            </div>
+                        </div>-->
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgContactId')">
+							<div class="view-title col-sm-5" title="Spg Contact Id" id="label_spgContactId">Spg Contact Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgContactId">{{contact?.spgContactId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" title="Created By" id="label_createdBy">Created By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdBy">{{contact?.createdBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" title="Created By User Id" id="label_createdByUserId">Created By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdByUserId">{{contact?.createdByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" title="Created Date" id="label_createdDate">Created Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdDate">{{contact?.createdDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" title="Modified By" id="label_modifiedBy">Modified By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedBy">{{contact?.modifiedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" title="Modified By User Id" id="label_modifiedByUserId">Modified By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedByUserId">{{contact?.modifiedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" title="Modified Date" id="label_modifiedDate">Modified Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedDate">{{contact?.modifiedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" title="Deleted" id="label_deleted">Deleted <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deleted">{{contact?.deleted}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" title="Deleted By" id="label_deletedBy">Deleted By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedBy">{{contact?.deletedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" title="Deleted By User Id" id="label_deletedByUserId">Deleted By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedByUserId">{{contact?.deletedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" title="Deleted Date" id="label_deletedDate">Deleted Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedDate">{{contact?.deletedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" title="Locked" id="label_locked">Locked <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="locked">{{contact?.locked}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" title="Version" id="label_version">Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="version">{{contact?.version}}</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+		<div class="form-field-div col-sm-6" *ngIf="is_external_user"><br>
+			<div id="label_modifiedDate">Last updated on {{date}} at {{finalTime}} by an External User</div>
+			<br>
+		</div>
+        <div class="form-field-div col-sm-6" *ngIf="!is_external_user"><br>
+			<div id="label_modifiedDate">Last updated on {{date}} at {{finalTime}} by {{contact?.spgUpdateUser}}</div>
+			<br>
+		</div>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

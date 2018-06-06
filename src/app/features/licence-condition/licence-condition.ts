@@ -1,0 +1,35 @@
+export class LicenceCondition {
+  attendanceCount: any;
+  expectedEndDate: any;
+  actualEndDate: any;
+  sentenceDate: any;
+  expectedStartDate: any;
+  actualStartDate: any;
+  note: any;
+  eventId: any;
+  licenceConditionId: any;
+  spgVersion: any;
+  spgUpdateUser: any;
+  licCondTypeMainCategoryId: any;
+  licCondTypeSubCategoryId: any;
+  terminationReasonId: any;
+  lcProviderId: any;
+  lcResponsibleTeam: any;
+  lcResponsibleOfficer: any;
+  spgLicenceConditionId: any;
+  createdBy: any;
+  createdByUserId: any;
+  createdDate: any;
+  modifiedBy: any;
+  modifiedByUserId: any;
+  modifiedDate: any;
+  deleted: any;
+  deletedBy: any;
+  deletedByUserId: any;
+  deletedDate: any;
+  locked: any;
+  version: any;
+  profileId: number;
+  lcResponsibleTeamId: any;
+  lcResponsibleOfficerId: any;
+}

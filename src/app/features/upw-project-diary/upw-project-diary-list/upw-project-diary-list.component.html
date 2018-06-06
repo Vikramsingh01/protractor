@@ -1,0 +1,95 @@
+<div class="list-view-layout">
+	<h2 class="page-title">Community Payback Project Diary</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Community Payback Project Diary" [selected]="true">
+				<div class="grid-head">
+					<tr-list-refresh (refreshCommand)="paginate(sortSearchPaginationObj?.paginationObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter" [selected]="true">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="searchUpwProjectDiary($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row" *ngIf="enableAddButton">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+
+											<th id="projectName" trSortBy="projectName" (sortCommand)="sort($event)"><span class="th-div">Project Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'projectName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('projectCode')" id="projectCode" trSortBy="projectCode" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Project Code<span *ngIf="sortSearchPaginationObj.sortObj.field == 'projectCode'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('startTime')" id="startTime" trSortBy="startTime" (sortCommand)="sort($event)" class="text-center"><span class="th-div">start Time<span *ngIf="sortSearchPaginationObj.sortObj.field == 'startTime'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('endTime')" id="endTime" trSortBy="endTime" (sortCommand)="sort($event)" class="text-center"><span class="th-div">end Time<span *ngIf="sortSearchPaginationObj.sortObj.field == 'endTime'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('appointmentDate')" id="appointmentDate" trSortBy="appointmentDate" (sortCommand)="sort($event)"
+												class="text-center"><span class="th-div">Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'appointmentDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('numberOfServiceUsers')" id="numberOfServiceUsers" trSortBy="numberOfServiceUsers" (sortCommand)="sort($event)"
+												class="text-center"><span class="th-div">number Of SU<span class="cust-lowercase">s</span><span *ngIf="sortSearchPaginationObj.sortObj.field == 'numberOfServiceUsers'"
+													[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+													class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let upwProjectDiary of upwProjectDiaryList; let i = index">
+
+											<td *ngIf="isFeildAuthorized('projectName')">{{upwProjectDiary?.projectName}}</td>
+											<td *ngIf="isFeildAuthorized('projectCode')">{{upwProjectDiary?.projectCode}}</td>
+											<td *ngIf="isFeildAuthorized('startTime')" class="text-center">{{upwProjectDiary?.startTime}}</td>
+											<td *ngIf="isFeildAuthorized('endTime')" class="text-center">{{upwProjectDiary?.endTime}}</td>
+											<td *ngIf="isFeildAuthorized('appointmentDate')" class="text-center">{{upwProjectDiary?.appointmentDate}}</td>
+											<td *ngIf="isFeildAuthorized('numberOfServiceUsers')" class="text-center">{{upwProjectDiary?.numberOfServiceUsers}}</td>
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+												<button [routerLink]="['project-attendance', upwProjectDiary?.upwAppointmentId]" id="upwProjectDiary_view{{i}}"
+													class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+													<button [routerLink]="['project-attendance', 'bulk-update', upwProjectDiary?.upwAppointmentId]" id="upwProjectDiary_edit{{i}}" class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isFeildAuthorized('upwOutcomeTypeId')">
+													<button id="upwProjectDiary_tasks{{i}}" class="btn btn-default btn-small" title="Outcome Details"><span class="glyphicon glyphicon-tasks">aa</span></button>
+												</span>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="upwProjectDiaryList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'upwProjectDiaryList'" *ngIf="upwProjectDiaryList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+
+</div>

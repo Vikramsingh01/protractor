@@ -1,0 +1,60 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW National Search</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+   
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Personal Circumstance </legend>
+                    <div class="table-div">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                         <!--<th  id="nationalSearchQueryId"  ><span class="th-div">National Search Query Id<span class="glyphicon"></span></span></th> -->
+                                         <th id="crcSearchId"  title="Crc Search Id" class="text-center"><span class="th-div">No<span class="glyphicon"></span></span></th> 
+                                         <th  id="pType" title="Personal Circumstance Type"><span class="th-div">Personal Circumstance Type<span  class="glyphicon"></span></span></th> 
+                                         <th  id="pSubType"  title="Personal Circumstance Sub Type"><span class="th-div">Personal Circumstance Sub Type<span class="glyphicon"></span></span></th> 
+                                         <th  id="pDate"  title="Personal Circumstance Date" class="text-center"><span class="th-div">Personal Circumstance Date<span class="glyphicon"></span></span></th> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let nationalSearch of nationalSearchList; let i = index">
+                                            <td class="text-center">
+                                                    <span>
+                                                         <p>{{i+1}}</p>
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                        <span *ngFor="let personalCircumstanceTypeId of personalCircumstanceTypeList | filter :'key' : nationalSearch?.personalCircumstanceType">{{personalCircumstanceTypeId.value}} </span>    
+                                                </span>
+                                            </td>
+                                            <td>
+                                                    <span>
+                                                        <span *ngFor="let personalCircumstanceSubTypeId of personalCircumstanceSubTypeList | filter :'key' : nationalSearch?.personalCircumstanceSubType">{{personalCircumstanceSubTypeId.value}} </span>   
+                                                    </span>
+                                                </td>
+                                            <td class="text-center">
+                                                <span>
+                                                       {{nationalSearch?.personalCircumstanceDate}}
+                                                </span>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div *ngIf="nationalSearchList?.length<=0" class="no-records">No Records Found</div>
+                        </div>
+                </fieldset>
+        
+   
+      
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

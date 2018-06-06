@@ -1,0 +1,88 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Location</h2>
+        <h2 class="page-title" *ngIf="action == 'Create'">Add Location</h2>
+
+        <form [formGroup]="custodyLocationAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Location </legend>
+                <div class="row">
+
+                    <div class="">
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('currentLocationId')">
+                            <div class="cust-label-div" title="CURRENT STATUS">CURRENT STATUS</div>
+                            <div class="radio-group-list disable-style">{{currentStatus}}</div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locationStartDate')">
+                            <div class="cust-label-div" title="STATUS DATE">STATUS DATE<span class="pull-right">:</span></div>
+                            <div class="radio-group-list disable-style">{{statusDate | date:"MM/dd/yyyy"}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('currentLocationId')">
+                        <label for="currentLocationId" title="Current Location Id">Current Location
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="135" [controlName]="'currentLocationId'" [dropdown]="custodyLocationAddForm"></tr-dropdown>
+                        <control-messages [control]="custodyLocationAddForm.controls.currentLocationId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locationStartDate')">
+                        <label for="locationStartDate" title="Location Start Date">Location Start Date
+                                                                    </label>
+                        <date-picker [controlName]="'locationStartDate'" [form]="custodyLocationAddForm"></date-picker>
+                        <control-messages [control]="custodyLocationAddForm.controls.locationStartDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('prisonerNumber')">
+                        <label for="prisonerNumber" title="Prisoner Number">Prisoner Number
+                                                                </label>
+                        <input type="text" formControlName="prisonerNumber" id="prisonerNumber" class="form-control" placeholder="Prisoner Number"
+                        />
+                        <control-messages [control]="custodyLocationAddForm.controls.prisonerNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('paroleNumber')">
+                        <label for="paroleNumber" title="Parole Number">Parole Number
+                                                                </label>
+                        <input type="text" formControlName="paroleNumber" id="paroleNumber" class="form-control" placeholder="Parole Number" />
+                        <control-messages [control]="custodyLocationAddForm.controls.paroleNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('probationContact')">
+                        <label for="probationContact" title="Probation Contact">Probation Contact
+                                                                </label>
+                        <input type="text" formControlName="probationContact" id="probationContact" class="form-control" placeholder="Probation Contact"
+                        />
+                        <control-messages [control]="custodyLocationAddForm.controls.probationContact"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('pcTelephoneNumber')">
+                        <label for="pcTelephoneNumber" title="Telephone Number (Probation Contact)">Telephone Number (Probation Contact)</label>
+                        <input type="text" formControlName="pcTelephoneNumber" id="pcTelephoneNumber" class="form-control" placeholder="Pc Telephone Number"/>
+                        <control-messages [control]="custodyLocationAddForm.controls.pcTelephoneNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('prisonOfficer')">
+                        <label for="prisonOfficer" title="Prison Officer">Prison Officer
+                                                                </label>
+                        <input type="text" formControlName="prisonOfficer" id="prisonOfficer" class="form-control" placeholder="Prison Officer"/>
+                        <control-messages [control]="custodyLocationAddForm.controls.prisonOfficer"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('poTelephoneNumber')">
+                        <label for="poTelephoneNumber" title="Telephone Number (Prison Officer)">Telephone Number (Prison Officer)
+                                                                </label>
+                        <input type="text" formControlName="poTelephoneNumber" id="poTelephoneNumber" class="form-control" placeholder="Po Telephone Number"
+                        />
+                        <control-messages [control]="custodyLocationAddForm.controls.poTelephoneNumber"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="custodyLocationAddForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

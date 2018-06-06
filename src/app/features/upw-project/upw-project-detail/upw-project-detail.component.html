@@ -1,0 +1,255 @@
+<div class="detail-view-layout ntt">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">View Community Payback Project</h2>
+			<div class="pull-right">
+				<button [routerLink]="['..']" id="backButton" class="btn btn-default btn-purple pull-right">BACK</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10"></div>
+	<div *ngIf="authorizedFlag">
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="Project Details" [selected]="true">
+					<div class="grid-head"></div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+						<div class="">
+							<div class="row">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('projectStatusId')">
+									<div class="view-title col-sm-5" title="Status" id="label_projectStatusId">Status <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="projectStatusId">
+										<tr-list-label *ngIf="upwProject?.projectStatusId" [tableId]="1527" [pkValue]="upwProject?.projectStatusId"></tr-list-label>
+									</div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('projectCode')">
+									<div class="view-title col-sm-5" title="Project Code" id="label_projectCode">Project Code <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.projectCode" class="detail-value col-sm-7" id="projectCode" [innerHtml]="upwProject?.projectCode"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('officeTeamId')">
+									<div class="view-title col-sm-5" title="Team" id="label_officeTeamId">Team <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="officeTeamId">
+										<span *ngFor="let team of teamList | filter :'key' : upwProject?.officeTeamId">{{team?.value}}</span>
+										<!--<tr-list-label *ngIf="upwProject?.officeTeamId" [tableId]="445" [pkValue]="upwProject?.officeTeamId"></tr-list-label>-->
+									</div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('projectName')">
+									<div class="view-title col-sm-5" title="Project Name" id="label_projectName">Project Name <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.projectName" class="detail-value col-sm-7" id="projectName" [innerHtml]="upwProject?.projectName"></div>
+								</div>
+
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('highVisibilityYesNoId')">
+									<div class="view-title col-sm-5" title="High Visibility Req" id="label_highVisibilityYesNoId">High Visibility Req <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="highVisibilityYesNoId">
+										<tr-list-label *ngIf="upwProject?.highVisibilityYesNoId" [tableId]="244" [pkValue]="upwProject?.highVisibilityYesNoId"></tr-list-label>
+									</div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('projectTypeId')">
+									<div class="view-title col-sm-5" title="Project Type" id="label_projectTypeId">Project Type <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="projectTypeId">
+										<tr-list-label *ngIf="upwProject?.projectTypeId" [tableId]="239" [pkValue]="upwProject?.projectTypeId"></tr-list-label>
+									</div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+									<div class="view-title col-sm-5" title="Start Date" id="label_startDate">Start Date <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.startDate" class="detail-value col-sm-7" id="startDate" [innerHtml]="upwProject?.startDate"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+									<div class="view-title col-sm-5" title="End Date" id="label_endDate">End Date <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.endDate" class="detail-value col-sm-7" id="endDate" [innerHtml]="upwProject?.endDate"></div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="Provider Details" [selected]="false">
+					<div class="grid-head"></div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+						<div class="">
+							<div class="row">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('provider')">
+									<div class="view-title col-sm-5" title="Provider" id="label_provider">Provider <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="provider">{{upwProject?.provider}}</div>
+								</div>
+								<tr-address-generic-detail [valueObj]="upwProject?.providerAddressId"></tr-address-generic-detail>
+							</div>
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="Beneficiary Details" [selected]="false">
+					<div class="grid-head"></div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+						<div class="">
+							<div class="row">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('beneficiaryName')">
+									<div class="view-title col-sm-5" title="Name" id="label_beneficiaryName">Beneficiary/Contact Name <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.beneficiaryName" class="detail-value col-sm-7" id="beneficiaryName" [innerHtml]="upwProject?.beneficiaryName"></div>
+								</div>
+								<tr-address-generic-detail [valueObj]="upwProject?.beneficiaryAddressId"></tr-address-generic-detail>
+							</div>
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="Placement Details" [selected]="false">
+					<div class="grid-head"></div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+						<div class="">
+							<div class="row">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('beneficiaryName')">
+									<div class="view-title col-sm-5" title="Name" id="label_placementName">Name <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.placementName" class="detail-value col-sm-7" id="placementName" [innerHtml]="upwProject?.placementName"></div>
+								</div>
+								<tr-address-generic-detail [valueObj]="upwProject?.placementAddressId"></tr-address-generic-detail>
+								<div class="col-sm-12 nopadding">
+									<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('placementNotes')">
+										<div class="view-title col-sm-5" title="Placement Notes" id="label_placementNotes">Placement Notes <span class="pull-right">:</span></div>
+										<div *ngIf="upwProject?.placementNotes" class="detail-value col-sm-7" class="detail-view text-box" id="placementNotes" [innerHtml]="upwProject?.placementNotes"></div>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="Project Availability & Information" [selected]="false">
+					<div class="grid-head"></div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+						<div class="">
+							<div class="row">
+
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateRequested')">
+									<div class="view-title col-sm-5" title="Date Requested" id="label_dateRequested">Date Requested <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.dateRequested" class="detail-value col-sm-7" id="dateRequested" [innerHtml]="upwProject?.dateRequested"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateJobEvaluted')">
+									<div class="view-title col-sm-5" title="Date Job Evaluted" id="label_dateJobEvaluted">Date Job Evaluted <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.dateJobEvaluted" class="detail-value col-sm-7" id="dateJobEvaluted" [innerHtml]="upwProject?.dateJobEvaluted"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('plannedStartDate')">
+									<div class="view-title col-sm-5" title="Planned Start Date" id="label_plannedStartDate">Planned Start Date <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.plannedStartDate" class="detail-value col-sm-7" id="plannedStartDate" [innerHtml]="upwProject?.plannedStartDate"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('minimumAge')">
+									<div class="view-title col-sm-5" title="Minimum Age" id="label_minimumAge">Minimum Age <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.minimumAge" class="detail-value col-sm-7" id="minimumAge" [innerHtml]="upwProject?.minimumAge"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('maximumAge')">
+									<div class="view-title col-sm-5" title="Maximum Age" id="label_maximumAge">Maximum Age <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.maximumAge" class="detail-value col-sm-7" id="maximumAge" [innerHtml]="upwProject?.maximumAge" ></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('minimumNoInGroup')">
+									<div class="view-title col-sm-5" title="Minimum no. in Group" id="label_minimumNoInGroup">Minimum no. in Group <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.minimumNoInGroup" class="detail-value col-sm-7" id="minimumNoInGroup" [innerHtml]="upwProject?.minimumNoInGroup" ></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('maximumNoInGroup')">
+									<div class="view-title col-sm-5" title="Maximum no. in Group" id="label_maximumNoInGroup">Maximum no. in Group <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.maximumNoInGroup" class="detail-value col-sm-7" id="maximumNoInGroup" [innerHtml]="upwProject?.maximumNoInGroup"></div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('genderSuitabilityId')">
+									<div class="view-title col-sm-5" title="Gender Suitability" id="label_genderSuitabilityId">Gender Suitability <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="genderSuitabilityId">
+										<tr-list-label *ngIf="upwProject?.genderSuitabilityId" [tableId]="237" [pkValue]="upwProject?.genderSuitabilityId"></tr-list-label>
+									</div>
+								</div>
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('visibileToPublicYesNoId')">
+									<div class="view-title col-sm-5" title="Visibile to the public" id="label_visibileToPublicYesNoId">Visibile to the public <span class="pull-right">:</span></div>
+									<div class="detail-value col-sm-7" id="visibileToPublicYesNoId">
+										<tr-list-label *ngIf="upwProject?.visibileToPublicYesNoId" [tableId]="244" [pkValue]="upwProject?.visibileToPublicYesNoId"></tr-list-label>
+									</div>
+								</div>
+								<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('natureOfWorkNotes')">
+									<div class="view-title col-sm-5" title="Notes / Project NOT suitable for" id="label_projectNotSuitableForNotes">Notes / Project NOT suitable for <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.projectNotSuitableForNotes" class="detail-value col-sm-7" class="detail-view text-box" id="projectNotSuitableForNotes" [innerHtml]="upwProject?.projectNotSuitableForNotes" ></div>
+								</div>
+								<div class="col-sm-12">
+									<div class="mt10">
+										<div class="row">
+											<div class="col-md-8">
+												<div class="sub-title">Project Availability</div>
+											</div>
+											<div class="col-sm-12 mt10">
+												<table class="table table-bordered mt10">
+													<thead>
+														<tr>
+															<th>Day</th>
+															<th class="text-center">Start</th>
+															<th class="text-center">End</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let pa of upwProject?.projectAvailability;let i=index">
+															<td>
+																<tr-list-label *ngIf="pa?.dayOfWeekId" [tableId]="357" [pkValue]="pa?.dayOfWeekId"></tr-list-label>
+															</td>
+															<td class="text-center">
+																<p>{{pa?.start}}</p>
+															</td>
+															<td class="text-center">
+																<p>{{pa?.end}}</p>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="Nature of Work & Qualifications" [selected]="false">
+					<div class="grid-head"></div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span>Community Payback Project </legend>
+						<div class="row">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('selectNatureOfWorkId')">
+								<div class="view-title col-sm-5" title="Nature of Work" id="label_selectNatureOfWorkId">Nature of Work <span class="pull-right">:</span></div>
+								<div class="detail-value col-sm-7" id="selectNatureOfWorkId">
+									<tr-list-label *ngIf="upwProject?.selectNatureOfWorkId" [tableId]="238" [pkValue]="upwProject?.selectNatureOfWorkId"></tr-list-label>
+								</div>
+							</div>
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('qualificationOpportunitieId')">
+								<div class="view-title col-sm-5" title="Opportunity for Skills / Qualifications" id="label_qualificationOpportunitieId">Opportunity for Skills / Qualifications <span class="pull-right">:</span></div>
+								<div class="detail-value col-sm-7" id="qualificationOpportunitieId">
+									<tr-list-label *ngIf="upwProject?.qualificationOpportunitieId" [tableId]="240" [pkValue]="upwProject?.qualificationOpportunitieId"></tr-list-label>
+								</div>
+							</div>
+							<div class="col-sm-12 nopadding">
+								<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('natureOfWorkNotes')">
+									<div class="view-title col-sm-5" title="Notes" id="label_natureOfWorkNotes">Notes <span class="pull-right">:</span></div>
+									<div *ngIf="upwProject?.natureOfWorkNotes" class="detail-value col-sm-7" class="detail-view text-box" id="natureOfWorkNotes" [innerHtml]="upwProject?.natureOfWorkNotes"></div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

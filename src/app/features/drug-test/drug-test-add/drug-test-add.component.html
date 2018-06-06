@@ -1,0 +1,123 @@
+<div class="edit-view-layout">
+
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Drug Test</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Drug Test</h2>
+
+		<form [formGroup]="drugTestAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Drug Test </legend>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('drugTestId')">
+						<label for="drugTestId" title="Drug Test Id">Drug Test Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="drugTestId" id="drugTestId" class="form-control" placeholder="Drug Test Id" />
+						<control-messages [control]="drugTestAddForm.controls.drugTestId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+						<label for="eventId" title="Event Id">Event Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="Event Id" />
+						<control-messages [control]="drugTestAddForm.controls.eventId"></control-messages>
+					</div>
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgDrugTestId')">
+						<label for="spgDrugTestId" title="Spg Drug Test Id">Spg Drug Test Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="spgDrugTestId" id="spgDrugTestId" class="form-control" placeholder="Spg Drug Test Id"
+						/>
+						<control-messages [control]="drugTestAddForm.controls.spgDrugTestId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateOfTest')">
+						<label for="dateOfTest" title="Date Of Test">Date Of Test<span class="mand-text"> * </span>
+                                                                    </label>
+						<date-picker [controlName]="'dateOfTest'" [form]="drugTestAddForm"></date-picker>
+						<control-messages [control]="drugTestAddForm.controls.dateOfTest"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('testedBy')">
+						<label for="testedBy" title="Tested By">Tested By<span class="mand-text"> * </span> </label>
+						<input type="text" formControlName="testedBy" id="testedBy" class="form-control" placeholder="Tested By" />
+						<control-messages [control]="drugTestAddForm.controls.testedBy"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenderComplianceYesNoId') ">
+						<label for="offenderComplianceYesNoId" title="SU Complied">SU Complied <span class="mand-text"> * </span></label>
+
+						<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'offenderComplianceYesNoId'" [excludeCodes]="['U']" [dropdown]="drugTestAddForm"></tr-dropdown>
+						<control-messages [control]="drugTestAddForm.controls.offenderComplianceYesNoId"></control-messages>
+					</div>
+          <div class="col-sm-6" *ngIf="futureDateNotAllowed">
+            <div class="info-div">
+              <span class="glyphicon glyphicon-info-sign" (click)="toggleInfoClicked()"></span>
+              <span class="red-text" *ngIf="infoClicked">You cannot enter compliance information for a future test date</span>
+            </div>
+          </div>
+					 <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="drugTestAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="drugTestAddForm.controls.note"></control-messages>
+           </div>
+				</div>
+
+
+				<div class="grid-style" *ngIf="authorizedFlag">
+
+					<tr-accordion>
+						<tr-accordionTab header="drug(s) to be tested for" [selected]="true">
+							<div class="pad15">
+								<table class="table table-bordered mt8">
+									<thead>
+										<tr>
+											<th class="wid200">Drug </th>
+											<th class="wid300">Admitted ? </th>
+											<th class="wid300"> Result </th>
+											<th class="wid400">Agreed ? </th>
+										</tr>
+									</thead>
+									<tbody formArrayName="drugTestResultList">
+
+										<tr *ngFor="let drugTestResult of drugTestAddForm.controls.drugTestResultList.controls; let i=index" [formGroupName]="i">
+
+											<td>
+												<tr-list-label *ngIf="drugTestResult.controls.drugTypeId?.value" [tableId]="119" [pkValue]="drugTestResult.controls.drugTypeId?.value"></tr-list-label>
+											</td>
+											<td>
+												<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'admittedUseYesNoId'" name="{{i}}" [excludeCodes]="['U']" [dropdown]="drugTestResult"></tr-dropdown>
+												<control-messages [control]="drugTestResult.controls.admittedUseYesNoId"></control-messages>
+											</td>
+											<td>
+												<tr-dropdown [operation] = "action" [tableId]="2543" [controlName]="'testResultId'" name="{{i}}" [dropdown]="drugTestResult"></tr-dropdown>
+												<control-messages [control]="drugTestResult.controls.testResultId"></control-messages>
+											</td>
+											<td>
+												<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'agreedYesNoId'" name="{{i}}" [excludeCodes]="['U']" [dropdown]="drugTestResult"></tr-dropdown>
+												<control-messages [control]="drugTestResult.controls.agreedYesNoId"></control-messages>
+											</td>
+										</tr>
+									</tbody>
+
+
+								</table>
+							</div>
+						</tr-accordionTab>
+					</tr-accordion>
+
+				</div>
+
+				<div class="form-group col-sm-12 text-right nopadding">
+					<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="drugTestAddForm">Submit</button>
+					<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+					<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+
+				</div>
+
+			</fieldset>
+
+		</form>
+
+	</div>
+
+</div>

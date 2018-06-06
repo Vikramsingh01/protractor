@@ -1,0 +1,102 @@
+<div class="list-view-layout" *ngIf="authorizedFlag">
+	<h2 class="page-title">Transfer Out History</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Transfer Out History" [selected]="False">
+				<div class="grid-head">
+					<tr-list-refresh (refreshCommand)="searchTransferOutRequest(sortSearchPaginationObj?.filterObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th id="type1head" class="wid120"><span class="th-div">  Type  </span>
+											</th>
+											<th id="descriptionId1head" class="wid120"><span class="th-div"> Description</span>
+											</th>
+											<th id="requestDatehead" class="wid100 text-center"><span class="th-div">  Request Date  </span>
+											</th>
+											<th id="transferReasonId1head" class="wid120"><span class="th-div">Transfer Reason</span>
+											</th>
+											<th id="transferFromProviderIdhead" class="wid100"><span class="th-div">From</span>
+											</th>
+											<th id="transferToProviderId1head" class="wid100"><span class="th-div">To</span>
+											</th>
+
+											<th id="statushead" class="wid100"><span class="th-div">status</span>
+											</th>
+											<th id="rejectionReasonhead" class="wid120"><span class="th-div"> Rejection Reason  </span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let transferOutRequest of transferOutRequestList; let i = index">
+											<!--<td *ngIf="isFeildAuthorized('familyName')">{{transferOutRequest?.familyName}}</td>
+
+											<td *ngIf="isFeildAuthorized('firstName')">{{transferOutRequest?.firstName}}</td>-->
+
+											<td>{{transferOutRequest?.type}}</td>
+											<td>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '337'" [tableId]="421" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '17'" [tableId]="215" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '18'" [tableId]="422" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '19'" [tableId]="197" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '31'" [tableId]="149" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '29'" [tableId]="108" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '38' || transferOutRequest?.tableId == '48'" [tableId]="192" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+											</td>
+											<td class="text-center">{{transferOutRequest?.requestDate}}</td>
+
+											<td>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '4'" [tableId]="144" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '337'" [tableId]="141" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '17'" [tableId]="143" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '18'" [tableId]="139" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '19'" [tableId]="142" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '31'" [tableId]="137" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '29'" [tableId]="136" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '38' || transferOutRequest?.tableId == '48'" [tableId]="140" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+											</td>
+
+											<td>
+												<tr-list-label *ngIf="transferOutRequest?.transferFromProviderId" [tableId]="193" [pkValue]="transferOutRequest?.transferFromProviderId"></tr-list-label>
+											</td>
+
+											<td>
+												<tr-list-label *ngIf="transferOutRequest?.transferToProviderId" [tableId]="193" [pkValue]="transferOutRequest?.transferToProviderId"></tr-list-label>
+											</td>
+
+
+											<td>
+												<tr-list-label *ngIf="transferOutRequest?.status" [tableId]="229" [pkValue]="transferOutRequest?.status"></tr-list-label>
+											</td>
+
+											<td>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '4'" [tableId]="175" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '337'" [tableId]="182" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '17'" [tableId]="214" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '18'" [tableId]="154" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '19'" [tableId]="196" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '31'" [tableId]="147" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '29'" [tableId]="111" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '38' || transferOutRequest?.tableId == '48'" [tableId]="167" [pkValue]="transferOutRequest?.rejectionReason"></tr-list-label>
+											</td>
+
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="transferOutRequestList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'transferOutRequestList'" *ngIf="transferOutRequestList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

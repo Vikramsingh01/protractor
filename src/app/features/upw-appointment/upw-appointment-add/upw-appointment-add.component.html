@@ -1,0 +1,202 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Community Payback Appointment</h2>
+        <h2 class="page-title" *ngIf="action == 'Create'">Schedule Community Payback Appointment</h2>
+
+        <form [formGroup]="upwAppointmentAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Appointment </legend>
+                <div class="row">
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwAppointmentId')">
+                        <label for="upwAppointmentId" title="Upw Appointment">Community Payback Appointment<span class="mand-text">*</span></label>
+                        <input type="text" formControlName="upwAppointmentId" id="upwAppointmentId" class="form-control" placeholder="Community Payback Appointment"
+                        />
+                        <control-messages [control]="upwAppointmentAddForm.controls.upwAppointmentId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+                        <label for="eventId" title="Event">Event<span class="mand-text">*</span></label>
+                        <input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="Event" />
+                        <control-messages [control]="upwAppointmentAddForm.controls.eventId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('appointmentDate')">
+                        <label for="appointmentDate" title="Date">Date<span class="mand-text">*</span></label>
+                        <date-picker [controlName]="'appointmentDate'" [form]="upwAppointmentAddForm" [isNsrd]="true" (updateNsrd)="updateNsrd($event)" (dateChanged)="getUPWData()"></date-picker>
+                        <control-messages [control]="upwAppointmentAddForm.controls.appointmentDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="officeTeamId" title="Team">Team <span class="mand-text">*</span></label>
+                        <select class="form-control" formControlName="officeTeamId" (change)="getUPWData()" id="officeTeamId">
+                        <option value=''>- Select - </option>
+                        <option *ngFor="let officeTeam of officeTeams" value="{{officeTeam?.key}}">{{officeTeam?.value}}</option>
+                    </select>
+                        <control-messages [control]="upwAppointmentAddForm.controls.officeTeamId"></control-messages>
+                    </div>
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('providerId')">
+                        <label for="providerId">Provider
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'providerId'" [dropdown]="upwAppointmentAddForm"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.providerId"></control-messages>
+                    </div>-->
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectTypeId')">
+                        <label for="projectTypeId" title="Project Type ">Project Type <span class="mand-text">*</span>
+                                                                    </label>
+                        <select class="form-control" formControlName="projectTypeId" (change)="getUPWData()" id="projectTypeId">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let projectType of projectTypes" value="{{projectType?.key}}">{{projectType?.value}}</option>
+                        </select>
+                        <control-messages [control]="upwAppointmentAddForm.controls.projectTypeId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectName')">
+                        <label for="projectName" title="Project Name ">Project Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <select class="form-control" formControlName="projectId" (change)="upwProjectUpdate($event.target.value)" id="projectName">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let project of upwProjects" value="{{project?.upwProjectId}}">{{project?.projectName}}</option>
+                        </select>
+                        <control-messages [control]="upwAppointmentAddForm.controls.projectName"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectName') && projectSlots.length > 0">
+                        <label for="projectAvailability" title="Project Availability ">Project Availability </label>
+                        <select class="form-control" (change)="projectAvailabilityUpdate($event.target.value)" id="projectAvailability">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let projectSlot of projectSlots" value="{{projectSlot?.projectAvailabilityId}}">{{projectSlot?.start}} - {{projectSlot?.end}}</option>
+                        </select>
+                        <control-messages [control]="upwAppointmentAddForm.controls.projectName"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <button class="btn btn-default btn-purple" type="button" (click)="getAllocatedServiceUsers()">Show / Hide Allocated Service Users</button>
+
+                    </div>
+                    <div class="col-sm-12 mb25" *ngIf="showHideAllocatedServiceUsers">
+                        <table class="table table-bordered nomarbtm mt10">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">CRN</th>
+                                    <th>Family Name</th>
+                                    <th>First Name</th>
+                                    <th class="text-center">Date of Birth</th>
+                                    <th>Gender</th>
+                                </tr>
+                            </thead>
+                            <tr *ngFor="let serviceUser of allocatedServiceUsers">
+                                <td class="text-center">{{serviceUser?.caseReferenceNumber}}</td>
+                                <td>{{serviceUser?.familyName}}</td>
+                                <td>{{serviceUser?.firstName}}</td>
+                                <td class="text-center">{{serviceUser?.dateOfBirth}}</td>
+                                <td>
+                                    <tr-list-label *ngIf="serviceUser?.genderId" [tableId]="2" [pkValue]="serviceUser?.genderId"></tr-list-label>
+                                </td>
+                            </tr>
+                        </table>
+                        <div *ngIf="showHideAllocatedServiceUsers && allocatedServiceUsers?.length<=0" class="no-records">No Service Users Allocated</div>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('startTime')">
+                        <label for="startTime" title="Start Time">Start Time <span class="mand-text">*</span></label>
+                        <timepicker [controlName]="'startTime'" [form]="upwAppointmentAddForm" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+                        <control-messages [control]="upwAppointmentAddForm.controls.startTime"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('endTime')">
+                        <label for="endTime" title="End Time">End Time <span class="mand-text">*</span></label>
+                        <timepicker [controlName]="'endTime'" [form]="upwAppointmentAddForm" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+                        <control-messages [control]="upwAppointmentAddForm.controls.endTime"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwOutcomeTypeId')">
+                        <label for="upwOutcomeTypeId" title="Outcome">Outcome<span *ngIf="nsrdData['upwOutcomeTypeId']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [isNsrd]="true" [tableId]="103" [list]="outcomeTypeList" [controlName]="'upwOutcomeTypeId'" [dropdown]="upwAppointmentAddForm" (updateAd)="updateAd($event)"
+                            (updateNsrd)="updateNsrd($event)"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.upwOutcomeTypeId"></control-messages>
+                    </div>
+                     <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwOutcomeTypeId') && nsrdData['enforcementActionId']?.active">
+                        <label for="enforcementActionId" title="Enforcement Action">Enforcement Action<span *ngIf="nsrdData['enforcementActionId']?.mandatory" class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="121" [controlName]="'enforcementActionId'" [dropdown]="upwAppointmentAddForm"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.enforcementActionId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('highVisibilityVestYesNoId') && nsrdData['highVisibilityVestYesNoId']?.active">
+                        <label for="highVisibilityVestYesNoId" title="High Visibility Vest Worn?">High Visibility Vest Worn?<span *ngIf="nsrdData['highVisibilityVestYesNoId']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'highVisibilityVestYesNoId'" [dropdown]="upwAppointmentAddForm" [excludeCodes]="['U']"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.highVisibilityVestYesNoId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('intensiveYesNoId') && nsrdData['intensiveYesNoId']?.active">
+                        <label for="intensiveYesNoId" title="Worked Intensively?">Worked Intensively?<span *ngIf="nsrdData['intensiveYesNoId']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'intensiveYesNoId'" [dropdown]="upwAppointmentAddForm" [excludeCodes]="['U']"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.intensiveYesNoId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('minutesOffered') && nsrdData['minutesOffered']?.active">
+                        <label for="minutesOffered" title="Hours Offered">Hours Offered
+                                                                </label>
+                        <input type="text" formControlName="minutesOffered" id="minutesOffered" class="form-control" placeholder="Minutes Offered"
+                        />
+                        <control-messages [control]="upwAppointmentAddForm.controls.minutesOffered"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('penaltyTime') && nsrdData['penaltyTime']?.active">
+                        <label for="penaltyTime" title="Penalty Time (hh:mm)">Penalty Time (hh:mm)<span *ngIf="nsrdData['penaltyTime']?.mandatory" class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="penaltyTime" id="penaltyTime" class="form-control" placeholder="Penalty Time (hh:mm)" />
+                        <control-messages [control]="upwAppointmentAddForm.controls.penaltyTime"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('minutesCredited') && nsrdData['minutesCredited']?.active">
+                        <label for="minutesCredited" title="Hours Credited (hh:mm)">Hours Credited (hh:mm)<span *ngIf="nsrdData['minutesCredited']?.mandatory" class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="minutesCredited" id="minutesCredited" class="form-control" placeholder="Minutes Credited (hh:mm)"
+                        />
+                        <control-messages [control]="upwAppointmentAddForm.controls.minutesCredited"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('workQualityId') && nsrdData['workQualityId']?.active">
+                        <label for="workQualityId" title="Worked Quality">Worked Quality<span *ngIf="nsrdData['workQualityId']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="243" [controlName]="'workQualityId'" [dropdown]="upwAppointmentAddForm"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.workQualityId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('behaviourId') && nsrdData['behaviourId']?.active">
+                        <label for="behaviourId" title="Behaviour">Behaviour<span *ngIf="nsrdData['behaviourId']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="234" [controlName]="'behaviourId'" [dropdown]="upwAppointmentAddForm"></tr-dropdown>
+                        <control-messages [control]="upwAppointmentAddForm.controls.behaviourId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="upwAppointmentAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="upwAppointmentAddForm.controls.note"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwTeam')">
+                        <label for="upwTeam" title="Supervisor Team">Supervisor Team<span class="mand-text">*</span></label>
+                        <!--<input type="text" formControlName="upwTeam" id="upwTeam" class="form-control" placeholder="Supervisior Team" />-->
+                        <select class="form-control" formControlName="upwTeamId" (change)="supervisiorTeamChange($event.target.value)" id="upwTeam">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let upwTeam of upwTeams" value="{{upwTeam?.key}}">{{upwTeam?.value}}</option>
+                        </select>
+                        <control-messages [control]="upwAppointmentAddForm.controls.upwTeamId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwContactOfficer')">
+                        <label for="upwContactOfficer" title="Supervisor">Supervisor  <span class="mand-text">*</span></label>
+                        <select class="form-control" formControlName="upwContactOfficerId" id="upwContactOfficer">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let upwOfficer of upwOfficers" value="{{upwOfficer?.key}}">{{upwOfficer?.value}}</option>
+                        </select>
+                        <control-messages [control]="upwAppointmentAddForm.controls.upwContactOfficerId"></control-messages>
+                    </div>
+
+
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="upwAppointmentAddForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,241 @@
+<div class="edit-view-layout one-line-view">
+
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Assessment</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Assessment</h2>
+		<form [formGroup]="assessmentAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Assessment </legend>
+				<div class="row">
+					<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                                <label for="spgVersion">Spg Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+                                <control-messages [control]="assessmentAddForm.controls.spgVersion"></control-messages>
+                            </div>-->
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralId')">
+						<label for="referralId" title="Referral Id ">Referral Id <span class="mand-text">*</span> </label>
+						<input type="text" formControlName="referralId" id="referralId" class="form-control" placeholder="Referral Id" />
+						<control-messages [control]="assessmentAddForm.controls.referralId"></control-messages>
+					</div>
+					<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentId')">
+                                <label for="assessmentId">Assessment Id  <span class="mand-text">*</span> </label>
+                                <input type="text" formControlName="assessmentId" id="assessmentId" class="form-control" placeholder="Assessment Id" />
+                                <control-messages [control]="assessmentAddForm.controls.assessmentId"></control-messages>
+                            </div>-->
+					<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                                <label for="spgUpdateUser">Spg Update User
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.spgUpdateUser"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentProviderId')">
+                                <label for="assessmentProviderId">Assessment Provider Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="assessmentProviderId" id="assessmentProviderId" class="form-control" placeholder="Assessment Provider Id"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.assessmentProviderId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentTeam')">
+                                <label for="assessmentTeam">Assessment Team
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="assessmentTeam" id="assessmentTeam" class="form-control" placeholder="Assessment Team"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.assessmentTeam"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentOfficer')">
+                                <label for="assessmentOfficer">Assessment Officer
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="assessmentOfficer" id="assessmentOfficer" class="form-control" placeholder="Assessment Officer"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.assessmentOfficer"></control-messages>
+                            </div>
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentScore')  && nsrdData['assessmentScore']?.active">
+                                <label for="assessmentScore">Assessment Score <span *ngIf="nsrdData['assessmentScore']?.mandatory" class="mand-text">*</span></label>
+                                <input type="text" formControlName="assessmentScore" id="assessmentScore" class="form-control" placeholder="Assessment Score"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.assessmentScore"></control-messages>
+                            </div>
+
+
+                            <!-- <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgAssessmentId')">
+                                <label for="spgAssessmentId">Spg Assessment Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="spgAssessmentId" id="spgAssessmentId" class="form-control" placeholder="Spg Assessment Id"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.spgAssessmentId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+                                <label for="eventId">Event Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="Event Id" />
+                                <control-messages [control]="assessmentAddForm.controls.eventId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                                <label for="createdBy">Created By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+                                <control-messages [control]="assessmentAddForm.controls.createdBy"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                                <label for="createdByUserId">Created By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.createdByUserId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                                <label for="createdDate">Created Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                                <date-picker [controlName]="'createdDate'" [form]="assessmentAddForm"></date-picker>
+                                <control-messages [control]="assessmentAddForm.controls.createdDate"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                                <label for="modifiedBy">Modified By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+                                <control-messages [control]="assessmentAddForm.controls.modifiedBy"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                                <label for="modifiedByUserId">Modified By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.modifiedByUserId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                                <label for="modifiedDate">Modified Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                                <date-picker [controlName]="'modifiedDate'" [form]="assessmentAddForm"></date-picker>
+                                <control-messages [control]="assessmentAddForm.controls.modifiedDate"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                                <label for="deleted">Deleted
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+                                <control-messages [control]="assessmentAddForm.controls.deleted"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                                <label for="deletedBy">Deleted By
+                                                                </label>
+                                <input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+                                <control-messages [control]="assessmentAddForm.controls.deletedBy"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                                <label for="deletedByUserId">Deleted By User Id
+                                                                </label>
+                                <input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+                                />
+                                <control-messages [control]="assessmentAddForm.controls.deletedByUserId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                                <label for="deletedDate">Deleted Date
+                                                                    </label>
+                                <date-picker [controlName]="'deletedDate'" [form]="assessmentAddForm"></date-picker>
+                                <control-messages [control]="assessmentAddForm.controls.deletedDate"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                                <label for="locked">Locked
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+                                <control-messages [control]="assessmentAddForm.controls.locked"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+                                <label for="version">Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+                                <control-messages [control]="assessmentAddForm.controls.version"></control-messages>
+                            </div>-->
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentDate')">
+						<label for="assessmentDate" title="Assessment Date">Assessment Date <span class="mand-text">*</span></label>
+						<date-picker [controlName]="'assessmentDate'" [form]="assessmentAddForm"></date-picker>
+						<control-messages [control]="assessmentAddForm.controls.assessmentDate"></control-messages>
+					</div>
+<!--
+					<div class="form-group col-sm-6">
+						<label for="referralTypeId" title="Referral Type">Referral Type <span class="mand-text">*</span> </label>
+						<tr-dropdown [operation] = "action" [tableId]="203" [controlName]="'referralTypeId'" [dropdown]="assessmentAddForm"></tr-dropdown>
+						<control-messages [control]="assessmentAddForm.controls.referralTypeId"></control-messages>
+					</div>-->
+
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentTypeId')">
+						<label for="assessmentTypeId" title="Assessment Type">Assessment Type <span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="96"  [isDependent]="true" [list]="childParentAnswers[96]"   [hasChildAnswers]="true" (updateAnswers)="updateAnswers($event)" [controlName]="'assessmentTypeId'"
+							[dropdown]="assessmentAddForm" [isNsrd]="true" (updateNsrd)="updateNsrd($event)"></tr-dropdown>
+						<control-messages [control]="assessmentAddForm.controls.assessmentTypeId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenderRequiredToAttendYesNoId')">
+						<label for="offenderRequiredToAttendYesNoId" title="SU Required To attend?">SU Required To attend?  <span class="mand-text">*</span>  </label>
+						<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'offenderRequiredToAttendYesNoId'" [excludeCodes]="['U']" [dropdown]="assessmentAddForm"></tr-dropdown>
+						<control-messages [control]="assessmentAddForm.controls.offenderRequiredToAttendYesNoId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenderAttendedYesNoId')">
+						<label for="offenderAttendedYesNoId" title="SU Attended?">SU Attended?  </label>
+						<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'offenderAttendedYesNoId'" [excludeCodes]="['U']" [dropdown]="assessmentAddForm"></tr-dropdown>
+						<control-messages [control]="assessmentAddForm.controls.offenderAttendedYesNoId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentOutcomeId') && nsrdData['assessmentOutcomeId']?.active">
+						<label for="assessmentOutcomeId" title="Assessment Outcome">Assessment Outcome <span *ngIf="nsrdData['assessmentOutcomeId']?.mandatory" class="mand-text">*</span> </label>
+						<tr-dropdown [operation] = "action" [tableId]="95" [isDependent]="true" [list]="childAnswers[95]" [parentTableId]="96" [parentControlName]="'assessmentTypeId'"
+							[controlName]="'assessmentOutcomeId'" (updateAnswers)="updateAnswers($event)" [dropdown]="assessmentAddForm"></tr-dropdown>
+						<control-messages [control]="assessmentAddForm.controls.assessmentOutcomeId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('assessmentScore')  && nsrdData['assessmentScore']?.active">
+						<label for="assessmentScore" title="Assessment Score">Assessment Score <span *ngIf="nsrdData['assessmentScore']?.mandatory" class="mand-text">*</span></label>
+						<input type="text" formControlName="assessmentScore" id="assessmentScore" class="form-control" placeholder="Assessment Score"
+						/>
+						<control-messages [control]="assessmentAddForm.controls.assessmentScore"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('durationInMinutes')  && nsrdData['durationInMinutes']?.active">
+						<label for="durationInMinutes" title="Assessment Duration(HH:MM)"> Assessment Duration(HH:MM) <span *ngIf="nsrdData['durationInMinutes']?.mandatory" class="mand-text">*</span></label>
+						<input type="text" formControlName="durationInMinutes" id="durationInMinutes" class="form-control" placeholder="Duration In Minutes"
+						/>
+						<control-messages [control]="assessmentAddForm.controls.durationInMinutes"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenderAgreementYesNoId') && nsrdData['offenderAgreementYesNoId']?.active">
+						<label for="offenderAgreementYesNoId" title="SU Agreement">SU Agreement <span *ngIf="nsrdData['offenderAgreementYesNoId']?.mandatory" class="mand-text">*</span> </label>
+						<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'offenderAgreementYesNoId'" [excludeCodes]="['U']" [dropdown]="assessmentAddForm"></tr-dropdown>
+						<control-messages [control]="assessmentAddForm.controls.offenderAgreementYesNoId"></control-messages>
+					</div>
+
+				 <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="assessmentAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="assessmentAddForm.controls.note"></control-messages>
+                    </div>
+
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="assessmentAddForm">Submit</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+	</div>
+
+</div>

@@ -1,0 +1,83 @@
+<div class="detail-view-layout">
+	<div class="row hide-heading">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Drug Test</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Drug Test" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> DrugTest </legend>
+          <div class="row">
+
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateOfTest')">
+              <div class="view-title col-sm-5" title="Date Of Test" id="label_dateOfTest">Date Of Test<span class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="dateOfTest">{{drugTest?.dateOfTest}}</p>
+            </div>
+
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('testedBy')">
+              <div class="view-title col-sm-5" title="Tested By" id="label_testedBy">Tested By<span class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="testedBy">{{drugTest?.testedBy}}</p>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenderComplianceYesNoId')">
+              <div class="view-title col-sm-5" title="Su Complied" id="label_offenderComplianceYesNoId">Su Complied <span
+                class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="offenderComplianceYesNoId">
+                <tr-list-label *ngIf="drugTest?.offenderComplianceYesNoId" [tableId]="244"
+                               [pkValue]="drugTest?.offenderComplianceYesNoId"></tr-list-label>
+              </p>
+            </div>
+            <div class="col-sm-12 nopadding">
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+              <div class="view-title col-sm-5" title="Notes" id="label_note">Notes<span class="pull-right">:</span></div>
+              <p class="detail-value-note col-sm-7" id="note">{{drugTest?.note}}</p>
+            </div>
+            </div>
+            <div class="col-sm-12 nopadding">
+            <div class="form-field-div col-sm-6">    
+	        	<div class="view-title col-sm-5" title="Drug(s) to be tested for">Drug(s) to be tested for <span class="pull-right">:</span></div>
+            </div>
+            </div>
+            <div class="col-sm-12">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="wid200">Drug  </th>
+                  <th class="wid300">Admitted? </th>
+                  <th class="wid300"> Result </th>
+                  <th class="wid400">Agreed? </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor="let drugTestResult of drugTest?.drugTestResultList">
+                  <td>
+                    <tr-list-label [tableId]="119" [pkValue]="drugTestResult?.drugTypeId"></tr-list-label>
+                  </td>
+                  <td>
+                    <tr-list-label [tableId]="244" [pkValue]="drugTestResult?.admittedUseYesNoId"></tr-list-label>
+                  </td>
+                  <td>
+                    <tr-list-label [tableId]="2543" [pkValue]="drugTestResult?.testResultId"></tr-list-label>
+                  </td>
+                  <td>
+                    <tr-list-label [tableId]="244" [pkValue]="drugTestResult?.agreedYesNoId"></tr-list-label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

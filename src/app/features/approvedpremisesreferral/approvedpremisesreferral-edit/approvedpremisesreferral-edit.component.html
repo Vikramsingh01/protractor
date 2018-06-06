@@ -1,0 +1,267 @@
+<div class="edit-view-layout">
+	<div class="page-title">{{action}} approved Premises Referral</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="approved Premises Referral" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<form [formGroup]="approvedPremisesReferralForm" (ngSubmit)="onSubmit()" autocomplete="off">
+					<fieldset class="three-column">
+						<legend> <span class="glyphicon glyphicon-flash"></span> approved Premises Referral Detail </legend>
+						<div class="row">
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseReferralId')">
+								<label for="approvedPremiseReferralId">approved Premise Referral</label>
+								<div>
+									<input type="text" formControlName="approvedPremiseReferralId" id="approvedPremiseReferralId" class="form-control" placeholder="approved Premise Referral"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedArrivalDate')">
+								<label for="expectedArrivalDate">expected Arrival Date</label>
+								<div>
+									<date-picker [controlName]="'expectedArrivalDate'" [form]="approvedPremisesReferralForm"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedDepartureDate')">
+								<label for="expectedDepartureDate">expected Departure Date</label>
+								<div>
+									<date-picker [controlName]="'expectedDepartureDate'" [form]="approvedPremisesReferralForm"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rejectReasonId')">
+								<label for="rejectReasonId">reject Reason</label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="94" [controlName]="'rejectReasonId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralGroupId')">
+								<label for="referralGroupId">referral Group</label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="93" [controlName]="'referralGroupId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referringProviderId')">
+								<label for="referringProviderId">referring Provider</label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'referringProviderId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('nonArrivalDate')">
+								<label for="nonArrivalDate">non Arrival Date</label>
+								<div>
+									<date-picker [controlName]="'nonArrivalDate'" [form]="approvedPremisesReferralForm"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('nonArrivalReasonId')">
+								<label for="nonArrivalReasonId">non Arrival Reason</label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="91" [controlName]="'nonArrivalReasonId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('sourceTypeId')">
+								<label for="sourceTypeId">source Type <span class="mand-text">*</span></label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="221" [controlName]="'sourceTypeId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referringOfficer')">
+								<label for="referringOfficer">referring Officer</label>
+								<div>
+									<input type="text" formControlName="referringOfficer" id="referringOfficer" class="form-control" placeholder="referring Officer"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('decisionProviderId')">
+								<label for="decisionProviderId">decision Provider</label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'decisionProviderId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralCategoryId')">
+								<label for="referralCategoryId">referral Category <span class="mand-text">*</span></label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="92" [controlName]="'referralCategoryId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralDecisionId')">
+								<label for="referralDecisionId">referral Decision <span class="mand-text">*</span></label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="201" [controlName]="'referralDecisionId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('decisionTeam')">
+								<label for="decisionTeam">decision Team</label>
+								<div>
+									<input type="text" formControlName="decisionTeam" id="decisionTeam" class="form-control" placeholder="decision Team" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('decisionOfficer')">
+								<label for="decisionOfficer">decision Officer</label>
+								<div>
+									<input type="text" formControlName="decisionOfficer" id="decisionOfficer" class="form-control" placeholder="decision Officer"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralDate')">
+								<label for="referralDate">referral Date <span class="mand-text">*</span></label>
+								<div>
+									<date-picker [controlName]="'referralDate'" [form]="approvedPremisesReferralForm"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('decisionDate')">
+								<label for="decisionDate">decision Date</label>
+								<div>
+									<date-picker [controlName]="'decisionDate'" [form]="approvedPremisesReferralForm"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('apReferralSourceId')">
+								<label for="apReferralSourceId">AP Referral Source <span class="mand-text">*</span></label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="202" [controlName]="'apReferralSourceId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseId')">
+								<label for="approvedPremiseId">approved Premise</label>
+								<div>
+									<tr-dropdown [operation] = "action" [tableId]="132" [controlName]="'approvedPremiseId'" [dropdown]="approvedPremisesReferralForm"></tr-dropdown>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+								<label for="eventId">event</label>
+								<div>
+									<input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="event" />
+								</div>
+							</div>
+
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referringTeam')">
+								<label for="referringTeam">referring Team</label>
+								<div>
+									<input type="text" formControlName="referringTeam" id="referringTeam" class="form-control" placeholder="referring Team" />
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgApprovedPremiseReferralId')">
+								<label for="spgApprovedPremiseReferralId">SPG Approved Premise Referral</label>
+								<div>
+									<input type="text" formControlName="spgApprovedPremiseReferralId" id="spgApprovedPremiseReferralId" class="form-control"
+										placeholder="spg Approved Premise Referral" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+								<label for="spgVersion">SPG Version <span class="mand-text">*</span></label>
+								<div>
+									<input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="spg Version" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+								<label for="spgUpdateUser">SPG Update User <span class="mand-text">*</span></label>
+								<div>
+									<input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="spg Update User"
+									/>
+								</div>
+							</div>
+							<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+					<label for="createdDate"  >created Date</label>
+					<div >
+						<input type="text" formControlName="createdDate" id="createdDate" class="form-control" placeholder="created Date" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+					<label for="createdBy"  >created By</label>
+					<div >
+						<input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="created By" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+					<label for="createdByUserId"  >created By User</label>
+					<div >
+						<input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="created By User" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+					<label for="modifiedDate"  >modified Date</label>
+					<div >
+						<input type="text" formControlName="modifiedDate" id="modifiedDate" class="form-control" placeholder="modified Date" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+					<label for="modifiedBy"  >modified By</label>
+					<div >
+						<input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="modified By" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+					<label for="modifiedByUserId"  >modified By User</label>
+					<div >
+						<input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="modified By User" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+					<label for="deleted"  >deleted</label>
+					<div >
+						<input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="deleted" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+					<label for="deletedDate"  >deleted Date</label>
+					<div >
+						<input type="text" formControlName="deletedDate" id="deletedDate" class="form-control" placeholder="deleted Date" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+					<label for="deletedBy"  >deleted By</label>
+					<div >
+						<input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="deleted By" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+					<label for="deletedByUserId"  >deleted By User</label>
+					<div >
+						<input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="deleted By User" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+					<label for="locked"  >locked</label>
+					<div >
+						<input type="text" formControlName="locked" id="locked" class="form-control" placeholder="locked" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+					<label for="version"  >version</label>
+					<div >
+						<input type="text" formControlName="version" id="version" class="form-control" placeholder="version" />
+					</div>
+				</div>-->
+							<div class="form-group col-sm-12" *ngIf="isFeildAuthorized('referralNote')">
+								<label for="referralNote">referral Notes</label>
+								<div>
+									<textarea formControlName="referralNote" id="referralNote" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group col-sm-12" *ngIf="isFeildAuthorized('nonArrivalNote')">
+								<label for="nonArrivalNote">non Arrival Notes</label>
+								<div>
+									<textarea formControlName="nonArrivalNote" id="nonArrivalNote" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group col-sm-12" *ngIf="isFeildAuthorized('decisionNote')">
+								<label for="decisionNote">decision Notes</label>
+								<div>
+									<textarea formControlName="decisionNote" id="decisionNote" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group col-sm-12">
+								<button class="btn btn-default btn-purple">Save</button>
+								<button class="btn btn-default btn-white" [routerLink]="['/my-service-user', profileId, 'event', approvedPremisesReferral?.eventId]">Cancel</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

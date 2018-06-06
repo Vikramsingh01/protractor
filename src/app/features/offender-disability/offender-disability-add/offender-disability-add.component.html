@@ -1,0 +1,190 @@
+<div class="edit-view-layout one-line-view">
+
+    <!--<a *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" class="pull-right">
+        <button class="btn btn-default btn-custom ">Back</button>
+    </a>
+    <a *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="pull-right">
+        <button class="btn btn-default btn-custom ">Back</button>
+    </a>-->
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+         <h2 class="page-title" *ngIf="action == 'Update'">Edit Accessibility</h2>
+    <h2 class="page-title" *ngIf="action == 'Create'">Add Accessibility</h2>
+                <form [formGroup]="offenderDisabilityAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <fieldset class="three-column">
+                        <legend> <span class="glyphicon glyphicon-flash"></span> Accessibility </legend>
+                        <div class="row">
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                                <label for="profileId" title="Profile Id">Profile Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="profileId" id="profileId" class="form-control" placeholder="Profile Id" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.profileId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                                <label for="spgVersion" title="Spg Version">Spg Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.spgVersion"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                                <label for="spgUpdateUser" title="Spg Update User">Spg Update User
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"
+                                />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.spgUpdateUser"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('disabilityTypeId')">
+                                <label for="disabilityTypeId" title="Accessibility Type">Accessibility Type
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                                <tr-dropdown [operation] = "action" [tableId]="115" [controlName]="'disabilityTypeId'" [dropdown]="offenderDisabilityAddForm" [excludeItems] = "assignedDisabilityTypes"></tr-dropdown>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.disabilityTypeId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+                                <label for="startDate" title="Start Date">Start Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                                <date-picker [controlName]="'startDate'" [form]="offenderDisabilityAddForm"></date-picker>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.startDate"></control-messages>
+                            </div>
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+                                <label for="endDate" title="End Date">End Date
+                                                                    </label>
+                                <date-picker [controlName]="'endDate'" [form]="offenderDisabilityAddForm"></date-picker>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.endDate"></control-messages>
+                            </div>
+							<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="offenderDisabilityAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="offenderDisabilityAddForm.controls.note"></control-messages>
+                    </div>
+					<!--
+                            <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                                <label for="note" title="Notes">Notes </label>
+                                <textarea formControlName="newNote" id="note" class="form-control"></textarea>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.newNote"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-8 note-style" *ngIf="action=='Update'">
+								<label for="OldNote">Previous Note</label>
+								<textarea readonly style="overflow-y:scroll" formControlName="note" id="OldNote" class="form-control detail-value-note" onscroll="true"></textarea>
+						   </div>
+                            <div class="form-group col-sm-4" *ngIf="action=='Update'">
+                                 <p id="loggedUser" style="margin-top:35px;white-space: pre-line" >{{loggedUserDetails}}<br>{{currentTime}}</p>
+                            </div>
+						-->
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenderDisabilityId')">
+                                <label for="offenderDisabilityId" title="Offender Disability Id">Offender Disability Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="offenderDisabilityId" id="offenderDisabilityId" class="form-control" placeholder="Offender Disability Id"
+                                />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.offenderDisabilityId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgOffenderDisabilityId')">
+                                <label for="spgOffenderDisabilityId" title="Spg Offender Disability Id">Spg Offender Disability Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="spgOffenderDisabilityId" id="spgOffenderDisabilityId" class="form-control" placeholder="Spg Offender Disability Id"
+                                />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.spgOffenderDisabilityId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                                <label for="createdBy" title="Created By">Created By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.createdBy"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                                <label for="createdByUserId" title="Created By User Id">Created By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+                                />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.createdByUserId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                                <label for="createdDate" title="Created Date">Created Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                                <date-picker [controlName]="'createdDate'" [form]="offenderDisabilityAddForm"></date-picker>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.createdDate"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                                <label for="modifiedBy" title="Modified By">Modified By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.modifiedBy"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                                <label for="modifiedByUserId" title="Modified By User Id">Modified By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+                                />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.modifiedByUserId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                                <label for="modifiedDate" title="Modified Date">Modified Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                                <date-picker [controlName]="'modifiedDate'" [form]="offenderDisabilityAddForm"></date-picker>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.modifiedDate"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                                <label for="deleted" title="Deleted">Deleted
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.deleted"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                                <label for="deletedBy" title="Deleted By">Deleted By
+                                                                </label>
+                                <input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.deletedBy"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                                <label for="deletedByUserId" title="Deleted By User Id">Deleted By User Id
+                                                                </label>
+                                <input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+                                />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.deletedByUserId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                                <label for="deletedDate" title="Deleted Date">Deleted Date
+                                                                    </label>
+                                <date-picker [controlName]="'deletedDate'" [form]="offenderDisabilityAddForm"></date-picker>
+                                <control-messages [control]="offenderDisabilityAddForm.controls.deletedDate"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                                <label for="locked" title="Locked">Locked
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.locked"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+                                <label for="version" title="Version">Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+                                <control-messages [control]="offenderDisabilityAddForm.controls.version"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-12 text-right">
+                                <button class="btn btn-default btn-purple" fromServerMessageValidator [form]="offenderDisabilityAddForm">SUBMIT</button>
+                                <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="btn btn-default btn-white">CANCEL</button>
+                                <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" class="btn btn-default btn-white">CANCEL</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+    </div>
+
+</div>

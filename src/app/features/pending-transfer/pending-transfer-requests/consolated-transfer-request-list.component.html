@@ -1,0 +1,130 @@
+<div class="list-view-layout">
+	<div class="row">
+		<div class="col-md-12">
+<form [formGroup]="pendingTransferForm" (ngSubmit)="acceptPendingTransfer()">
+		<div class="col-sm-12">
+		<div class="form-group col-sm-12">
+				<label class="radio-inline">
+					<input type="radio" id="yesRadio" (change)="setIsRejectCheckedFlag(true)" formControlName="acceptRejectFlag" value="true"  [checked]='true'>Accept
+				</label>
+				<label class="radio-inline">
+					<input type="radio" id="noRadio"  (change)="setIsRejectCheckedFlag(false)" formControlName="acceptRejectFlag" value="false"  />Reject
+				</label>
+		</div>
+		  <div class="form-group col-sm-3">
+					<label for="teamId" >Team<span class="mand-text">*</span> </label>
+					<select class="form-control" id="teamId" formControlName="teamId" (change)="change($event.target.options)" >
+	 \                 <option value=''>--Select--</option>
+					  <option *ngFor="let officeTeamId of teams" [value]="officeTeamId?.key" >{{officeTeamId?.value}}</option>
+				   </select>
+				   <control-messages [control]="pendingTransferForm.controls.teamId"></control-messages>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="officerId">Officer<span class="mand-text">*</span> </label>
+					<select class="form-control" formControlName="officerId" id="officerId">
+						<option value=''>--Select--</option>
+						<option *ngFor="let user of officerIds" [value]="user?.key">{{user?.value}}</option>
+					</select>
+					<control-messages [control]="pendingTransferForm.controls.officerId"></control-messages>
+				</div>
+				<div class="form-group col-sm-3">
+						<label for="bandId">Band<span class="mand-text">*</span> </label>
+						<select class="form-control" formControlName="bandIdForOmRequest">
+								<option value=''>--Select--</option>
+							<option *ngFor="let band of listOfBandIds" [value]="band?.key" >{{band?.value}}</option>
+						</select>
+						 <control-messages [control]="pendingTransferForm.controls.bandIdForOmRequest"></control-messages>
+					
+				</div>
+
+	<div class="col-md-12">
+		<div class="table-div three-column">
+
+			<table class="table table-bordered" id="ConsolatedTransferRequestListTable">
+				<thead>
+					<tr>
+
+						<th><span class="th-div">COMPONENT<span class="glyphicon"></span></span>
+						</th>
+						<th><span class="th-div">COMPONENT TYPE<span class="glyphicon"></span></span>
+						</th>
+						<th><span class="th-div">TRANSFER REASON<span class="glyphicon"></span></span>
+						</th>
+						<th><span class="th-div">SENDER<span class="glyphicon"></span></span>
+						<th>
+							<span class="th-div">SELECT<span class="glyphicon"></span></span>
+
+						</th>
+						<th>
+							<span class="th-div">Rejection Reason<span class="glyphicon"></span></span>
+						</th>
+
+					</tr>
+					
+				</thead>
+				<tbody  formArrayName="consolatedResponseList">
+
+					<tr  *ngFor="let component of pendingTransferForm.controls.consolatedResponseList.controls; let i=index" [formGroupName]="i" id="componentAllocationRow-{{i+1}}">
+
+						
+						<td>{{component.controls['component']?.value}}</td>
+						<td>
+
+							<tr-list-label  *ngIf="component.controls['tableId']?.value == '337'" [tableId]="421" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '17'" [tableId]="215" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '18'" [tableId]="422" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '19'" [tableId]="197" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '31'" [tableId]="149" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '29'" [tableId]="108" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '38' || component.controls['tableId']?.value == '48'" [tableId]="192" [pkValue]="component.controls['descriptionId']?.value"></tr-list-label>
+						</td>
+						<td>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '4'" [tableId]="144" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '337'" [tableId]="141" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '17'" [tableId]="143" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '18'" [tableId]="139" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '19'" [tableId]="142" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '31'" [tableId]="137" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '38' || component.controls['tableId']?.value == '48'" [tableId]="140" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+							<tr-list-label *ngIf="component.controls['tableId']?.value == '29'" [tableId]="136" [pkValue]="component.controls['transferReasonId']?.value"></tr-list-label>
+						</td>
+						<td>
+								<tr-list-label  [tableId]="193" [pkValue]="component.controls['providerId'].value"></tr-list-label>
+						</td>
+						<td  class="text-center">
+								<input id="status{{component?.dataId}}" (change)="toggleBandField($event,component)" type="checkbox" formControlName="statusId">
+							
+						</td>
+						<td>
+							 <div>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '4'" [tableId]="175" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '337'"  [tableId]="182" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '17'"  [tableId]="214" [controlName]="'rejectionReasonId'" [dropdown]="component"  ></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '18'" [tableId]="154" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '19'" [tableId]="196" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '31'" [tableId]="147" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '29'" [tableId]="147" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <tr-dropdown disabled="!isReject" [operation] = "action" *ngIf="component.controls['tableId']?.value == '38' || component.controls['tableId']?.value == '48'" [tableId]="167" [controlName]="'rejectionReasonId'" [dropdown]="component"></tr-dropdown>
+							  <control-messages [control]="component.controls.rejectionReasonId"></control-messages>
+							</div>
+						</td>
+
+					</tr>
+
+				</tbody>
+			</table>
+			<div *ngIf="componentAllocationList?.length<=0" class="no-records">No Records Found</div>
+		</div>
+	</div>
+	<div class="form-group col-sm-12 text-right mt15">
+		<button class="btn btn-default btn-purple"id="saveButton" fromServerMessageValidator [form]="pendingTransferForm"  [disabled]="!isFormSubmittable">Submit</button>
+		<button class="btn btn-default btn-white" (click)="navigateTo(['../..'])" type="button" id="cancelButton">Cancel</button>
+	</div>
+	</div>
+</form>
+</div>
+</div>
+
+</div>
+
+

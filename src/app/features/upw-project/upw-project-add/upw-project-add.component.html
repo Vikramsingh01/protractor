@@ -1,0 +1,295 @@
+<div class="edit-view-layout ntt">
+	<h2 class="page-title" *ngIf="action == 'Update'">EDIT Community Payback PROJECT</h2>
+	<h2 class="page-title" *ngIf="action == 'Create'">ADD Community Payback PROJECT</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div *ngIf="authorizedFlag">
+		<form [formGroup]="upwProjectAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<div class="grid-style">
+				<tr-accordion>
+					<tr-accordionTab header="Project Details" [selected]="true">
+						<div class="grid-head"></div>
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+							<div class="row">
+								<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwProjectId')">
+                                <label for="upwProjectId" title="Upw Project">Upw Project<span class="mand-text">*</span></label>
+                                <input type="text" formControlName="upwProjectId" id="upwProjectId" class="form-control" placeholder="Upw Project" />
+                                <control-messages [control]="upwProjectAddForm.controls.upwProjectId"></control-messages>
+                            </div>-->
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectStatusId')">
+									<label for="projectStatusId" title="Status">Status<span class="mand-text">*</span></label>
+									<tr-dropdown [operation] = "action" [tableId]="1527" [controlName]="'projectStatusId'" [dropdown]="upwProjectAddForm"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.projectStatusId"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectCode')">
+									<label for="projectCode" title="Project Code">Project Code<span class="mand-text">*</span></label>
+									<input type="text" formControlName="projectCode" id="projectCode" class="form-control" placeholder="Project Code" />
+									<control-messages [control]="upwProjectAddForm.controls.projectCode"></control-messages>
+								</div>
+
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('officeTeamId')">
+									<label for="officeTeamId" title="Team">Team<span class="mand-text">*</span></label>
+									<tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'officeTeamId'" [dropdown]="upwProjectAddForm" [list]="officeTeams"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.officeTeamId"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectName')">
+									<label for="projectName" title="Project Name">Project Name<span class="mand-text">*</span></label>
+									<input type="text" formControlName="projectName" id="projectName" class="form-control" placeholder="Project Name" />
+									<control-messages [control]="upwProjectAddForm.controls.projectName"></control-messages>
+								</div>
+
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('highVisibilityYesNoId')">
+									<label for="highVisibilityYesNoId" title="High Visibility Req">High Visibility Req</label>
+									<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'highVisibilityYesNoId'" [dropdown]="upwProjectAddForm" [excludeCodes]="['U']"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.highVisibilityYesNoId"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectTypeId')">
+									<label for="projectTypeId" title="Project Type">Project Type<span class="mand-text">*</span></label>
+									<tr-dropdown [operation] = "action" [tableId]="239" [controlName]="'projectTypeId'" [dropdown]="upwProjectAddForm"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.projectTypeId"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+									<label for="startDate" title="Start Date">Start Date</label>
+									<date-picker [controlName]="'startDate'" [form]="upwProjectAddForm"></date-picker>
+									<control-messages [control]="upwProjectAddForm.controls.startDate"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+									<label for="endDate" title="End Date">End Date</label>
+									<date-picker [controlName]="'endDate'" [form]="upwProjectAddForm"></date-picker>
+									<control-messages [control]="upwProjectAddForm.controls.endDate"></control-messages>
+								</div>
+							</div>
+						</fieldset>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+			<div class="grid-style">
+				<tr-accordion>
+					<tr-accordionTab header="Provider Details" [selected]="false">
+						<div class="grid-head"></div>
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+							<div class="row">
+
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('provider')">
+									<label for="provider" title="Provider">Provider
+                                                                </label>
+									<input type="text" formControlName="provider" id="provider" class="form-control" placeholder="Provider" />
+									<control-messages [control]="upwProjectAddForm.controls.provider"></control-messages>
+								</div>
+								<tr-address-generic-add [form]="upwProjectAddForm" [formGroupName]="'providerAddressId'"></tr-address-generic-add>
+							</div>
+						</fieldset>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+			<div class="grid-style">
+				<tr-accordion>
+					<tr-accordionTab header="Beneficiary Details" [selected]="false">
+						<div class="grid-head"></div>
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+							<div class="row">
+
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('beneficiaryName')">
+									<label for="beneficiaryName" title="Name">Beneficiary/Contact Name</label>
+									<input type="text" formControlName="beneficiaryName" id="beneficiaryName" class="form-control" placeholder="Beneficiary Name"
+									/>
+									<control-messages [control]="upwProjectAddForm.controls.beneficiaryName"></control-messages>
+								</div>
+								<tr-address-generic-add [form]="upwProjectAddForm" [formGroupName]="'beneficiaryAddressId'"></tr-address-generic-add>
+
+							</div>
+						</fieldset>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+			<div class="grid-style">
+				<tr-accordion>
+					<tr-accordionTab header="Placement Details" [selected]="false">
+						<div class="grid-head"></div>
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+							<div class="row">
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('placementName')">
+									<label for="placementName" title="Name">Name</label>
+									<input type="text" formControlName="placementName" id="placementName" class="form-control" placeholder="Placement Name" />
+									<control-messages [control]="upwProjectAddForm.controls.placementName"></control-messages>
+								</div>
+								<tr-address-generic-add [form]="upwProjectAddForm" [formGroupName]="'placementAddressId'"></tr-address-generic-add>
+								<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('placementNotes')">
+									<label for="placementNotes" title="Placement Notes">Placement Notes</label>
+									<textarea formControlName="placementNotes" id="placementNotes" class="form-control"></textarea>
+									<control-messages [control]="upwProjectAddForm.controls.placementNotes"></control-messages>
+								</div>
+							</div>
+						</fieldset>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+			<div class="grid-style">
+				<tr-accordion>
+					<tr-accordionTab header="Project Availability & Information" [selected]="false">
+						<div class="grid-head"></div>
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+							<div class="row">
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateRequested')">
+									<label for="dateRequested" title="Date Requested">Date Requested<span class="mand-text">*</span></label>
+									<date-picker [controlName]="'dateRequested'" [form]="upwProjectAddForm"></date-picker>
+									<control-messages [control]="upwProjectAddForm.controls.dateRequested"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateJobEvaluted')">
+									<label for="dateJobEvaluted" title="Date Job Evaluted">Date Job Evaluted<span class="mand-text">*</span></label>
+									<date-picker [controlName]="'dateJobEvaluted'" [form]="upwProjectAddForm"></date-picker>
+									<control-messages [control]="upwProjectAddForm.controls.dateJobEvaluted"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('plannedStartDate')">
+									<label for="plannedStartDate" title="Planned Start Date">Planned Start Date<span class="mand-text">*</span></label>
+									<date-picker [controlName]="'plannedStartDate'" [form]="upwProjectAddForm"></date-picker>
+									<control-messages [control]="upwProjectAddForm.controls.plannedStartDate"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('minimumAge')">
+									<label for="minimumAge" title="Minimum Age">Minimum Age</label>
+									<input type="text" formControlName="minimumAge" id="minimumAge" class="form-control" placeholder="Minimum Age" />
+									<control-messages [control]="upwProjectAddForm.controls.minimumAge"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('maximumAge')">
+									<label for="maximumAge" title="Maximum Age">Maximum Age</label>
+									<input type="text" formControlName="maximumAge" id="maximumAge" class="form-control" placeholder="Maximum Age" />
+									<control-messages [control]="upwProjectAddForm.controls.maximumAge"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('minimumNoInGroup')">
+									<label for="minimumNoInGroup" title="Minimum no. in Group">Minimum no. in Group<span class="mand-text">*</span></label>
+									<input type="text" formControlName="minimumNoInGroup" id="minimumNoInGroup" class="form-control" placeholder="Minimum No In Group"
+									/>
+									<control-messages [control]="upwProjectAddForm.controls.minimumNoInGroup"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('maximumNoInGroup')">
+									<label for="maximumNoInGroup" title="Maximum no. in Group">Maximum no. in Group<span class="mand-text">*</span></label>
+									<input type="text" formControlName="maximumNoInGroup" id="maximumNoInGroup" class="form-control" placeholder="Maximum No In Group"
+									/>
+									<control-messages [control]="upwProjectAddForm.controls.maximumNoInGroup"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('genderSuitabilityId')">
+									<label for="genderSuitabilityId" title="Gender Suitability">Gender Suitability</label>
+									<tr-dropdown [operation] = "action" [tableId]="237" [controlName]="'genderSuitabilityId'" [dropdown]="upwProjectAddForm"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.genderSuitabilityId"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('visibileToPublicYesNoId')">
+									<label for="visibileToPublicYesNoId" title="Visibile to Public?">Visibile to Public?</label>
+									<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'visibileToPublicYesNoId'" [dropdown]="upwProjectAddForm"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.visibileToPublicYesNoId"></control-messages>
+								</div>
+								<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('projectNotSuitableForNotes')">
+									<label for="projectNotSuitableForNotes" title="Notes / Project NOT suitable for">Notes / Project NOT suitable for</label>
+									<textarea formControlName="projectNotSuitableForNotes" id="projectNotSuitableForNotes" class="form-control"></textarea>
+									<control-messages [control]="upwProjectAddForm.controls.projectNotSuitableForNotes"></control-messages>
+								</div>
+								<div class="col-sm-12">
+									<div class="mt10">
+										<div class="row">
+											<div class="col-md-8">
+												<div class="sub-title">Project Availability</div>
+											</div>
+											<div class="col-md-4">
+												<button type="button" class="btn btn-default btn-purple pull-right" (click)="addProjectAvailability()">ADD</button>
+											</div>
+										</div>
+
+										<table class="table table-bordered mt10">
+											<thead>
+												<tr>
+													<th>Day</th>
+													<th class="text-center">Start</th>
+													<th class="text-center">End</th>
+													<th class="wid180 text-center"><span class="hidden">aa</span></th>
+												</tr>
+											</thead>
+											<tbody formArrayName="projectAvailability">
+												<tr *ngFor="let pa of upwProjectAddForm.controls.projectAvailability.controls; let i=index" [formGroupName]="i">
+													<td>
+														<tr-dropdown [operation] = "action" [tableId]="0" [controlName]="'dayOfWeekId'" [dropdown]="pa" [list]="dayOfWeekList"></tr-dropdown>
+														<control-messages [control]="pa.controls.dayOfWeekId"></control-messages>
+													</td>
+													<td class="text-center">
+														<!--<date-picker [controlName]="'start'" [form]="pa"></date-picker>-->
+														<timepicker [controlName]="'start'" [form]="pa" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+														<control-messages [control]="pa.controls.start"></control-messages>
+													</td>
+													<td class="text-center">
+														<!--<date-picker [controlName]="'end'" [form]="pa"></date-picker>-->
+														<timepicker [controlName]="'end'" [form]="pa" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+														<control-messages [control]="pa.controls.end"></control-messages>
+													</td>
+													<td class="text-center"><button type="button" class="btn btn-default btn-white" (click)="removeProjectAvailability(i)">Remove</button></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!--<div class="row table">
+                                <div class="col-md-2">Day</div>
+                                <div class="col-md-3">Start Date</div>
+                                <div class="col-md-3">End Date</div>
+                            </div>
+                            <div class="row" formArrayName="projectAvailability">
+                                <div *ngFor="let pa of upwProjectAddForm.controls.projectAvailability.controls; let i=index" [formGroupName]="i">
+                                    <div >
+                                    <div class="col-md-2" >
+                                        <tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'dayOfWeekId'" [dropdown]="pa"></tr-dropdown>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <date-picker [controlName]="'start'" [form]="pa"></date-picker>
+                                    </div>
+                                    <div class="col-md-3">
+                                         <date-picker [controlName]="'end'" [form]="pa"></date-picker>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn" (click)="removeProjectAvailability(i)">Remove</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>-->
+							</div>
+						</fieldset>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+			<div class="grid-style">
+				<tr-accordion>
+					<tr-accordionTab header="Nature of Work & Qualifications" [selected]="false">
+						<div class="grid-head"></div>
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Project </legend>
+							<div class="row">
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('selectNatureOfWorkId')">
+									<label for="selectNatureOfWorkId" title="Nature of Work">Nature of Work</label>
+									<tr-dropdown [operation] = "action" [tableId]="238" [controlName]="'selectNatureOfWorkId'" [dropdown]="upwProjectAddForm"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.selectNatureOfWorkId"></control-messages>
+								</div>
+								<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('qualificationOpportunitieId')">
+									<label for="qualificationOpportunitieId" title="Opportunity for Skills / Qualifications">Opportunity for Skills / Qualifications</label>
+									<tr-dropdown [operation] = "action" [tableId]="240" [controlName]="'qualificationOpportunitieId'" [dropdown]="upwProjectAddForm"></tr-dropdown>
+									<control-messages [control]="upwProjectAddForm.controls.qualificationOpportunitieId"></control-messages>
+								</div>
+								<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('natureOfWorkNotes')">
+									<label for="natureOfWorkNotes" title="Notes">Notes</label>
+									<textarea formControlName="natureOfWorkNotes" id="natureOfWorkNotes" class="form-control"></textarea>
+									<control-messages [control]="upwProjectAddForm.controls.natureOfWorkNotes"></control-messages>
+								</div>
+							</div>
+						</fieldset>
+					</tr-accordionTab>
+				</tr-accordion>
+
+			</div>
+			<div class="form-group text-right">
+				<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="upwProjectAddForm">SUBMIT</button>
+				<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['..'])" id="cancelButton" class="btn btn-default btn-white">CANCEL</button>
+				<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">CANCEL</button>
+			</div>
+		</form>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

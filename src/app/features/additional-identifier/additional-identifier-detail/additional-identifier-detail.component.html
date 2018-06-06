@@ -1,0 +1,102 @@
+<div class="detail-view-layout">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Additional Identifier</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Additional Identifier" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> AdditionalIdentifier </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('additionalIdentifierId')">
+							<div class="view-title col-sm-5" title="Additional Identifier">Additional Identifier <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.additionalIdentifierId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+							<div class="view-title col-sm-5" title="Profile Id">Profile Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.profileId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" title="Spg Version">Spg Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.spgVersion}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" title="Spg Update User">Spg Update User <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.spgUpdateUser}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgAdditionalIdentifierId')">
+							<div class="view-title col-sm-5" title="Spg Additional Identifier ">Spg Additional Identifier  <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.spgAdditionalIdentifierId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" title="Created By">Created By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.createdBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" title="Created By User Id">Created By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.createdByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" title="Created Date">Created Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.createdDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" title="Modified By">Modified By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.modifiedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" title="Modified By User Id">Modified By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.modifiedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" title="Modified Date">Modified Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.modifiedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" title="Deleted">Deleted <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.deleted}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" title="Deleted By">Deleted By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.deletedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" title="Deleted By User Id">Deleted By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.deletedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" title="Deleted Date">Deleted Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.deletedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" title="Locked">Locked <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.locked}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" title="Version">Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.version}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('identifierTypeId')">
+							<div class="view-title col-sm-5" title="Identifier Type ">Identifier Type  <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="additionalIdentifier?.identifierTypeId" [tableId]="79" [pkValue]="additionalIdentifier?.identifierTypeId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('identifier')">
+							<div class="view-title col-sm-5" title="Identifier">Identifier <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{additionalIdentifier?.identifier}}</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

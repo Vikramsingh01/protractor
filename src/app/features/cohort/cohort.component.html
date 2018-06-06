@@ -1,0 +1,95 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Cohort" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['cohort', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<!--<th *ngIf="isFeildAuthorized('cohortId')">cohort</th>-->
+											<!--<th *ngIf="isFeildAuthorized('caseReferenceNumber')">case Reference Number</th>-->
+											<th *ngIf="isFeildAuthorized('cohortCode')" trSortBy="cohortCode" (sortCommand)="sort($event)"><span class="th-div">cohort Code<span *ngIf="sortFilterPaginationObj.sortObj.field == 'cohortCode'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('cohortProviderId')" trSortBy="cohortProviderId" (sortCommand)="sort($event)"><span class="th-div">cohort Provider<span *ngIf="sortFilterPaginationObj.sortObj.field == 'cohortProviderId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<!--<th *ngIf="isFeildAuthorized('eventId')">event</th>-->
+											<th *ngIf="isFeildAuthorized('sentenceReleaseDate')" trSortBy="sentenceReleaseDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">sentence <span class="txt-trasi">or</span> Release Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'sentenceReleaseDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<!--<th *ngIf="isFeildAuthorized('spgCohortId')">SPG Cohort</th>-->
+											<th *ngIf="isFeildAuthorized('startDate')" trSortBy="startDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">start Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'startDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>-->
+											<!--<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>-->
+											<!--<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+						<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+						<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+						<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+						<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+						<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+						<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+						<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+						<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+						<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+						<th *ngIf="isFeildAuthorized('locked')">locked</th>
+						<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let cohort of cohorts">
+											<!--<td *ngIf="isFeildAuthorized('cohortId')">{{cohort.cohortId}}</td>-->
+											<!--<td *ngIf="isFeildAuthorized('caseReferenceNumber')">{{cohort.caseReferenceNumber}}</td>-->
+											<td *ngIf="isFeildAuthorized('cohortCode')">{{cohort.cohortCode}}</td>
+											<!--<td *ngIf="isFeildAuthorized('cohortProviderId')">{{cohort.cohortProviderId}}</td>-->
+											<td *ngIf="isFeildAuthorized('cohortProviderId')"><span *ngFor="let item of listProvider | filter :'key' : cohort?.cohortProviderId">{{item.value}}</span></td>
+											<!--<td *ngIf="isFeildAuthorized('eventId')">{{cohort.eventId}}</td>-->
+											<td class="text-center" *ngIf="isFeildAuthorized('sentenceReleaseDate')">{{cohort.sentenceReleaseDate}}</td>
+											<!--<td *ngIf="isFeildAuthorized('spgCohortId')">{{cohort.spgCohortId}}</td>-->
+											<td class="text-center" *ngIf="isFeildAuthorized('startDate')">{{cohort.startDate}}</td>
+											<!--<td *ngIf="isFeildAuthorized('spgVersion')">{{cohort.spgVersion}}</td>-->
+											<!--<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{cohort.spgUpdateUser}}</td>-->
+											<!--<td *ngIf="isFeildAuthorized('createdDate')">{{cohort.createdDate}}</td>
+						<td *ngIf="isFeildAuthorized('createdBy')">{{cohort.createdBy}}</td>
+						<td *ngIf="isFeildAuthorized('createdByUserId')">{{cohort.createdByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedDate')">{{cohort.modifiedDate}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedBy')">{{cohort.modifiedBy}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{cohort.modifiedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('deleted')">{{cohort.deleted}}</td>
+						<td *ngIf="isFeildAuthorized('deletedDate')">{{cohort.deletedDate}}</td>
+						<td *ngIf="isFeildAuthorized('deletedBy')">{{cohort.deletedBy}}</td>
+						<td *ngIf="isFeildAuthorized('deletedByUserId')">{{cohort.deletedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('locked')">{{cohort.locked}}</td>
+						<td *ngIf="isFeildAuthorized('version')">{{cohort.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['cohort', cohort.cohortId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="cohort?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!cohort?.locked" [routerLink]="['cohort', cohort.cohortId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(cohort.cohortId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="cohorts?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'cohorts'" *ngIf="cohorts?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

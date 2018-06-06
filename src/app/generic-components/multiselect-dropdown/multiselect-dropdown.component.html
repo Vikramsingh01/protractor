@@ -1,0 +1,11 @@
+<div [formGroup]="form">
+      <input type="hidden" [formControlName]="controlName">
+    <div class="suggestions" *ngIf="list.length > 0">
+        <div class="checkbox" *ngFor="let item of list" >
+            <label>
+                 <input type="checkbox" (change)="select($event.target)" value="{{item?.key}}" [checked] = "checked.indexOf(item?.key) > -1">{{item?.value}}
+            </label>
+        </div>
+    </div>
+</div>
+

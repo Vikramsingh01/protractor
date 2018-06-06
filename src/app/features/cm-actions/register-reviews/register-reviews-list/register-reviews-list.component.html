@@ -1,0 +1,144 @@
+<tr-tabs [structure]="'cmaction'"></tr-tabs>
+<div class="list-view-layout">
+	
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Register Reviews Entries" [selected]="true">
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+								</div>
+
+								<div class="pad15 nopadbtm">
+
+										<form [formGroup]="registerReviewFilterForm" (ngSubmit)="search()" class="collapse in" id="collapseExample" autocomplete="off">
+										<div class="row">
+											<div class="form-group col-sm-6">
+													<label for="registerServiceUser">Service Users</label>
+													<select class="form-control" name="registerServiceUser" formControlName="registerServiceUser" id="registerServiceUser">
+														<option value=null>- Select -</option>
+														<option value="1">My Service Users</option>
+														<option value="0">My Team's Service Users</option>
+													</select>
+											</div>
+											
+											<div class="form-group col-sm-6" *ngIf="registerReviewFilterForm.value.registerServiceUser==0" >
+													<label for="caseManager">Case Manager</label>
+													<select class="form-control"  name="caseManager" formControlName="caseManager" id="caseManager">
+														<option value=null>- Select -</option>
+														<option *ngFor="let user of officerIds" [value]="user?.key">{{user?.value}}</option>
+													</select>
+											</div>
+
+											<div class="form-group col-sm-6">
+													<label for="registerDue">Register Due</label>
+													<select class="form-control"  name="registerDue" formControlName="registerDue" id="registerDue">
+														<option value=null>- Select -</option>
+														<option value="1">Today</option>
+														<option value="2">Overdue</option>
+														<option value="3">+1 Week</option>
+														<option value="4">+2 Weeks</option>
+													</select>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-4 pull-right text-right">
+												<button type="submit" class="btn btn-default btn-purple">Search</button>
+												<button type="button" class="btn btn-default btn-white" (click)="reset(registerReviewFilterForm)">Reset</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="wid120"  id="familyName" trSortBy="familyName" (sortCommand)="sort($event)"><span class="th-div">Family Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'familyName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+										
+											<th class="wid120"  id="firstName" trSortBy="firstName" (sortCommand)="sort($event)"><span class="th-div">First Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th class="wid120"  id="caseReferenceNumber" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)"><span class="th-div">Crn<span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseReferenceNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('registerTypeId')" id="registerTypeFlag" trSortBy="registerTypeFlag" (sortCommand)="sort($event)"><span class="th-div">Register<span *ngIf="sortSearchPaginationObj.sortObj.field == 'registerTypeFlag'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('registerTypeId')" id="registerType" trSortBy="registerType" (sortCommand)="sort($event)"><span class="th-div">Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'registerType'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('registrationDate')" id="registrationDate" trSortBy="registrationDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'registrationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('nextReviewDate')" id="nextReviewDate" trSortBy="nextReviewDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Next Review<span *ngIf="sortSearchPaginationObj.sortObj.field == 'nextReviewDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('registrationDate')" id="deregistrationEndDate" trSortBy="deregistrationDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">End Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'deregistrationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">view</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let registration of registrationList; let i = index">
+
+											<td> {{registration?.familyName}}</td>
+											
+											<td> {{registration?.firstName}}</td>
+											
+											<td> {{registration?.caseReferenceNumber}}</td>
+
+											<td> {{registration?.registerTypeFlag}}</td>
+
+											<td> {{registration?.registerType}}</td>
+
+											<td> {{registration?.registrationDate}}</td>
+
+											<td>{{registration?.nextReviewDate}}</td>
+
+											<td>{{registration?.deregistrationDate}}</td>
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')" >
+												<button class="btn btn-default btn-small" id="registration_view{{i}}" [routerLink]="[registration?.profileId, registration?.registrationId]" [queryParams]="{profileLoc:'2'}" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+
+												<span *ngIf="registration.deregistrationDate==null && isAuthorized('Update')">
+												<button *ngIf="!registration?.rrlocked" [routerLink]="[registration?.profileId, 'edit', registration?.registrationReviewId, registration?.registrationId]" [queryParams]="{profileLoc:'2'}" id="registration_edit{{i}}" class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>												
+												</span>
+											</td>
+
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="registrationList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'registrationList'" *ngIf="registrationList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+
+</div>

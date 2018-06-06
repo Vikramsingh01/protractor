@@ -1,0 +1,99 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Community Requirement Manager" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['requirementmanager', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('responsibleOfficer')" trSortBy="responsibleOfficer"(sortCommand)="sort($event)"><span class="th-div">responsible Officer<span *ngIf="sortFilterPaginationObj.sortObj.field == 'responsibleOfficer'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('allocationReasonId')" trSortBy="allocationReasonId" (sortCommand)="sort($event)"><span class="th-div">allocation Reason<span *ngIf="sortFilterPaginationObj.sortObj.field == 'allocationReasonId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('allocationDate')" trSortBy="allocationDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">allocation Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'allocationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('providerId')" class="wid150" trSortBy="providerId" (sortCommand)="sort($event)"><span class="th-div">provider<span *ngIf="sortFilterPaginationObj.sortObj.field == 'providerId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('createdDate')" trSortBy="createdDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">created Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'createdDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('responsibleTeam')">responsible Team</th>
+						<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+						<th *ngIf="isFeildAuthorized('endDate')">end Date</th>
+					    <th *ngIf="isFeildAuthorized('communityRequirementId')">community Requirement</th>
+					    <th *ngIf="isFeildAuthorized('requirementManagerId')">requirement Manager</th>
+					    <th *ngIf="isFeildAuthorized('spgRequirementManagerId')">SPG Requirement Manager</th>
+						<!--<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+						<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+						<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+						<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+						<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+						<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+						<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+						<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+						<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+						<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+						<th *ngIf="isFeildAuthorized('locked')">locked</th>
+						<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let requirementManager of requirementManagers">
+											<td *ngIf="isFeildAuthorized('responsibleOfficer')">{{requirementManager.responsibleOfficer}}</td>
+											<td *ngIf="isFeildAuthorized('allocationReasonId')"><span *ngFor="let allocationReasonId of allocationReasonList | filter :'key' :requirementManager?.allocationReasonId">{{allocationReasonId.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('allocationDate')" class="text-center">{{requirementManager.allocationDate}}</td>
+											<td *ngIf="isFeildAuthorized('providerId')" class="wid150"><span *ngFor="let provider of providerList | filter :'key' :requirementManager?.providerId">{{provider.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('createdDate')" class="text-center">{{requirementManager.createdDate}}</td>
+											<!--<td *ngIf="isFeildAuthorized('allocationReasonId')">{{requirementManager.allocationReasonId}}</td>
+						<td *ngIf="isFeildAuthorized('endDate')">{{requirementManager.endDate}}</td>
+						<td *ngIf="isFeildAuthorized('requirementManagerId')">{{requirementManager.requirementManagerId}}</td>
+						<td *ngIf="isFeildAuthorized('communityRequirementId')">{{requirementManager.communityRequirementId}}</td>
+						<td *ngIf="isFeildAuthorized('responsibleTeam')">{{requirementManager.responsibleTeam}}</td>
+						<td *ngIf="isFeildAuthorized('spgRequirementManagerId')">{{requirementManager.spgRequirementManagerId}}</td>
+						<td *ngIf="isFeildAuthorized('spgVersion')">{{requirementManager.spgVersion}}</td>
+						<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{requirementManager.spgUpdateUser}}</td>
+						<td *ngIf="isFeildAuthorized('createdBy')">{{requirementManager.createdBy}}</td>
+						<td *ngIf="isFeildAuthorized('createdByUserId')">{{requirementManager.createdByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedDate')">{{requirementManager.modifiedDate}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedBy')">{{requirementManager.modifiedBy}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{requirementManager.modifiedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('deleted')">{{requirementManager.deleted}}</td>
+						<td *ngIf="isFeildAuthorized('deletedDate')">{{requirementManager.deletedDate}}</td>
+						<td *ngIf="isFeildAuthorized('deletedBy')">{{requirementManager.deletedBy}}</td>
+						<td *ngIf="isFeildAuthorized('deletedByUserId')">{{requirementManager.deletedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('locked')">{{requirementManager.locked}}</td>
+						<td *ngIf="isFeildAuthorized('version')">{{requirementManager.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['requirementmanager', requirementManager.requirementManagerId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="requirementmanager?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!requirementmanager?.locked" [routerLink]="['requirementmanager', requirementManager.requirementManagerId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(requirementManager.requirementManagerId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="requirementManagers?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'requirementManagers'" *ngIf="requirementManagers?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

@@ -1,0 +1,119 @@
+<div class="edit-view-layout one-line-view">
+
+    <!--<div class="double-divider-purple mt10"></div>-->
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+
+               <h2 class="page-title" *ngIf="action == 'Update'">Edit/Withdraw Transfer Out Request</h2>
+               <h2 class="page-title" *ngIf="action == 'Create'">Add Transfer Out Request</h2>
+                <form [formGroup]="transferOutRequestEditForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <fieldset class="three-column">
+                        <legend> <span class="glyphicon glyphicon-flash"></span> Transfer Out Request </legend>
+                        <div class="row">
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('type')">
+                                <label for="type" title="Type">Type<span class="mand-text"></span></label>
+                                <input type="text" formControlName="type" id="type" class="form-control" placeholder="Type"  [readonly]="!type"/>
+                                <control-messages [control]="transferOutRequestEditForm.controls.type"></control-messages>
+                            </div>
+                         <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('descriptionId')">
+                         <label for="descriptionId" title="Description">Description<span class="mand-text"></span></label>
+                         <div *ngIf="transferOutRequest1?.descriptionId === null">
+                                <input type="text" formControlName="descriptionId" id="descriptionId" class="form-control" [readonly]="!descriptionId"/>
+                         </div>
+                          <div *ngIf="transferOutRequest1?.descriptionId !== null">
+                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '337'" [tableId]="421" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm">></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '17'" [tableId]="215" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '18'" [tableId]="422" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm">></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '19'" [tableId]="197" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm">></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '31'" [tableId]="149" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm">></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '29'" [tableId]="108" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm">></tr-dropdown>
+                           <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '38' || transferOutRequest1?.tableId == '48'" [tableId]="192" [controlName]="'descriptionId'" [dropdown]="transferOutRequestEditForm">></tr-dropdown>
+
+                           <!--<tr-dropdown [operation] = "action" [tableId]="421" [controlName]="'description'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>-->
+                           <!--<input type="text" formControlName="description" id="description" class="form-control" placeholder="Description" [readonly]="!description" />-->
+                        <control-messages [control]="transferOutRequestEditForm.controls.descriptionId"></control-messages>
+                        </div>
+                         </div>
+
+
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferToProviderId')">
+                                <label for="transferToProviderId" title="To Provider">To Provider<span class="mand-text"></span></label>
+                               <tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'transferToProviderId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferToProviderId"></control-messages>
+                        </div>
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferToTeam')">
+                                <label for="transferToTeam" title="To Team">To Team<span class="mand-text"></span></label>
+                               <input type="text" formControlName="transferToTeam" id="transferToTeam" class="form-control" placeholder="To Team" [readonly]="!transferToTeam" />
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferToTeam"></control-messages>
+                        </div>
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferFromProviderId')">
+                                <label for="transferToOfficer" title="To Officer">To Case Manager<span class="mand-text"></span></label>
+                                <input type="text" formControlName="transferToOfficer" id="transferToOfficer" class="form-control" placeholder="transferToOfficer" [readonly]="!transferToOfficer"/>
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferToOfficer"></control-messages>
+                        </div>
+                          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('requestDate')">
+                                <label for="requestDate" title="Request Date">Request Date
+                                                                        <span class="mand-text"></span>
+                                                                    </label>
+                                <date-picker [controlName]="'requestDate'" [form]="transferOutRequestEditForm"></date-picker>
+                                <control-messages [control]="transferOutRequestEditForm.controls.requestDate"></control-messages>
+                            </div>
+                             <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('statusId')">
+                                <label for="statusId" title="Status">Status<span class="mand-text"></span></label>
+                                <!--<input type="text" formControlName="statusId" id="statusId" class="form-control" placeholder="Status Id" [readonly]="!statusId"/>-->
+                                <tr-dropdown [operation] = "action" [tableId]="229" [controlName]="'statusId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+                                <control-messages [control]="transferOutRequestEditForm.controls.statusId"></control-messages>
+                            </div>
+                        <div class="col-sm-12 nopadding">
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferReasonId')">
+                                <label for="transferReasonId" title="Transfer Reason">Transfer Reason<span class="mand-text"></span></label>
+                                <!--<input type="text" formControlName="transferReasonId" id="transferReasonId" class="form-control" placeholder="Transfer Reason Id" />-->
+                             <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '4'" [tableId]="144"[controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                         <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '337'" [tableId]="141" [controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                         <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '17'" [tableId]="143" [controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                         <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '18'" [tableId]="139" [controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                         <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '19'" [tableId]="142" [controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                          <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '31'" [tableId]="137"[controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                         <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '29'" [tableId]="136" [controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+	                        <tr-dropdown [operation] = "action" *ngIf="transferOutRequest1?.tableId == '38' || transferOutRequest1?.tableId == '48'" [tableId]="140" [controlName]="'transferReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferReasonId"></control-messages>
+                            </div>
+
+
+
+
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferWithdrawnReasonId')">
+                                <label for="transferWithdrawnReasonId" title="Withdrawal Reason">Withdrawal Reason<span class="mand-text"></span></label>
+                                <!--<input type="text" formControlName="transferWithdrawnReasonId" id="transferWithdrawnReasonId" class="form-control" placeholder="Transfer Withdrawn Reason Id" />-->
+                                 <tr-dropdown [operation] = "action" [tableId]="230" [controlName]="'transferWithdrawnReasonId'" [dropdown]="transferOutRequestEditForm"></tr-dropdown>
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferWithdrawnReasonId"></control-messages>
+                            </div>
+                        </div>
+
+                            <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferFromTeam')">
+                                <label for="transferFromTeam" title="Transfer From Team">Transfer From Team
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="transferFromTeam" id="transferFromTeam" class="form-control" placeholder="Transfer From Team" />
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferFromTeam"></control-messages>
+                            </div>-->
+                            <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferFromOfficer')">
+                                <label for="transferFromOfficer" title="Transfer From Officer">Transfer From Officer
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="transferFromOfficer" id="transferFromOfficer" class="form-control" placeholder="Transfer From Officer" />
+                                <control-messages [control]="transferOutRequestEditForm.controls.transferFromOfficer"></control-messages>
+                            </div>-->
+
+                            <div class="form-group col-sm-12 text-right">
+                                <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="transferOutRequestEditForm">Submit</button>
+                                    <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                                    <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

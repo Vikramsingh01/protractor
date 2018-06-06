@@ -1,0 +1,159 @@
+<div class="detail-view-layout one-line-view">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Assessment</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Assessment" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> Assessment </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" title="Spg Version" id="label_spgVersion">Spg Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgVersion">{{assessment?.spgVersion}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralId')">
+							<div class="view-title col-sm-5" title="Referral Id" id="label_referralId">Referral Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="referralId">{{assessment?.referralId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentId')">
+							<div class="view-title col-sm-5" title="Assessment Id" id="label_assessmentId">Assessment Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="assessmentId">{{assessment?.assessmentId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" title="Spg Update User" id="label_spgUpdateUser">Spg Update User <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgUpdateUser">{{assessment?.spgUpdateUser}}</div>
+						</div>
+						<!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentProviderId')">
+                            <div class="view-title col-sm-5" title="Assessment Provider Id" id="label_assessmentProviderId">Assessment Provider Id <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="assessmentProviderId">{{assessment?.assessmentProviderId}}</div>
+                        </div>-->
+						<!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentTeam')">
+                            <div class="view-title col-sm-5" title="Assessment Team" id="label_assessmentTeam">Assessment Team <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="assessmentTeam">{{assessment?.assessmentTeam}}</div>
+                        </div>-->
+						<!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentOfficer')">
+                            <div class="view-title col-sm-5" title="Assessment Officer" id="label_assessmentOfficer">Assessment Officer <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="assessmentOfficer">{{assessment?.assessmentOfficer}}</div>
+                        </div>-->
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgAssessmentId')">
+							<div class="view-title col-sm-5" title="Spg Assessment Id" id="label_spgAssessmentId">Spg Assessment Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgAssessmentId">{{assessment?.spgAssessmentId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+							<div class="view-title col-sm-5" title="Event Id" id="label_eventId">Event Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="eventId">{{assessment?.eventId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" title="Created By" id="label_createdBy">Created By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdBy">{{assessment?.createdBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" title="Created By User Id" id="label_createdByUserId">Created By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdByUserId">{{assessment?.createdByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" title="Created Date" id="label_createdDate">Created Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdDate">{{assessment?.createdDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" title="Modified By" id="label_modifiedBy">Modified By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedBy">{{assessment?.modifiedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" title="Modified By User Id" id="label_modifiedByUserId">Modified By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedByUserId">{{assessment?.modifiedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" title="Modified Date" id="label_modifiedDate">Modified Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedDate">{{assessment?.modifiedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" title="Deleted" id="label_deleted">Deleted <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deleted">{{assessment?.deleted}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" title="Deleted By" id="label_deletedBy">Deleted By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedBy">{{assessment?.deletedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" title="Deleted By User Id" id="label_deletedByUserId">Deleted By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedByUserId">{{assessment?.deletedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" title="Deleted Date" id="label_deletedDate">Deleted Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedDate">{{assessment?.deletedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" title="Locked" id="label_locked">Locked <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="locked">{{assessment?.locked}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" title="Version" id="label_version">Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="version">{{assessment?.version}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentDate')">
+							<div class="view-title col-sm-5" title="Assessment Date" id="label_assessmentDate">Assessment Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="assessmentDate">{{assessment?.assessmentDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentTypeId')">
+							<div class="view-title col-sm-5" title="Assessment Type" id="label_assessmentTypeId">Assessment Type <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="assessmentTypeId">
+								<tr-list-label *ngIf="assessment?.assessmentTypeId" [tableId]="96" [pkValue]="assessment?.assessmentTypeId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenderRequiredToAttendYesNoId')">
+							<div class="view-title col-sm-5" title="SU Required To Attend&#63;" id="label_offenderRequiredToAttendYesNoId">SU Required To Attend&#63; <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="offenderRequiredToAttendYesNoId">
+								<tr-list-label *ngIf="assessment?.offenderRequiredToAttendYesNoId" [tableId]="244" [pkValue]="assessment?.offenderRequiredToAttendYesNoId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenderAttendedYesNoId')">
+							<div class="view-title col-sm-5" title="SU Attended&#63;" id="label_offenderAttendedYesNoId">SU Attended&#63; <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="offenderAttendedYesNoId">
+								<tr-list-label *ngIf="assessment?.offenderAttendedYesNoId" [tableId]="244" [pkValue]="assessment?.offenderAttendedYesNoId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentOutcomeId')&& nsrdData['durationInMinutes']?.active">
+							<div class="view-title col-sm-5" title="Assessment Outcome" id="label_assessmentOutcomeId">Assessment Outcome <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="assessmentOutcomeId">
+								<tr-list-label *ngIf="assessment?.assessmentOutcomeId" [tableId]="95" [pkValue]="assessment?.assessmentOutcomeId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('assessmentScore') && nsrdData['assessmentScore']?.active">
+							<div class="view-title col-sm-5" title="Assessment Score" id="label_assessmentScore">Assessment Score <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="assessmentScore">{{assessment?.assessmentScore}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('durationInMinutes') && nsrdData['durationInMinutes']?.active">
+							<div class="view-title col-sm-5" title="Assessment Duration(HH:MM)" id="label_durationInMinutes">Assessment Duration(HH:MM) <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="durationInMinutes">{{assessment?.durationInMinutes}}
+								<!--<tr-list-label *ngIf="assessment?.durationInMinutes" [tableId]="" [pkValue]="assessment?.durationInMinutes"></tr-list-label>-->
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('offenderAgreementYesNoId')&& nsrdData['durationInMinutes']?.active">
+							<div class="view-title col-sm-5" title="SU Agreement " id="label_offenderAgreementYesNoId">SU Agreement <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="offenderAgreementYesNoId">
+								<tr-list-label *ngIf="assessment?.offenderAgreementYesNoId" [tableId]="244" [pkValue]="assessment?.offenderAgreementYesNoId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+							<div class="view-title col-sm-5" title="Notes" id="label_note">Notes <span class="pull-right">:</span></div>
+							<div class="detail-value-note col-sm-7" id="note">{{assessment?.note}}</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,73 @@
+<div class="edit-view-layout one-line-view">
+
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Community Payback Details</h2>
+    <h2 class="page-title" *ngIf="action == 'Create'">Add Community Payback Details</h2>
+                <form [formGroup]="upwDetailAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <fieldset class="three-column">
+                        <legend> <span class="glyphicon glyphicon-flash"></span>Edit Community Payback Details </legend>
+                        <div class="row">
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwLengthInMinutes')">
+                                <label for="eventNumber" title="Event">Event<span class="mand-text">*</span></label>
+                                <input type="text" formControlName="eventNumber" id="eventNumber" class="form-control" placeholder="Event" />
+                                <control-messages [control]="upwDetailAddForm.controls.eventNumber"></control-messages>
+                            </div>
+                            <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwLengthInMinutes')">
+                                <label for="upwLengthInMinutes" title="Upw Length In Minutes">Upw Length In Minutes<span class="mand-text">*</span></label>
+                                <input type="text" formControlName="upwLengthInMinutes" id="upwLengthInMinutes" class="form-control" placeholder="Upw Length In Minutes" />
+                                <control-messages [control]="upwDetailAddForm.controls.upwLengthInMinutes"></control-messages>
+                            </div>-->
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('agreedTravelFare')">
+                                <label for="agreedTravelFare" title="Agreed Travel Fare (£)">Agreed Travel Fare (£)</label>
+                                <input type="text" formControlName="agreedTravelFare" id="agreedTravelFare" class="form-control" placeholder="Agreed Travel Fare" />
+                                <control-messages [control]="upwDetailAddForm.controls.agreedTravelFare"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('workedIntensivelyYesNoId')">
+                                <label for="workedIntensivelyYesNoId" title="Worked Intensively">Worked Intensively</label>
+                                <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'workedIntensivelyYesNoId'" [dropdown]="upwDetailAddForm"></tr-dropdown>
+                                <control-messages [control]="upwDetailAddForm.controls.workedIntensivelyYesNoId"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwStatusId')">
+                                <label for="upwStatusId" title="Status">Status<span class="mand-text">*</span></label>
+                                <tr-dropdown [operation] = "action" [tableId]="242" [controlName]="'upwStatusId'" [dropdown]="upwDetailAddForm"></tr-dropdown>
+                                <control-messages [control]="upwDetailAddForm.controls.upwStatusId"></control-messages>
+                            </div>
+
+                           <div class="form-group col-sm-6">
+                                <label for="totalHoursOrdered" title="Total Hours Ordered">Total Hours Ordered</label>
+                                <input type="text" formControlName="totalHoursOrdered" id="totalHoursOrdered" class="form-control" placeholder="Total Hours Ordered" />
+                                <control-messages [control]="upwDetailAddForm.controls.totalHoursOrdered"></control-messages>
+                            </div>
+                             <div class="form-group col-sm-6">
+                                <label for="adjustment" title="Adjustments">Adjustments</label>
+                                <input type="text" formControlName="totalAdjustment" id="adjustment" class="form-control" placeholder="Adjustments" />
+                                <control-messages [control]="upwDetailAddForm.controls.totalAdjustment"></control-messages>
+                            </div>
+                             <div class="form-group col-sm-6">
+                                <label for="totalHoursWorked" title="Total Hours Worked">Total Hours Worked</label>
+                                <input type="text" formControlName="totalHoursWorked" id="totalHoursWorked" class="form-control" placeholder="Total Hours Worked" />
+                                <control-messages [control]="upwDetailAddForm.controls.totalHoursWorked"></control-messages>
+                            </div>
+                             <div class="form-group col-sm-6">
+                                <label for="totalHoursLeft" title="Total Hours Left">Total Hours Left</label>
+                                <input type="text" formControlName="totalHoursLeft" id="totalHoursLeft" class="form-control" placeholder="Total Hours Left" />
+                                <control-messages [control]="upwDetailAddForm.controls.totalHoursLeft"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                                <!-- <label for="note" title="Notes">Notes</label>
+                                <textarea formControlName="notes" id="notes" placeholder="Notes" class="form-control"></textarea> -->
+                                <tr-notes [controlName]="'note'" [form]="upwDetailAddForm" [action]="action" [previousNotes]="previousNotes"></tr-notes>
+                                <control-messages [control]="upwDetailAddForm.controls.note"></control-messages>
+                            </div>
+                            <div class="form-group col-sm-12 text-right">
+                                <button class="btn btn-default btn-purple" fromServerMessageValidator [form]="upwDetailAddForm">Submit</button>
+                                    <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" class="btn btn-default btn-white">Cancel</button>
+                                    <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" class="btn btn-default btn-white">Cancel</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

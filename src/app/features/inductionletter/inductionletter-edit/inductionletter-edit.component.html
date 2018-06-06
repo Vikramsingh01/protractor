@@ -1,0 +1,67 @@
+<div class="edit-view-layout">
+	<h2 class="page-title"> Induction Letter</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Induction Letter" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<form [formGroup]="inductionLetterForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+					<fieldset class="three-column">
+
+						<div class="row">
+
+							<!--<div class="form-group col-md-12" *ngIf="isFeildAuthorized('dateOfAppointment')">
+				<label for="dateOfAppointment" class="">date Of Appointment</label>
+				<div class="">
+					<input type="date" formControlName="dateOfAppointment" class="form-control" placeholder="date Of Appointment" />
+				</div>
+			</div>-->
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateOfAppointment')">
+								<label for="dateOfAppointment" class="">date of Appointment </label>
+								<date-picker [controlName]="'dateOfAppointment'" [form]="inductionLetterForm"></date-picker>
+
+								<!--	<input type="date" formControlName="dateOfAppointment" class="form-control" placeholder="date Of Appointment" />-->
+								<small *ngIf="!inductionLetterForm.controls.dateOfAppointment.valid" class="text-danger">
+      				 Date of appointment field is required.
+     				 </small>
+							</div>
+
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('timeOfAppointment')">
+								<label for="timeOfAppointment" class="">time of Appointment</label>
+
+								<!--<input id="timeOfAppointment" formControlName="timeOfAppointment" type="time" class="form-control" step='1' min="00:00:00">-->
+				<timepicker [controlName]="'timeOfAppointment'" [form]="inductionLetterForm" [showMeridian]="false"  [showSeconds]="false" (timepicker)="close()"></timepicker>
+
+							</div>
+
+			<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('location')">
+				<label for="location" class="">location</label>
+				<input type="text" formControlName="location" class="form-control" placeholder="location" />
+				
+			</div>
+
+
+			<div class="form-group col-md-12" *ngIf="isFeildAuthorized('notes')">
+				<label for="notes" class="">notes</label>
+				<div class="">
+					<textarea formControlName="notes" class="form-control"></textarea>
+				</div>
+			</div>
+
+							<!--<timepicker [controlName]="'timeOfAppointment'" [form]="inductionLetterForm" [showMeridian]="false"></timepicker>-->
+
+							<div class="form-group col-sm-12">
+								<button class="btn btn-default btn-purple">Finish</button>
+
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

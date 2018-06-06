@@ -1,0 +1,112 @@
+<div class="list-view-layout"  *ngIf="authorizedFlag">
+  <h2 class="page-title hide-heading">Community Payback Appointments</h2>
+  <div class="double-divider-purple mt10 hide-heading"></div>
+  <div class="grid-style">
+    <tr-accordion>
+      <tr-accordionTab header="Community Payback Appointments" [selected]="false">
+        <div class="grid-head">
+          <tr-accordion-header>
+            <div *ngIf="isAuthorized('Create')"
+              class="pull-right">
+              <button [routerLink]="['upw-appointment', 'single']" title="Add Single" id="upwAppointment_addButton" class="btn btn-default btn-white">Add Single</button>
+              <button [routerLink]="['upw-appointment', 'recurring']" title="Add Recurring" id="upwAppointment_addRecButton" class="btn btn-default btn-white">Add Recurring</button>
+            </div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+        <div class="pad15">
+          <div class="grid-style filter-div">
+            <tr-accordion>
+              <tr-accordionTab header="filter">
+
+                <div class="grid-head">
+
+                </div>
+                <div class="pad15 nopadbtm">
+                  <tr-search [searchObjs]="searchObjs" (searchCommand)="searchUpwAppointment($event)"></tr-search>
+                </div>
+              </tr-accordionTab>
+            </tr-accordion>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-div">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+
+                      <th *ngIf="isFeildAuthorized('appointmentDate')" id="appointmentDate" trSortBy="appointmentDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'appointmentDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('appointmentDate')" id="appointmentDay"><span class="th-div">Day</span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('projectName')" id="projectName" trSortBy="projectName" (sortCommand)="sort($event)"><span class="th-div">Project<span *ngIf="sortSearchPaginationObj.sortObj.field == 'projectName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('minutesOffered')" id="minutesOffered" trSortBy="minutesOffered" (sortCommand)="sort($event)" class="text-center"><span class="th-div">HOurs Offered<span *ngIf="sortSearchPaginationObj.sortObj.field == 'minutesOffered'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('minutesCredited')" id="minutesCredited" trSortBy="minutesCredited" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Hours Credited<span *ngIf="sortSearchPaginationObj.sortObj.field == 'minutesCredited'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('behaviourId')" id="behaviourId" trSortBy="behaviourId" (sortCommand)="sort($event)"><span class="th-div">Behaviour<span *ngIf="sortSearchPaginationObj.sortObj.field == 'behaviourId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('workQualityId')" id="workQualityId" trSortBy="workQualityId" (sortCommand)="sort($event)"><span class="th-div">Work Quality<span *ngIf="sortSearchPaginationObj.sortObj.field == 'workQualityId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isFeildAuthorized('upwOutcomeTypeId')" id="upwOutcomeTypeId" trSortBy="upwOutcomeTypeId" (sortCommand)="sort($event)"><span class="th-div">Outcome<span *ngIf="sortSearchPaginationObj.sortObj.field == 'upwOutcomeTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let upwAppointment of upwAppointmentList; let i = index">
+                      <td class="text-center" *ngIf="isFeildAuthorized('appointmentDate')">{{upwAppointment?.appointmentDate}}</td>
+                      <td *ngIf="isFeildAuthorized('appointmentDate')">
+                        <span *ngFor="let dayOfWeekId of dayOfWeekList | filter :'key' : upwAppointment?.dayOfWeekId">{{dayOfWeekId.value}}</span>
+                      </td>
+                      <td *ngIf="isFeildAuthorized('projectName')">{{upwAppointment?.projectName}}</td>
+                      <td class="text-center" *ngIf="isFeildAuthorized('minutesOffered')">{{upwAppointment?.minutesOffered}}</td>
+                      <td class="text-center" *ngIf="isFeildAuthorized('minutesCredited')">{{upwAppointment?.minutesCredited}}</td>
+                      <td *ngIf="isFeildAuthorized('behaviourId')">
+                        <span *ngFor="let behaviourId of behaviourIdList | filter :'key' : upwAppointment?.behaviourId">{{behaviourId.value}}</span>
+                      </td>
+                      <td *ngIf="isFeildAuthorized('workQualityId')">
+                        <span *ngFor="let workQualityId of workQualityIdList | filter :'key' : upwAppointment?.workQualityId">{{workQualityId.value}}</span>
+                      </td>
+                      <td *ngIf="isFeildAuthorized('upwOutcomeTypeId')">
+                        <span *ngFor="let upwOutcomeTypeId of upwOutcomeTypeIdList | filter :'key' : upwAppointment?.upwOutcomeTypeId">{{upwOutcomeTypeId.value}}</span>
+                      </td>
+                      <td class="text-center">
+                        <span *ngIf="isAuthorized('Read')">
+                          <button class="btn btn-default btn-small" id="upwAppointment_view{{i}}" [routerLink]="['upw-appointment', upwAppointment?.upwAppointmentId]" title="View Record">
+                            <span class="glyphicon glyphicon-search">aa</span>
+                        </button>
+                        </span>
+                        <span *ngIf="isAuthorized('Update')">
+                          <button id="upwAppointment_edit{{i}}" class="btn btn-default btn-small" *ngIf="upwAppointment?.locked" title="Edit record is locked.">
+                            <span class="glyphicon glyphicon-lock">aa</span>
+                          </button>
+                          <button *ngIf="!upwAppointment?.locked" [routerLink]="['upw-appointment', 'edit', upwAppointment?.upwAppointmentId]" id="upwAppointment_edit{{i}}" class="btn btn-default btn-small" title="Edit Record">
+                            <span class="glyphicon glyphicon-pencil">aa</span>
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="upwAppointmentList?.length<=0" class="no-records">No Records Found</div>
+              </div>
+            </div>
+            <tr-pagination [name]="'upwAppointmentList'" *ngIf="upwAppointmentList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+              (paginationCommand)="paginate($event)"></tr-pagination>
+          </div>
+        </div>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="list-view-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'SU'"></tr-tabs>
+	<h2 class="page-title hide-heading">NSI</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Interventions" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['new']" id="processContact_addButton" class="btn btn-default btn-small" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<div class="filter-div">
+										<form [formGroup]="processContactFilterForm" (ngSubmit)="searchProcessContact()" class="collapse in" id="collapseExample" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-sm-4">
+													<label for="terminatedNsiId">Show Terminated Interventions</label>
+													<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'terminatedNsiId'" [dropdown]="processContactFilterForm" [excludeCodes]="['U']"></tr-dropdown>
+													<control-messages [control]="processContactFilterForm.controls.terminatedNsiId"></control-messages>
+												</div>
+											</div>
+											<div class="row">
+												<input type="hidden" formControlName="profileId">
+											</div>
+											<div class="row">
+												<div class="form-group col-sm-6 pull-right text-right">
+													<button type="submit" class="btn btn-default btn-purple">Search</button>
+													<button type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('processStartDate')" id="processStartDate" trSortBy="processStartDate" (sortCommand)="sort($event)" title="Start Date" class="text-center"><span class="th-div">Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('processTypeId')" id="processTypeId" trSortBy="processTypeId" (sortCommand)="sort($event)" title="Description"><span class="th-div">Description<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('processStageId')" id="processStageId" trSortBy="processStageId" (sortCommand)="sort($event)" title="Status"><span class="th-div">Status<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('processStageDate')" id="processStageDate" trSortBy="processStageDate" (sortCommand)="sort($event)" title="Status Date" class="text-center"><span class="th-div">Status Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th id="processManagerProviderId" title="Case Manager"><span class="th-div">Case Manager</span>
+											</th>
+											<th id="documents"  title="Documents?"><span class="th-div">Documents?</span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let processContact of processContactList; let i = index">
+
+											<td class="text-center" *ngIf="isFeildAuthorized('processStartDate')">{{processContact?.processStartDate}}</td>
+											<td *ngIf="isFeildAuthorized('processTypeId')">
+												<span *ngFor="let processTypeId of processTypeIdList | filter :'key' : processContact?.processTypeId">{{processTypeId.value}}</span>
+												<span *ngFor="let processSubTypeId of processSubTypeIdList | filter :'key' : processContact?.processSubTypeId"> - {{processSubTypeId.value}}</span>
+											</td>
+											<td *ngIf="isFeildAuthorized('processStageId')">
+												<span *ngFor="let processStageId of processStageIdList | filter :'key' : processContact?.processStageId">{{processStageId.value}}</span>
+											</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('processStageDate')">{{processContact?.processStageDate}}</td>
+											<td>{{parseOfficer(processContact?.nsiOfficer)}}</td>
+											<td>{{processContact?.documents}}</td>
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+                                                    <button class="btn btn-default btn-small" id="processContact_view{{i}}"  [routerLink]="[processContact?.processId,processContact?.processTypeId]"  title="View Record">
+                                                    	<span class="glyphicon glyphicon-search">aa</span>
+													</button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+                                                    <button id="processContact_edit{{i}}" class="btn btn-default btn-small" *ngIf="processContact?.locked && processContact?.processEndDate == null" title="Edit record is locked.">
+                                                    	<span class="glyphicon glyphicon-lock">aa</span>
+													</button>
+													<button *ngIf="!processContact?.locked && processContact?.processEndDate == null"  [routerLink]="['edit', processContact?.processId,processContact?.processTypeId]" id="processContact_edit{{i}}" class="btn btn-default btn-small" title="Edit Record">
+														<span class="glyphicon glyphicon-pencil">aa</span>
+													</button>
+												</span>
+												<span *ngIf="isAuthorized('Archive') && processContact?.isActive  && processContact?.isDelete">
+                                                    <button id="processContact_delete{{i}}" class="btn btn-default btn-small" *ngIf="processContact?.locked" title="Delete record is locked.">
+                                                        <span class="glyphicon glyphicon-lock">aa</span>
+													</button>
+													<button *ngIf="!processContact?.locked" (click)="delete(processContact?.processId)" id="processContact_delete{{i}}" class="btn btn-default btn-small"
+												 		title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="processContactList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'processContact'" *ngIf="processContactList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+						 (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

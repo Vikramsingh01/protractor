@@ -1,0 +1,99 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Order Manager" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['ordermanager', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('responsibleOfficer')" trSortBy="responsibleOfficer" (sortCommand)="sort($event)"><span class="th-div">responsible Officer<span *ngIf="sortFilterPaginationObj.sortObj.field == 'responsibleOfficer'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('providerId')" trSortBy="providerId" (sortCommand)="sort($event)"><span class="th-div">provider<span *ngIf="sortFilterPaginationObj.sortObj.field == 'providerId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('allocationDate')" class="wid150 text-center" trSortBy="allocationDate" (sortCommand)="sort($event)"><span class="th-div">allocation Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'allocationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--
+					<th *ngIf="isFeildAuthorized('orderManagerId')">order Manager</th>
+					<th *ngIf="isFeildAuthorized('allocationReasonId')">allocation Reason</th>
+					<th *ngIf="isFeildAuthorized('endDate')">end Date</th>
+					<th *ngIf="isFeildAuthorized('eventId')">event</th>
+					<th *ngIf="isFeildAuthorized('responsibleTeam')">responsible Team</th>
+					<th *ngIf="isFeildAuthorized('spgOrderManagerId')">SPG Order Manager</th>
+					<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+					<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+					<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+					<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+					<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+					<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+					<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+					<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+					<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+					<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+					<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+					<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+					<th *ngIf="isFeildAuthorized('locked')">locked</th>
+					<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let orderManager of orderManagers">
+											<td *ngIf="isFeildAuthorized('responsibleOfficer')">{{orderManager.responsibleOfficer}}</td>
+											<td *ngIf="isFeildAuthorized('providerId')"><span *ngFor="let provider of providerList | filter :'key' : orderManager?.providerId">{{provider.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('allocationDate')" class="wid150 text-center">{{orderManager.allocationDate}}</td>
+											<!--
+					<td *ngIf="isFeildAuthorized('orderManagerId')">{{orderManager.orderManagerId}}</td>
+					
+					<td *ngIf="isFeildAuthorized('allocationReasonId')">{{orderManager.allocationReasonId}}</td>
+					<td *ngIf="isFeildAuthorized('endDate')">{{orderManager.endDate }}</td>
+					<td *ngIf="isFeildAuthorized('eventId')">{{orderManager.eventId}}</td>
+					
+					
+					<td *ngIf="isFeildAuthorized('responsibleTeam')">{{orderManager.responsibleTeam}}</td>
+					<td *ngIf="isFeildAuthorized('spgOrderManagerId')">{{orderManager.spgOrderManagerId}}</td>
+					<td *ngIf="isFeildAuthorized('spgVersion')">{{orderManager.spgVersion}}</td>
+					<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{orderManager.spgUpdateUser}}</td>
+					<td *ngIf="isFeildAuthorized('createdDate')">{{orderManager.createdDate}}</td>
+					<td *ngIf="isFeildAuthorized('createdBy')">{{orderManager.createdBy}}</td>
+					<td *ngIf="isFeildAuthorized('createdByUserId')">{{orderManager.createdByUserId}}</td>
+					<td *ngIf="isFeildAuthorized('modifiedDate')">{{orderManager.modifiedDate}}</td>
+					<td *ngIf="isFeildAuthorized('modifiedBy')">{{orderManager.modifiedBy}}</td>
+					<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{orderManager.modifiedByUserId}}</td>
+					<td *ngIf="isFeildAuthorized('deleted')">{{orderManager.deleted}}</td>
+					<td *ngIf="isFeildAuthorized('deletedDate')">{{orderManager.deletedDate}}</td>
+					<td *ngIf="isFeildAuthorized('deletedBy')">{{orderManager.deletedBy}}</td>
+					<td *ngIf="isFeildAuthorized('deletedByUserId')">{{orderManager.deletedByUserId}}</td>
+					<td *ngIf="isFeildAuthorized('locked')">{{orderManager.locked}}</td>
+					<td *ngIf="isFeildAuthorized('version')">{{orderManager.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['ordermanager', orderManager.orderManagerId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="ordermanager?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!ordermanager?.locked" [routerLink]="['ordermanager', orderManager.orderManagerId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(orderManager.orderManagerId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="orderManagers?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'orderManagers'" *ngIf="orderManagers?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

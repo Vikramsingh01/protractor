@@ -1,0 +1,167 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-grey" *ngIf="authorizedFlag">
+		<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+		<h2>Court Work</h2>
+
+		<div class="mt20">
+
+			<div class="grid-style filter-div">
+				<tr-accordion>
+					<tr-accordionTab header="filter" [selected]="false">
+
+						<div class="grid-head">
+						</div>
+						<div class="pad15 nopadbtm">
+							<div class="filter-div">
+								<form [formGroup]="adminCourtWorkFilterForm" (ngSubmit)="searchCourtWork()" class="collapse in" id="collapseExample" autocomplete="off">
+									<div class="row">
+										<div class="form-group col-sm-4">
+											<label for="processTypeId">Request Type</label>
+											<tr-dropdown [operation] = "action" [tableId]="192" [controlName]="'processTypeId'" [dropdown]="adminCourtWorkFilterForm" [excludeItems]="reqTypeIds"></tr-dropdown>
+											<control-messages [control]="adminCourtWorkFilterForm.controls.processTypeId"></control-messages>
+										</div>
+
+										<div class="form-group col-sm-4 nopadding">
+											<label for="officeTeamId" title="Team">Team</label>
+											<select class="form-control" formControlName="officeTeamId">
+													<option value='' >--Select--</option>
+													<option *ngFor="let officeTeam of officeTeams" [value]="officeTeam?.key" >{{officeTeam?.value}}</option>
+												</select>
+											<control-messages [control]="adminCourtWorkFilterForm.controls.officeTeamId"></control-messages>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-4">
+											<label for="caseReferenceNumber">CRN</label>
+											<input type="text" formControlName="caseReferenceNumber" id="caseReferenceNumber" class="form-control" placeholder="CRN"
+											/>
+										</div>
+										<div class="form-group col-sm-4">
+										<label for="categoryId">Category</label>
+										<select class="form-control" formControlName="categoryId">
+													<option value='' >--Select--</option>
+													<option *ngFor="let category of categoryList" [value]="category?.key" >{{category?.value}}</option>
+												</select>
+									</div>
+									</div>
+
+									<div class="row">
+										<div class="form-group col-sm-6 pull-right text-right">
+											<button type="submit" class="btn btn-default btn-purple">Search</button>
+											<button type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+										</div>
+									</div>
+
+								</form>
+							</div>
+
+						</div>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-div">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th id="familyName" trSortBy="familyName" (sortCommand)="sort($event)"><span class="th-div">Family Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'familyName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="firstName" trSortBy="firstName" (sortCommand)="sort($event)"><span class="th-div">First Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="caseReferenceNumber" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)" class="text-center"><span class="th-div">CRN<span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseReferenceNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="team" trSortBy="team" (sortCommand)="sort($event)"><span class="th-div">Team<span *ngIf="sortSearchPaginationObj.sortObj.field == 'team'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="categoryId" trSortBy="categoryId" (sortCommand)="sort($event)"><span class="th-div">Category<span *ngIf="sortSearchPaginationObj.sortObj.field == 'categoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="processTypeId" trSortBy="processTypeId" (sortCommand)="sort($event)"><span class="th-div">Request Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="processSubTypeId" trSortBy="processSubTypeId" (sortCommand)="sort($event)"><span class="th-div">Request Sub Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processSubTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="disposalType" trSortBy="disposalType" (sortCommand)="sort($event)"><span class="th-div">Associated Event<span *ngIf="sortSearchPaginationObj.sortObj.field == 'disposalType'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+
+									<th id="processRefDate" trSortBy="processRefDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Referral Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processRefDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="processStageDate" trSortBy="processStageDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Status Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="processStageId" trSortBy="processStageId" (sortCommand)="sort($event)"><span class="th-div">Status<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="processOutcomeId" trSortBy="processOutcomeId" (sortCommand)="sort($event)"><span class="th-div">Outcome<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processOutcomeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th class="text-center wid120"><span class="hidden">View</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let adminCourtWork of adminCourtWorkList; let i = index">
+									<td>{{adminCourtWork?.familyName}}</td>
+									<td>{{adminCourtWork?.firstName}}</td>
+									<td class="text-center">{{adminCourtWork?.caseReferenceNumber}}</td>
+									<td>{{adminCourtWork?.officeTeam}}</td>
+									<td>
+										<tr-list-label [tableId]="2546" [pkValue]="adminCourtWork?.categoryId"></tr-list-label>
+									</td>
+									<td>
+										<span *ngFor="let processTypeId of processTypeIdList | filter :'key' : adminCourtWork?.processTypeId">{{processTypeId.value}}</span>
+									</td>
+									<td>
+										<span *ngFor="let processSubTypeId of processSubTypeIdList | filter :'key' : adminCourtWork?.processSubTypeId">{{processSubTypeId.value}}</span>
+									</td>
+
+									<td>{{adminCourtWork?.eventNumber}} - {{adminCourtWork?.disposalType}}</td>
+
+									<td class="text-center">{{adminCourtWork?.processRefDate}}</td>
+
+									<td class="text-center">{{adminCourtWork?.processStageDate}}</td>
+
+									<td>
+										<span *ngFor="let processStageId of processStageIdList | filter :'key' : adminCourtWork?.processStageId">{{processStageId.value}}</span>
+									</td>
+
+									<td>
+										<span *ngFor="let processOutcomeId of processOutcomeIdList | filter :'key' : adminCourtWork?.processOutcomeId">{{processOutcomeId.value}}</span>
+									</td>
+
+									<td class="text-center">
+										<span *ngIf="isAuthorized('Read')">
+											<button class="btn btn-default btn-small" id="courtWork_view{{i}}" [routerLink]="[ adminCourtWork?.profileId, adminCourtWork?.eventId, adminCourtWork?.processId]" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+										</span>
+										<span *ngIf="isAuthorized('Update')">
+											<button id="courtWork_edit{{i}}" class="btn btn-default btn-small" *ngIf="adminCourtWork?.locked" title="Edit record is locked."><span class="glyphicon glyphicon-lock">aa</span></button>
+										<button *ngIf="!adminCourtWork?.locked" [routerLink]="[adminCourtWork?.profileId, adminCourtWork?.eventId, 'edit', adminCourtWork?.processId]" id="courtWork_edit{{i}}"
+										 class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+										</span>
+										<!--<span >
+											<button id="courtWork_delete{{i}}" class="btn btn-default btn-small" *ngIf="adminCourtWork?.locked" title="Delete record is locked."><span class="glyphicon glyphicon-lock">aa</span></button>
+											<button *ngIf="!adminCourtWork?.locked" (click)="delete(adminCourtWork?.processId)" id="courtWork_delete{{i}}" class="btn btn-default btn-small" title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+										</span>-->
+									</td>
+								</tr>
+							</tbody>
+
+						</table>
+						<div *ngIf="adminCourtWorkList?.length<=0" class="no-records">No Records Found</div>
+					</div>
+				</div>
+				<tr-pagination [name]="'adminCourtWorkList'" *ngIf="adminCourtWorkList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+				 (paginationCommand)="paginate($event)"></tr-pagination>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

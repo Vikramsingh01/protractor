@@ -1,0 +1,82 @@
+<router-outlet></router-outlet>
+<div class="sub-menu">
+  <ul>
+    <li>
+      <button class="btn btn-default btn-purple" [routerLink]="['/lasu',profileId,'restriction','detail']">
+        Restriction
+      </button>
+    </li>
+    <li>
+      <button class="btn btn-default btn-purple" [routerLink]="['/lasu',profileId,'exclusion','detail']">
+        Exclusion
+      </button>
+    </li>
+  </ul>
+</div>
+<div class="detail-view-layout">
+  <div class="double-divider-purple mt10 hide-heading"></div>
+  <div class="grid-style">
+    <tr-accordion>
+      <tr-accordionTab header="Exclusion Details" [selected]="true">
+        <fieldset class="three-column shrink-view">
+          <div class="row">
+            <table class="table table-bordered nomargin">
+              <thead>
+              <tr>
+                <th class="" trSortBy="user" (sortCommand)="sort($event)">
+              <span class="th-div">User<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'user'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+                </th>
+                <th class="text-center">Reason</th>
+                <th class="text-center" trSortBy="startDate" (sortCommand)="sort($event)">
+              <span class="th-div">Start Date<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'startDate'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+                </th>
+                <th class="text-center" trSortBy="endDate" (sortCommand)="sort($event)">
+              <span class="th-div">End Date<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'endDate'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+                </th>
+                <th class="text-center" trSortBy="status" (sortCommand)="sort($event)">
+              <span class="th-div">Status<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'status'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let lasuExclusion of lasuExclusionList">
+                <td>
+                  {{getPersonName(lasuExclusion?.excludedStaffId)}}
+                </td>
+                <td>
+                  <tr-list-label [tableId]="153" [pkValue]="lasuExclusion?.exclusionReasonId"></tr-list-label>
+                </td>
+                <td>
+                  {{lasuExclusion?.exclusionStartDate.split(' ')[0]}}
+                </td>
+                <td>
+                  <span *ngIf="lasuExclusion?.exclusionEndDate">
+                  {{lasuExclusion?.exclusionEndDate.split(' ')[0]}}
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span *ngIf="lasuExclusion?.active">Active</span>
+                  <span *ngIf="!lasuExclusion?.active && lasuExclusion.lasuExclusionId">Inactive</span>
+                  <span *ngIf="!lasuExclusion?.active && !lasuExclusion.lasuExclusionId">Not Started</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div *ngIf="lasuExclusionList?.length<=0" class="no-records text-center">No Persons Added</div>
+          </div>
+        </fieldset>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+</div>

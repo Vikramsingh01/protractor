@@ -1,0 +1,85 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Engagement History" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div class="pull-right">
+							<div *ngIf="isAuthorized('Create')" class="cust-inline"><button class="btn btn-default btn-white pull-right" [routerLink]="['new']">Add</button></div>
+						</div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<!--<th *ngIf="isFeildAuthorized('engagementHistoryId')">engagement History Id</th>-->
+											<th *ngIf="isFeildAuthorized('caseReferenceNumber')" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)" class="text-center"><span class="th-div">case Reference Number<span *ngIf="sortFilterPaginationObj.sortObj.field == 'caseReferenceNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('spgOffenderId')" trSortBy="spgOffenderId" (sortCommand)="sort($event)" class="text-center"><span class="th-div">spg Offender Id<span *ngIf="sortFilterPaginationObj.sortObj.field == 'spgOffenderId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('acceptedRejectedDate')" trSortBy="acceptedRejectedDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">accepted Rejected Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'acceptedRejectedDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('rejectedReason')" trSortBy="rejectedReason" (sortCommand)="sort($event)"><span class="th-div">rejected Reason<span *ngIf="sortFilterPaginationObj.sortObj.field == 'rejectedReason'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('acceptedRejectedByUserId')" trSortBy="acceptedRejectedByUserId" (sortCommand)="sort($event)"><span class="th-div">accepted Rejected By UserId<span *ngIf="sortFilterPaginationObj.sortObj.field == 'acceptedRejectedByUserId'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('status')" trSortBy="status" (sortCommand)="sort($event)"><span class="th-div">status<span *ngIf="sortFilterPaginationObj.sortObj.field == 'status'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('createdDate')" class="text-center">created Date</th>
+											<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+											<th *ngIf="isFeildAuthorized('createdByUserId')" class="text-center">created By User Id</th>
+											<th *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">modified Date</th>
+											<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+											<th *ngIf="isFeildAuthorized('modifiedByUserId')" class="text-center">modified By User Id</th>
+											<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+											<th *ngIf="isFeildAuthorized('deletedDate')" class="text-center">deleted Date</th>
+											<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+											<th *ngIf="isFeildAuthorized('deletedByUserId')" class="text-center">deleted By User Id</th>
+											<th *ngIf="isFeildAuthorized('locked')">locked</th>
+											<th *ngIf="isFeildAuthorized('version')">version</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let engagementHistory of engagementHistorys">
+											<!--<td *ngIf="isFeildAuthorized('engagementHistoryId')">{{engagementHistory.engagementHistoryId}}</td>-->
+											<td *ngIf="isFeildAuthorized('caseReferenceNumber')" class="text-center">{{engagementHistory.caseReferenceNumber}}</td>
+											<td *ngIf="isFeildAuthorized('spgOffenderId')" class="text-center">{{engagementHistory.spgOffenderId}}</td>
+											<td *ngIf="isFeildAuthorized('acceptedRejectedDate')" class="text-center">{{engagementHistory.acceptedRejectedDate}}</td>
+											<td *ngIf="isFeildAuthorized('rejectedReason')">{{engagementHistory.rejectedReason}}</td>
+											<td *ngIf="isFeildAuthorized('acceptedRejectedByUserId')">{{engagementHistory.acceptedRejectByUser}}</td>
+											<td *ngIf="isFeildAuthorized('status')">{{engagementHistory.status}}</td>
+											<td *ngIf="isFeildAuthorized('createdDate')" class="text-center">{{engagementHistory.createdDate}}</td>
+											<td *ngIf="isFeildAuthorized('createdBy')">{{engagementHistory.createdBy}}</td>
+											<td *ngIf="isFeildAuthorized('createdByUserId')" class="text-center">{{engagementHistory.createdByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">{{engagementHistory.modifiedDate}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedBy')">{{engagementHistory.modifiedBy}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedByUserId')" class="text-center">{{engagementHistory.modifiedByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('deleted')">{{engagementHistory.deleted}}</td>
+											<td *ngIf="isFeildAuthorized('deletedDate')" class="text-center">{{engagementHistory.deletedDate}}</td>
+											<td *ngIf="isFeildAuthorized('deletedBy')">{{engagementHistory.deletedBy}}</td>
+											<td *ngIf="isFeildAuthorized('deletedByUserId')" class="text-center">{{engagementHistory.deletedByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('locked')">{{engagementHistory.locked}}</td>
+											<td *ngIf="isFeildAuthorized('version')">{{engagementHistory.version}}</td>
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="[engagementHistory.engagementHistoryId]"><span class="glyphicon glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="[engagementHistory.engagementHistoryId,'edit']"><span class="glyphicon glyphicon glyphicon-pencil">aa</span></button></td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(engagementHistory.engagementHistoryId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<tr-pagination [name]="'engagementHistorys'" *ngIf="engagementHistorys?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

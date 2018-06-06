@@ -1,0 +1,225 @@
+<div class="detail-view-layout">
+	<h2 class="page-title">VIEW allocate Process</h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']">Back</button>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Allocate Process" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column">
+					<legend> <span class="glyphicon glyphicon-flash"></span> allocate Process </legend>
+					<div class="row">
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processStageId')">
+								<div class="view-title col-sm-5">process Stage </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="allocateProcess?.processStageId" [tableId]="191" [pkValue]="allocateProcess?.processStageId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processDate')">
+								<div class="view-title col-sm-5">process Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocateProcessId')">
+								<div class="view-title col-sm-5">allocate Process </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.allocateProcessId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processTypeId')">
+								<div class="view-title col-sm-5">process Type </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="allocateProcess?.processTypeId" [tableId]="192" [pkValue]="allocateProcess?.processTypeId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processSubTypeId')">
+								<div class="view-title col-sm-5">process Sub Type </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="allocateProcess?.processSubTypeId" [tableId]="170" [pkValue]="allocateProcess?.processSubTypeId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processExpectedStartDate')">
+								<div class="view-title col-sm-5">process Expected Start Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processExpectedStartDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processExpectedEndDate')">
+								<div class="view-title col-sm-5">process Expected End Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processExpectedEndDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processOutcomeId')">
+								<div class="view-title col-sm-5">process Outcome </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="allocateProcess?.processOutcomeId" [tableId]="169" [pkValue]="allocateProcess?.processOutcomeId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processEndAttendanceCount')">
+								<div class="view-title col-sm-5">process End Attendance Count </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processEndAttendanceCount}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processManagerProviderId')">
+								<div class="view-title col-sm-5">process Manager Provider </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="allocateProcess?.processManagerProviderId" [tableId]="193" [pkValue]="allocateProcess?.processManagerProviderId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processManagerTeam')">
+								<div class="view-title col-sm-5">process Manager Team </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processManagerTeam}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processManagerOfficer')">
+								<div class="view-title col-sm-5">process Manager Officer </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processManagerOfficer}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processEndDate')">
+								<div class="view-title col-sm-5">process End Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processEndDate}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processRefDate')">
+								<div class="view-title col-sm-5">process Referral Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processRefDate}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('processStartDate')">
+								<div class="view-title col-sm-5">process Start Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.processStartDate}}</div>
+							</div>
+						</div>
+
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+								<div class="view-title col-sm-5">profile </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.profileId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+								<div class="view-title col-sm-5">SPG Version </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.spgVersion}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+								<div class="view-title col-sm-5">SPG Update User </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.spgUpdateUser}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+								<div class="view-title col-sm-5">created Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.createdDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+								<div class="view-title col-sm-5">created By </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.createdBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+								<div class="view-title col-sm-5">created By User Id </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.createdByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+								<div class="view-title col-sm-5">modified Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.modifiedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+								<div class="view-title col-sm-5">modified By </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.modifiedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+								<div class="view-title col-sm-5">modified By User Id </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.modifiedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+								<div class="view-title col-sm-5">deleted </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.deleted}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+								<div class="view-title col-sm-5">deleted Date </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.deletedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+								<div class="view-title col-sm-5">deleted By </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.deletedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+								<div class="view-title col-sm-5">deleted By User Id </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.deletedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+								<div class="view-title col-sm-5">locked </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.locked}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+								<div class="view-title col-sm-5">version </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.version}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgProcessContactId')">
+								<div class="view-title col-sm-5">SPG Process Contact Id </div>
+								<div class="detail-value col-sm-7">{{allocateProcess?.spgProcessContactId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-12" *ngIf="isFeildAuthorized('processNote')">
+								<div class="view-title col-sm-5">process Notes </div>
+								<div class="detail-value text-box">{{allocateProcess?.processNote}}</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

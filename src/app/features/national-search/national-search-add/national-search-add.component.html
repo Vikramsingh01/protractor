@@ -1,0 +1,98 @@
+<div class="edit-view-layout">
+
+    <div  *ngIf="authorizedFlag">
+        <div class="pad15 nopadding">
+        <form [formGroup]="nationalSearchAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> National Search </legend>
+                <div class="row">
+
+
+                    <div class="form-group col-sm-6"  *ngIf="isFeildAuthorized(surname)">
+                        <label for="surname" title="Family Name">Family Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="surname" id="surname" class="form-control" placeholder="Family Name" />
+                        <control-messages [control]="nationalSearchAddForm.controls.surname"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized(forename)">
+                        <label for="forename" title="First Name">First Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="forename" id="forename" class="form-control" placeholder="First Name" />
+                        <control-messages [control]="nationalSearchAddForm.controls.forename"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized(middleName)">
+                        <label for="middleName" title="Middle Name">Middle Name
+
+                                                                </label>
+                        <input type="text" formControlName="middleName" id="middleName" class="form-control" placeholder="Middle Name" />
+                        <control-messages [control]="nationalSearchAddForm.controls.middleName"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized(dateOfBirth)" >
+                        <label for="dateOfBirth" title="Date Of Birth">Date Of Birth
+
+                                                                    </label>
+                        <date-picker [controlName]="'dateOfBirth'" [form]="nationalSearchAddForm"></date-picker>
+                        <control-messages [control]="nationalSearchAddForm.controls.dateOfBirth"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6 " *ngIf="isFeildAuthorized(genderId)">
+                        <label for="genderId" title="Gender Id">Gender
+
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'genderId'" [dropdown]="nationalSearchAddForm"></tr-dropdown>
+                        <control-messages [control]="nationalSearchAddForm.controls.genderId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized(caseReferenceNumber)">
+                        <label for="caseReferenceNumber" title="Case Reference Number">Case Reference Number
+
+                                                                </label>
+                        <input type="text" formControlName="caseReferenceNumber" id="caseReferenceNumber" class="form-control" placeholder="Case Reference Number"
+                        />
+                        <control-messages [control]="nationalSearchAddForm.controls.caseReferenceNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized(pncNumber)">
+                        <label for="pncNumber" title="Pnc Number">Pnc Number
+
+                                                                </label>
+                        <input type="text" formControlName="pncNumber" id="pncNumber" class="form-control" placeholder="Pnc Number" />
+                        <control-messages [control]="nationalSearchAddForm.controls.pncNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6 " *ngIf="isFeildAuthorized(croNumber)">
+                        <label for="croNumber" title="Cro Number">Cro Number
+
+                                                                </label>
+                        <input type="text" formControlName="croNumber" id="croNumber" class="form-control" placeholder="Cro Number" />
+                        <control-messages [control]="nationalSearchAddForm.controls.croNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized(nomisNumber)">
+                        <label for="nomisNumber" title="Nomis Number">Nomis Number
+
+                                                                </label>
+                        <input type="text" formControlName="nomisNumber" id="nomisNumber" class="form-control" placeholder="Nomis Number" />
+                        <control-messages [control]="nationalSearchAddForm.controls.nomisNumber"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6"  *ngIf="isFeildAuthorized(niNumber)">
+                        <label for="niNumber" title="Ni Number">Ni Number
+
+                                                                </label>
+                        <input type="text" formControlName="niNumber" id="niNumber" class="form-control" placeholder="Ni Number" />
+                        <control-messages [control]="nationalSearchAddForm.controls.niNumber"></control-messages>
+                    </div>
+
+
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" *ngIf="isSearch" id="saveButton" fromServerMessageValidator [form]="nationalSearchAddForm">Submit</button>
+                        <button class="btn btn-default btn-purple" *ngIf="!isSearch" id="refreshButton" (click)="onRefreshData();" >DISPLAY THE SEARCH RESULTS</button>
+                        <button type="button" (click)="onReset()" id="resetButton" class="btn btn-default btn-white">Reset</button>
+
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+        </div>
+    </div>
+    <!-- <div *ngIf="!authorizedFlag">Not Authorized</div> -->
+</div>

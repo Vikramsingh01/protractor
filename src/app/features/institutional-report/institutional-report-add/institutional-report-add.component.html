@@ -1,0 +1,181 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Institutional Report</h2>
+        <h2 class="page-title" *ngIf="action == 'Create'">Add Institutional Report</h2>
+        <form [formGroup]="institutionalReportAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Institutional Report </legend>
+                <div class="row">
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('institutionalReportId')">
+                                <label for="institutionalReportId" title="Institutional Report Id">Institutional Report Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="institutionalReportId" id="institutionalReportId" class="form-control" placeholder="Institutional Report Id" />
+                                <control-messages [control]="institutionalReportAddForm.controls.institutionalReportId"></control-messages>
+                            </div>
+                                                                                                                                                                                                                                <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+                                <label for="eventId" title="Event Id">Event Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="Event Id" />
+                                <control-messages [control]="institutionalReportAddForm.controls.eventId"></control-messages>
+                            </div>-->
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('requestedDate')">
+                        <label for="requestedDate" title="Requested Date">Requested Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'requestedDate'" [form]="institutionalReportAddForm"></date-picker>
+                        <control-messages [control]="institutionalReportAddForm.controls.requestedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('requiredByDate')">
+                        <label for="requiredByDate" title="Required By Date">Required By Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'requiredByDate'" [form]="institutionalReportAddForm"></date-picker>
+                        <control-messages [control]="institutionalReportAddForm.controls.requiredByDate"></control-messages>
+                    </div>
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('requestedReportTypeId')">
+                        <label for="requestedReportTypeId" title="Requested Report Type ">Requested Report Type
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="149" [controlName]="'requestedReportTypeId'" [dropdown]="institutionalReportAddForm"></tr-dropdown>
+                        <control-messages [control]="institutionalReportAddForm.controls.requestedReportTypeId"></control-messages>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('allocatedDate')">
+                        <label for="allocatedDate" title="Allocated Date">Allocated Date
+                                                                    </label>
+                        <date-picker [controlName]="'allocatedDate'" [form]="institutionalReportAddForm"></date-picker>
+                        <control-messages [control]="institutionalReportAddForm.controls.allocatedDate"></control-messages>
+                    </div>
+
+
+
+
+
+
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('videoLink')">
+                        <label for="videoLinkYesNoId" title="Interview conducted via Video Link ">Interview conducted via Video Link
+
+                                                   </label>
+                        <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'videoLinkYesNoId'"  [excludeItems]="[3]" [dropdown]="institutionalReportAddForm"></tr-dropdown>
+                        <control-messages [control]="institutionalReportAddForm.controls.videoLinkYesNoId"></control-messages>
+                    </div>-->
+
+
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('videoLink')">
+                                <label for="videoLinkYesNoId" title="Interview conducted via Video Link">Interview conducted via Video Link </label>
+
+                                <select class="form-control"  formControlName="videoLinkYesNoId"  [excludeItems]="[3]" (change)="videoLinkYesNoIdUpdate($event.target.value)">
+
+                            <option *ngFor="let yesNo of yesNoList" value="{{yesNo?.key}}">{{yesNo?.value}}
+
+                        </select>
+
+
+                            </div>-->
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('videoLink')">
+
+                        <label for="videoLinkYesNoId" title="Interview conducted via Video Link">Interview conducted via Video Link</label>
+
+                        <select class="form-control" formControlName="videoLinkYesNoId" id="videoLinkYesNoId">
+
+                                    <option *ngFor="let yesNo of yesNoList let i = index" value="{{yesNo.key}}">{{yesNo.value}}</option>
+                                </select>
+                        <!--<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'sensitiveContactYesNoId'" [dropdown]="contactAddForm"></tr-dropdown>-->
+                        <control-messages [control]="institutionalReportAddForm.controls.videoLinkYesNoId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('completedDate')">
+                        <label for="completedDate" title="completed Date">completed Date
+
+                                                                    </label>
+                        <date-picker [controlName]="'completedDate'" [form]="institutionalReportAddForm"></date-picker>
+                        <control-messages [control]="institutionalReportAddForm.controls.completedDate"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('institutionId')">
+                        <label for="institutionId" title="Institution">Institution <span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="135" [controlName]="'institutionId'" [dropdown]="institutionalReportAddForm"></tr-dropdown>
+                        <control-messages [control]="institutionalReportAddForm.controls.institutionId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deliveredToEstablishment')">
+                        <label for="deliveredToEstablishment" title="Delivered To Establishment Date">Delivered To Establishment Date
+                                                                    </label>
+                        <date-picker [controlName]="'deliveredToEstablishment'" [form]="institutionalReportAddForm"></date-picker>
+                        <control-messages [control]="institutionalReportAddForm.controls.deliveredToEstablishment"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateAbandoned')">
+                        <label for="dateAbandoned" title="Date Abandoned">Date Abandoned
+                                                                    </label>
+                        <date-picker [controlName]="'dateAbandoned'" [form]="institutionalReportAddForm"></date-picker>
+                        <control-messages [control]="institutionalReportAddForm.controls.dateAbandoned"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('institutionalReportProviderId')">
+                        <label for="institutionalReportProviderId" title="CRC / NPS Division">CRC / NPS Division
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'institutionalReportProviderId'" [dropdown]="institutionalReportAddForm"></tr-dropdown>
+                        <control-messages [control]="institutionalReportAddForm.controls.institutionalReportProviderId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+						<label for="institutionalReportTeam" title="Team">Team<span class="mand-text">*</span></label>
+						<div *ngIf="action!='Update'">
+							<select class="form-control" formControlName="institutionalReportTeam" (change)="change($event.target.options)" id="institutionalReportTeam">
+
+							<option value=null>--Select--</option>
+							<option *ngFor="let org of orgs" [value]="org?.value" >{{org?.value}}</option>
+						</select>
+						</div>
+						<div *ngIf="action=='Update'">
+							<input type="text" formControlName="institutionalReportTeam" id="institutionalReportTeam" class="form-control" placeholder="Team"
+							/>
+						</div>
+						<control-messages [control]="institutionalReportAddForm.controls.institutionalReportTeam"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="institutionalReportOfficer" title="Case Manager">Case Manager<span class="mand-text">*</span></label>
+						<div *ngIf="action!='Update'">
+							<select class="form-control" formControlName="institutionalReportOfficer" id="institutionalReportOfficer">
+                            <option value=null>--Select--</option>
+                            	<option *ngFor="let user of officerIds" [value]="user?.value">
+									{{user?.value?.split("/")[1]}}
+								</option>
+                        </select>
+						</div>
+						<div *ngIf="action=='Update'">
+							<input type="text" formControlName="institutionalReportOfficer" id="institutionalReportOfficer" class="form-control" placeholder="Officer"
+							/>
+						</div>
+						<control-messages [control]="institutionalReportAddForm.controls.institutionalReportOfficer"></control-messages>
+					</div>
+
+                    <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="institutionalReportAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="institutionalReportAddForm.controls.note"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="institutionalReportAddForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+
+</div>

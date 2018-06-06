@@ -1,0 +1,291 @@
+<div class="edit-view-layout">
+
+	<!--<a *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" class="pull-right">
+		<button class="btn btn-default btn-custom ">Back</button>
+	</a>
+	<a *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="pull-right">
+		<button class="btn btn-default btn-custom ">Back</button>
+	</a>-->
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<div class="col-sm-6 nopadding nomargin">
+			<h2 class="page-title" *ngIf="action == 'Update'">Edit Plan Entry Details</h2>
+			<h2 class="page-title" *ngIf="action == 'Create'">Add Plan Entry Details</h2>
+		</div>
+		<span class="col-sm-6 nomargin">
+			<button id="planentry_addLetter{{i}}" [routerLink]="['generate-letter']" class="btn btn-default btn-small pull-right" title="Add Letter">
+				<span class="glyphicon glyphicon-envelope">aa</span>
+			</button>
+		</span>
+		<div class="clearfix"></div>
+		<form [formGroup]="contactAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Contact </legend>
+				<div class="row">
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+						<label for="profileId" title="Profile Id">Profile Id<span class="mand-text">*</span></label>
+						<input type="text" formControlName="profileId" id="profileId" class="form-control" placeholder="Profile Id" />
+						<control-messages [control]="contactAddForm.controls.profileId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+						<label for="spgVersion" title="Spg Version">Spg Version<span class="mand-text">*</span></label>
+						<input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+						<control-messages [control]="contactAddForm.controls.spgVersion"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactId')">
+						<label for="contactId" title="Contact Id">Contact Id<span class="mand-text">*</span></label>
+						<input type="text" formControlName="contactId" id="contactId" class="form-control" placeholder="Contact Id" />
+						<control-messages [control]="contactAddForm.controls.contactId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+						<label for="spgUpdateUser" title="Spg Update User">Spg Update User<span class="mand-text">*</span></label>
+						<input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"
+						/>
+						<control-messages [control]="contactAddForm.controls.spgUpdateUser"></control-messages>
+					</div>
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactTypeId')">
+						<label for="relatesToId" title="Relates To">Relates To<span class="mand-text">*</span></label>
+						<!--<tr-dropdown [operation] = "action" [tableId]="104" [hasChildAnswers]="true" [controlName]="'contactTypeId'" [dropdown]="contactAddForm" [isNsrd]="true" (updateAd)="updateAd($event)" (updateNsrd)="updateNsrd($event)"></tr-dropdown>-->
+						<select class="form-control" formControlName="relatesTo" id="relatesToId">
+									<option value=''>- Select -</option>
+									<option *ngFor="let listItem of relateto   let i = index" value="{{listItem.key.description}}">{{listItem.value}}</option>
+								</select>
+						<control-messages [control]="contactAddForm.controls.relatesTo"></control-messages>
+					</div>
+
+
+
+					<!-- <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactCategoryId')">
+								<label for="contactCategoryId" title="Entry Category">Entry Category<span class="mand-text">*</span></label>
+								<tr-dropdown [operation] = "action" [tableId]="101" [controlName]="'contactCategoryId'" [dropdown]="contactAddForm"></tr-dropdown>
+								<control-messages [control]="contactAddForm.controls.contactCategoryId"></control-messages>
+							</div> -->
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactTypeId')">
+						<label for="contactTypeId" title="Entry Type">Entry Type<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="104" [hasChildAnswers]="true" [controlName]="'contactTypeId'" [dropdown]="contactAddForm" [isNsrd]="true"
+							(updateAnswers)="updateAnswers($event)" (updateNsrd)="updateNsrd($event)"></tr-dropdown>
+						<control-messages [control]="contactAddForm.controls.contactTypeId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('alertYesNoId')">
+						<label for="alertYesNoId" title="Alert?">Alert?<span class="mand-text">*</span></label>
+						<!--<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'alertYesNoId'" [dropdown]="contactAddForm"></tr-dropdown>-->
+						<!--<select class="form-control" formControlName="alertYesNoId" id="alertYesNoId">
+                                    <option value=null>- Select -</option>
+                                    <option *ngFor="let listItem of alertList let i = index" value="{{listItem.key}}">{{listItem.value}}</option>
+                                </select>-->
+						<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'alertYesNoId'" [dropdown]="contactAddForm" [excludeCodes]="['U']"></tr-dropdown>
+						<control-messages [control]="contactAddForm.controls.alertYesNoId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactDate')">
+						<label for="contactDate" title="Date">Date<span class="mand-text">*</span></label>
+						<date-picker [hasChildAnswers]="false" [controlName]="'contactDate'" [form]="contactAddForm" [isNsrd]="true" (updateNsrd)="updateNsrd($event)"></date-picker>
+						<control-messages [control]="contactAddForm.controls.contactDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-3" *ngIf="isFeildAuthorized('contactStartTime') && nsrdData['contactStartTime']?.active">
+						<label for="contactStartTime" title="Start Time">Start Time<span *ngIf="nsrdData['contactStartTime']?.mandatory" class="mand-text">*</span></label>
+						<timepicker [controlName]="'contactStartTime'" [form]="contactAddForm" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+						<control-messages [control]="contactAddForm.controls.contactStartTime"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-3" *ngIf="isFeildAuthorized('contactEndTime') && nsrdData['contactEndTime']?.active">
+						<label for="contactEndTime" title="End Time">End Time<span *ngIf="nsrdData['contactEndTime']?.mandatory" class="mand-text">*</span></label>
+						<timepicker [controlName]="'contactEndTime'" [form]="contactAddForm" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+						<control-messages [control]="contactAddForm.controls.contactEndTime"></control-messages>
+					</div>
+
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('sensitiveContactYesNoId')">
+						<div class="cust-label-div" title="RAR Day?">RAR Day? </div>
+						<!--<input type="radio" value="Yes" formControlName="rarDay" />Yes
+						<input type="radio" value="No" formControlName="rarDay" class="ml10" />No-->
+						<div class="radio-group-list">
+							<label class="radio-inline">
+						<input type="radio" name="rarDay" id="yesRadio" value="Yes" formControlName="rarDay"> Yes
+						</label>
+							<label class="radio-inline">
+						<input type="radio" name="rarDay" id="noRadio" value="No" formControlName="rarDay"> No
+						</label>
+							<control-messages [control]="contactAddForm.controls.rarDay"></control-messages>
+						</div>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('sensitiveContactYesNoId')">
+						<label for="sensitiveContactYesNoId" title="Sensitive Contact?">Sensitive Contact?</label>
+						<!--<select class="form-control" formControlName="sensitiveContactYesNoId" id="sensitiveContactYesNoId">
+                                    <option value=null>- Select -</option>
+                                    <option *ngFor="let listItem of sensitiveYesNoList let i = index" value="{{listItem.key}}">{{listItem.value}}</option>
+                                </select>-->
+						<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'sensitiveContactYesNoId'" [dropdown]="contactAddForm" [excludeCodes]="['U']"></tr-dropdown>
+						<!--<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'sensitiveContactYesNoId'" [dropdown]="contactAddForm"></tr-dropdown>-->
+						<control-messages [control]="contactAddForm.controls.sensitiveContactYesNoId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('location') && nsrdData['location']?.active">
+						<label for="location" title="Location">Location<span *ngIf="nsrdData['location']?.mandatory" class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="2544" [controlName]="'location'" [dropdown]="contactAddForm"></tr-dropdown>
+
+						<!--<input type="text" formControlName="location" id="location" class="form-control" placeholder="Location" />-->
+						<control-messages [control]="contactAddForm.controls.location"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactOutcomeId') && nsrdData['contactOutcomeId']?.active">
+						<label for="contactOutcomeId" title="Outcome">Outcome<span *ngIf="nsrdData['contactOutcomeId']?.mandatory" class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [isNsrd]="true" [tableId]="103" [list]="childAnswers[103]" [controlName]="'contactOutcomeId'" [dropdown]="contactAddForm"
+							(updateNsrd)="updateNsrd($event)"></tr-dropdown>
+						<control-messages [control]="contactAddForm.controls.contactOutcomeId"></control-messages>
+					</div>
+
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('enforcementActionId') && nsrdData['enforcementActionId']?.active">
+						<label for="enforcementActionId" title="Enforcement Action">Enforcement Action<span *ngIf="nsrdData['enforcementActionId']?.mandatory" class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [isNsrd]="true" (updateNsrd)="updateNsrd($event)" [tableId]="121" [controlName]="'enforcementActionId'" [dropdown]="contactAddForm"></tr-dropdown>
+						<control-messages [control]="contactAddForm.controls.enforcementActionId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('enforcementActionId') && nsrdData['responseBy']?.active">
+						<label for="enforcementActionId" title="Response By">Response By<span *ngIf="nsrdData['responseBy']?.mandatory" class="mand-text">*</span></label>
+
+						<date-picker [controlName]="'responseBy'" [form]="contactAddForm"></date-picker>
+
+
+						<control-messages [control]="contactAddForm.controls.responseBy"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgContactId')">
+						<label for="spgContactId" title="Spg Contact Id">Spg Contact Id <span class="mand-text">*</span></label>
+						<input type="text" formControlName="spgContactId" id="spgContactId" class="form-control" placeholder="Spg Contact Id" />
+						<control-messages [control]="contactAddForm.controls.spgContactId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+						<label for="createdBy" title="Created By">Created By<span class="mand-text">*</span></label>
+						<input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+						<control-messages [control]="contactAddForm.controls.createdBy"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+						<label for="createdByUserId" title="Created By User Id">Created By User Id<span class="mand-text">*</span></label>
+						<input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+						/>
+						<control-messages [control]="contactAddForm.controls.createdByUserId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+						<label for="createdDate" title="Created Date">Created Date<span class="mand-text">*</span></label>
+						<date-picker [controlName]="'createdDate'" [form]="contactAddForm"></date-picker>
+						<control-messages [control]="contactAddForm.controls.createdDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+						<label for="modifiedBy" title="Modified By ">Modified By<span class="mand-text">*</span> </label>
+						<input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+						<control-messages [control]="contactAddForm.controls.modifiedBy"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+						<label for="modifiedByUserId" title="Modified By User Id ">Modified By User Id <span class="mand-text">*</span> </label>
+						<input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+						/>
+						<control-messages [control]="contactAddForm.controls.modifiedByUserId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+						<label for="modifiedDate" title="Modified Date">Modified Date<span class="mand-text">*</span></label>
+						<date-picker [controlName]="'modifiedDate'" [form]="contactAddForm"></date-picker>
+						<control-messages [control]="contactAddForm.controls.modifiedDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+						<label for="deleted" title="Deleted">Deleted<span class="mand-text">*</span></label>
+						<input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+						<control-messages [control]="contactAddForm.controls.deleted"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+						<label for="deletedBy" title="Deleted By">Deleted By</label>
+						<input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+						<control-messages [control]="contactAddForm.controls.deletedBy"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+						<label for="deletedByUserId" title="Deleted By User Id">Deleted By User Id</label>
+						<input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+						/>
+						<control-messages [control]="contactAddForm.controls.deletedByUserId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+						<label for="deletedDate" title="Deleted Date">Deleted Date</label>
+						<date-picker [controlName]="'deletedDate'" [form]="contactAddForm"></date-picker>
+						<control-messages [control]="contactAddForm.controls.deletedDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+						<label for="locked" title="Locked">Locked<span class="mand-text">*</span></label>
+						<input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+						<control-messages [control]="contactAddForm.controls.locked"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+						<label for="version" title="Version">Version<span class="mand-text">*</span></label>
+						<input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+						<control-messages [control]="contactAddForm.controls.version"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('providerId')">
+						<label for="providerId" title="CRC / NPS Division">CRC / NPS Division <span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'providerId'" [dropdown]="contactAddForm"></tr-dropdown>
+						<control-messages [control]="contactAddForm.controls.providerId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('team')">
+						<label for="team" title="Team">Team<span class="mand-text"></span></label>
+						<!--<tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'team'" [dropdown]="contactAddForm" [lookup]="501"></tr-dropdown>-->
+						<input type="text" formControlName="team" id="team" class="form-control" placeholder="Team">
+						<control-messages [control]="contactAddForm.controls.team"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('contactOfficer')">
+						<label for="contactOfficer" title="Officer ">Officer <span class="mand-text"></span></label>
+						<!--<tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'contactOfficer'" [dropdown]="contactAddForm" [lookup]="502" [hasChildAnswers]="true"></tr-dropdown>-->
+						<input type="text" formControlName="contactOfficer" id="contactOfficer" class="form-control" placeholder="Officer">
+						<control-messages [control]="contactAddForm.controls.contactOfficer"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+						<tr-notes [controlName]="'note'" [form]="contactAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+						<control-messages [control]="contactAddForm.controls.note"></control-messages>
+					</div>
+
+					<!--
+					<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+						<label for="note" title="Notes">Notes</label>
+						<textarea formControlName="note" id="note" class="form-control"></textarea>
+						<control-messages [control]="contactAddForm.controls.note"></control-messages>
+					</div>
+
+					-->
+
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" fromServerMessageValidator [form]="contactAddForm">Submit</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" class="btn btn-default btn-white" id="cancelButton">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" class="btn btn-default btn-white" id="cancelButton">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

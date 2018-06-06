@@ -1,0 +1,170 @@
+<div class="detail-view-layout one-line-view">
+	<div class="row hide-heading">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">Court Appearance Details</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Court Appearance" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> CourtAppearance </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtDate')">
+							<div class="view-title col-sm-5" title="Appearance Date" id="label_courtDate">Appearance Date<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="courtDate">{{courtAppearance?.courtDate}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtAppearanceTypeId')">
+							<div class="view-title col-sm-5" title="Appearance Type" id="label_courtAppearanceTypeId">Appearance Type<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="courtAppearanceTypeId">
+								<tr-list-label *ngIf="courtAppearance?.courtAppearanceTypeId" [tableId]="107" [pkValue]="courtAppearance?.courtAppearanceTypeId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('pleaId')">
+							<div class="view-title col-sm-5" title="Plea" id="label_pleaId">Plea<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="pleaId">
+								<tr-list-label *ngIf="courtAppearance?.pleaId" [tableId]="188" [pkValue]="courtAppearance?.pleaId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('outcomeId')">
+							<div class="view-title col-sm-5" title="Sentence" id="label_outcomeId">Sentence<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="outcomeId">
+								<tr-list-label *ngIf="courtAppearance?.outcomeId" [tableId]="106" [pkValue]="courtAppearance?.outcomeId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('remandStatusId')">
+							<div class="view-title col-sm-5" title="Remand Status" id="label_remandStatusId">Remand Status<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="remandStatusId">
+								<tr-list-label *ngIf="courtAppearance?.remandStatusId" [tableId]="213" [pkValue]="courtAppearance?.remandStatusId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtId')">
+							<div class="view-title col-sm-5" title="Court" id="label_courtId">Court<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="courtId">
+								<tr-list-label *ngIf="courtAppearance?.courtId" [tableId]="105" [pkValue]="courtAppearance?.courtId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Building Name" id="label_buildingName">Building Name<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="buildingName">{{courtAppearance?.buildingName}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Street Name" id="label_streetName">Street Name<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="streetName">{{courtAppearance?.streetName}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="District" id="label_district">District<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="district">{{courtAppearance?.district}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Town/City" id="label_town/City">Town/City<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="town/City"></p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="County" id="label_county">County<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="county">{{courtAppearance?.county}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Postcode" id="label_postcode">Postcode<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="postcode">{{courtAppearance?.postcode}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Country" id="label_country">Country<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="country">{{courtAppearance?.country}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Telephone Number" id="label_telephoneNumber">Telephone Number<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="telephoneNumber">{{courtAppearance?.telephoneNumber}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Secure Mail" id="label_secureMail">Secure Mail<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="secureMail">{{courtAppearance?.secureMail}}</p>
+						</div>
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="FAX Number" id="label_FAXNumber">FAX Number<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="FAXNumber">{{courtAppearance?.FAXNumber}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+							<div class="view-title col-sm-5" title="Notes" id="label_note">Notes<span class="pull-right">:</span> </div>
+							<p class="detail-value-note col-sm-7" id="note">{{courtAppearance?.note}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtAppearanceId')">
+							<div class="view-title col-sm-5" title="Court Appearance Id" id="label_courtAppearanceId">Court Appearance Id<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="courtAppearanceId">{{courtAppearance?.courtAppearanceId}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+							<div class="view-title col-sm-5" title="Event Id" id="label_eventId">Event Id<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="eventId">{{courtAppearance?.eventId}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" title="Spg Version" id="label_spgVersion">Spg Version<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="spgVersion">{{courtAppearance?.spgVersion}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" title="Spg Update User" id="label_spgUpdateUser">Spg Update User<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="spgUpdateUser">{{courtAppearance?.spgUpdateUser}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgCourtAppearanceId')">
+							<div class="view-title col-sm-5" title="Spg Court Appearance Id" id="label_spgCourtAppearanceId">Spg Court Appearance Id<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="spgCourtAppearanceId">{{courtAppearance?.spgCourtAppearanceId}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" title="Created By" id="label_createdBy">Created By<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="createdBy">{{courtAppearance?.createdBy}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" title="Created By User Id" id="label_createdByUserId">Created By User Id<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="createdByUserId">{{courtAppearance?.createdByUserId}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" title="Created Date" id="label_createdDate">Created Date<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="createdDate">{{courtAppearance?.createdDate}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" title="Modified By" id="label_modifiedBy">Modified By<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="modifiedBy">{{courtAppearance?.modifiedBy}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" title="Modified By User Id" id="label_modifiedByUserId">Modified By User Id<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="modifiedByUserId">{{courtAppearance?.modifiedByUserId}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" title="Modified Date" id="label_modifiedDate">Modified Date<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="modifiedDate">{{courtAppearance?.modifiedDate}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" title="Deleted" id="label_deleted">Deleted<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="deleted">{{courtAppearance?.deleted}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" title="Deleted By" id="label_deletedBy">Deleted By<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="deletedBy">{{courtAppearance?.deletedBy}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" title="Deleted By User Id" id="label_deletedByUserId">Deleted By User Id<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="deletedByUserId">{{courtAppearance?.deletedByUserId}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" title="Deleted Date" id="label_deletedDate">Deleted Date<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="deletedDate">{{courtAppearance?.deletedDate}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" title="Locked" id="label_locked">Locked<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="locked">{{courtAppearance?.locked}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" title="Version" id="label_version">Version<span class="pull-right">:</span> </div>
+							<p class="detail-value col-sm-7" id="version">{{courtAppearance?.version}}</p>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

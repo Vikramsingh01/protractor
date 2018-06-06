@@ -1,0 +1,69 @@
+<div class="detail-view-layout one-line-view">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Licence Condition</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Licence Condition" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Licence Condition </legend>
+                    <div class="row">
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('licCondTypeMainCategoryId')">
+                            <div class="view-title col-sm-5" title="Licence Condition Main Type" id="label_licCondTypeMainCategoryId">Licence Condition Main Type<span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="licCondTypeMainCategoryId">
+                                <tr-list-label *ngIf="licenceCondition?.licCondTypeMainCategoryId" [tableId]="422" [pkValue]="licenceCondition?.licCondTypeMainCategoryId"></tr-list-label>
+                            </p>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('licCondTypeSubCategoryId')">
+                            <div class="view-title col-sm-5" title="Licence Condition Sub Type" id="label_licCondTypeSubCategoryId">Licence Condition Sub Type<span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="licCondTypeSubCategoryId">
+                                <tr-list-label *ngIf="licenceCondition?.licCondTypeSubCategoryId" [tableId]="155" [pkValue]="licenceCondition?.licCondTypeSubCategoryId"></tr-list-label>
+                            </p>
+                        </div>
+                           <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sentenceDate')">
+                            <div class="view-title col-sm-5" title="Imposed (Release) Date" id="label_sentenceDate">Imposed (Release) Date<span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="sentenceDate">{{licenceCondition?.sentenceDate}}</p>
+                        </div>
+                    
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedStartDate')">
+                            <div class="view-title col-sm-5" title="Expected Start Date" id="label_expectedStartDate">Expected Start Date<span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="expectedStartDate">{{licenceCondition?.expectedStartDate}}</p>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('actualStartDate')">
+                            <div class="view-title col-sm-5" title="Actual Start Date" id="label_actualStartDate">Actual Start Date<span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="actualStartDate">{{licenceCondition?.actualStartDate}}</p>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+                            <div class="view-title col-sm-5" title="Licence Expiry Date" id="label_expectedEndDate">Licence Expiry Date<span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="expectedEndDate">{{licenceCondition?.expectedEndDate}}</p>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('lcResponsibleTeam')">
+							<div class="view-title col-sm-5" title="Team" id="lcResponsibleTeam">Team<span class="pull-right">:</span></div>
+							<p class="detail-value col-sm-7" id="lcResponsibleTeam">{{licenceCondition?.lcResponsibleTeam?.split("/")[1].split("(")[0].split("[")[0]}}</p>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('lcResponsibleOfficer')">
+							<div class="view-title col-sm-5" title="Officer" id="lcResponsibleOfficer">Officer<span class="pull-right">:</span></div>
+							<p class="detail-value col-sm-7" id="lcResponsibleOfficer">{{parseOfficer(licenceCondition?.lcResponsibleOfficer)}}</p>
+						</div>
+                        <div class="col-sm-12 nopadding">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+                            <div class="view-title col-sm-5" title="Notes" id="label_note">Notes<span class="pull-right">:</span></div>
+                            <p class="detail-value-note col-sm-7" id="note">{{licenceCondition?.note}}</p>
+                        </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>
+<tr-licence-condition-terminate></tr-licence-condition-terminate>

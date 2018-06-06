@@ -1,0 +1,82 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Custody Location</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Location" [selected]="true">
+                <div class="grid-head">
+                    <div class="pull-right">
+                        
+                        <button class="btn btn-default btn-small" *ngIf="isRecallLock == true && isAuthorized('Update')" title="Edit record is locked.">
+                                              <span class="glyphicon glyphicon-lock">aa</span>
+                         </button>
+
+                        <button *ngIf="isAuthorized('Update') && isRecall ==false && isStatusInCustody== true && custodyLocation?.locked === 'false'" [routerLink]="['custody-location','edit',custodyLocation?.custodyLocationId]"
+                            class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil" >aa</span></button>
+                    </div>
+                </div>
+
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> CustodyLocation </legend>
+                    <div class="row">
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locationStartDate')">
+                            <div class="view-title col-sm-5" id="label_currentStatus" title="Current Status">current Status<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="currentStatus">{{currentStatus}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locationStartDate')">
+                            <div class="view-title col-sm-5" id="label_currentStatusDate" title="Status Date">Status Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="currentStatusDate">{{ statusDate | date:"dd/MM/yyyy" }}</div>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('currentLocationId')">
+                            <div class="view-title col-sm-5" id="label_currentLocationId" title="Current Location Id">Current Location<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="currentLocationId">
+                                <tr-list-label *ngIf="custodyLocation?.currentLocationId" [tableId]="135" [pkValue]="custodyLocation?.currentLocationId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locationStartDate')">
+                            <div class="view-title col-sm-5" id="label_locationStartDate" title="Location Start Date">Location Start Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="locationStartDate">{{custodyLocation?.locationStartDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('prisonerNumber')">
+                            <div class="view-title col-sm-5" id="label_prisonerNumber" title="Prisoner Number">Prisoner Number<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="prisonerNumber">{{custodyLocation?.prisonerNumber}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('paroleNumber')">
+                            <div class="view-title col-sm-5" id="label_paroleNumber" title="Parole Number">Parole Number<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="paroleNumber">{{custodyLocation?.paroleNumber}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('probationContact')">
+                            <div class="view-title col-sm-5" id="label_probationContact" title="CRC Resettlement Worker">CRC Resettlement Worker<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="probationContact">{{custodyLocation?.probationContact}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('pcTelephoneNumber')">
+                            <div class="view-title col-sm-5" id="label_pcTelephoneNumber" title="Telephone Number (Probation Contact)">Telephone Number (Probation Contact) )
+                                <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="pcTelephoneNumber">{{custodyLocation?.pcTelephoneNumber}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('prisonOfficer')">
+                            <div class="view-title col-sm-5" id="label_prisonOfficer" title="Prison Officer">Prison Officer<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="prisonOfficer">{{custodyLocation?.prisonOfficer}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('poTelephoneNumber')">
+                            <div class="view-title col-sm-5" id="label_poTelephoneNumber" title="Telephone Number (Prison Officer)">Telephone Number (Prison Officer)<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="poTelephoneNumber">{{custodyLocation?.poTelephoneNumber}}</div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

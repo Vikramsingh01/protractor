@@ -1,0 +1,103 @@
+<tr-main-tabs></tr-main-tabs>
+<tr-tabs [structure]="'Event'"></tr-tabs>
+<div class="list-view-layout">
+	<h2 class="page-title hide-heading">Offloc</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="DSS Search Result" [selected]="true">
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Family Name</th>
+											<th>First Name</th>
+											<th class="text-center">Date of Birth</th>
+											<th class="text-center">PNC</th>
+											<th>Gender</th>
+											<th class="text-center">Prison</th>
+											<th class="text-center">CRO No</th>
+											<th class="text-center">NOMS No</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody *ngIf="offlocList?.length >0 && offlocList.length <=5">
+										<tr *ngFor="let offloc of offlocList; let i = index" class="text-center">
+											<td>
+												<div *ngIf="offloc.surname && familyName">
+													<span *ngIf="offloc.surname.toUpperCase().trim() === familyName.toUpperCase().trim()" style="background: #7fff00">{{offloc.surname.toUpperCase()}}</span>
+													<span *ngIf="offloc.surname.toUpperCase().trim() !== familyName.toUpperCase().trim()">{{offloc.surname.toUpperCase()}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.forename && firstName">
+													<span *ngIf="offloc.forename.toUpperCase().trim() === firstName.toUpperCase().trim()" style="background: #7fff00">{{offloc.forename.toUpperCase()}}</span>
+													<span *ngIf="offloc.forename.toUpperCase().trim() !== firstName.toUpperCase().trim()">{{offloc.forename.toUpperCase()}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.dateOfBirth">
+													<span *ngIf="offloc.dateOfBirth == dateOfBirth" style="background: #7fff00">{{offloc.dateOfBirth}}</span>
+													<span *ngIf="offloc.dateOfBirth !== dateOfBirth">{{offloc.dateOfBirth}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.pncNumberList">
+													<span *ngIf="offloc.pncNumberList == pnc" style="background: #7fff00">{{offloc.pncNumberList}}</span>
+													<span *ngIf="offloc.pncNumberList !== pnc">{{offloc.pncNumberList}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.gender">
+													<span *ngIf="offloc.gender == gender" style="background: #7fff00">{{offloc.gender}}</span>
+													<span *ngIf="offloc.gender !== gender">{{offloc.gender}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.prison">
+													<span *ngIf="offloc.prison == prisonerNumber" style="background: #7fff00">{{offloc.prison}}</span>
+													<span *ngIf="offloc.prison !== prisonerNumber">{{offloc.prison}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.croNumber">
+													<span *ngIf="offloc.croNumber == croNumber" style="background: #7fff00">{{offloc.croNumber}}</span>
+													<span *ngIf="offloc.croNumber !== croNumber">{{offloc.croNumber}}</span>
+												</div>
+											</td>
+											<td>
+												<div *ngIf="offloc.nomisNumber">
+													<span *ngIf="offloc.nomisNumber == nomisNumber" style="background: #7fff00">{{offloc.nomisNumber}}</span>
+													<span *ngIf="offloc.nomisNumber !== nomisNumber">{{offloc.nomisNumber}}</span>
+												</div>
+											</td>
+											<td>
+												<a [routerLink]="[offloc?.offlocResponseId]">Compare</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="offlocList?.length<=0 && isRequested==false && isRefreshed == false" class="no-records">Please Submit a Request</div>
+								<div *ngIf="offlocList?.length<=0 && isRequested==true" class="no-records">Your Request has been submitted. Please click on refresh button to refresh data</div>
+								<div *ngIf="offlocList?.length<=0 && isRequested==false && isRefreshed == true" class="no-records">No Dss Records found for this Service User.</div>
+								<div *ngIf="offlocList?.length>5 && isRefreshed == true" class="no-records">The number of matched results exceeds permitted maximum.</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'offloc'" *ngIf="offlocList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+				<div class="form-group col-sm-12 text-right mt20 nopadding">
+					<button class="btn btn-default btn-purple" *ngIf="!isRequested && isAuthorized('Create')" (click)="sendRequest()" id="requestButton">Request</button>
+					<button class="btn btn-default btn-small" *ngIf="isRequested && isAuthorized('Create')"><span class="glyphicon glyphicon-lock"></span></button>
+					<button class="btn btn-default btn-purple" (click)="initiateRefresh() && isAuthorized('Read')" id="updateButton">Refresh</button>
+				</div>
+
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,123 @@
+<div class="edit-view-layout">
+
+  <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+    <h2 class="page-title" *ngIf="action == 'Update'">Edit Drug Test Profile</h2>
+    <h2 class="page-title" *ngIf="action == 'Create'">Add Drug Test Profile</h2>
+
+    <form [formGroup]="drugTestProfileAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <fieldset class="three-column">
+        <legend><span class="glyphicon glyphicon-flash"></span> Drug Test Profile</legend>
+        <div class="row">
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateAssessed')">
+            <label for="dateAssessed" title="Date Assessed">Date Assessed <span class="mand-text">*</span></label>
+            <date-picker [controlName]="'dateAssessed'" [form]="drugTestProfileAddForm"></date-picker>
+            <control-messages [control]="drugTestProfileAddForm.controls.dateAssessed"></control-messages>
+          </div>
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('teamId')">
+            <label for="teamId" title="Crc">Crc <span class="mand-text">*</span></label>
+            <tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'teamId'" [dropdown]="drugTestProfileAddForm" [lookup]="503"></tr-dropdown>
+            <control-messages [control]="drugTestProfileAddForm.controls.teamId"></control-messages>
+          </div>
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('officeTeamId')">
+            <label for="officeTeamId" title="Team">Team <span class="mand-text">*</span></label>
+            <tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'officeTeamId'" [dropdown]="drugTestProfileAddForm" [lookup]="507"></tr-dropdown>
+            <control-messages [control]="drugTestProfileAddForm.controls.officeTeamId"></control-messages>
+          </div>
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('officerId')">
+            <label for="officerId" title="Officer">Officer <span class="mand-text">*</span></label>
+            <tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'officerId'" [dropdown]="drugTestProfileAddForm" [lookup]="502" [hasChildAnswers]="true"></tr-dropdown>
+
+            <control-messages [control]="drugTestProfileAddForm.controls.officerId"></control-messages>
+          </div>
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('mainDrugId')">
+            <label for="mainDrugId" title="Main Drug">Main Drug <span class="mand-text">*</span></label>
+            <tr-dropdown [operation] = "action" [tableId]="119" [controlName]="'mainDrugId'" (change)='drugTestProfileAddForm.controls.addMainDrugYesNoId.patchValue(""); mainDrugMessage = null; ' [dropdown]="drugTestProfileAddForm"></tr-dropdown>
+            <div class="error-msg" *ngIf="mainDrugMessage !== null">This drug has already been added.</div>
+            <control-messages [control]="drugTestProfileAddForm.controls.mainDrugId"></control-messages>
+          </div>
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('addMainDrugYesNoId')">
+            <label for="addMainDrugYesNoId" title="Add Main Drug to test list?">Add Main Drug to test list? <span class="mand-text">*</span>
+            </label>
+            <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'addMainDrugYesNoId'" [excludeCodes]="['U']" [dropdown]="drugTestProfileAddForm"
+              (change)="addDrug(true)"></tr-dropdown>
+            <control-messages [control]="drugTestProfileAddForm.controls.addMainDrugYesNoId"></control-messages>
+          </div>
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('estimatedWeekelyCost')">
+            <label for="estimatedWeekelyCost" title="Estimated weekly cost of habit (£)">Estimated weekly cost of habit (£)
+              <span class="mand-text cust-align-star">*</span>
+            </label>
+            <input type="text" formControlName="estimatedWeekelyCost" id="estimatedWeekelyCost" class="form-control" placeholder="Estimated Weekly Cost"
+            />
+            <control-messages [control]="drugTestProfileAddForm.controls.estimatedWeekelyCost"></control-messages>
+          </div>
+
+
+          <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('notes')">
+            <label for="notes" title="Notes">Notes</label>
+             <textarea formControlName="notes" id="notes" class="form-control"></textarea>
+            <control-messages [control]="drugTestProfileAddForm.controls.notes"></control-messages>
+          </div>
+
+          <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('drugToBeTestedForId')">
+            <label for="drugToBeTestedForId" title="Drug(s) To Be Tested For">Drug(s) To Be Tested For</label>
+            <tr-dropdown [operation] = "action" [tableId]="119" [controlName]="'drugToBeTestedForId'" (change)="secondaryDrugDrugMessage=null" [dropdown]="drugTestProfileAddForm"></tr-dropdown>
+            <div class="error-msg" *ngIf="secondaryDrugDrugMessage !== null">This drug has already been added.</div>
+          </div>
+          <div class="col-sm-4 ">
+            <button type="button" class="btn btn-purple mt5" id="addToListButton" (click)="addDrug(false)">Add To List
+            </button>
+          </div>
+          <div class="pad15">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="">Drug</th>
+                  <th class="">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let drug of drugList">
+                  <td>
+                    <tr-list-label [tableId]="119" [pkValue]="drug"></tr-list-label>
+
+                  </td>
+                  <td class="text-center">
+                    <span *ngIf="drug != mainDrug">
+                    <button type="button" class="btn btn-default btn-white" (click)="removeDrug(drug)">Remove</button>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group col-sm-12 text-right">
+            <!--<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="upwAppointmentAddForm">Submit</button>
+              <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+              <buttontype="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>-->
+
+              <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="drugTestProfileAddForm">Submit
+              </button>
+              <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel
+              </button>
+              <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel
+              </button>
+          </div>
+          <!--</form>-->
+          <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralId')">
+            <label for="referralId">Referral Id
+              <span class="mand-text">*</span>
+            </label>
+            <input type="text" formControlName="referralId" id="referralId" class="form-control"
+                   placeholder="Referral Id"/>
+            <control-messages [control]="drugTestProfileAddForm.controls.referralId"></control-messages>
+          </div>-->
+
+
+        </div>
+      </fieldset>
+
+    </form>
+
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

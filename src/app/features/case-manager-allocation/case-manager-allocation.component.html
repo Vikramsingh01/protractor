@@ -1,0 +1,36 @@
+<form [formGroup]="cmaform">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="page-title text-center">Case Manager Allocation</div>
+			<div class="double-divider-purple nomarbtm mt10 "></div>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3 mt10">
+					<div class="sub-list">
+						<div class="list-title">Case Manager </div>
+						<div class="list-detail">
+
+							<div class="form-group">
+								<label for="team">Team </label><span class="mand-text">*</span>
+								<select class="form-control" formControlName="team" required (change)="change($event.target.options)">
+          <option value="">--Select--</option>
+					<option *ngFor="let team of teams" [value]="team?.key">{{team?.value}}</option>
+        </select>
+							</div>
+							<div class="form-group">
+								<label for="user">User <span class="mand-text">*</span></label>
+								
+								<select class="form-control" formControlName="user" required>
+					            <option value="">--Select--</option>
+        	<option *ngFor="let user of users" [value]="user?.key">{{user?.value}}</option>
+        </select>
+							</div>
+							<div *ngIf="cmaform.valid" class="text-center">
+								<button class="btn btn-default btn-purple" (click)="updateCaseManager()">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,12 @@
+<fieldset class="pending-detail" [ngClass]="{'panel-open': isOpen}">
+    <legend>
+    <span (click)="toggleOpen($event)">{{heading}}</span>
+    
+    <div class="collapse-arrow"><span class="glyphicon" [ngClass]="{'glyphicon-chevron-up': isOpen, 'glyphicon-chevron-down': !isOpen}" (click)="toggleOpen($event)"></span></div>
+    </legend>
+    <div class="panel-collapse" [hidden]="!isOpen">
+        <div class="panel-body">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</fieldset>

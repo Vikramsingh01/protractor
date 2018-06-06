@@ -1,0 +1,331 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Interventions</h2>
+        <h2 class="page-title" *ngIf="action == 'Create'">Add Interventions</h2>
+
+        <form [formGroup]="processContactAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Process Contact </legend>
+                <div class="row">
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processId')">
+                        <label for="processId" title="Process Id">Process Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="processId" id="processId" class="form-control" placeholder="Process Id" />
+                        <control-messages [control]="processContactAddForm.controls.processId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                        <label for="profileId" title="Profile Id">Profile Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="profileId" id="profileId" class="form-control" placeholder="Profile Id" />
+                        <control-messages [control]="processContactAddForm.controls.profileId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                        <label for="spgVersion" title="Spg Version">Spg Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+                        <control-messages [control]="processContactAddForm.controls.spgVersion"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                        <label for="spgUpdateUser" title="Spg Update User">Spg Update User
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"/>
+                        <control-messages [control]="processContactAddForm.controls.spgUpdateUser"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('intendedProviderId')">
+                        <label for="intendedProviderId" title="Interventions Provider">Interventions Provider<span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'intendedProviderId'" [dropdown]="processContactAddForm" [hasParentAnswers]="true" [excludeItems]="nsiProvisionListIds"   (updateParentAnswers)="updateParentAnswers($event)" ></tr-dropdown>
+                        <control-messages [control]="processContactAddForm.controls.intendedProviderId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="action == 'Create'">
+						<label for="relatesToId" title="Relates To">Relates To<span class="mand-text">*</span></label>
+						<select class="form-control"  formControlName="relatesTo" id="relatesToId" (change)="onChange($event.target.value)">
+									<option value=null>- Select -</option>
+									<option *ngFor="let listItem of relateto   let i = index" value="{{listItem.key | json}}">{{listItem.value}}</option>
+								</select>
+						<control-messages [control]="processContactAddForm.controls.relatesTo"></control-messages>
+					</div>
+                        <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processTypeId')">
+                        <label for="processTypeId" title="NSI">NSI<span class="mand-text">*</span></label>
+
+
+                          <tr-dropdown [operation] = "action" [tableId]="192" [isDependent]="true" [hasChildAnswers]="true" (updateAnswers)="updateAnswers($event)" [controlName]="'processTypeId'" [dropdown]="processContactAddForm"
+                    [excludeItems]="processTypeExcludeList" [isDataNsrd]="true" (updateDataNsrd)="updateDataNsrd($event)"[list]="processTypeList"></tr-dropdown>
+
+                        <control-messages [control]="processContactAddForm.controls.processTypeId"></control-messages>
+                    </div>
+
+
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processSubTypeId')">
+
+                        <label for="processSubTypeId" title="NSI Sub Type">NSI Sub Type<span class="mand-text">*</span></label>
+
+                        <!--<tr-dropdown [operation] = "action" [tableId]="170" [controlName]="'processSubTypeId'" [dropdown]="processContactAddForm"></tr-dropdown>-->
+                        <tr-dropdown [operation] = "action" [tableId]="170" [isDependent]="true" [list]="childAnswers[170]" [controlName]="'processSubTypeId'" [dropdown]="processContactAddForm"></tr-dropdown>
+                        <control-messages [control]="processContactAddForm.controls.processSubTypeId"></control-messages>
+                    </div>
+
+
+
+                    <div class="form-group col-sm-6" *ngIf="action == 'Update'">
+						<label for="relatesToId" title="Relates To">Relates To<span class="mand-text">*</span></label>
+						<select class="form-control"  formControlName="relatesTo" id="relatesToId">
+									<option value=null>- Select -</option>
+									<option *ngFor="let listItem of relateToEdit   let i = index" value="{{listItem.key.description}}">{{listItem.value}}</option>
+								</select>
+						<control-messages [control]="processContactAddForm.controls.relatesTo"></control-messages>
+					</div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processRefDate')">
+                        <label for="processRefDate" title="Referral Date">Referral Date<span class="mand-text">*</span></label>
+                        <date-picker [controlName]="'processRefDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processRefDate"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processExpectedStartDate')">
+                        <label for="processExpectedStartDate" title="Expected Start Date">Expected Start Date</label>
+                        <date-picker [controlName]="'processExpectedStartDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processExpectedStartDate"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStartDate')">
+                        <label for="processStartDate" title="Actual Start Date">Actual Start Date</label>
+                        <date-picker [controlName]="'processStartDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processStartDate"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStageId')">
+                        <label for="processStageId" title="Status">Status<span class="mand-text">*</span></label>
+                         <tr-dropdown [operation] = "action" [tableId]="191"  [isDependent]="true" [list]="childAnswers[191]" [controlName]="'processStageId'" [dropdown]="processContactAddForm"></tr-dropdown>
+                         <control-messages [control]="processContactAddForm.controls.processStageId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStageDate')">
+                        <label for="processStageDate" title="Status Date">Status Date<span class="mand-text">*</span></label>
+                        <date-picker [controlName]="'processStageDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processStageDate"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processManagerProviderId')">
+						<label for="processManagerProviderId" title="Provider">Provider<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'processManagerProviderId'" [dropdown]="processContactAddForm"></tr-dropdown>
+						<control-messages [control]="processContactAddForm.controls.processManagerProviderId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6"  *ngIf=showTeamAndOfficer>
+						<label for="nsiTeamId" title="Team">Team<span class="mand-text">*</span></label>
+						<!--<input type="text" formControlName="nsiTeam" id="nsiTeam" class="form-control" placeholder="Team">-->
+                        	<select class="form-control" formControlName="nsiTeamId" (change)="change($event.target.options)" id="nsiTeamId">
+
+							<option value=null>--Select--</option>
+							<option *ngFor="let org of orgs" [value]="org?.value" >{{org?.value}}</option>
+						</select>
+						<control-messages [control]="processContactAddForm.controls.nsiTeamId"></control-messages>
+					</div>
+
+                    <div class="form-group col-sm-6" *ngIf=showTeamAndOfficer>
+						<label for="nsiOfficerId" title="Case Manager">Case Manager<span class="mand-text">*</span></label>
+						<!--<input type="text" formControlName="nsiOfficer" id="nsiOfficer" class="form-control" placeholder="Officer">-->
+                        <select class="form-control" formControlName="nsiOfficerId" id="nsiOfficerId">
+                            <option value=null>--Select--</option>
+                            <option *ngFor="let user of officerIds" [value]="user?.value">{{user?.value?.split("/")[1]}}</option>
+                        </select>
+						<control-messages [control]="processContactAddForm.controls.nsiOfficerId"></control-messages>
+					</div>
+
+                    <div class="form-group col-sm-6"  *ngIf="action=='Update'">
+						<label for="nsiTeam" title="Team">Team<span class="mand-text">*</span></label>
+						<input type="text" formControlName="nsiTeam" id="nsiTeam" class="form-control" placeholder="Team">
+						<control-messages [control]="processContactAddForm.controls.nsiTeam"></control-messages>
+					</div>
+
+                    <div class="form-group col-sm-6"*ngIf="action=='Update'">
+						<label for="nsiOfficer" title="Case Manager">Case Manager<span class="mand-text">*</span></label>
+						<input type="text" formControlName="nsiOfficer" id="nsiOfficer" class="form-control" placeholder="Officer">
+
+						<control-messages [control]="processContactAddForm.controls.nsiOfficer"></control-messages>
+					</div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processExpectedEndDate')">
+                        <label for="processExpectedEndDate" title="Expected End Date">Expected End Date</label>
+                        <date-picker [controlName]="'processExpectedEndDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processExpectedEndDate"></control-messages>
+                    </div>
+
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processEndDate')">
+                        <label for="processEndDate" title="Actual End Date">Actual End Date</label>
+                        <date-picker [controlName]="'processEndDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processEndDate"></control-messages>
+                    </div>-->
+
+
+                     <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processEndDate')">
+                        <label for="processEndDate" title="Process End Date">Actual End Date
+                                                                    </label>
+                        <date-picker [controlName]="'processEndDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.processEndDate"></control-messages>
+                         <!-- <div class="form-group col-sm-6 custom-fix-day" *ngIf="nsrdData['unitsCode']?.active">
+
+                             <label for="unitsCode" title="Units Code" class="cust-unit-fix">Units Code	 </label>
+
+                            <input type="text" formControlName="unitsCode" id="unitsCode" class="form-control" placeholder="" disabled="true" />
+                            <control-messages [control]="processContactAddForm.controls.unitsCode"></control-messages>
+                        </div>-->
+                    </div>
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processOutcomeId')">
+                        <label for="processOutcomeId" title="Outcome">Outcome</label>
+
+
+
+ <tr-dropdown [operation] = "action" [tableId]="169"  [isDependent]="true" [list]="childAnswers[169]" [controlName]="'processOutcomeId'" [dropdown]="processContactAddForm"></tr-dropdown>
+
+
+                        <control-messages [control]="processContactAddForm.controls.processOutcomeId"></control-messages>
+                    </div>
+
+
+
+
+
+                     <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processEndAttCount') && nsrdData['processEndAttCount']?.active">
+                        <label for="processEndAttCount" title="Process End Att Count">Business Process End Count
+                                                                </label>
+                        <input type="text" formControlName="processEndAttCount" id="processEndAttCount" class="form-control" placeholder="Process End Att Count"/>
+                        <control-messages      [control]="processContactAddForm.controls.processEndAttCount"></control-messages>
+                    </div>
+
+                   <div class="form-group col-sm-6"  *ngIf=hideLength>
+                        <label for="length" title="Length">Length<span  class="mand-text">*</span></label>
+                        <input type="text" formControlName="length" id="length" class="form-control" placeholder="Length" />
+                        <control-messages [control]="processContactAddForm.controls.length"></control-messages>
+                        <div class="form-group col-sm-6 custom-fix-day" *ngIf="nsrdData['unitsCode']?.active">
+
+                            <input type="text" formControlName="unitsCode" id="unitsCode" class="form-control" placeholder="" disabled="true" />
+                            <control-messages [control]="processContactAddForm.controls.unitsCode"></control-messages>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('processNote')">
+                        <tr-notes [controlName]="'processNote'" [form]="processContactAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="processContactAddForm.controls.processNote"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgProcessContactId')">
+                        <label for="spgProcessContactId" title="Spg Process Contact Id">Spg Process Contact Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgProcessContactId" id="spgProcessContactId" class="form-control" placeholder="Spg Process Contact Id"
+                        />
+                        <control-messages [control]="processContactAddForm.controls.spgProcessContactId"></control-messages>
+                    </div>
+
+
+
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                        <label for="createdBy" title="Created By">Created By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+                        <control-messages [control]="processContactAddForm.controls.createdBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                        <label for="createdByUserId" title="Created By User Id">Created By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+                        />
+                        <control-messages [control]="processContactAddForm.controls.createdByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                        <label for="createdDate" title="Created Date">Created Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'createdDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.createdDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                        <label for="modifiedBy" title="Modified By">Modified By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+                        <control-messages [control]="processContactAddForm.controls.modifiedBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                        <label for="modifiedByUserId" title="Modified By User Id">Modified By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+                        />
+                        <control-messages [control]="processContactAddForm.controls.modifiedByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                        <label for="modifiedDate" title="Modified Date">Modified Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'modifiedDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.modifiedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                        <label for="deleted" title="Deleted">Deleted
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+                        <control-messages [control]="processContactAddForm.controls.deleted"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                        <label for="deletedBy" title="Deleted By">Deleted By
+                                                                </label>
+                        <input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+                        <control-messages [control]="processContactAddForm.controls.deletedBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                        <label for="deletedByUserId" title="Deleted By User Id">Deleted By User Id
+                                                                </label>
+                        <input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+                        />
+                        <control-messages [control]="processContactAddForm.controls.deletedByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                        <label for="deletedDate" title="Deleted Date">Deleted Date
+                                                                    </label>
+                        <date-picker [controlName]="'deletedDate'" [form]="processContactAddForm"></date-picker>
+                        <control-messages [control]="processContactAddForm.controls.deletedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                        <label for="locked" title="Locked">Locked
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+                        <control-messages [control]="processContactAddForm.controls.locked"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+                        <label for="version" title="Version">Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+                        <control-messages [control]="processContactAddForm.controls.version"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="processContactAddForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+
+</div>

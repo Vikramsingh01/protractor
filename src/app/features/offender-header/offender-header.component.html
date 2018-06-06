@@ -1,0 +1,53 @@
+<div *ngIf="toBeShown"><div class="relative">
+  
+<div class="user-info col-sm-8 nopadding">
+  <div class="col-sm-3 nopadding">
+    <p id="offenderHeader_name"><strong>Name:</strong> {{offenderDetails?.firstName}} {{offenderDetails?.familyName}}</p>
+    <p id="offenderHeader_dateOfBirth"><strong>DOB:</strong> {{offenderDetails?.dateOfBirth}} </p>
+  </div>
+  <div class="col-sm-2">
+    <p id="offenderHeader_caseReferenceNumber"><strong>CRN:</strong>  {{offenderDetails?.caseReferenceNumber}} </p>
+    <p id="offenderHeader_pncNumber"><strong>PNC:</strong>  {{offenderDetails?.pncNumber}}</p>
+  </div>
+  <div class="col-sm-4">
+    <p id="offenderHeader_caseManager"><strong>Case Manager:</strong> <span class="subheadcust-wid" title="{{offenderDetails?.offenderManagerResponsibleOfficer}}">{{offenderDetails?.offenderManagerResponsibleOfficer}}</span></p>
+    <p id="offenderHeader_team"><strong>Team:</strong> <span class="subheadcust-wid" title="{{offenderDetails?.offenderManagerResponsibleTeam}}">{{offenderDetails?.offenderManagerResponsibleTeam}}</span></p>
+  </div>
+  <div class="col-sm-3">
+    <p id="offenderHeader_provider"><strong>Provider:</strong>
+      <span class="subheadcust-wid"><tr-list-label *ngIf="offenderDetails?.offenderManagerProviderId" [tableId]="193" [pkValue]="offenderDetails?.offenderManagerProviderId"></tr-list-label>
+      </span>
+    </p>
+    <p id="offenderHeader_band"><strong>Band:</strong>
+       {{offenderDetails?.bandValue}}
+    </p>
+  </div>
+
+	<div class="clearfix"></div>
+ </div>
+
+ <div class="rasip-div">
+
+      <button type="button" [ngClass]="{'red-style' : r?.severity==1, 'amber-style' : r?.severity==2, 'green-style' : r?.severity==3, 'white-style' : r?.severity==4}"
+       *ngIf="offenderDetails?.profileId" [routerLink]="['/', serviceUserUrl, offenderDetails?.profileId ,'profile', 'registration']">R</button>
+
+      <button type="button" [ngClass]="{'red-style' : a?.severity==1, 'amber-style' : a?.severity==2, 'green-style' : a?.severity==3, 'white-style' : a?.severity==4}"
+      *ngIf="offenderDetails?.profileId" [routerLink]="['/', serviceUserUrl, offenderDetails?.profileId ,'profile', 'registration']">A</button>
+
+      <button type="button" [ngClass]="{'red-style' : s?.severity==1, 'amber-style' : s?.severity==2, 'green-style' : s?.severity==3, 'white-style' : s?.severity==4}"
+      *ngIf="offenderDetails?.profileId" [routerLink]="['/', serviceUserUrl, offenderDetails?.profileId ,'profile', 'registration']">S</button>
+
+      <button type="button" [ngClass]="{'red-style' : i?.severity==1, 'amber-style' : i?.severity==2, 'green-style' : i?.severity==3, 'white-style' : i?.severity==4}"
+       *ngIf="offenderDetails?.profileId" [routerLink]="['/', serviceUserUrl, offenderDetails?.profileId ,'profile', 'registration']">I</button>
+
+      <button type="button" [ngClass]="{'red-style' : p?.severity==1, 'amber-style' : p?.severity==2, 'green-style' : p?.severity==3, 'white-style' : p?.severity==4}"
+       *ngIf="offenderDetails?.profileId" [routerLink]="['/', serviceUserUrl, offenderDetails?.profileId ,'profile', 'registration']">P</button>
+
+    </div>
+    <div class="breach-alert" *ngIf="isActiveBreach">
+      <div class="alert-icon">
+        <img src="../../../assets/images/alert-icon.png" alt="Alert Icon" class=""/>
+      </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,38 @@
+<div class="filter-div">
+<form [formGroup]="searchForm" (ngSubmit)="search()" class="collapse in" autocomplete="off">
+    <div class="row">
+		<div *ngFor="let field of searchObjs">
+        <div *ngIf="field.type == 'text'" class="form-group col-sm-6">
+          <label htmlFor="{{field.field}}">{{field.label}}</label>
+          <input type="text" formControlName="{{field.field}}" id="{{field.field}}" class="form-control" placeholder="{{field.label}}">
+          <control-messages [control]="searchForm.controls[field.field]"></control-messages>
+        </div>
+        <div *ngIf="field.type == 'dropdown'" class="form-group col-sm-6">
+          <label htmlFor="{{field.field}}">{{field.label}}<span *ngIf="field?.mandatory" class="mand-text">*</span></label>
+          <tr-dropdown [controlName]="field.field" [tableId]="field.tableId" [dropdown]="searchForm" [lookup]="field.lookup" [inputParam]="field.inputParam" [isDependent]="false" [list]="field.list" [excludeCodes]="field?.excludeCodes"></tr-dropdown>
+          <control-messages [control]="searchForm.controls[field.field]"></control-messages>
+        </div>
+        <div *ngIf="field.type == 'date'" class="form-group col-sm-6">
+          <label htmlFor="{{field.field}}">{{field.label}}<span *ngIf="field?.mandatory" class="mand-text">*</span></label>
+          <date-picker [controlName]="field.field" [form]="searchForm"></date-picker>
+          <control-messages [control]="searchForm.controls[field.field]"></control-messages>
+        </div>
+        <div *ngIf="field.type == 'time'" class="form-group col-sm-6">
+          <label htmlFor="{{field.field}}">{{field.label}}<span *ngIf="field?.mandatory" class="mand-text">*</span></label>
+          <timepicker [controlName]="field.field" [form]="searchForm" [showMeridian]="false"></timepicker>
+          <control-messages [control]="searchForm.controls[field.field]"></control-messages>
+        </div>
+        <div *ngIf="field.type == 'hidden'">
+          <input type="hidden" formControlName="{{field.field}}">
+        </div>
+		</div>
+    </div>
+    <div class="row">	
+			<div class="form-group col-sm-4 pull-right text-right">
+				<button type="submit" class="btn btn-default btn-purple" fromServerMessageValidator [form]="searchForm">Search</button>
+				<button *ngIf="showResetButton" type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+				
+			</div>
+		</div>
+	</form>
+</div>

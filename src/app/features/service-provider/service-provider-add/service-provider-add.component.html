@@ -1,0 +1,145 @@
+<div class="edit-view-layout">
+	<h2 class="page-title" *ngIf="action == 'Update'">Edit Service Provider</h2>
+	<!--<a *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" class="pull-right">
+		<button class="btn btn-default btn-custom ">Back</button>
+	</a>-->
+	<h2 class="page-title" *ngIf="action == 'Create'">Add Service Provider</h2>
+<!--	<a *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="pull-right">
+		<button class="btn btn-default btn-custom ">Back</button>
+	</a>-->
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Service Provider" [selected]="true">
+				<div class="grid-head"></div>
+				<form [formGroup]="serviceProviderAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+					<fieldset class="three-column">
+						<legend> <span class="glyphicon glyphicon-flash"></span> Service Provider </legend>
+						<div class="row">
+							<!-- <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('serviceProviderId')">
+                                <label for="serviceProviderId">Service Provider Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <input type="text" formControlName="serviceProviderId" id="serviceProviderId" class="form-control" placeholder="Service Provider Id" />
+                                <control-messages [control]="serviceProviderAddForm.controls.serviceProviderId"></control-messages>
+                            </div>  -->
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('serviceProviderName')">
+								<label for="serviceProviderName">Service Provider Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+								<input type="text" formControlName="serviceProviderName" id="serviceProviderName" class="form-control" placeholder="Service Provider Name"
+								/>
+								<control-messages [control]="serviceProviderAddForm.controls.serviceProviderName"></control-messages>
+							</div>
+
+							<!-- <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('selectedCrc')">
+                                <label for="selectedCrc">Selected Crc
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                                <!--<input type="text" formControlName="selectedCrc" id="selectedCrc" class="form-control" placeholder="Selected Crc" />-->
+							<!-- <label class="checkbox-inline" *ngFor="let pow of crcList">
+                                    <input type="checkbox" value="{{pow.organisation}}" class="form-control"
+                                    [checked] = "pow.checked"
+                                    (change)="onCheckBoxChange(pow.organisation,$event)" >{{pow.organisation}}  </label>
+                                <control-messages [control]="serviceProviderAddForm.controls.selectedCrc"></control-messages>
+                            </div> -->
+
+							<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('selectedCrc')">
+                                <label for="selectedCrc">Selected Crc
+                                       <span class="mand-text">*</span>
+                                 </label>
+                                <label class="checkbox-inline" *ngFor="let pow of crcList">
+                                    <input type="checkbox" value="{{pow.organisation}}" formControlName="selectedCrc" id="selectedCrc" class="form-control" placeholder="Selected Crc"
+                                    (change)="onCheckBoxChange(pow.id,$event)" >{{pow.organisation}}</label>
+                            </div>-->
+
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('activeStart')">
+								<label for="activeStart">Active Start Date <span class="mand-text">*</span>
+                                                                    </label>
+								<date-picker [controlName]="'activeStart'" [form]="serviceProviderAddForm"></date-picker>
+								<control-messages [control]="serviceProviderAddForm.controls.activeStart"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('activeEnd')">
+								<label for="activeEnd">Active End Date
+                                                                    </label>
+								<date-picker [controlName]="'activeEnd'" [form]="serviceProviderAddForm"></date-picker>
+								<control-messages [control]="serviceProviderAddForm.controls.activeEnd"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('addressLineOne')">
+								<label for="addressLineOne">Address Line 1
+                                                                </label>
+								<input type="text" formControlName="addressLineOne" id="addressLineOne" class="form-control" placeholder="Address Line One"
+								/>
+								<control-messages [control]="serviceProviderAddForm.controls.addressLineOne"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('addressLineTwo')">
+								<label for="addressLineTwo">Address Line 2
+                                                                </label>
+								<input type="text" formControlName="addressLineTwo" id="addressLineTwo" class="form-control" placeholder="Address Line Two"
+								/>
+								<control-messages [control]="serviceProviderAddForm.controls.addressLineTwo"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('addressLineThree')">
+								<label for="addressLineThree">Address Line 3
+                                                                </label>
+								<input type="text" formControlName="addressLineThree" id="addressLineThree" class="form-control" placeholder="Address Line Three"
+								/>
+								<control-messages [control]="serviceProviderAddForm.controls.addressLineThree"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('town')">
+								<label for="town">Town
+                                                                </label>
+								<input type="text" formControlName="town" id="town" class="form-control" placeholder="Town" />
+								<control-messages [control]="serviceProviderAddForm.controls.town"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('postcode')">
+								<label for="postcode">Postcode
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+								<input type="text" formControlName="postcode" id="postcode" class="form-control" placeholder="Postcode" />
+								<control-messages [control]="serviceProviderAddForm.controls.postcode"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('provision')">
+								<label for="provision">Provision <span class="mand-text">*</span></label>
+								<tr-dropdown [operation] = "action" [tableId]="520" [controlName]="'provision'" [dropdown]="serviceProviderAddForm"></tr-dropdown>
+
+
+								<control-messages [control]="serviceProviderAddForm.controls.provision"></control-messages>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('status')">
+								<label for="status">Status
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+								<tr-dropdown [operation] = "action" [tableId]="519" [controlName]="'status'" [dropdown]="serviceProviderAddForm"></tr-dropdown>
+								<control-messages [control]="serviceProviderAddForm.controls.status"></control-messages>
+							</div>
+
+                            <div class="form-group col-sm-12" *ngIf="isFeildAuthorized('selectedCrc')">
+								<label for="selectedCrc">Please Select <span class="txt-trasilower">a</span> CRC's
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+								<tr-multiselect-dropdown [controlName]="'selectedCrc'" [list]="crcList" [checked]="selectedCrc" [form]="serviceProviderAddForm">
+
+								</tr-multiselect-dropdown>
+								<control-messages [control]="serviceProviderAddForm.controls.selectedCrc"></control-messages>
+							</div>
+							<div class="form-group col-sm-12">
+								<button  class="btn btn-default btn-purple" fromServerMessageValidator [form]="serviceProviderAddForm">Submit</button>
+
+								<a *ngIf="action == 'Create'" (click)="navigateTo(['..'])">
+									<button class="btn btn-default btn-white">Cancel</button>
+								</a>
+								<a *ngIf="action == 'Update'" (click)="navigateTo(['../..'])">
+									<button class="btn btn-default btn-white">Cancel</button>
+								</a>
+							</div>
+						</div>
+					</fieldset>
+
+				</form>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

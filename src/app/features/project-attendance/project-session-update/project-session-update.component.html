@@ -1,0 +1,162 @@
+<div class="detail-view-layout one-line-view">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="page-title pull-left">Community Payback Session Project Outcome</h2>
+      <div class="pull-right">
+        <button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="double-divider-purple mt10"></div>
+  <div class="grid-style" *ngIf="authorizedFlag">
+    <form [formGroup]="sessionOutcomeForm" (ngSubmit)="onSubmit()">
+    <tr-accordion>
+      <tr-accordionTab header="Community Payback Session Project Outcome" [selected]="true">
+        <div class="grid-head"></div>
+        <fieldset class="three-column shrink-view">
+          <legend> <span class="glyphicon glyphicon-flash"></span>Community Payback Session Project Outcome</legend>
+          <div class="row">
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Project Type" id="label_projectType">Project Type<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">
+                <tr-list-label *ngIf="upwAppointment?.projectTypeId" [tableId]="239" [pkValue]="upwAppointment?.projectTypeId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Project Name" id="label_projectName">Project Name<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.projectName}}</div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Date" id="label_projectName">Date<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.appointmentDate}}</div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Start Time" id="label_startTime">Start Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.startTime}}</div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="End Time" id="label_endTime">End Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.endTime}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwTeam')">
+                <label for="upwTeam" title="Supervisor Team">Supervisor Team<span class="mand-text">*</span></label>
+                <!--<input type="text" formControlName="upwTeam" id="upwTeam" class="form-control" placeholder="Supervisior Team" />-->
+                <select class="form-control" formControlName="upwTeamId" (change)="supervisiorTeamChange($event.target.value)" id="upwTeam">
+                    <option value=''>- Select - </option>
+                    <option *ngFor="let upwTeam of upwTeams" value="{{upwTeam?.key}}">{{upwTeam?.value}}</option>
+                </select>
+                <control-messages [control]="sessionOutcomeForm.controls.upwTeamId"></control-messages>
+            </div>
+            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwContactOfficer')">
+                <label for="upwContactOfficer" title="Supervisor">Supervisor  <span class="mand-text">*</span></label>
+                <select class="form-control" formControlName="upwContactOfficer"  id="upwContactOfficer">
+                    <option value=''>- Select - </option>
+                    <option *ngFor="let upwOfficer of upwOfficers" value="{{upwOfficer?.value}}">{{upwOfficer?.value}}</option>
+                </select>
+                <control-messages [control]="sessionOutcomeForm.controls.upwContactOfficer"></control-messages>
+            </div>
+              <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwOutcomeTypeId')">
+                  <label for="upwOutcomeTypeId" title="Outcome">Outcome<span *ngIf="nsrdData['upwOutcomeTypeId']?.mandatory" class="mand-text">*</span></label>
+                  <tr-dropdown [operation] = "action" [isNsrd]="true" [tableId]="103" [list]="outcomeTypeList" [controlName]="'upwOutcomeTypeId'" [dropdown]="sessionOutcomeForm"
+                      (updateNsrd)="updateNsrd($event)"></tr-dropdown>
+                  <control-messages [control]="sessionOutcomeForm.controls.upwOutcomeTypeId"></control-messages>
+              </div>
+                 <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('upwOutcomeTypeId') && nsrdData['enforcementActionId']?.active">
+                  <label for="enforcementActionId" title="Enforcement Action">Enforcement Action<span *ngIf="nsrdData['enforcementActionId']?.mandatory" class="mand-text">*</span></label>
+                  <tr-dropdown [operation] = "action" [tableId]="121" [controlName]="'enforcementActionId'" [dropdown]="sessionOutcomeForm"></tr-dropdown>
+                  <control-messages [control]="sessionOutcomeForm.controls.enforcementActionId"></control-messages>
+              </div>
+              <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('highVisibilityVestYesNoId') && nsrdData['highVisibilityVestYesNoId']?.active">
+                  <label for="highVisibilityVestYesNoId" title="High Visibility Vest Worn?">High Visibility Vest Worn?<span *ngIf="nsrdData['highVisibilityVestYesNoId']?.mandatory" class="mand-text">*</span></label>
+                  <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'highVisibilityVestYesNoId'" [dropdown]="sessionOutcomeForm" [excludeCodes]="['U']"></tr-dropdown>
+                  <control-messages [control]="sessionOutcomeForm.controls.highVisibilityVestYesNoId"></control-messages>
+              </div>
+              <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('intensiveYesNoId') && nsrdData['intensiveYesNoId']?.active">
+                  <label for="intensiveYesNoId" title="Worked Intensively?">Worked Intensively?<span *ngIf="nsrdData['intensiveYesNoId']?.mandatory" class="mand-text">*</span></label>
+                  <tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'intensiveYesNoId'" [dropdown]="sessionOutcomeForm" [excludeCodes]="['U']"></tr-dropdown>
+                  <control-messages [control]="sessionOutcomeForm.controls.intensiveYesNoId"></control-messages>
+              </div>
+              <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('penaltyTime') && nsrdData['penaltyTime']?.active">
+                  <label for="penaltyTime" title="Penalty Time (hh:mm)">Penalty Time (hh:mm)<span *ngIf="nsrdData['penaltyTime']?.mandatory" class="mand-text">*</span></label>
+                  <input type="text" formControlName="penaltyTime" id="penaltyTime" class="form-control" placeholder="Penalty Time (hh:mm)" />
+                  <control-messages [control]="sessionOutcomeForm.controls.penaltyTime"></control-messages>
+              </div>
+
+              <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('workQualityId') && nsrdData['workQualityId']?.active">
+                  <label for="workQualityId" title="Worked Quality">Worked Quality<span *ngIf="nsrdData['workQualityId']?.mandatory" class="mand-text">*</span>
+                                                              </label>
+                  <tr-dropdown [operation] = "action" [tableId]="243" [controlName]="'workQualityId'" [dropdown]="sessionOutcomeForm"></tr-dropdown>
+                  <control-messages [control]="sessionOutcomeForm.controls.workQualityId"></control-messages>
+              </div>
+              <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('behaviourId') && nsrdData['behaviourId']?.active">
+                  <label for="behaviourId" title="Behaviour">Behaviour<span *ngIf="nsrdData['behaviourId']?.mandatory" class="mand-text">*</span>
+                                                              </label>
+                  <tr-dropdown [operation] = "action" [tableId]="234" [controlName]="'behaviourId'" [dropdown]="sessionOutcomeForm"></tr-dropdown>
+                  <control-messages [control]="sessionOutcomeForm.controls.behaviourId"></control-messages>
+              </div>
+              <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                <label for="note" title="Notes">Notes </label>
+                  <textarea formControlName="note" class="form-control" id="note"></textarea>
+                  <control-messages [control]="sessionOutcomeForm.controls.note"></control-messages>
+              </div>
+          </div>
+        </fieldset>
+        <div class="col-sm-12">
+          <table class="table table-bordered mt10">
+            <thead>
+              <tr>
+                <th id="CRN" class="wid120 text-center" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)">CRN
+                  <span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseReferenceNumber'" [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                    class="glyphicon"></span>
+                </th>
+                <th id="Name" class="wid180" trSortBy="firstName" (sortCommand)="sort($event)">Name
+                  <span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'" [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                    class="glyphicon"></span>
+                </th>
+                <th id="DoB" class="text-center">DoB</th>
+                <th id="hrs_ordered" class="wid120 text-center">Hrs Ordered</th>
+                <th id="Hrs_left" class="text-center">Hrs Left</th>
+                <th id="Start_time" class="text-center">Start Time</th>
+                <th id="End_Time" class="text-center">End Time</th>
+                <th id="Hrs_credited" class="wid120 text-center">Hrs Credited</th>
+                <th class="text-center"><span class="hidden">View</span></th>
+              </tr>
+            </thead>
+            <tr *ngFor="let serviceUser of allocatedServiceUsers">
+              <td class="text-center">{{serviceUser?.caseReferenceNumber}}</td>
+              <td>{{serviceUser?.firstName}} {{serviceUser?.familyName}}</td>
+              <td class="text-center">{{serviceUser?.dateOfBirth}}</td>
+              <td class="text-center">{{serviceUser?.length}}</td>
+              <td class="text-center">{{serviceUser?.totalHoursLeft}}</td>
+              <td class="text-center"></td>
+              <td class="text-center"></td>
+              <td></td>
+
+              <td class="text-center wid120">
+                <input *ngIf="!serviceUser?.locked" type="checkbox" class="form-control appointment-checkbox" (change)="updateCheckedOptions(serviceUser?.upwAppointmentId, $event)" value="{{serviceUser?.upwAppointmentId}}"/>
+                <button id="serviceUser_delete{{i}}" class="btn btn-default btn-small" *ngIf="serviceUser?.locked" title="Record is locked.">
+                    <span class="glyphicon glyphicon-lock">aa</span>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="showHideAllocatedServiceUsers && allocatedServiceUsers?.length<=0" class="no-records">No Service Users Allocated</div>
+        <div class="clearfix"></div>
+        <div class="col-sm-12 mb10">
+        <button class="btn btn-default btn-purple" type="button" [routerLink]="['../../..']">Close</button>
+        <button class="btn btn-default btn-purple" type="button" (click)="selectAllUsers()">Select All</button>
+        <button class="btn btn-default btn-purple" type="button" (click)="deselectAllUsers()">Deselect All</button>
+        <button class="btn btn-default btn-purple" type="submit" fromServerMessageValidator [form]="sessionOutcomeForm">Update</button>
+        </div>
+        <div class="clearfix"></div>
+        <tr-pagination [name]="'allocatedServiceUsers'" *ngIf="allocatedServiceUsers?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+          (paginationCommand)="paginate($event)"></tr-pagination>
+      </tr-accordionTab>
+    </tr-accordion>
+    </form>
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

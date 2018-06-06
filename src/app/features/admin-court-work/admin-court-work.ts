@@ -1,0 +1,48 @@
+export class AdminCourtWork {
+  processId: any;
+  profileId: any;
+  spgVersion: any;
+  spgUpdateUser: any;
+  processTypeId: any;
+  processSubTypeId: any;
+  processRefDate: any;
+  processExpectedStartDate: any;
+  processStartDate: any;
+  processExpectedEndDate: any;
+  processEndDate: any;
+  processStageId: any;
+  processStageDate: any;
+  processNote: any;
+  processOutcomeId: any;
+  processEndAttCount: any;
+  intendedProviderId: any;
+  spgProcessContactId: any;
+  createdBy: any;
+  createdByUserId: any;
+  createdDate: any;
+  modifiedBy: any;
+  modifiedByUserId: any;
+  modifiedDate: any;
+  deleted: any;
+  deletedBy: any;
+  deletedByUserId: any;
+  deletedDate: any;
+  locked: any;
+  version: any;
+  firstName: any;
+  familyName: any;
+  caseReferenceNumber: any;
+  team: any;
+  nsiOfficer:any
+  nsiTeam:any;
+  eventId: any;
+  eventNumber: any;
+  disposalType: any;
+  teamId: any;
+  officeTeam: any;
+  officeTeamId: any;
+  docType: any;
+  documentName: any;
+  alfrescoDocId: any;
+  categoryId: any;
+}

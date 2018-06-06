@@ -1,0 +1,111 @@
+<div class="edit-view-layout one-line-view">
+    <h2 class="page-title" *ngIf="action == 'Update'">Transfer Out Request</h2>
+    <h2 class="page-title" *ngIf="action == 'Create'">Transfer Out Request</h2>
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style shrink-view grey-bg" *ngIf="authorizedFlag">
+
+        <tr-accordion>
+            <tr-accordionTab header="Transfer Out Request" [selected]="true">
+                <div class="grid-head" ></div>
+                <form [formGroup]="transferOutRequestAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <fieldset class="three-column">
+                        <legend> <span class="glyphicon glyphicon-flash"></span> Transfer Out Request </legend>
+                        <div class="row">
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferToProviderId')">
+                                <label for="transferToProviderId" title="To Provider">To Provider
+                                    <span class="mand-text">*</span>
+                                </label>
+                                <tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'transferToProviderId'" [includeCodes]="providerCodesList" [dropdown]="transferOutRequestAddForm"></tr-dropdown>
+                                <control-messages [control]="transferOutRequestAddForm.controls.transferToProviderId"></control-messages>
+                            </div>
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferToTeam')">
+                                <label for="transferToTeam" title="To Team">To Team
+                                </label>
+                                <input type="text" formControlName="transferToTeam" id="transferToTeam" class="form-control" placeholder="To Team" [disabled]="true" />
+                                <control-messages [control]="transferOutRequestAddForm.controls.transferToTeam"></control-messages>
+                            </div>
+
+                            <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('transferToOfficer')">
+                                <label for="transferToOfficer" title="To Case Manager">To Case Manager
+                                </label>
+                                <input type="text" formControlName="transferToOfficer" id="transferToOfficer" class="form-control" placeholder="To Officer" [disabled]="true"/>
+                                <control-messages [control]="transferOutRequestAddForm.controls.transferToOfficer"></control-messages>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-div">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th *ngIf="isFeildAuthorized('type')" id="type" class="wid100"><span class="th-div">Type</span></th>
+                                                <th *ngIf="isFeildAuthorized('descriptionId')" id="descriptionId" class="wid120"><span class="th-div">Description</span></th>
+                                                <th *ngIf="isFeildAuthorized('startDate')" id="startDate" class="wid100 text-center"><span class="th-div">Start Date</span></th>
+                                                <th *ngIf="isFeildAuthorized('statusId')" id="statusId" class="wid100"><span class="th-div">Status</span></th>
+                                                <th *ngIf="isFeildAuthorized('transferReason')" id="transferReason" class="wid120"><span class="th-div">Transfer Reason</span></th>
+                                                <th class="text-center wid80"><span class="hidden">View</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="transferOutRequests">
+                                            <tr *ngFor="let tor of transferOutRequestAddForm.controls.transferOutRequests.controls; let i=index" [formGroupName]="i">
+                                                <td *ngIf="isFeildAuthorized('type')">
+                                                    {{tor?.controls['type']?.value}}
+                                                </td>
+                                                <td *ngIf="isFeildAuthorized('descriptionId')">
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '337'" [tableId]="421" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '17'" [tableId]="215" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '18'" [tableId]="422" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '19'" [tableId]="197" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '31'" [tableId]="149" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '29'" [tableId]="108" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                    <tr-list-label *ngIf="tor?.controls['tableId']?.value == '38' || tor?.controls['tableId']?.value == '48'" [tableId]="192" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+                                                </td>
+                                                <td *ngIf="isFeildAuthorized('requestDate')" class="text-center">
+                                                    {{tor?.controls['requestDate']?.value}}
+                                                </td>
+                                                <td *ngIf="isFeildAuthorized('statusId')">
+                                                    <tr-list-label [tableId]="229" [pkValue]="tor?.controls['statusId']?.value"></tr-list-label>
+                                                </td>
+                                                <td>
+                                                    <label for="transferReasonId" class="cust-label">Transfer Reason</label>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '4'" [tableId]="144" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)" ></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '337'" [tableId]="141" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '17'" [tableId]="143" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '18'" [tableId]="139" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '19'" [tableId]="142" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '31'" [tableId]="137" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '29'" [tableId]="136" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                    <tr-dropdown [operation] = "action" name="{{i}}" *ngIf="tor?.controls['tableId']?.value == '38' || tor?.controls['tableId']?.value == '48'" [tableId]="140" [controlName]="'transferReasonId'" [dropdown]="tor" [disabled]="tor?.controls['statusId']?.value !='' && tor?.controls['statusId']?.value != null"
+                                                        (change)="onChange($event.target.value)"></tr-dropdown>
+                                                </td>
+                                                	<td *ngIf="isAuthorized('Update')" class="text-center"><button id="transferOutRequest_view{{i}}" [routerLink]="['edit',transferOutRequestList[i]?.transferOutRequestId]" class="btn btn-default btn-small" [disabled]="tor?.controls['statusId']?.value != 14"><span class="glyphicon glyphicon-search">aa</span></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div *ngIf="transferOutRequestAddForm.controls.transferOutRequests.controls?.length<=0" class="no-records">No Records Found</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt15">
+                            <div class="form-group col-sm-12 text-right">
+                                <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="transferOutRequestAddForm" [disabled]="!allowTransferOut">Transfer</button>
+                                <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+
+</div>

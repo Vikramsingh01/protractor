@@ -1,0 +1,107 @@
+<div class="list-view-layout">
+	<h2 class="page-title">Transfer Out Request</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Transfer Out Request" [selected]="true">
+				<div class="grid-head">
+					<tr-list-refresh (refreshCommand)="searchTransferOutRequest(sortSearchPaginationObj?.filterObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search *ngIf="providerList" [searchObjs]="searchObjs"  (searchCommand)="searchTransferOutRequest($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th  id="familyNamehead" class="wid100"><span class="th-div">Surname</span>
+											</th>
+											<th  id="firstNamehead" class="wid100"><span class="th-div">First Name</span>
+											</th>
+											<th *ngIf="isFeildAuthorized('type')" id="typehead"  class="wid100"><span class="th-div">  type  </span>
+											</th>
+											<th *ngIf="isFeildAuthorized('description')" id="descriptionhead" class="wid120"><span class="th-div"> Description</span>
+											</th>
+											<th *ngIf="isFeildAuthorized('requestDate')" id="requestDatehead"  class="wid100 text-center"><span class="th-div">  Request Date  </span>
+											</th>
+										    <th *ngIf="isFeildAuthorized('transferFromProviderId')" id="transferFromProviderIdhead"  class="wid100"><span class="th-div">From Provider </span>
+											</th>
+											<th *ngIf="isFeildAuthorized('transferToProviderId')" id="transferToProviderIdhead" class="wid100"><span class="th-div">To Provider </span>
+											</th>
+											<th *ngIf="isFeildAuthorized('transferReasonId')" id="transferReasonIdhead" class="wid120"><span class="th-div">Transfer Reason</span>
+											</th>
+                                             	<th *ngIf="isFeildAuthorized('status')" id="statushead" class="wid120"><span class="th-div">status</span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center wid80"><span class="hidden">View</span></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let transferOutRequest of transferOutRequestList">
+											<td *ngIf="isFeildAuthorized('familyName')">{{transferOutRequest?.familyName}}</td>
+
+											<td *ngIf="isFeildAuthorized('firstName')">{{transferOutRequest?.firstName}}</td>
+                                            <td *ngIf="isFeildAuthorized('type')">{{transferOutRequest?.type}}</td>
+											<td >
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '337'" [tableId]="421" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '17'" [tableId]="215" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '18'" [tableId]="422" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '19'" [tableId]="197" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '31'" [tableId]="149" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '29'" [tableId]="108" [pkValue]="transferOutRequest?.descriptionId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '38' || transferOutRequest?.tableId == '48'" [tableId]="192" [pkValue]="transferOutRequest?.description"></tr-list-label>
+											</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('requestDate')">{{transferOutRequest?.requestDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('transferFromProviderId')">
+												<tr-list-label *ngIf="transferOutRequest?.transferFromProviderId" [tableId]="193" [pkValue]="transferOutRequest?.transferFromProviderId"></tr-list-label>
+											</td>
+
+											<td *ngIf="isFeildAuthorized('transferToProviderId')">
+												<tr-list-label *ngIf="transferOutRequest?.transferToProviderId" [tableId]="193" [pkValue]="transferOutRequest?.transferToProviderId"></tr-list-label>
+											</td>
+
+											<td *ngIf="isFeildAuthorized('transferReasonId')">
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '4'" [tableId]="144" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '337'" [tableId]="141" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '17'" [tableId]="143" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '18'" [tableId]="139" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '19'" [tableId]="142" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '31'" [tableId]="137" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '29'" [tableId]="136" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+												<tr-list-label *ngIf="transferOutRequest?.tableId == '38' || transferOutRequest?.tableId == '48'" [tableId]="140" [pkValue]="transferOutRequest?.transferReasonId"></tr-list-label>
+										</td>
+                                          <td *ngIf="isFeildAuthorized('status')">
+											    <tr-list-label *ngIf="transferOutRequest?.status" [tableId]="229" [pkValue]="transferOutRequest?.status"></tr-list-label>
+                                        </td>
+											<!--<td *ngIf="isAuthorized('Read')" class="text-center"><button [routerLink]="['transferOutRequest', transferOutRequest?.transferOutRequestId]" id="transferOutRequest_view{{i}}"
+												 class="btn btn-default btn-small"><span class="glyphicon glyphicon-search">aa</span></button></td>-->
+											<!--<td *ngIf="isAuthorized('Read')" class="text-center"><button id="transferOutRequest_view{{i}}" class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button></td>-->	 
+										
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="transferOutRequestList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'transferOutRequestList'" *ngIf="transferOutRequestList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

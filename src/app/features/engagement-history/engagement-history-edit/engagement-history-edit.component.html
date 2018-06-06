@@ -1,0 +1,146 @@
+<div class="edit-view-layout">
+	<div class="page-title">{{action}} engagement History</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="engagement History" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<form [formGroup]="engagementHistoryForm" (ngSubmit)="onSubmit()" autocomplete="off">
+					<fieldset class="three-column">
+						<legend> <span class="glyphicon glyphicon-flash"></span> engagement History</legend>
+						<div class="row">
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('engagementHistoryId')">
+								<label for="engagementHistoryId" class="">engagement History Id</label>
+								<div class="">
+									<input type="text" formControlName="engagementHistoryId" id="engagementHistoryId" class="form-control" placeholder="engagement History Id"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('caseReferenceNumber')">
+								<label for="caseReferenceNumber" class="">case Reference Number</label>
+								<div class="">
+									<input type="text" formControlName="caseReferenceNumber" id="caseReferenceNumber" class="form-control" placeholder="case Reference Number"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgOffenderId')">
+								<label for="spgOffenderId" class="">spg Offender Id</label>
+								<div class="">
+									<input type="text" formControlName="spgOffenderId" id="spgOffenderId" class="form-control" placeholder="spg Offender Id"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('acceptedRejectedDate')">
+								<label for="acceptedRejectedDate" class="">accepted Rejected Date</label>
+								<div class="">
+									<input type="text" formControlName="acceptedRejectedDate" id="acceptedRejectedDate" class="form-control" placeholder="accepted Rejected Date"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rejectedReason')">
+								<label for="rejectedReason" class="">rejected Reason</label>
+								<div class="">
+									<input type="text" formControlName="rejectedReason" id="rejectedReason" class="form-control" placeholder="rejected Reason"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('acceptedRejectedByUserId')">
+								<label for="acceptedRejectedByUserId" class="">accepted Rejected By User Id</label>
+								<div class="">
+									<input type="text" formControlName="acceptedRejectedByUserId" id="acceptedRejectedByUserId" class="form-control" placeholder="accepted Rejected By User Id"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('status')">
+								<label for="status" class="">status</label>
+								<div class="">
+									<input type="text" formControlName="status" id="status" class="form-control" placeholder="status" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+								<label for="createdDate" class="">created Date</label>
+								<div class="">
+									<input type="text" formControlName="createdDate" id="createdDate" class="form-control" placeholder="created Date" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+								<label for="createdBy" class="">created By</label>
+								<div class="">
+									<input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="created By" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+								<label for="createdByUserId" class="">created By User Id</label>
+								<div class="">
+									<input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="created By User Id"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+								<label for="modifiedDate" class="">modified Date</label>
+								<div class="">
+									<input type="text" formControlName="modifiedDate" id="modifiedDate" class="form-control" placeholder="modified Date" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+								<label for="modifiedBy" class="">modified By</label>
+								<div class="">
+									<input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="modified By" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+								<label for="modifiedByUserId" class="">modified By User Id</label>
+								<div class="">
+									<input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="modified By User Id"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+								<label for="deleted" class="">deleted</label>
+								<div class="">
+									<input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="deleted" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+								<label for="deletedDate" class="">deleted Date</label>
+								<div class="">
+									<input type="text" formControlName="deletedDate" id="deletedDate" class="form-control" placeholder="deleted Date" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+								<label for="deletedBy" class="">deleted By</label>
+								<div class="">
+									<input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="deleted By" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+								<label for="deletedByUserId" class="">deleted By User Id</label>
+								<div class="">
+									<input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="deleted By User Id"
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+								<label for="locked" class="">locked</label>
+								<div class="">
+									<input type="text" formControlName="locked" id="locked" class="form-control" placeholder="locked" />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+								<label for="version" class="">version</label>
+								<div class="">
+									<input type="text" formControlName="version" id="version" class="form-control" placeholder="version" />
+								</div>
+							</div>
+							<div class="form-group col-sm-12">
+								<button class="btn btn-default btn-purple">Save</button>
+
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

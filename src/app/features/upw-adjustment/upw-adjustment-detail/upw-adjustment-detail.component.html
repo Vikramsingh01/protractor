@@ -1,0 +1,108 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Upw Adjustment</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Upw Adjustment" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> UpwAdjustment </legend>
+                    <div class="row">
+                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('adjustmentType')">
+                            <div class="view-title col-sm-5" id="label_adjustmentType">Adjustment Type<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="adjustmentType">{{upwAdjustment?.adjustmentType}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('adjustmentDate')">
+                            <div class="view-title col-sm-5" id="label_adjustmentDate">Adjustment Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="adjustmentDate">{{upwAdjustment?.adjustmentDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('upwAdjustmentId')">
+                            <div class="view-title col-sm-5" id="label_upwAdjustmentId">Upw Adjustment Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="upwAdjustmentId">{{upwAdjustment?.upwAdjustmentId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('adjustmentAmount')">
+                            <div class="view-title col-sm-5" id="label_adjustmentAmount">Adjustment Amount<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="adjustmentAmount">{{upwAdjustment?.adjustmentAmount}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+                            <div class="view-title col-sm-5" id="label_eventId">Event Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="eventId">{{upwAdjustment?.eventId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                            <div class="view-title col-sm-5" id="label_spgVersion">Spg Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgVersion">{{upwAdjustment?.spgVersion}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                            <div class="view-title col-sm-5" id="label_spgUpdateUser">Spg Update User<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgUpdateUser">{{upwAdjustment?.spgUpdateUser}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('adjustmentReasonId')">
+                            <div class="view-title col-sm-5" id="label_adjustmentReasonId">Adjustment Reason Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="adjustmentReasonId">{{upwAdjustment?.adjustmentReasonId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpwAdjustmentId')">
+                            <div class="view-title col-sm-5" id="label_spgUpwAdjustmentId">Spg Upw Adjustment Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgUpwAdjustmentId">{{upwAdjustment?.spgUpwAdjustmentId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5" id="label_createdBy">Created By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdBy">{{upwAdjustment?.createdBy}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5" id="label_createdByUserId">Created By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdByUserId">{{upwAdjustment?.createdByUserId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5" id="label_createdDate">Created Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdDate">{{upwAdjustment?.createdDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5" id="label_modifiedBy">Modified By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedBy">{{upwAdjustment?.modifiedBy}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5" id="label_modifiedByUserId">Modified By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedByUserId">{{upwAdjustment?.modifiedByUserId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5" id="label_modifiedDate">Modified Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedDate">{{upwAdjustment?.modifiedDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5" id="label_deleted">Deleted<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deleted">{{upwAdjustment?.deleted}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5" id="label_deletedBy">Deleted By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedBy">{{upwAdjustment?.deletedBy}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5" id="label_deletedByUserId">Deleted By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedByUserId">{{upwAdjustment?.deletedByUserId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5" id="label_deletedDate">Deleted Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedDate">{{upwAdjustment?.deletedDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5" id="label_locked">Locked<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="locked">{{upwAdjustment?.locked}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5" id="label_version">Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="version">{{upwAdjustment?.version}}</div>
+                        </div>
+                                                                                            </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

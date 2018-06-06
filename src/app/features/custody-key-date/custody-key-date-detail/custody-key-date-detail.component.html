@@ -1,0 +1,100 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Key Date</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+                  <tr-accordionTab header="Key Date" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> CustodyKeyDate </legend>
+                    <div class="row">
+                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('custodyKeyDateId')">
+                            <div class="view-title col-sm-5" id="label_custodyKeyDateId" title="Custody Key Date Id">Custody Key Date Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="custodyKeyDateId">{{custodyKeyDate?.custodyKeyDateId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+                            <div class="view-title col-sm-5" id="label_eventId" title="Event Id">Event Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="eventId">{{custodyKeyDate?.eventId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                            <div class="view-title col-sm-5" id="label_spgVersion" title="Spg Version">Spg Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgVersion">{{custodyKeyDate?.spgVersion}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                            <div class="view-title col-sm-5" id="label_spgUpdateUser" title="Spg Update User">Spg Update User<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgUpdateUser">{{custodyKeyDate?.spgUpdateUser}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgCustodyKeyDateId')">
+                            <div class="view-title col-sm-5" id="label_spgCustodyKeyDateId" title="Spg Custody Key Date Id">Spg Custody Key Date Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgCustodyKeyDateId">{{custodyKeyDate?.spgCustodyKeyDateId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5" id="label_createdBy" title="Created By">Created By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdBy">{{custodyKeyDate?.createdBy}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5" id="label_createdByUserId" title="Created By User Id">Created By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdByUserId">{{custodyKeyDate?.createdByUserId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5" id="label_createdDate" title="Created Date">Created Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdDate">{{custodyKeyDate?.createdDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5" id="label_modifiedBy" title="Modified By">Modified By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedBy">{{custodyKeyDate?.modifiedBy}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5" id="label_modifiedByUserId" title="Modified By User Id">Modified By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedByUserId">{{custodyKeyDate?.modifiedByUserId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5" id="label_modifiedDate" title="Modified Date">Modified Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedDate">{{custodyKeyDate?.modifiedDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5" id="label_deleted" title="Deleted">Deleted<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deleted">{{custodyKeyDate?.deleted}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5" id="label_deletedBy" title="Deleted By">Deleted By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedBy">{{custodyKeyDate?.deletedBy}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5" id="label_deletedByUserId" title="Deleted By User Id">Deleted By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedByUserId">{{custodyKeyDate?.deletedByUserId}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5" id="label_deletedDate" title="Deleted Date">Deleted Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedDate">{{custodyKeyDate?.deletedDate}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5" id="label_locked" title="Locked">Locked<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="locked">{{custodyKeyDate?.locked}}</div>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5" id="label_version" title="Version">Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="version">{{custodyKeyDate?.version}}</div>
+                        </div>
+                                                                                                                                                <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('keyDateTypeId')">
+                            <div class="view-title col-sm-5" id="label_keyDateTypeId" title="Key Date Type Id">Key Date Type Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="keyDateTypeId"><tr-list-label *ngIf="custodyKeyDate?.keyDateTypeId" [tableId]="223" [pkValue]="custodyKeyDate?.keyDateTypeId"></tr-list-label></div>
+                        </div>
+                                                                                                <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('keyDate')">
+                            <div class="view-title col-sm-5" id="label_keyDate" title="Key Date">Key Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="keyDate">{{custodyKeyDate?.keyDate}}</div>
+                        </div>
+                                                                                            </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

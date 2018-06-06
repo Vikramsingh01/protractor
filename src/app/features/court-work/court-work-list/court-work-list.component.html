@@ -1,0 +1,215 @@
+<div class="list-view-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'Event'"></tr-tabs>
+	<h2 class="page-title hide-heading">Court Work</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+
+
+	<div class="grid-style" *ngIf="isAuthorized('Create')">
+		<div class="custom-align">
+			- {{event.eventNumber}} and
+			<tr-list-label *ngIf="event?.orderTypeDisposalTypeId" [tableId]="421" [pkValue]="event?.orderTypeDisposalTypeId"></tr-list-label>
+		</div>
+		<tr-accordion>
+			<tr-accordionTab header="Court Work Request" [selected]="true">
+
+				<div class="pad15">
+					<tr-court-work-edit (updateCourtWorkList)="updateCourtWorkList($event)"></tr-court-work-edit>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Court Work Log" [selected]="false">
+				<div class="grid-head">
+					<tr-list-refresh (refreshCommand)="searchCourtWork()"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<!--<tr-search [searchObjs]="searchObjs" (searchCommand)="searchCourtWork($event)"></tr-search>-->
+
+									<div class="filter-div">
+										<form [formGroup]="courtWorkFilterForm" (ngSubmit)="searchCourtWork()" class="collapse in" id="collapseExample" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-sm-6">
+													<label for="processTypeId">Request Type</label>
+													<tr-dropdown [operation] = "action" [tableId]="192" [controlName]="'processTypeId'" [dropdown]="courtWorkFilterForm" [excludeItems]="reqTypeIds"></tr-dropdown>
+													<control-messages [control]="courtWorkFilterForm.controls.processTypeId"></control-messages>
+												</div>
+												<div class="form-group col-sm-6">
+													<label for="processStageId">Status</label>
+													<tr-dropdown [operation] = "action" [tableId]="191" [controlName]="'processStageId'" [dropdown]="courtWorkFilterForm"></tr-dropdown>
+													<control-messages [control]="courtWorkFilterForm.controls.processStageId"></control-messages>
+												</div>
+											</div>
+											<div class="row">
+												<input type="hidden" formControlName="eventId">
+											</div>
+											<div class="row">
+												<input type="hidden" formControlName="profileId">
+											</div>
+											<div class="row">
+												<div class="form-group col-sm-6 pull-right text-right">
+													<button type="submit" class="btn btn-default btn-purple">Search</button>
+													<button type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+												</div>
+											</div>
+
+										</form>
+									</div>
+
+
+
+
+
+
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<!-- <th *ngIf="isFeildAuthorized('processId')" id="processId" trSortBy="processId" (sortCommand)="sort($event)"><span class="th-div">Process Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('profileId')" id="profileId" trSortBy="profileId" (sortCommand)="sort($event)"><span class="th-div">Profile Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'profileId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('spgVersion')" id="spgVersion" trSortBy="spgVersion" (sortCommand)="sort($event)"><span class="th-div">Spg Version<span *ngIf="sortSearchPaginationObj.sortObj.field == 'spgVersion'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('spgUpdateUser')" id="spgUpdateUser" trSortBy="spgUpdateUser" (sortCommand)="sort($event)"><span class="th-div">Spg Update User<span *ngIf="sortSearchPaginationObj.sortObj.field == 'spgUpdateUser'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<th *ngIf="isFeildAuthorized('processTypeId')" id="processTypeId1" trSortBy="processTypeId" (sortCommand)="sort($event)"><span class="th-div">Request Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<!-- <th *ngIf="isFeildAuthorized('processSubTypeId')" id="processSubTypeId" trSortBy="processSubTypeId" (sortCommand)="sort($event)"><span class="th-div">Process Sub Type Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processSubTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<th *ngIf="isFeildAuthorized('processRefDate')" id="processRefDate1" trSortBy="processRefDate" (sortCommand)="sort($event)"
+												class="text-center"><span class="th-div">Referral Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processRefDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<!-- <th *ngIf="isFeildAuthorized('processExpectedStartDate')" id="processExpectedStartDate" trSortBy="processExpectedStartDate" (sortCommand)="sort($event)"><span class="th-div">Process Expected Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processExpectedStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('processStartDate')" id="processStartDate" trSortBy="processStartDate" (sortCommand)="sort($event)"><span class="th-div">Process Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('processExpectedEndDate')" id="processExpectedEndDate" trSortBy="processExpectedEndDate" (sortCommand)="sort($event)"><span class="th-div">Process Expected End Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processExpectedEndDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('processEndDate')" id="processEndDate" trSortBy="processEndDate" (sortCommand)="sort($event)"><span class="th-div">Process End Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processEndDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<th *ngIf="isFeildAuthorized('processStageDate')" id="processStageDate" trSortBy="processStageDate" (sortCommand)="sort($event)"
+												class="text-center"><span class="th-div">Status Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('processStageId')" id="processStageId1" trSortBy="processStageId" (sortCommand)="sort($event)"><span class="th-div">Status<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('processOutcomeId')" id="processOutcomeId" trSortBy="processOutcomeId" (sortCommand)="sort($event)"><span class="th-div">Outcome<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processOutcomeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<!-- <th *ngIf="isFeildAuthorized('processNote')" id="processNote" trSortBy="processNote" (sortCommand)="sort($event)"><span class="th-div">Process Note<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processNote'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('processOutcomeId')" id="processOutcomeId" trSortBy="processOutcomeId" (sortCommand)="sort($event)"><span class="th-div">Process Outcome Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processOutcomeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('processEndAttCount')" id="processEndAttCount" trSortBy="processEndAttCount" (sortCommand)="sort($event)"><span class="th-div">Process End Att Count<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processEndAttCount'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('intendedProviderId')" id="intendedProviderId" trSortBy="intendedProviderId" (sortCommand)="sort($event)"><span class="th-div">Intended Provider Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'intendedProviderId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('spgProcessContactId')" id="spgProcessContactId" trSortBy="spgProcessContactId" (sortCommand)="sort($event)"><span class="th-div">Spg Process Contact Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'spgProcessContactId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('createdBy')" id="createdBy" trSortBy="createdBy" (sortCommand)="sort($event)"><span class="th-div">Created By<span *ngIf="sortSearchPaginationObj.sortObj.field == 'createdBy'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('createdByUserId')" id="createdByUserId" trSortBy="createdByUserId" (sortCommand)="sort($event)"><span class="th-div">Created By User Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'createdByUserId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('createdDate')" id="createdDate" trSortBy="createdDate" (sortCommand)="sort($event)"><span class="th-div">Created Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'createdDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('modifiedBy')" id="modifiedBy" trSortBy="modifiedBy" (sortCommand)="sort($event)"><span class="th-div">Modified By<span *ngIf="sortSearchPaginationObj.sortObj.field == 'modifiedBy'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('modifiedByUserId')" id="modifiedByUserId" trSortBy="modifiedByUserId" (sortCommand)="sort($event)"><span class="th-div">Modified By User Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'modifiedByUserId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('modifiedDate')" id="modifiedDate" trSortBy="modifiedDate" (sortCommand)="sort($event)"><span class="th-div">Modified Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'modifiedDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('deleted')" id="deleted" trSortBy="deleted" (sortCommand)="sort($event)"><span class="th-div">Deleted<span *ngIf="sortSearchPaginationObj.sortObj.field == 'deleted'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('deletedBy')" id="deletedBy" trSortBy="deletedBy" (sortCommand)="sort($event)"><span class="th-div">Deleted By<span *ngIf="sortSearchPaginationObj.sortObj.field == 'deletedBy'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('deletedByUserId')" id="deletedByUserId" trSortBy="deletedByUserId" (sortCommand)="sort($event)"><span class="th-div">Deleted By User Id<span *ngIf="sortSearchPaginationObj.sortObj.field == 'deletedByUserId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('deletedDate')" id="deletedDate" trSortBy="deletedDate" (sortCommand)="sort($event)"><span class="th-div">Deleted Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'deletedDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('locked')" id="locked" trSortBy="locked" (sortCommand)="sort($event)"><span class="th-div">Locked<span *ngIf="sortSearchPaginationObj.sortObj.field == 'locked'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+											<!-- <th *ngIf="isFeildAuthorized('version')" id="version" trSortBy="version" (sortCommand)="sort($event)"><span class="th-div">Version<span *ngIf="sortSearchPaginationObj.sortObj.field == 'version'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th> -->
+
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let courtWork of courtWorkList; let i = index">
+											<td *ngIf="isFeildAuthorized('processTypeId')">
+												<span *ngFor="let processTypeId of processTypeIdList | filter :'key' : courtWork?.processTypeId">{{processTypeId.value}}</span>
+											</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('processRefDate')">{{courtWork?.processRefDate}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('processStageDate')">{{courtWork?.processStageDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('processStageId')">
+												<span *ngFor="let processStageId of processStageIdList | filter :'key' : courtWork?.processStageId">{{processStageId.value}}</span>
+											</td>
+
+											<td *ngIf="isFeildAuthorized('processOutcomeId')">
+												<span *ngFor="let processOutcomeId of processOutcomeIdList | filter :'key' : courtWork?.processOutcomeId">{{processOutcomeId.value}}</span>
+											</td>
+
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+                                                   <button class="btn btn-default btn-small" id="courtWork_view{{i}}" [routerLink]="[courtWork?.processId]" title="View Record">
+                                                     <span class="glyphicon glyphicon-search">aa</span>
+												</button>
+												</span>
+												<!--<span *ngIf="isAuthorized('Update')">
+                                                                                                                                                                                        <button id="courtWork_edit{{i}}" class="btn btn-default btn-small" *ngIf="courtWork?.locked" title="Edit record is locked.">
+                                                                                                <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!courtWork?.locked" [routerLink]="['court-work', 'edit', courtWork?.processId]" id="courtWork_edit{{i}}" class="btn btn-default btn-small"
+												 title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>-->
+												<!-- <span *ngIf="isAuthorized('Archive')">
+                                                                                                                                                                                        <button id="courtWork_delete{{i}}" class="btn btn-default btn-small" *ngIf="courtWork?.locked" title="Delete record is locked.">
+                                                                                                <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!courtWork?.locked" (click)="delete(courtWork?.processId)" id="courtWork_delete{{i}}" class="btn btn-default btn-small"
+													title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span> -->
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="courtWorkList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'courtWorkList'" *ngIf="courtWorkList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+
+
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

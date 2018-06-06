@@ -1,0 +1,124 @@
+<div class="detail-view-layout">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Personal Circumstance</h2>
+            <div class="pull-right">
+                <button [routerLink]="['..']" class="btn btn-default btn-purple pull-right" id="backButton">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Personal Circumstance" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> PersonalCircumstance </legend>
+                    <div class="row">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('personalCircumstanceId')">
+                            <div class="view-title col-sm-5"id="label_personalCircumstanceId" >Personal Circumstance Id</div>
+                            <div class="detail-value col-sm-7" id="personalCircumstanceId">{{personalCircumstance?.personalCircumstanceId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                            <div class="view-title col-sm-5" title="Profile Id" id="label_profileId">Profile Id <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="profileId">{{personalCircumstance?.profileId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                            <div class="view-title col-sm-5" title="Spg Version" id="label_spgVersion">Spg Version <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgVersion">{{personalCircumstance?.spgVersion}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                            <div class="view-title col-sm-5" title="Spg Update User" id="label_spgUpdateUser">Spg Update User <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgUpdateUser">{{personalCircumstance?.spgUpdateUser}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('circumstanceTypeId')">
+                            <div class="view-title col-sm-5" title="Circumstance Type" id="label_circumstanceTypeId">Circumstance Type <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="personalCircumstance?.circumstanceTypeId" [tableId]="186" [pkValue]="personalCircumstance?.circumstanceTypeId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('circumstanceSubTypeId')">
+                            <div class="view-title col-sm-5" title="Circumstance Sub Type" id="label_circumstanceSubTypeId">Circumstance Sub Type <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="personalCircumstance?.circumstanceSubTypeId" [tableId]="185" [pkValue]="personalCircumstance?.circumstanceSubTypeId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+                            <div class="view-title col-sm-5" title="Start Date" id="label_startDate">Start Date <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="startDate">{{personalCircumstance?.startDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+                            <div class="view-title col-sm-5" title="End Date" id="label_endDate">End Date <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="endDate">{{personalCircumstance?.endDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('evidencedYesNoId')">
+                            <div class="view-title col-sm-5" title="Evidenced" id="label_evidencedYesNoId">Evidenced <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="personalCircumstance?.evidencedYesNoId" [tableId]="244" [pkValue]="personalCircumstance?.evidencedYesNoId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 nopadding">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+                            <div class="view-title col-sm-5" title="Notes" id="label_Note">Notes <span class="pull-right">:</span></div>
+                            <div class="detail-value-note col-sm-7" id="Note">{{personalCircumstance?.note}}</div>
+                        </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgPersonalCircumstanceId')">
+                            <div class="view-title col-sm-5" title="Spg Personal Circumstance Id" id="label_spgPersonalCircumstanceId">Spg Personal Circumstance Id <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgPersonalCircumstanceId">{{personalCircumstance?.spgPersonalCircumstanceId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5" title="Created By" id="label_createdBy">Created By <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdBy">{{personalCircumstance?.createdBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5" title="Created By User Id" id="label_createdByUserId">Created By User Id <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdByUserId">{{personalCircumstance?.createdByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5" title="Created Date" id="label_createdDate">Created Date <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdDate">{{personalCircumstance?.createdDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5" title="Modified By" id="label_modifiedBy">Modified By <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedBy">{{personalCircumstance?.modifiedBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5" title="Modified By User Id" id="label_modifiedByUserId">Modified By User Id <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedByUserId">{{personalCircumstance?.modifiedByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5" title="Modified Date" id="label_modifiedDate">Modified Date <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedDate">{{personalCircumstance?.modifiedDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5" title="Deleted" id="label_deleted">Deleted <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deleted">{{personalCircumstance?.deleted}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5" title="Deleted By" id="label_deletedBy">Deleted By <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedBy">{{personalCircumstance?.deletedBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5" title="Deleted By User Id" id="label_deletedByUserId">Deleted By User Id <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedByUserId">{{personalCircumstance?.deletedByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5" title="Deleted Date" id="label_deletedDate">Deleted Date <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedDate">{{personalCircumstance?.deletedDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5" title="Locked" id="label_locked">Locked <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="locked">{{personalCircumstance?.locked}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5" title="Version" id="label_version">Version <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="version">{{personalCircumstance?.version}}</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

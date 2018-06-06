@@ -1,0 +1,129 @@
+<div class="list-view-layout">
+	<h2 class="page-title hide-heading">National Search</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="National Search" [selected]="true">
+				<div class="grid-head">
+					
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="SEARCH CRITERIA" [selected]="true">
+
+								<div class="grid-head">
+									
+								</div>
+								<div >
+									<tr-national-search-edit></tr-national-search-edit>
+									<!--<tr-search [searchObjs]="searchObjs" (searchCommand)="searchNationalSearch($event)"></tr-search>-->
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+				
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div" >
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											 <!--<th  id="nationalSearchQueryId"  ><span class="th-div">National Search Query Id<span class="glyphicon"></span></span></th> -->
+
+											 <th  id="surnamehead" title="Falimy Name"><span class="th-div">FAMILY NAME</span></th> 
+											 <th  id="forenamehead"  title="First Name"><span class="th-div">FIRST NAME</span></th> 
+											 <th  id="dateOfBirthhead" title="Date Of Birth" class="text-center"><span class="th-div">DATE OF BIRTH</span></th>
+											 <th  id="caseReferenceNumberhead"  title="Case Reference Number" class="text-center"><span class="th-div">CRN</span></th>
+											 <th  id="Riskhead"  title="ROSH"><span class="th-div">ROSH</span></th> 
+											 <th id="genderIdhead" title="Gender"><span class="th-div">GENDER</span></th> 
+											 <th  id="laohead"  title="LASU"><span class="th-div">LASU</span></th> 
+											 <th  id="providerhead"  title="Provider"><span class="th-div">PROVIDER</span></th> 
+											 <th id="casemanagerhead" title="Case Manager"><span class="th-div">CASE MANAGER</span></th> 
+											 <th id="currenthead" title="Current"><span class="th-div">Event</span></th>
+											 <th id="viewOFDhead" title="View Offender Details"><span class="th-div"></span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let nationalSearchResponsDetails of nationalSearchResponsDetailsList; let i = index">
+										<!-- <tr *ngFor="let nationalSearch of nationalSearchList; let i = index"> -->
+											<!-- <td *ngIf="isFeildAuthorized('surname')"></td> -->
+											
+											<td>
+												<span >
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='N'">{{nationalSearchResponsDetails?.surname}}</p>	
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'">*</p>	
+												</span>
+											</td>
+											<td>
+												<span >
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='N'">{{nationalSearchResponsDetails?.forename}}</p>	
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'">*</p>
+												</span>
+											</td>
+											<td class="text-center">
+												<span>
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='N'">{{nationalSearchResponsDetails?.dateOfBirth}}</p>
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'">*</p>
+												</span>
+											</td>
+											<td class="text-center">
+												<span>
+													<p>{{nationalSearchResponsDetails?.caseReferenceNumber}}</p>
+													
+												</span>
+											</td>
+											<td>
+													<span *ngIf="nationalSearchResponsDetails?.risk == 'RED'" class="red-circle"></span>
+													<span *ngIf="nationalSearchResponsDetails?.risk == 'MR'" class="orange-circle"></span>
+													<span *ngIf="nationalSearchResponsDetails?.risk == 'LR'" class="green-circle"></span>
+											</td>
+											<td>
+												<p *ngIf="nationalSearchResponsDetails?.laoFlag=='N'">
+												<span  *ngFor="let genderId of genderIdList | filter :'key' : nationalSearchResponsDetails?.genderId">{{genderId.value}}</span></p>
+												<p *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'">*</p>
+											</td>
+											<td>
+												<span>
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='N'">No</p>
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'">Yes</p>
+												</span>
+											</td>
+											<td>
+													<span  *ngFor="let omProviderId of omProviderList | filter :'key' : nationalSearchResponsDetails?.omProvider">{{omProviderId.value}}</span>
+											</td>
+											<td>
+												<span>
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='N'">{{trimValue(nationalSearchResponsDetails?.omOfficer)}}</p>
+													<p *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'">*</p>
+												</span>
+											</td>
+											<td>
+												<span>
+													 <p>{{nationalSearchResponsDetails.current}}</p>
+												</span>
+											</td>
+											<td class="text-center">
+												<span >
+														<button  *ngIf="nationalSearchResponsDetails?.laoFlag=='N'" id="nationalsearch_view{{i}}" [routerLink]="[nationalSearchResponsDetails.crcSearchId,nationalSearchResponsDetails.offenderId,nationalSearchResponsDetails.caseReferenceNumber]" class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+														<button *ngIf="nationalSearchResponsDetails?.laoFlag=='Y'" id="nationalsearch_view{{i}}" class="btn btn-default btn-small" title="View Record"> <span class="glyphicon glyphicon-lock">aa</span></button>
+												</span>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="isEmpty" class="no-records">No Records Found</div>
+								<div *ngIf="isExcess" class="no-records">Search result exceeds the permitted maximum number,please amend the search criteria and try again</div>
+							</div>
+							<p *ngIf="(resultCount | json) != '{}'" style="margin-top:50;">Displaying {{Resultlength}} out of {{resultCount?.crcSearchCount }} results</p>
+						</div>
+						
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+
+</div>

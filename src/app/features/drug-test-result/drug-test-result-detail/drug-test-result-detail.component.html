@@ -1,0 +1,108 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Drug Test Result</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Drug Test Result" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> DrugTestResult </legend>
+                    <div class="row">
+                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('drugTestResultId')">
+                            <div class="view-title col-sm-5" title="Drug Test Result Id" id="label_drugTestResultId">Drug Test Result Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="drugTestResultId">{{drugTestResult?.drugTestResultId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('drugsTestId')">
+                            <div class="view-title col-sm-5" title="Drugs Test Id" id="label_drugsTestId">Drugs Test Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="drugsTestId">{{drugTestResult?.drugsTestId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                            <div class="view-title col-sm-5" title="Spg Version" id="label_spgVersion">Spg Version <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="spgVersion">{{drugTestResult?.spgVersion}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('drugTypeId')">
+                            <div class="view-title col-sm-5" title="Drug Type Id" id="label_drugTypeId">Drug Type Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="drugTypeId">{{drugTestResult?.drugTypeId}}</p>
+                        </div>
+                                                                                                                                                <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('admittedUseYesNoId')">
+                            <div class="view-title col-sm-5" title="Admitted Use Yes No Id" id="label_admittedUseYesNoId">Admitted Use Yes No Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="admittedUseYesNoId"><tr-list-label *ngIf="drugTestResult?.admittedUseYesNoId" [tableId]="244" [pkValue]="drugTestResult?.admittedUseYesNoId"></tr-list-label></p>
+                        </div>
+                                                                                                <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                            <div class="view-title col-sm-5" title="Spg Update User" id="label_spgUpdateUser">Spg Update User <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="spgUpdateUser">{{drugTestResult?.spgUpdateUser}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgDrugTestResultId')">
+                            <div class="view-title col-sm-5" title="Spg Drug Test Result Id" id="label_spgDrugTestResultId">Spg Drug Test Result Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="spgDrugTestResultId">{{drugTestResult?.spgDrugTestResultId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5" title="Created By" id="label_createdBy">Created By <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="createdBy">{{drugTestResult?.createdBy}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5" title="Created By User Id" id="label_createdByUserId">Created By User Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="createdByUserId">{{drugTestResult?.createdByUserId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5" title="Created Date" id="label_createdDate">Created Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="createdDate">{{drugTestResult?.createdDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5" title="Modified By" id="label_modifiedBy">Modified By <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="modifiedBy">{{drugTestResult?.modifiedBy}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5" title="Modified By User Id" id="label_modifiedByUserId">Modified By User Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="modifiedByUserId">{{drugTestResult?.modifiedByUserId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5" title="Modified Date" id="label_modifiedDate">Modified Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="modifiedDate">{{drugTestResult?.modifiedDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5" title="Deleted" id="label_deleted">Deleted <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="deleted">{{drugTestResult?.deleted}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5" title="Deleted By" id="label_deletedBy">Deleted By <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="deletedBy">{{drugTestResult?.deletedBy}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5" title="Deleted By User Id" id="label_deletedByUserId">Deleted By User Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="deletedByUserId">{{drugTestResult?.deletedByUserId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5" title="Deleted Date" id="label_deletedDate">Deleted Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="deletedDate">{{drugTestResult?.deletedDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5" title="Locked" id="label_locked">Locked <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="locked">{{drugTestResult?.locked}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5" title="Version" id="label_version">Version <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="version">{{drugTestResult?.version}}</p>
+                        </div>
+                                                                                                                                                <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('testResultId')">
+                            <div class="view-title col-sm-5" title="Test Result Id" id="label_testResultId">Test Result Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="testResultId"><tr-list-label *ngIf="drugTestResult?.testResultId" [tableId]="244" [pkValue]="drugTestResult?.testResultId"></tr-list-label></p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('agreedYesNoId')">
+                            <div class="view-title col-sm-5" title="Agreed Yes No Id" id="label_agreedYesNoId">Agreed Yes No Id <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="agreedYesNoId"><tr-list-label *ngIf="drugTestResult?.agreedYesNoId" [tableId]="244" [pkValue]="drugTestResult?.agreedYesNoId"></tr-list-label></p>
+                        </div>
+                                                                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,62 @@
+<div class="list-view-layout">
+  <h2 class="page-title hide-heading">COMMUNITY PAYBACK PROJECT</h2>
+  <div class="double-divider-purple mt10 hide-heading"></div>
+  <div class="grid-style">
+    <tr-accordion>
+      <tr-accordionTab header="COMMUNITY PAYBACK PROJECT" [selected]="false">
+        <div class="grid-head">
+              <tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+        <div class="pad15">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-div">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+
+                      <th *ngIf="isFeildAuthorized('appointmentDate')" id="appointmentDate" trSortBy="appointmentDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Day<span *ngIf="sortSearchPaginationObj.sortObj.field == 'appointmentDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                    
+                      <th *ngIf="isFeildAuthorized('projectName')" id="projectName" trSortBy="projectName" (sortCommand)="sort($event)"><span class="th-div">Project<span *ngIf="sortSearchPaginationObj.sortObj.field == 'projectName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+                      </th>
+                      <th class="text-center"><span class="hidden">view</span></th>
+                   
+                   </tr>
+
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let upwAppointment of upwAppointmentList; let i = index">
+                      <td class="text-center" *ngIf="isFeildAuthorized('appointmentDate')">
+
+                         <span *ngFor="let dayOfWeek of dayOfWeekList | filter :'key' : upwAppointment?.dayOfWeek">{{dayOfWeek.value}}</span>
+
+                      </td>
+                      
+                      <td *ngIf="isFeildAuthorized('projectName')" class="text-center" >{{upwAppointment?.projectName}}</td>
+                      
+                      <td class="text-center">
+
+
+                          <span *ngIf="isAuthorized('Archive')">
+													<button id="appointment_delete{{i}}" class="btn btn-default btn-white" *ngIf="!upwAppointment?.locked" title="Delete record is locked."  (click)="delete(upwAppointment?.projectName , upwAppointment?.eventId , upwAppointment?.dayOfWeek)">REMOVE</button>
+												<button id="appointment_delete{{i}}" *ngIf="upwAppointment?.locked" class="btn btn-default btn-white"
+													title="Delete Record" disabled>REMOVE</button>
+												</span>
+                </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="upwAppointmentList?.length<=0" class="no-records">No Records Found</div>
+              </div>
+            </div>
+            <tr-pagination [name]="'upwAppointmentList'" *ngIf="upwAppointmentList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+              (paginationCommand)="paginate($event)"></tr-pagination>
+          </div>
+        </div>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+</div>

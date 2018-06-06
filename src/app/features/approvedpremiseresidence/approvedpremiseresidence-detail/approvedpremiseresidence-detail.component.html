@@ -1,0 +1,192 @@
+<div class="detail-view-layout">
+	<h2 class="page-title">VIEW approved Premise Residence</h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']">Back</button>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Approved Premise Residence" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column">
+					<legend> <span class="glyphicon glyphicon-flash"></span> approved Premise Residence </legend>
+					<div class="row">
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseResidenceId')">
+								<div class="view-title col-sm-5">approved Premise Residence </div>
+								<div class="detail-value col-sm-7">{{approvedPremiseResidence?.approvedPremiseResidenceId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('arrivalDate')">
+								<div class="view-title col-sm-5">arrival Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremiseResidence?.arrivalDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedDepartureDate')">
+								<div class="view-title col-sm-5">expected Departure Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremiseResidence?.expectedDepartureDate}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('departureDate')">
+								<div class="view-title col-sm-5">departure Date </div>
+								<div class="detail-value col-sm-7">{{approvedPremiseResidence?.departureDate}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('departureReasonId')">
+								<div class="view-title col-sm-5">departure Reason </div>
+								<tr-list-label *ngIf="approvedPremiseResidence?.departureReasonId" [tableId]="88" [pkValue]="approvedPremiseResidence?.departureReasonId"></tr-list-label>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseId')">
+								<div class="view-title col-sm-5">approved Premise </div>
+								<tr-list-label *ngIf="approvedPremiseResidence?.approvedPremiseId" [tableId]="132" [pkValue]="approvedPremiseResidence?.approvedPremiseId"></tr-list-label>
+							</div>
+
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('moveOnCategoryId')">
+							<div class="view-title col-sm-5">move On Category </div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="approvedPremiseResidence?.moveOnCategoryId" [tableId]="164" [pkValue]="approvedPremiseResidence?.moveOnCategoryId"></tr-list-label>
+							</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseKeyWorker')">
+							<div class="view-title col-sm-5">approved Premise Key Worker </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.approvedPremiseKeyWorker}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseResponsibleOfficer')">
+							<div class="view-title col-sm-5">approved Premise Responsible Officer </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.approvedPremiseResponsibleOfficer}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseResponsibleTeam')">
+							<div class="view-title col-sm-5">approved Premise Responsible Team </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.approvedPremiseResponsibleTeam}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('approvedPremiseReferralId')">
+							<div class="view-title col-sm-5">approved Premise Referral </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.approvedPremiseReferralId}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('apReferralId')">
+							<div class="view-title col-sm-5">approved Premise Referral </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.apReferralId}}</div>
+						</div>
+					</div>
+
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgApprovedPremiseResidenceId')">
+							<div class="view-title col-sm-5">SPG Approved Premise Residence </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.spgApprovedPremiseResidenceId}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5">SPG Version </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.spgVersion}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5">SPG Update User </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.spgUpdateUser}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5">created Date </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.createdDate}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5">created By </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.createdBy}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5">created By User </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.createdByUserId}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5">modified Date </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.modifiedDate}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5">modified By </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.modifiedBy}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5">modified By User </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.modifiedByUserId}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5">deleted </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.deleted}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5">deleted Date </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.deletedDate}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5">deleted By </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.deletedBy}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5">deleted By User </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.deletedByUserId}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5">locked </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.locked}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5">version </div>
+							<div class="detail-value col-sm-7">{{approvedPremiseResidence?.version}}</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="form-field-div col-sm-12" *ngIf="isFeildAuthorized('arrivalNote')">
+							<div class="view-title col-sm-5">arrival Notes </div>
+							<div class="detail-value text-box">{{approvedPremiseResidence?.arrivalNote}}</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

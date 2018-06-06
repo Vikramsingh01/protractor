@@ -1,0 +1,102 @@
+<div class="edit-view-layout">
+
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Community Requirement</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Community Requirement</h2>
+		<form [formGroup]="communityRequirementAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Community Requirement </legend>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('communityRequirementId')">
+						<label for="communityRequirementId" title="Community Requirement Id">Community Requirement Id
+                         <span class="mand-text">*</span>  </label>
+						<input type="text" formControlName="communityRequirementId" id="communityRequirementId" class="form-control" placeholder="Community Requirement Id"
+						/>
+						<control-messages [control]="communityRequirementAddForm.controls.communityRequirementId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+						<label for="eventId" title="Event Id">Event Id
+                           <span class="mand-text">*</span> </label>
+						<input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="Event Id" />
+						<control-messages [control]="communityRequirementAddForm.controls.eventId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('requirementTypeMainCategoryId')">
+						<label for="requirementTypeMainCategoryId" title="Requirement Type Main Category Id">Requirement Type Main Category Id
+                                                                    </label>
+						<tr-dropdown [operation] = "action" [tableId]="215" [controlName]="'requirementTypeMainCategoryId'" [dropdown]="communityRequirementAddForm"></tr-dropdown>
+						<control-messages [control]="communityRequirementAddForm.controls.requirementTypeMainCategoryId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('requirementTypeSubCategoryId')">
+						<label for="requirementTypeSubCategoryId" title="Requirement Type Sub Category Id">Requirement Type Sub Category Id
+                                                                    </label>
+						<tr-dropdown [operation] = "action" [tableId]="216" [controlName]="'requirementTypeSubCategoryId'" [dropdown]="communityRequirementAddForm"></tr-dropdown>
+						<control-messages [control]="communityRequirementAddForm.controls.requirementTypeSubCategoryId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('imposedDate')">
+						<label for="imposedDate" title="Imposed Date">Imposed (Sentence) Date
+                        <span class="mand-text">*</span></label>
+						<date-picker [controlName]="'imposedDate'" [form]="communityRequirementAddForm"></date-picker>
+						<control-messages [control]="communityRequirementAddForm.controls.imposedDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('length') && communityRequirementAddForm.controls['length']!=null">
+						<label for="length" title="Length">Length
+						<span class="mand-text">*</span></label>
+						<input type="text" formControlName="length" id="length" class="form-control" placeholder="Length" />
+						<control-messages [control]="communityRequirementAddForm.controls.length"></control-messages>
+
+						<div class="form-group col-sm-6 custom-fix-day" *ngIf="isFeildAuthorized('length')">
+							<input type="text" formControlName="unitsCode" id="unitsCode" class="form-control" placeholder="UnitsCode" />
+							<control-messages [control]="communityRequirementAddForm.controls.unitsCode"></control-messages>
+						</div>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedStartDate')">
+						<label for="expectedStartDate" title="Expected Start Date">Expected Start Date </label>
+						<date-picker [controlName]="'expectedStartDate'" [form]="communityRequirementAddForm"></date-picker>
+						<control-messages [control]="communityRequirementAddForm.controls.expectedStartDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('actualStartDate')">
+						<label for="actualStartDate" title="Actual Start Date">Actual Start Date   </label>
+						<date-picker [controlName]="'actualStartDate'" [form]="communityRequirementAddForm"></date-picker>
+						<control-messages [control]="communityRequirementAddForm.controls.actualStartDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+						<label for="expectedEndDate" title="Expected End Date">Expected End Date (Termination)
+                                                                    </label>
+						<date-picker [controlName]="'expectedEndDate'" [form]="communityRequirementAddForm"></date-picker>
+						<control-messages [control]="communityRequirementAddForm.controls.expectedEndDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rqResponsibleTeam')">
+						<label for="rqResponsibleTeam" title="Team">Team
+                           <span class="mand-text">*</span> </label>
+						<input type="text" formControlName="rqResponsibleTeam" id="rqResponsibleTeam" class="form-control" placeholder="Team" />
+						<control-messages [control]="communityRequirementAddForm.controls.rqResponsibleTeam"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rqResponsibleOfficer')">
+						<label for="rqResponsibleOfficer" title="Officer">Officer
+                           <span class="mand-text">*</span> </label>
+						<input type="text" formControlName="rqResponsibleOfficer" id="rqResponsibleOfficer" class="form-control" placeholder="Officer" />
+						<control-messages [control]="communityRequirementAddForm.controls.rqResponsibleOfficer"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+						<tr-notes [controlName]="'note'" [form]="communityRequirementAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+						<control-messages [control]="communityRequirementAddForm.controls.note"></control-messages>
+					</div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" fromServerMessageValidator [form]="communityRequirementAddForm">Submit</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" class="btn btn-default btn-white">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" class="btn btn-default btn-white">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

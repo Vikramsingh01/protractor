@@ -1,0 +1,116 @@
+
+<section *ngIf="!isLoggedIn">
+	<div class="landing-content">
+		<h1>Neo 4.5</h1>
+		<h2>Transforming Rehabilitation</h2>
+		<p class="mb25">NEO is a secure web-based data partnership infrastructure that enables organisations across sectors to share sensitive
+			data securely to allow multiple providers to collaborate, supporting disadvantaged individuals.</p>
+		<button [routerLink]="['login']" type="button" class="btn btn-default btn-white mr10" data-toggle="modal" data-target="#log-in">LOG IN</button>
+		<button type="button" class="btn btn-default btn-white" data-toggle="modal" data-target="#sign-up">SIGN UP</button>
+		<div class="divider"></div>
+		<div class="text-center">
+			<h4>MegaNexus Ltd.</h4>
+			<p>Argyle House</p>
+			<p>29-31 Euston Road, London, NW1 2SD</p>
+			<p>0207 843 4343</p>
+		</div>
+	</div>
+</section>
+<div class="dashboard-div" *ngIf="isLoggedIn">
+	<h2 class="page-title">Dashboard</h2>
+	<section>
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="inner-service">
+					<div class="icon-div">
+						<i class="icon glyphicon glyphicon-search"></i>
+					</div>
+					<span>View Service Users Plan</span>
+				</div>
+				<div class="double-box"></div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="inner-service">
+					<div class="icon-div">
+						<i class="icon glyphicon glyphicon-tasks"></i>
+					</div>
+					<span>Create Activities</span>
+				</div>
+				<div class="double-box"></div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="inner-service">
+					<div class="icon-div">
+						<i class="icon glyphicon glyphicon-user"></i>
+					</div>
+					<span>Find Service Users</span>
+				</div>
+				<div class="double-box"></div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="inner-service">
+					<div class="icon-div">
+						<i class="icon glyphicon glyphicon-cog"></i>
+					</div>
+					<span>Log Interaction</span>
+				</div>
+				<div class="double-box"></div>
+			</div>
+		</div>
+	</section>
+	<div class="grey-divider"></div>
+
+	<section>
+		<div class="row">
+			<div class="col-sm-4">
+				<h2 class="sub-title">Overview</h2>
+				<div class="demo-chart"></div>
+			</div>
+			<div class="col-sm-8">
+				<div class="overview-list">
+					<div class="row">
+						<div class="col-sm-4">
+							<ul>
+								<li>Alias</li>
+								<li>Personal Contact</li>
+								<li>Cohort</li>
+								<li>Court Reports</li>
+								<li>AP Referral</li>
+								<li>Court Appearance</li>
+								<li>Custody Location</li>
+								<li>Order Manager</li>
+							</ul>
+						</div>
+						<div class="col-sm-4">
+							<ul>
+								<li>Institutional Report</li>
+								<li>Court Appearance</li>
+								<li>Custody Location</li>
+								<li>Order Manager</li>
+								<li>Recall</li>
+								<li>Rate Card Intervention</li>
+								<li>Process Contact</li>
+								<li>Additional Identifier</li>
+							</ul>
+						</div>
+						<div class="col-sm-4">
+							<ul>
+								<li>Rate Card Intervention</li>
+								<li>Process Contact</li>
+								<li>Additional Identifier</li>
+								<li>Community Payback Details</li>
+								<li>Drug Test Result</li>
+								<li>Court Appearance</li>
+								<li>Custody Location</li>
+								<li>Order Manager</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

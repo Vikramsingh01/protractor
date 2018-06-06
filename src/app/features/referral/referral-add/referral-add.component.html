@@ -1,0 +1,58 @@
+<div class="edit-view-layout one-line-view">
+
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Referral</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Referral</h2>
+		<form [formGroup]="referralAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend><span class="glyphicon glyphicon-flash"></span> Referral</legend>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralTypeId')">
+						<label for="referralTypeId" title="Referral Type">Referral Type
+                  <span class="mand-text">*</span>
+                </label>
+						<tr-dropdown [operation] = "action" [tableId]="203" [controlName]="'referralTypeId'" [dropdown]="referralAddForm"></tr-dropdown>
+						<control-messages [control]="referralAddForm.controls.referralTypeId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralDate')">
+						<label for="referralDate" title="Referral Date">Referral Date
+                  <span class="mand-text">*</span>
+                </label>
+						<date-picker [controlName]="'referralDate'" [form]="referralAddForm"></date-picker>
+						<control-messages [control]="referralAddForm.controls.referralDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralOutcomeId')">
+						<label for="referralOutcomeId" title="Referral Outcome">Referral Outcome
+                  <span class="mand-text">*</span>
+                </label>
+						<tr-dropdown [operation] = "action" [tableId]="131" [controlName]="'referralOutcomeId'" [dropdown]="referralAddForm"></tr-dropdown>
+						<control-messages [control]="referralAddForm.controls.referralOutcomeId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralSourceId')">
+						<label for="referralSourceId" title="Referral Source">Referral Source
+                  <span class="mand-text">*</span>
+                </label>
+						<tr-dropdown [operation] = "action" [tableId]="202" [controlName]="'referralSourceId'" [dropdown]="referralAddForm"></tr-dropdown>
+						<control-messages [control]="referralAddForm.controls.referralSourceId"></control-messages>
+					</div>
+
+					 <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="referralAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="referralAddForm.controls.note"></control-messages>
+                    </div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="referralAddForm">Submit
+                </button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../'])" id="cancelButton" class="btn btn-default btn-white">Cancel
+                </button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel
+                </button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+	</div>
+
+</div>

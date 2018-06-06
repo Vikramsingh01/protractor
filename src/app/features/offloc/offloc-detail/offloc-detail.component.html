@@ -1,0 +1,165 @@
+<div class="detail-view-layout">
+  <div class="row hide-heading">
+    <div class="col-sm-12">
+      <h2 class="page-title pull-left">VIEW Offloc</h2>
+      <div class="pull-right">
+        <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="double-divider-purple mt10 hide-heading"></div>
+  <div class="grid-style" *ngIf="authorizedFlag">
+    <tr-accordion>
+      <tr-accordionTab header="DSS Comparison" [selected]="true">
+        <div class="grid-head"></div>
+        <fieldset class="three-column shrink-view">
+          <legend><span class="glyphicon glyphicon-flash"></span> DSS Comparison</legend>
+          <div class="row">
+            <div class="col-sm-12">
+            <table class="table table-bordered">
+              <thead>
+              <tr class="text-left">
+                <th>Information</th>
+                <th>Data Share System</th>
+                <th>CMS (Not Editable)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="text-left">
+                <td>Family Name</td>
+                <td>{{offlocResponse?.surname}}</td>
+                <td>{{cmsOffenderProfile?.familyName}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>First Name</td>
+                <td>{{offlocResponse?.forename}}</td>
+                <td>{{cmsOffenderProfile?.firstName}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Middle Name</td>
+                <td>{{offlocResponse?.middlename}}</td>
+                <td>{{cmsOffenderProfile?.secondName}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Date of Birth</td>
+                <td>{{offlocResponse?.dateOfBirth}}</td>
+                <td>{{cmsOffenderProfile?.dateOfBirth}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Gender</td>
+                <td>{{offlocResponse?.gender}}</td>
+                <td>
+                  <tr-list-label *ngIf="cmsOffenderProfile?.genderId" [tableId]="2" [pkValue]="cmsOffenderProfile?.genderId"></tr-list-label>
+                </td>
+              </tr>
+              <tr class="text-left">
+                <td>PNC</td>
+                <td>{{offlocResponse?.pnc}}</td>
+                <td>{{cmsOffenderProfile?.pncNumber}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Sentence Length</td>
+                <td>{{offlocResponse?.sentencingLength}}</td>
+                <td></td>
+              </tr>
+              <tr class="text-left">
+                <td>CRO Number</td>
+                <td>{{offlocResponse?.nationality}}</td>
+                <td>{{cmsOffenderProfile?.croNumber}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Nationality</td>
+                <td>{{offlocResponse?.nationality}}</td>
+                <td><tr-list-label *ngIf="cmsOffenderProfile?.nationalityId" [tableId]="165" [pkValue]="cmsOffenderProfile?.nationalityId"></tr-list-label></td>
+              </tr>
+               <tr class="text-left">
+                <td>Sentencing Court</td>
+                <td>{{offlocResponse?.sentencingCourt}}</td>
+                <td></td>
+              </tr>
+              <tr class="text-left">
+                <td>Sentencing Date</td>
+                <td>{{offlocResponse?.sentencingDate}}</td>
+                <td></td>
+              </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+            <table class="table table-bordered">
+              <thead>
+              <tr class="text-left">
+                <th>Information</th>
+                <th>Data Share System</th>
+                <th>CMS (Update Possible With DSS)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="text-left">
+                <td>Prison Number</td>
+                <td>{{offlocResponse?.pncNumberList}}</td>
+                <td>{{custodyLocation?.prisonerNumber}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>NOMS Number</td>
+                <td>{{offlocResponse?.nomisNumber}}</td>
+                <td>{{cmsOffenderProfile?.nomsNumber}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Prison</td>
+                <td>{{offlocResponse?.prison}}</td>
+                <td>
+                  <tr-list-label *ngIf="custodyLocation?.currentLocationId" [tableId]="135" [pkValue]="custodyLocation?.currentLocationId"></tr-list-label>
+              </tr>
+
+              <tr class="text-left">
+                <td>Conditional Release Date</td>
+                <td>{{offlocResponse?.conditionalReleaseDate}}</td>
+                <td>{{conditionalCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Parole Eligibilty Date</td>
+                <td>{{offlocResponse?.paroleEligibilityDate}}</td>
+                <td>{{paroleCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>License Expiry Date</td>
+               <td>{{offlocResponse?.licenseExpiryDate}}</td>
+                <td>{{licenceCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Sentence Expiry Date</td>
+               <td>{{offlocResponse?.sentenceExpiryDate}}</td>
+                <td>{{sentenceCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>HDC Eligibility Date</td>
+                <td>{{offlocResponse?.hdcEligibilityDate}}</td>
+                <td>{{hdcCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Expected Release Date</td>
+                <td>{{offlocResponse?.expectedReleaseDate}}</td>
+                <td>{{expectedReleaseDateCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              <tr class="text-left">
+                <td>Post Sentence Supervision End Date</td>
+                <td>{{offlocResponse?.pssEndDate}}</td>
+                <td>{{pssCustodyKeyDate?.keyDate}}</td>
+              </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+          <div class="form-group col-sm-12 text-right nopadding">
+            <button class="btn btn-default btn-purple" id="updateButton" *ngIf="isAuthorized('Update')" (click)="updateCmsDetails()">Update</button>
+            <button type="button" (click)="goBack()"  id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+          </div>
+        </fieldset>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

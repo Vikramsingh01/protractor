@@ -1,0 +1,166 @@
+<div class="detail-view-layout">
+	<h2 class="page-title">VIEW community requirement Manager</h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']" >Back</button>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Community requirement Manager" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column">
+					<legend> <span class="glyphicon glyphicon-flash"></span>community requirement Manager </legend>
+					<div class="row">
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requirementManagerId')">
+								<div class="view-title col-sm-5">community requirement Manager </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.requirementManagerId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('communityRequirementId')">
+								<div class="view-title col-sm-5">community Requirement </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.communityRequirementId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationDate')">
+								<div class="view-title col-sm-5">allocation Date </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.allocationDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('providerId')">
+								<div class="view-title col-sm-5">provider </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="requirementManager?.providerId" [tableId]="193" [pkValue]="requirementManager?.providerId"></tr-list-label>
+								</div>
+
+
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('responsibleTeam')">
+								<div class="view-title col-sm-5">responsible Team </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.responsibleTeam}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('responsibleOfficer')">
+								<div class="view-title col-sm-5">responsible Officer </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.responsibleOfficer}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationReasonId')">
+								<div class="view-title col-sm-5">allocation Reason </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="requirementManager?.allocationReasonId" [tableId]="143" [pkValue]="requirementManager?.allocationReasonId"></tr-list-label>
+								</div>
+
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+								<div class="view-title col-sm-5">end Date </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.endDate}}</div>
+							</div>
+						</div>
+
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgRequirementManagerId')">
+								<div class="view-title col-sm-5">SPG Requirement Manager </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.spgRequirementManagerId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+								<div class="view-title col-sm-5">SPG Version </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.spgVersion}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+								<div class="view-title col-sm-5">SPG Update User </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.spgUpdateUser}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+								<div class="view-title col-sm-5">created Date </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.createdDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+								<div class="view-title col-sm-5">created By </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.createdBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+								<div class="view-title col-sm-5">created By User </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.createdByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+								<div class="view-title col-sm-5">modified Date </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.modifiedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+								<div class="view-title col-sm-5">modified By </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.modifiedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+								<div class="view-title col-sm-5">modified By User </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.modifiedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+								<div class="view-title col-sm-5">deleted </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.deleted}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+								<div class="view-title col-sm-5">deleted Date </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.deletedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+								<div class="view-title col-sm-5">deleted By </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.deletedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+								<div class="view-title col-sm-5">deleted By User </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.deletedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+								<div class="view-title col-sm-5">locked </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.locked}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+								<div class="view-title col-sm-5">version </div>
+								<div class="detail-value col-sm-7">{{requirementManager?.version}}</div>
+
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

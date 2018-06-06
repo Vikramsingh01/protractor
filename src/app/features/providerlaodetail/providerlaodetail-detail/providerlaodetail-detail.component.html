@@ -1,0 +1,132 @@
+<div class="detail-view-layout">
+	<h2 class="page-title">VIEW provider LASU Detail</h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']" >Back</button>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Provider LASU Detail" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column">
+					<legend> <span class="glyphicon glyphicon-flash"></span> provider LASU Detail </legend>
+					<div class="row">
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('providerLaoDetailId')">
+								<div class="view-title col-sm-5">provider LASU Detail </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.providerLaoDetailId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('exclusionMessage')">
+								<div class="view-title col-sm-5">exclusion Message </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.exclusionMessage}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('laoProviderId')">
+								<div class="view-title col-sm-5">LASU Provider </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.laoProviderId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('restrictionMessage')">
+								<div class="view-title col-sm-5">restriction Message </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.restrictionMessage}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgProviderLaoDetailId')">
+								<div class="view-title col-sm-5">SPG Provider LASU Detail </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.spgProviderLaoDetailId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+								<div class="view-title col-sm-5">SPG Version </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.spgVersion}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+								<div class="view-title col-sm-5">SPG Update User </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.spgUpdateUser}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+								<div class="view-title col-sm-5">created Date </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.createdDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+								<div class="view-title col-sm-5">created By </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.createdBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+								<div class="view-title col-sm-5">created By User </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.createdByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+								<div class="view-title col-sm-5">modified Date </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.modifiedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+								<div class="view-title col-sm-5">modified By </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.modifiedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+								<div class="view-title col-sm-5">modified By User </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.modifiedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+								<div class="view-title col-sm-5">deleted </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.deleted}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+								<div class="view-title col-sm-5">deleted Date </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.deletedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+								<div class="view-title col-sm-5">deleted By </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.deletedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+								<div class="view-title col-sm-5">deleted By User </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.deletedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+								<div class="view-title col-sm-5">locked </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.locked}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+								<div class="view-title col-sm-5">version </div>
+								<div class="detail-value col-sm-7">{{providerLaoDetail?.version}}</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

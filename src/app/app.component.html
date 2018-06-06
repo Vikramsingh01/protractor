@@ -1,0 +1,94 @@
+<!-- Modal -->
+<tr-confirm-box></tr-confirm-box>
+<div *ngIf="(errorPopup | json) != '{}'">
+	<div class="modal show" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePopup()" autofocus><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Message</h4>
+				</div>
+				<div class="modal-body">
+					<p [innerHTML]="errorPopup?.errorMessage"></p>
+				</div>
+				<div class="modal-footer">
+          <button *ngIf="!errorPopup?.buttonText" type="button" class="btn btn-default" data-dismiss="modal" (click)="closePopup()">OK</button>
+          <button *ngIf="errorPopup?.buttonText" type="button" class="btn btn-default" data-dismiss="modal" (click)="closePopup()">{{errorPopup?.buttonText}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade in"></div>
+</div>
+
+<div *ngIf="(alertPopUp | json) != '{}'">
+	<div class="modal show" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeAlertPopUp()" autofocus><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Message</h4>
+				</div>
+				<div class="modal-body">
+					<p [innerHTML]="alertPopUp"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeAlertPopUp()">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade in"></div>
+</div>
+
+<div *ngIf="timedOut">
+	<div class="modal show" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePopup()" autofocus><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Session Inactive</h4>
+				</div>
+				<div class="modal-body">
+					<p>{{idleState}}</p>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-default" constfocus data-dismiss="modal" (click)="resume()">Stay logged in</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade in"></div>
+</div>
+
+<div [ngClass]="{'show':appLoading, 'hide':!appLoading}" class="loading-overlay">
+	<div class="text-center loader"><img src="./assets/images/purple-loader.gif" alt="loader" width="80"></div>
+	<div class="modal-backdrop fade in"></div>
+</div>
+
+
+<div [ngClass]="{'non-logged-template':!isLoggedIn}">
+	<div class="cms-div">
+	<div *ngIf="isLoggedIn"><tr-header></tr-header></div>
+	<!--<div>
+		<breadcrumb *ngIf="isLoggedIn"></breadcrumb>
+		<tr-offender-header *ngIf="toBeShown"></tr-offender-header>
+	</div>	-->
+	<div class="main-content relative">
+		<div class="col-sm-12 sub-head-div" *ngIf="isLoggedIn">
+		<!--<div class="col-sm-2 nopadding"></div>-->
+		<div class="col-sm-12 nopadding"><tr-offender-header *ngIf="toBeShown"></tr-offender-header></div>
+		</div>
+		<div class="col-sm-12 nopadding" *ngIf="isLoggedIn">
+			<breadcrumb class="breadcrumb-section"></breadcrumb>
+		</div>
+		<div *ngIf="isLoggedIn" class="left-panel">
+			<tr-left-panel [hidden]="isErrorPage==true" [isServiceUser]="isServiceUser" *ngIf="!timedOut"></tr-left-panel>
+		</div>
+		<div [ngClass]="{'displayblock':!isLoggedIn, 'mid-panel': isLoggedIn}">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+	<!--<tr-footer *ngIf="!isLoggedIn"></tr-footer>-->
+	</div>
+</div>

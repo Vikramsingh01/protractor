@@ -1,0 +1,107 @@
+<div class="list-view-layout">
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Pss Requirements" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create') && !pssAddNotAllowed" class="pull-right">
+							<button *ngIf="isPSSAllowed" [routerLink]="['pss-requirement', 'new']" id="pssRequirement_addButton" class="btn btn-default btn-small" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<!--<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="searchPssRequirement($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>-->
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+
+											<th *ngIf="isFeildAuthorized('pssRequirementTypeMainCategoryId')" id="pssRequirementTypeMainCategoryId" trSortBy="pssRequirementTypeMainCategoryId"
+												(sortCommand)="sort($event)"><span class="th-div">PSS Requirement Main Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'pssRequirementTypeMainCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('pssRequirementTypeSubCategoryId')" id="pssRequirementTypeSubCategoryId" trSortBy="pssRequirementTypeSubCategoryId"
+												(sortCommand)="sort($event)"><span class="th-div">PSS Requirement Sub Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'pssRequirementTypeSubCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="text-center" *ngIf="isFeildAuthorized('expectedStartDate')" id="expectedStartDate" trSortBy="expectedStartDate"
+												(sortCommand)="sort($event)"><span class="th-div">Expected Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'expectedStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid150 text-center" *ngIf="isFeildAuthorized('actualStartDate')" id="actualStartDate" trSortBy="actualStartDate"
+												(sortCommand)="sort($event)"><span class="th-div">Actual Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'actualStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid150 text-center" *ngIf="isFeildAuthorized('actualEndDate')" id="actualEndDate" trSortBy="actualEndDate" (sortCommand)="sort($event)"><span class="th-div">Termination Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'actualEndDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let pssRequirement of pssRequirementList; let i = index">
+											<td *ngIf="isFeildAuthorized('pssRequirementTypeMainCategoryId')">
+												<span *ngFor="let pssRequirementTypeMainCategoryId of pssRequirementTypeMainCategoryIdList | filter :'key' : pssRequirement?.pssRequirementTypeMainCategoryId">{{pssRequirementTypeMainCategoryId.value}}</span>
+											</td>
+
+											<td *ngIf="isFeildAuthorized('pssRequirementTypeSubCategoryId')">
+												<span *ngFor="let pssRequirementTypeSubCategoryId of pssRequirementTypeSubCategoryIdList | filter :'key' : pssRequirement?.pssRequirementTypeSubCategoryId">{{pssRequirementTypeSubCategoryId.value}}</span>
+											</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('expectedStartDate')">{{pssRequirement?.expectedStartDate}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('actualStartDate')">{{pssRequirement?.actualStartDate}}</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('actualEndDate')">{{pssRequirement?.actualEndDate}}</td>
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+                                                  <button class="btn btn-default btn-small" id="pssRequirement_view{{i}}" [routerLink]="['pss-requirement', pssRequirement?.pssRequirementId]" title="View Record">
+                                                  <span class="glyphicon glyphicon-search">aa</span>
+												</button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+                                                  <button id="pssRequirement_edit{{i}}" class="btn btn-default btn-small" *ngIf="pssRequirement?.locked && pssRequirement?.terminationReasonId == null" title="Edit record is locked.">
+                                                  <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!pssRequirement?.locked && pssRequirement?.terminationReasonId == null" [routerLink]="['pss-requirement', 'edit', pssRequirement?.pssRequirementId]" id="pssRequirement_edit{{i}}"
+													class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+                                                   <button id="pssRequirement_delete{{i}}" class="btn btn-default btn-small" *ngIf="pssRequirement?.locked" title="Delete record is locked.">
+                                                   <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!pssRequirement?.locked" (click)="delete(pssRequirement?.pssRequirementId)" id="pssRequirement_delete{{i}}"
+												 class="btn btn-default btn-small" title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="pssRequirementList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'pssRequirementList'" *ngIf="pssRequirementList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

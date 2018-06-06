@@ -1,0 +1,92 @@
+<div class="edit-view-layout one-line-view">
+
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Licence Condition</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Licence Condition</h2>
+		<form [formGroup]="licenceConditionAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Licence Condition </legend>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('licCondTypeMainCategoryId')">
+						<label for="licCondTypeMainCategoryId" title="Licence Condition Main Type  ">Licence Condition Main Type  <span class="mand-text cust-align-star">*</span> </label>
+						<tr-dropdown [operation] = "action" [tableId]="422" [hasChildAnswers]="true" (updateAnswers)="updateAnswers($event)" [controlName]="'licCondTypeMainCategoryId'"
+							[dropdown]="licenceConditionAddForm"></tr-dropdown>
+						<control-messages [control]="licenceConditionAddForm.controls.licCondTypeMainCategoryId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('licCondTypeSubCategoryId')">
+						<label for="licCondTypeSubCategoryId" title="Licence Condition Sub Type  ">Licence Condition Sub Type  <span class="mand-text">*</span> </label>
+						<tr-dropdown [operation] = "action" [tableId]="155" [isDependent]="true" [list]="childAnswers[155]" [controlName]="'licCondTypeSubCategoryId'" [dropdown]="licenceConditionAddForm"></tr-dropdown>
+						<control-messages [control]="licenceConditionAddForm.controls.licCondTypeSubCategoryId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('sentenceDate')">
+						<label for="sentenceDate" title="Imposed (Release) Date">Imposed (Release) Date <span class="mand-text">*</span> </label>
+						<date-picker [controlName]="'sentenceDate'" [form]="licenceConditionAddForm"></date-picker>
+						<control-messages [control]="licenceConditionAddForm.controls.sentenceDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedStartDate')">
+						<label for="expectedStartDate" title="Expected Start Date ">Expected Start Date </label>
+						<date-picker [controlName]="'expectedStartDate'" [form]="licenceConditionAddForm"></date-picker>
+						<control-messages [control]="licenceConditionAddForm.controls.expectedStartDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('actualStartDate')">
+						<label for="actualStartDate" title="Actual Start Date">Actual Start Date</label>
+						<date-picker [controlName]="'actualStartDate'" [form]="licenceConditionAddForm"></date-picker>
+						<control-messages [control]="licenceConditionAddForm.controls.actualStartDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+						<label for="expectedEndDate" title="Licence Expiry Date">Licence Expiry Date</label>
+						<date-picker [controlName]="'expectedEndDate'" [form]="licenceConditionAddForm"></date-picker>
+						<control-messages [control]="licenceConditionAddForm.controls.expectedEndDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6">
+						<label for="lcResponsibleTeam" title="Team">Team<span class="mand-text">*</span></label>
+						<div *ngIf="action!='Update'">
+							<select class="form-control" formControlName="lcResponsibleTeam" (change)="change($event.target.options)" id="lcResponsibleTeam">
+
+							<option value=null>--Select--</option>
+							<option *ngFor="let org of orgs" [value]="org?.value" >{{org?.value}}</option>
+						</select>
+						</div>
+						<div *ngIf="action=='Update'">
+							<input type="text" formControlName="lcResponsibleTeam" id="lcResponsibleTeam" class="form-control" placeholder="Team"
+							/>
+						</div>
+						<control-messages [control]="licenceConditionAddForm.controls.lcResponsibleTeam"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="lcResponsibleOfficer" title="Officer">Officer<span class="mand-text">*</span></label>
+						<div *ngIf="action!='Update'">
+							<select class="form-control" formControlName="lcResponsibleOfficer" id="lcResponsibleOfficer">
+                            <option value=null>--Select--</option>
+                            	<option *ngFor="let user of officerIds" [value]="user?.value">
+									{{user?.value?.split("/")[1]}}
+								</option>
+                        </select>
+						</div>
+						<div *ngIf="action=='Update'">
+							<input type="text" formControlName="lcResponsibleOfficer" id="lcResponsibleOfficer" class="form-control" placeholder="Officer"
+							/>
+						</div>
+						<control-messages [control]="licenceConditionAddForm.controls.lcResponsibleOfficer"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+						<tr-notes [controlName]="'note'" [form]="licenceConditionAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+						<control-messages [control]="licenceConditionAddForm.controls.note"></control-messages>
+					</div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="licenceConditionAddForm">Submit</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+
+	</div>
+
+</div>

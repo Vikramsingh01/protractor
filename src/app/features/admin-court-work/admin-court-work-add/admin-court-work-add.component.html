@@ -1,0 +1,117 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Edit Court Work Pack - </h2>
+        <div class="admin-custom-align">{{associatedEvent.value}}</div>
+        <form [formGroup]="adminCourtWorkAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Court Work </legend>
+                <div class="row">
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processId')">
+                        <label for="processId" title="Process Id">Process Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="processId" id="processId" class="form-control" placeholder="Process Id" />
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                        <label for="profileId" title="Profile Id">Profile Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="profileId" id="profileId" class="form-control" placeholder="Profile Id" />
+                        <control-messages [control]="adminCourtWorkAddForm.controls.profileId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processTypeId')">
+                        <label for="processTypeId" title="Court Work Request Type">Court Work Request Type<span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="192" [controlName]="'processTypeId'" [dropdown]="adminCourtWorkAddForm"></tr-dropdown>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processTypeId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processSubTypeId')">
+                        <label for="processSubTypeId" title="">Court Work Request Sub-Type<span class="mand-text cust-align-star">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="170" [controlName]="'processSubTypeId'" [dropdown]="adminCourtWorkAddForm"></tr-dropdown>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processSubTypeId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processRefDate')">
+                        <label for="processRefDate" title="Referral Date">Referral Date<span class="mand-text">*</span></label>
+                        <date-picker [controlName]="'processRefDate'" [form]="adminCourtWorkAddForm"></date-picker>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processRefDate"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('intendedProviderId')">
+                        <label for="intendedProviderId" title="NPS Division">NPS Division<span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [disabled]="true" [tableId]="193" [controlName]="'intendedProviderId'" [dropdown]="adminCourtWorkAddForm" [excludeItems]="divisionIds"></tr-dropdown>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.intendedProviderId"></control-messages>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStageId')">
+                        <label for="processStageId" title="Status">Status<span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="191" [controlName]="'processStageId'" [list]="processTypeList" [dropdown]="adminCourtWorkAddForm"
+                            [isNsrd]="true" (updateNsrd)="updateNsrd($event)"></tr-dropdown>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processStageId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="processStageDate">Status Date <span class="mand-text">*</span></label>
+                        <date-picker [controlName]="'processStageDate'" [form]="adminCourtWorkAddForm"></date-picker>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processStageDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processOutcomeId') && nsrdData['processOutcomeId']?.active">
+                        <label for="processOutcomeId" title="Status">Outcome <span *ngIf="nsrdData['processOutcomeId']?.mandatory" class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="169" [isDependent]="true" [controlName]="'processOutcomeId'" [list]="processOutcomeList" [dropdown]="adminCourtWorkAddForm"></tr-dropdown>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processOutcomeId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="docType" title="Document Type">Document Type</label>
+                        <select formControlName="docType" id="docType" class="form-control">
+                             <option value=''>- Select -</option>
+                             <option *ngFor="let documentType of documentTypes let i = index" value="{{documentType?.value}}">{{documentType?.value}}</option>
+                            </select>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="documentName" title="Document Name">Document Name</label>
+                        <input type="text" formControlName="documentName" id="documentName" class="form-control" placeholder="Document Name" />
+                        <control-messages [control]="adminCourtWorkAddForm.controls.documentName"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="file" title="Document">Document</label>
+                        <div class="radio-group-list white-bg">
+                            <input type="file" (change)=fileChangeEvent($event) formControlName="file" id="file" />
+                        </div>
+                        <div *ngIf="alfrescoDocId!=null" class="pull-left">This will automatically delete the previous version and replace it with uploaded version</div>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.file"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('processNote')">
+                        <tr-notes [controlName]="'processNote'" [form]="adminCourtWorkAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="adminCourtWorkAddForm.controls.processNote"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgProcessContactId')">
+                        <label for="spgProcessContactId" title="Spg Process Contact Id">Spg Process Contact Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgProcessContactId" id="spgProcessContactId" class="form-control" placeholder="Spg Process Contact Id"
+                        />
+                        <control-messages [control]="adminCourtWorkAddForm.controls.spgProcessContactId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="adminCourtWorkAddForm">SUBMIT</button>
+                        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['..'])" class="btn btn-default btn-white">CANCEL</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../../..'])" class="btn btn-default btn-white">CANCEL</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

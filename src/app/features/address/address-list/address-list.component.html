@@ -1,0 +1,104 @@
+<div class="list-view-layout">
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="ADDRESS" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['address', 'new']" class="btn btn-default btn-small pull-right" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('addressStatusId')" trSortBy="addressStatusId" (sortCommand)="sort($event)"><span class="th-div">Address Status<span *ngIf="sortSearchPaginationObj.sortObj.field == 'addressStatusId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('offenderAddressId')" trSortBy="offenderAddressId" (sortCommand)="sort($event)"><span class="th-div">Address<span *ngIf="sortSearchPaginationObj.sortObj.field == 'offenderAddressId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th><span>Address</span></th>
+
+											<th *ngIf="isFeildAuthorized('postcode')" trSortBy="postcode" class="text-center"><span>Post Code<span *ngIf="sortSearchPaginationObj.sortObj.field == 'postcode'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('startDate')" trSortBy="startDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'startDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('endDate')" trSortBy="endDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">End Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'endDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th><span>Address Assessment</span></th>
+
+											<th class="text-center"><span class="hidden">View</span></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let address of addressList; let i = index">
+											<td *ngIf="isFeildAuthorized('addressStatusId')">
+												<span *ngFor="let addressStatusId of addressStatusIdList | filter :'key' : address?.addressStatusId">{{addressStatusId.value}}</span>
+												<span *ngFor="let offenderAddressId of addressStatusIdList | filter :'key' : address?.offenderAddressId">{{offenderAddressId.value}}</span>
+
+											</td>
+											<td width="300px">
+												<ul class="multi-ele">
+													<li *ngIf="address?.houseNumber">{{address?.houseNumber}}</li>
+													<li *ngIf="address?.buildingName">{{address?.buildingName}}</li>
+													<li *ngIf="address?.streetName">{{address?.streetName}}</li>
+													<li *ngIf="address?.townCity">{{address?.townCity}}</li>
+													<li *ngIf="address?.district">{{address?.district}}</li>
+													<li *ngIf="address?.county">{{address?.county}}</li>
+												</ul>
+											</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('postcode')">{{address?.postcode}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('startDate')">{{address?.startDate}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('endDate')">{{address?.endDate}}</td>
+
+											<td *ngIf="isAddressAssesmentExists(address?.offenderAddressId)">Yes</td>
+											<td *ngIf="!isAddressAssesmentExists(address?.offenderAddressId)">No</td>
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+												<button id="address_view{{i}}" [routerLink]="['address', address?.offenderAddressId]" class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+												<button id="address_edit{{i}}" class="btn btn-default btn-small" *ngIf="address?.locked" title="Edit record is locked.">
+                                                                                                <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button id="address_edit{{i}}" *ngIf="!address?.locked" [routerLink]="['address', 'edit', address?.offenderAddressId]" class="btn btn-default btn-small"
+													title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+													<button id="address_delete{{i}}" class="btn btn-default btn-small" *ngIf="address?.locked" title="Delete record is locked.">
+                                                                                                <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button id="address_delete{{i}}" *ngIf="!address?.locked" (click)="delete(address?.offenderAddressId)" class="btn btn-default btn-small"
+													title="Delete Record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="addressList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'addressList'" *ngIf="addressList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	
+</div>

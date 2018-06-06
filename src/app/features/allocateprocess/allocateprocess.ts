@@ -1,0 +1,34 @@
+export class AllocateProcess {
+	allocateProcessId: number;
+	processDate: Date;
+	processEndAttendanceCount: number;
+	processEndDate: Date;
+	processExpectedEndDate: Date;
+	processExpectedStartDate: Date;
+	processNote: string;
+	processOutcomeId: number;
+	processRefDate: Date;
+	processStageId: number;
+	processStartDate: Date;
+	processSubTypeId: number;
+	processTypeId: number;
+	profileId: number;
+	spgVersion: string;
+	spgUpdateUser: string;
+	createdDate: Date;
+	createdBy: string;
+	createdByUserId: number;
+	modifiedDate: Date;
+	modifiedBy: string;
+	modifiedByUserId: number;
+	deleted: number;
+	deletedDate: Date;
+	deletedBy: string;
+	deletedByUserId: number;
+	locked: number;
+	version: number;
+	processManagerProviderId: number;
+	processManagerTeam: string;
+	processManagerOfficer: string;
+	spgProcessContactId: number;
+}

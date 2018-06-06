@@ -1,0 +1,114 @@
+<div class="detail-view-layout">
+	<div class="row hide-heading">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Recall</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Recall" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> Recall </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('recallId')">
+							<div class="view-title col-sm-5" id="label_recallId" title="Recall Id">Recall Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="recallId">{{recall?.recallId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+							<div class="view-title col-sm-5" id="label_eventId" title="Event Id">Event Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="eventId">{{recall?.eventId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" id="label_spgVersion" title="Spg Version">Spg Version<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgVersion">{{recall?.spgVersion}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" id="label_spgUpdateUser" title="Spg Update User">Spg Update User<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgUpdateUser">{{recall?.spgUpdateUser}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgRecallId')">
+							<div class="view-title col-sm-5" id="label_spgRecallId" title="Spg Recall Id">Spg Recall Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="spgRecallId">{{recall?.spgRecallId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" id="label_createdBy" title="Created By">Created By<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdBy">{{recall?.createdBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" id="label_createdByUserId" title="Created By User Id">Created By User Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdByUserId">{{recall?.createdByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" id="label_createdDate" title="Created Date">Created Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="createdDate">{{recall?.createdDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" id="label_modifiedBy" title="Modified By">Modified By<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedBy">{{recall?.modifiedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" id="label_modifiedByUserId" title="Modified By User Id">Modified By User Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedByUserId">{{recall?.modifiedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" id="label_modifiedDate" title="Modified Date">Modified Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="modifiedDate">{{recall?.modifiedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" id="label_deleted" title="Deleted">Deleted<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deleted">{{recall?.deleted}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" id="label_deletedBy" title="Deleted By">Deleted By<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedBy">{{recall?.deletedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" id="label_deletedByUserId" title="Deleted By User Id">Deleted By User Id<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedByUserId">{{recall?.deletedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" id="label_deletedDate" title="Deleted Date">Deleted Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="deletedDate">{{recall?.deletedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" id="label_locked" title="Locked">Locked<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="locked">{{recall?.locked}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" id="label_version" title="Version">Version<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="version">{{recall?.version}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('recallDate')">
+							<div class="view-title col-sm-5" id="label_recallDate" title="Recall Date">Recall Date<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="recallDate">{{recall?.recallDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('recallReasonId')">
+							<div class="view-title col-sm-5" id="label_recallReasonId" title="Recall Reason">Recall Reason<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="recallReasonId">
+								<tr-list-label *ngIf="recall?.recallReasonId" [tableId]="200" [pkValue]="recall?.recallReasonId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('recallLocationId')">
+							<div class="view-title col-sm-5" id="label_recallLocationId" title="Location">Location<span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="recallLocationId">
+								<tr-list-label *ngIf="recall?.recallLocationId" [tableId]="135" [pkValue]="recall?.recallLocationId"></tr-list-label>
+							</div>
+						</div>
+						<div class="col-sm-12 nopadding">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('recallNote')">
+								<div class="view-title col-sm-5" title="Notes">Notes<span class="pull-right">:</span></div>
+								<div class="detail-value-note text-box">{{recall?.recallNote}}</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

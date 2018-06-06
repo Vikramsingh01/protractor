@@ -1,0 +1,40 @@
+export class OfflocResponse {
+    offlocResponseId: number;
+    crcSearchId: any;
+    crcSearchSeqL: any;
+    offenderId: any;
+    caseReferenceNumber: any;
+    offlocFileDate: any;
+    surname: any;
+    forename: any;
+    middleName: any;
+    dateOfBirth: any;
+    gender: any;
+    nationality: any;
+    pncNumberList: any;
+    croNumber: any;
+    nomisNumber: any;
+    prison: any;
+    sentencingCourt: any;
+    sentencingDate: any;
+    hdcEligibilityDate: any;
+    conditionalReleaseDate: any;
+    paroleEligibilityDate: any;
+    licenseExpiryDate: any;
+    sentenceExpiryDate: any;
+    expectedReleaseDate: any;
+    actualReleaseDate: any;
+    pssEndDate: any;
+    createdBy: string;
+    createdByUserId: number;
+    modifiedDate: Date;
+    modifiedBy: string;
+    modifiedByUserId: number;
+    deleted: number;
+    deletedDate: Date;
+    deletedBy: string;
+    deletedByUserId: number;
+    locked: number;
+    version: number;
+  }
+  

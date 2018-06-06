@@ -1,0 +1,101 @@
+<div class="detail-view-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'SU'"></tr-tabs>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Equality & Diversity" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<!--<div  class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['edit']">Edit</button></div>-->
+						<button *ngIf="isAuthorized('Update')  && action=='Add' && !protectedCharacteristics?.locked" class="btn btn-default btn-small pull-right"
+							[routerLink]="['new']" id="protectedCharacteristics_addButton" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						<button *ngIf="isAuthorized('Update')  && action=='Edit' && !protectedCharacteristics?.locked" class="btn btn-default btn-small pull-right"
+							[routerLink]="['edit']" id="protectedCharacteristics_editButton" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+
+
+						<div class="pull-right"><button class="btn btn-default btn-small" *ngIf="protectedCharacteristics?.locked" title="The record is locked."><span class="glyphicon glyphicon-lock "></span></button></div>
+					</tr-accordion-header>
+				</div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> ProtectedCharacteristics </legend>
+					<div class="row">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('sexualOrientationId')">
+							<div class="view-title col-sm-5" title="Sexual Orientation" id="label_sexualOrientationId">Sexual Orientation <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.sexualOrientationId" [tableId]="220" [pkValue]="protectedCharacteristics?.sexualOrientationId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transGenderProcessId')">
+							<div class="view-title col-sm-5" title="Gender Reassignment" id="label_genderReassignmentId">Gender Reassignment <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.transGenderProcessId" [tableId]="231" [pkValue]="protectedCharacteristics?.transGenderProcessId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transGenderDiscloseConsentYesNoId') && isGenderReassigned(protectedCharacteristics?.transGenderProcessId)" >
+							<div class="view-title col-sm-5" title="Consent to disclose" id="label_consentToDiscloseId">Consent to Disclose <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.transGenderDiscloseConsentYesNoId" [tableId]="244" [pkValue]="protectedCharacteristics?.transGenderDiscloseConsentYesNoId"></tr-list-label>
+							</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('ethnicityId')">
+							<div class="view-title col-sm-5" title="Ethnicity" id="label_ethnicityId">Ethnicity <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.ethnicityId" [tableId]="68" [pkValue]="protectedCharacteristics?.ethnicityId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('nationalityId')">
+							<div class="view-title col-sm-5" title="Nationality" id="label_nationalityId">Nationality <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.nationalityId" [tableId]="165" [pkValue]="protectedCharacteristics?.nationalityId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('secondNationalityId')">
+							<div class="view-title col-sm-5" title="Second Nationality" id="label_secondNationalityId">Second Nationality <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.secondNationalityId" [tableId]="165" [pkValue]="protectedCharacteristics?.secondNationalityId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('languageId')">
+							<div class="view-title col-sm-5" title="Preferred Language " id="label_languageId">Preferred Language  <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.languageId" [tableId]="73" [pkValue]="protectedCharacteristics?.languageId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('interpreterRequiredYesNoId')">
+							<div class="view-title col-sm-5" title="Interpreter Required" id="label_interpreterRequiredYesNoId">Interpreter Required <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.interpreterRequiredYesNoId" [tableId]="244" [pkValue]="protectedCharacteristics?.interpreterRequiredYesNoId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('immigrationStatusId')">
+							<div class="view-title col-sm-5" title="Immigration Status" id="label_immigrationStatusId">Immigration Status <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.immigrationStatusId" [tableId]="134" [pkValue]="protectedCharacteristics?.immigrationStatusId"></tr-list-label>
+							</div>
+						</div>
+
+						<div class="form-field-div col-sm-6">
+							<div class="view-title col-sm-5" title="Immigration Number" id="label_immigrationNumber">Immigration Number <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="immigrationNumber">{{protectedCharacteristics?.immigrationNumber}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('religionId')">
+							<div class="view-title col-sm-5" title="Religion or Belief" id="label_religionId">Religion or Belief <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="protectedCharacteristics?.religionId" [tableId]="212" [pkValue]="protectedCharacteristics?.religionId"></tr-list-label>
+							</div>
+						</div>
+						<div class="col-sm-12 nopadding">
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('equalityMonitoringNote')">
+							<div class="view-title col-sm-5" title="Notes" id="label_equalityMonitoringNote">Notes <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="equalityMonitoringNote">{{protectedCharacteristics?.equalityMonitoringNote}}</div>
+						</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

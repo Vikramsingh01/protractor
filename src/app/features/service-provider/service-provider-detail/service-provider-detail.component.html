@@ -1,0 +1,78 @@
+<div class="detail-view-layout">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Service Provider</h2>
+            <div class="pull-right">
+                <a [routerLink]="['..']">
+                    <button class="btn btn-default btn-custom ">Back</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Service Provider" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> ServiceProvider </legend>
+                    <div class="row">
+                        <!--  <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('serviceProviderId')">
+                            <div class="view-title col-sm-5">Service Provider Id</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.serviceProviderId}}</div>
+                        </div> -->
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('serviceProviderName')">
+                            <div class="view-title col-sm-5">Service Provider Name</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.serviceProviderName}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('activeStart')">
+                            <div class="view-title col-sm-5">Active Start Date</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.activeStart}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('activeEnd')">
+                            <div class="view-title col-sm-5">Active End Date</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.activeEnd}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('addressLineOne')">
+                            <div class="view-title col-sm-5">Address Line 1</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.addressLineOne}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('addressLineTwo')">
+                            <div class="view-title col-sm-5">Address Line 2</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.addressLineTwo}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('addressLineThree')">
+                            <div class="view-title col-sm-5">Address Line 3</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.addressLineThree}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('town')">
+                            <div class="view-title col-sm-5">Town</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.town}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('postcode')">
+                            <div class="view-title col-sm-5">Postcode</div>
+                            <div class="detail-value col-sm-7">{{serviceProvider?.postcode}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('provision')">
+                            <div class="view-title col-sm-5">Provision</div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="serviceProvider?.provision" [tableId]="520" [pkValue]="serviceProvider?.provision"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('status')">
+                            <div class="view-title col-sm-5">Status</div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="serviceProvider?.status" [tableId]="519" [pkValue]="serviceProvider?.status"></tr-list-label>
+                            </div>
+                        </div>
+                         <div class="form-field-div  col-sm-12" *ngIf="isFeildAuthorized('selectedCrc')">
+                            <div class="view-title col-sm-5">Selected CRCs</div>
+                            <div class="detail-value text-box">{{selectedCrc}}</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

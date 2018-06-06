@@ -1,0 +1,89 @@
+<tr-main-tabs></tr-main-tabs>
+<tr-tabs [structure]="'Event'"></tr-tabs>
+<tr-tabs [structure]="'Throughcare'"></tr-tabs>
+<div class="list-view-layout">
+	<h2 class="page-title hide-heading">Recall</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Recall" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create') &&  !isActiveRecall && !isEventTerminated && isActiveRelease && !isSEDLessThanCurrrentDate && !isPssActive" class="pull-right">
+							<button [routerLink]="['new']" id="recall_addButton" class="btn btn-default btn-small" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+
+											<th *ngIf="isFeildAuthorized('recallDate')" id="recallDate" trSortBy="recallDate" (sortCommand)="sort($event)" title="Recall Date" class="text-center"><span class="th-div">Recall Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'recallDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('recallReasonId')" id="recallReasonId" trSortBy="recallReasonId" (sortCommand)="sort($event)"
+												title="Recall Reason"><span class="th-div">Recall Reason<span *ngIf="sortSearchPaginationObj.sortObj.field == 'recallReasonId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('recallLocationId')" id="recallLocationId" trSortBy="recallLocationId" (sortCommand)="sort($event)"
+												title="Location"><span class="th-div">Location<span *ngIf="sortSearchPaginationObj.sortObj.field == 'recallLocationId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let recall of recallList; let i = index">
+											<td class="text-center" *ngIf="isFeildAuthorized('recallDate')">{{recall?.recallDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('recallReasonId')">
+												<span *ngFor="let recallReasonId of recallReasonIdList | filter :'key' : recall?.recallReasonId">{{recallReasonId.value}}</span>
+											</td>
+
+											<td *ngIf="isFeildAuthorized('recallLocationId')">
+												<span *ngFor="let recallLocationId of recallLocationIdList | filter :'key' : recall?.recallLocationId">{{recallLocationId.value}}</span>
+											</td>
+
+											<td class="text-center wid150">
+												<span *ngIf="isAuthorized('Read') && !isActiveRelease && !isEventTerminated && isActiveRecall && i===0">
+                                                 <button class="btn btn-default btn-small" id="recall_view{{i}}" [routerLink]="[recall?.recallId]" title="View Record">
+                                                 <span class="glyphicon glyphicon-search">aa</span>
+												</button>
+												</span>
+												<span *ngIf="isAuthorized('Update') && isActiveRecall && !isEventTerminated && !isActiveRelease">
+                                                  <button id="recall_edit{{i}}" class="btn btn-default btn-small" *ngIf="recall?.locked" title="Edit record is locked.">
+                                                  <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!recall?.locked && i===0" [routerLink]="['edit', recall?.recallId]" id="recall_edit{{i}}" class="btn btn-default btn-small"
+													title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive') && isActiveRecall && !isEventTerminated && !isActiveRelease && i===0">
+                                                 <button id="recall_delete{{i}}" class="btn btn-default btn-small" *ngIf="recall?.locked" title="Delete record is locked.">
+                                                 <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!recall?.locked" (click)="delete(recall?.recallId)" id="recall_delete{{i}}" class="btn btn-default btn-small"
+													title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="recallList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'recall'" *ngIf="recallList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

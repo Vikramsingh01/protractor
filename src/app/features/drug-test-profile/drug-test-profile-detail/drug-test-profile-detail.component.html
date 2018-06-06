@@ -1,0 +1,115 @@
+<div class="detail-view-layout">
+  <!--<div class="row hide-heading">
+      <div class="col-sm-12">
+          <h2 class="page-title pull-left">VIEW Drug Test Profile</h2>
+          <div class="pull-right">
+                  <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+          </div>
+      </div>
+  </div>-->
+  <div class="double-divider-purple mt10 hide-heading"></div>
+  <div class="grid-style">
+    <tr-accordion>
+      <tr-accordionTab header="Drug Test Profile" [selected]="false">
+        <router-outlet></router-outlet>
+        <div class="grid-head">
+          <tr-accordion-header>
+            <!--<div  class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['edit']">Edit</button></div>-->
+            <!--<button *ngIf="isAuthorized('Update')  && action=='Add' "  class="btn btn-default btn-white pull-right" [routerLink]="['new']" id="drugTestProfile_addButton">Add</button>-->
+
+            <div *ngIf="isAuthorized('Create')" class="pull-right">
+              <button *ngIf="!drugTestProfile" [routerLink]="['drugTestProfile','new']" id="drugTestProfile_addButton"
+                      class="btn btn-default btn-small pull-right" title="Add Record"><span
+                class="glyphicon glyphicon-plus">aa</span></button>
+            </div>
+            <div *ngIf="isAuthorized('Update')" class="pull-right">
+              <button *ngIf="drugTestProfile" class="btn btn-default btn-small pull-right"
+                      [routerLink]="['drugTestProfile',drugTestProfile?.drugTestProfileId]"
+                      id="drugTestProfile_editButton" title="Edit Record"><span
+                class="glyphicon glyphicon-pencil">aa</span></button>
+            </div>
+          </tr-accordion-header>
+        </div>
+        <fieldset class="three-column shrink-view">
+          <legend><span class="glyphicon glyphicon-flash"></span> DrugTestProfile</legend>
+          <div class="row">
+            <!--<div class="form-field-div col-sm-6" >
+                <div class="view-title col-sm-5" title="Drug Test Profile Id" id="label_drugTestProfileId">Drug Test Profile Id <span class="pull-right">:</span></div>
+                <p class="detail-value col-sm-7" id="drugTestProfileId">{{drugTestProfile?.drugTestProfileId}}</p>
+            </div>-->
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateAssessed')">
+              <div class="view-title col-sm-5" title="Date Assesseddd" id="label_dateAssessed">Date Assessed <span
+                class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="dateAssessed">{{drugTestProfile?.dateAssessed}}</p>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('teamId')">
+              <div class="view-title col-sm-5" title="CRC" id="label_teamId">CRC <span class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="teamId">
+                <span *ngFor="let crc of crcList | filter :'key' : drugTestProfile?.teamId">{{crc?.value}}</span>
+              </p>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('officeTeamId')">
+              <div class="view-title col-sm-5" title="Team" id="label_officeTeamId">Team <span
+                class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="officeTeamId">
+                <span *ngFor="let crc of teamlist | filter :'key' : drugTestProfile?.officeTeamId">{{crc?.value}}</span>
+              </p>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('officerId')">
+              <div class="view-title col-sm-5" title="Officer" id="label_officerId">Officer <span
+                class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="officerId">
+                <span *ngFor="let crc of officerlist | filter :'key' : drugTestProfile?.officerId">{{crc?.value}}</span>
+              </p>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('mainDrugId')">
+              <div class="view-title col-sm-5" title="Main Drug" id="label_mainDrugId">Main Drug <span
+                class="pull-right">:</span></div>
+              <p class="detail-value col-sm-7" id="mainDrugId">
+                <tr-list-label *ngIf="drugTestProfile?.mainDrugId" [tableId]="119"
+                               [pkValue]="drugTestProfile?.mainDrugId"></tr-list-label>
+              </p>
+            </div>
+
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('estimatedWeekelyCost')">
+              <div class="view-title col-sm-5" title="Estimated weekly cost of habit (£)"
+                   id="label_estimatedWeekelyCost">Estimated weekly cost of habit (£) <span class="pull-right">:</span>
+              </div>
+              <p class="detail-value col-sm-7" id="estimatedWeekelyCost">{{drugTestProfile?.estimatedWeekelyCost}}</p>
+            </div>
+            <div class="col-sm-12 nopadding">
+              <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('notes')">
+                <div class="view-title col-sm-5" title="Notes" id="label_notes">Notes <span class="pull-right">:</span>
+                </div>
+                <p class="detail-value col-sm-7" id="notes">{{drugTestProfile?.notes}}</p>
+              </div>
+            </div>
+            <!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('referralId')">
+                <div class="view-title col-sm-5" title="Referral Id" id="label_referralId">Referral Id <span class="pull-right">:</span></div>
+                <p class="detail-value col-sm-7" id="referralId">{{drugTestProfile?.referralId}}</p>
+            </div>-->
+            <div class="pad15">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="">Drugs List</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let drug of drugTestProfile?.drugList">
+                  <td>
+                    <tr-list-label [tableId]="119" [pkValue]="drug"></tr-list-label>
+
+                  </td>
+                </tr>
+                </tbody>
+                <div *ngIf="!drugTestProfile?.drugList.length>0" class="no-records">No Records Found</div>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

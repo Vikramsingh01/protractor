@@ -1,0 +1,131 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Allocate Process" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white  pull-right" [routerLink]="['allocateprocess', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter" [selected]="false">
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="search($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('processTypeId')" trSortBy="processTypeId" (sortCommand)="sort($event)"><span class="th-div">process Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('processSubTypeId')" trSortBy="processSubTypeId" (sortCommand)="sort($event)"><span class="th-div">process Sub Type <span *ngIf="sortSearchPaginationObj.sortObj.field == 'processSubTypeId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('processRefDate')" class="wid150 text-center" trSortBy="processRefDate" (sortCommand)="sort($event)"><span class="th-div">process Referral Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processRefDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('processStageId')" class="wid150" trSortBy="processStageId" (sortCommand)="sort($event)"><span class="th-div">process Stage<span *ngIf="sortSearchPaginationObj.sortObj.field == 'processStageId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('processManagerProviderId')">process Manager Provider</th>
+											<!--<th *ngIf="isFeildAuthorized('allocateProcessId')">allocate Process Id</th>
+					<th *ngIf="isFeildAuthorized('processDate')">process Date</th>
+					<th *ngIf="isFeildAuthorized('processEndAttendanceCount')">process End Attendance Count</th>
+					<th *ngIf="isFeildAuthorized('processEndDate')">process End Date</th>
+					<th *ngIf="isFeildAuthorized('processExpectedEndDate')">process Expected End Date</th>
+					<th *ngIf="isFeildAuthorized('processExpectedStartDate')">process Expected Start Date</th>
+					<th *ngIf="isFeildAuthorized('processNote')">process Note</th>
+					<th *ngIf="isFeildAuthorized('processOutcomeId')">process Outcome Id</th>
+					<th *ngIf="isFeildAuthorized('processStartDate')">process Start Date</th>
+					<th *ngIf="isFeildAuthorized('profileId')">profile Id</th>
+					<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+					<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+					<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+					<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+					<th *ngIf="isFeildAuthorized('createdByUserId')">created By User Id</th>
+					<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>	
+					<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+					<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User Id</th>
+					<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+					<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+					<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+					<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User Id</th>
+					<th *ngIf="isFeildAuthorized('locked')">locked</th>
+					<th *ngIf="isFeildAuthorized('version')">version</th>
+					
+					<th *ngIf="isFeildAuthorized('processManagerTeam')">process Manager Team</th>
+					<th *ngIf="isFeildAuthorized('processManagerOfficer')">process Manager Officer</th>
+					<th *ngIf="isFeildAuthorized('spgProcessContactId')">SPG Process Contact Id</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let allocateProcess of allocateProcesss">
+
+											<td *ngIf="isFeildAuthorized('processTypeId')"><span *ngFor="let processType of processTypeList | filter :'key' : allocateProcess?.processTypeId">{{processType.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('processSubTypeId')"><span *ngFor="let processSubType of processSubTypeList | filter :'key' : processContact?.processSubTypeId">{{processSubType.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('processRefDate')" class="wid150 text-center">{{allocateProcess.processRefDate}}</td>
+											<td *ngIf="isFeildAuthorized('processStageId')" class="wid150"><span *ngFor="let processStage of processStageList | filter :'key' : allocateProcess?.processStageId">{{processStage.value}}</span></td>
+											<td *ngIf="isFeildAuthorized('processManagerProviderId')">{{allocateProcess.processManagerProviderId}}</td>
+											<!--<th *ngIf="isFeildAuthorized('allocateProcessId')">{{allocateProcess.allocateProcessId}}</th>
+					<th *ngIf="isFeildAuthorized('processDate')">{{allocateProcess.processDate}}</th>
+					<th *ngIf="isFeildAuthorized('processEndAttendanceCount')">{{allocateProcess.processEndAttendanceCount}}</th>
+					<th *ngIf="isFeildAuthorized('processEndDate')">{{allocateProcess.processEndDate}}</th>
+					<th *ngIf="isFeildAuthorized('processExpectedEndDate')">{{allocateProcess.processExpectedEndDate}}</th>
+					<th *ngIf="isFeildAuthorized('processExpectedStartDate')">{{allocateProcess.processExpectedStartDate}}</th>
+					<th *ngIf="isFeildAuthorized('processNote')">{{allocateProcess.processNote}}</th>
+					<th *ngIf="isFeildAuthorized('processOutcomeId')">{{allocateProcess.processOutcomeId}}</th>
+					<th *ngIf="isFeildAuthorized('processStartDate')">{{allocateProcess.processStartDate}}</th>
+					<th *ngIf="isFeildAuthorized('processSubTypeId')">{{allocateProcess.processSubTypeId}}</th>
+					<th *ngIf="isFeildAuthorized('profileId')">{{allocateProcess.profileId}}</th>
+					<th *ngIf="isFeildAuthorized('spgVersion')">{{allocateProcess.spgVersion}}</th>
+					<th *ngIf="isFeildAuthorized('spgUpdateUser')">{{allocateProcess.spgUpdateUser}}</th>
+					<th *ngIf="isFeildAuthorized('createdDate')">{{allocateProcess.createdDate}}</th>
+					<th *ngIf="isFeildAuthorized('createdBy')">{{allocateProcess.createdBy}}</th>
+					<th *ngIf="isFeildAuthorized('createdByUserId')">{{allocateProcess.createdByUserId}}</th>
+					<th *ngIf="isFeildAuthorized('modifiedDate')">{{allocateProcess.modifiedDate}}</th>
+					<th *ngIf="isFeildAuthorized('modifiedBy')">{{allocateProcess.modifiedBy}}</th>
+					<th *ngIf="isFeildAuthorized('modifiedByUserId')">{{allocateProcess.modifiedByUserId}}</th>
+					<th *ngIf="isFeildAuthorized('deleted')">{{allocateProcess.deleted}}</th>
+					<th *ngIf="isFeildAuthorized('deletedDate')">{{allocateProcess.deletedDate}}</th>
+					<th *ngIf="isFeildAuthorized('deletedBy')">{{allocateProcess.deletedBy}}</th>
+					<th *ngIf="isFeildAuthorized('deletedByUserId')">{{allocateProcess.deletedByUserId}}</th>
+					<th *ngIf="isFeildAuthorized('locked')">{{allocateProcess.locked}}</th>
+					<th *ngIf="isFeildAuthorized('version')">{{allocateProcess.version}}</th>
+					<th *ngIf="isFeildAuthorized('processManagerTeam')">{{allocateProcess.processManagerTeam}}</th>
+					<th *ngIf="isFeildAuthorized('processManagerOfficer')">{{allocateProcess.processManagerOfficer}}</th>
+					<th *ngIf="isFeildAuthorized('spgProcessContactId')">{{allocateProcess.spgProcessContactId}}</th>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['allocateprocess', allocateProcess.allocateProcessId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center">
+												<button class="btn btn-default btn-small" *ngIf="allocateProcess?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small" *ngIf="!allocateProcess?.locked" [routerLink]="['allocateprocess', allocateProcess?.allocateProcessId,'edit']">
+													<span class="glyphicon glyphicon-pencil">aa</span></button>
+												
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(allocateProcess.allocateProcessId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="allocateProcesss?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'allocateProcesss'" *ngIf="allocateProcesss?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

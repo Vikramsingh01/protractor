@@ -1,0 +1,28 @@
+<div class="col-sm-12 mt20 text-center">
+	<div class="col-sm-4 nopadding item-pp">
+		<label for="{{name}}_itemsPerPage" class="pull-left mt7">Items Per Page</label>
+		<div class="col-sm-3">
+			<select class="form-control" id="{{name}}_itemsPerPage" #size (change)="fetchDataList(size.value, paginationObj?.number/5)">
+      <option value="2" [selected]="paginationObj?.size == 2">2</option>
+			<option value="5" [selected]="paginationObj?.size == 5">5</option>
+      <option value="10" [selected]="paginationObj?.size == 10">10</option>
+      <option value="20" [selected]="paginationObj?.size == 20">20</option>
+      <option value="50" [selected]="paginationObj?.size == 50">50</option>
+    </select>
+		</div>
+		<!--<div class="results-text">Results 1-10 of 50</div>-->
+	</div>
+	<nav aria-label="Page navigation" class="pagination-circle pull-right">
+		<ul class="pagination pagination-sm">
+			<li [ngClass]="{'hide':paginationObj?.first}">	
+					<button class="btn btn-default btn-xs pre-tab" (click)="fetchDataList(paginationObj?.size, paginationObj?.number-1)" aria-label="Previous"><span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span></button>		
+			</li>
+			<li *ngFor="let pageNo of pages" [ngClass]="{'active':paginationObj?.number==pageNo, 'hide':pages.length<=1}">
+				<button class="btn btn-default btn-xs" id="{{name}}_{{pageNo+1}}" (click)="fetchDataList(paginationObj?.size, pageNo)">{{pageNo+1}}</button>
+			</li>
+			<li [ngClass]="{'hide':paginationObj?.last}">
+				<button class="btn btn-default btn-xs next-tab" (click)="fetchDataList(paginationObj?.size, paginationObj?.number+1)" aria-label="Next"><span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span></button>	
+  			</li>
+		</ul>
+	</nav>
+</div>

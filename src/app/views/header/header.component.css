@@ -1,0 +1,39 @@
+
+header {
+    padding: 15px;
+}
+
+.logo-div {
+    float: left;
+    display: block;
+    width: 70%;
+}
+
+.account-div {
+    float: right;
+    display: block;
+    width: 30%;
+    color: #b5b6b6;
+}
+
+.logo-pic {
+    background: url(../images/purple-futures-logo.png) no-repeat;
+    display: inline-block;
+    line-height: 40px;
+    background-size: 160px;
+    width: 160px;
+    height: 32px;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-top: 2px;
+}
+
+header a {
+    color: #fff;
+}
+
+header a:hover,
+header a.caret:visited {
+    color: #fff;
+}
+

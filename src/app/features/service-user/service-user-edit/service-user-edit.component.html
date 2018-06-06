@@ -1,0 +1,96 @@
+<div class="edit-view-layout">
+	<div class="page-title">{{action}} service User</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Service User" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<form name="addServiceUserForm" class="form-service-user" (ngSubmit)="onSubmit(f)" #f="ngForm">
+					<div ngmodelgroup="serviceUser">
+						<fieldset class="three-column">
+							<legend> <span class="glyphicon glyphicon-flash"></span>Service User </legend>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label for="serviceUserId" class="">service User</label>
+									<div class="">
+										<input type="text" name="serviceUserId"="serviceUserId" [(ngModel)]="serviceUser.serviceUserId" value="{{serviceUser?.serviceUserId}}"
+											class="form-control" placeholder="service User" />
+									</div>
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="firstName" class="">first Name</label>
+									<div class="">
+										<input type="text" name="firstName"="firstName" [(ngModel)]="serviceUser.firstName" value="{{serviceUser?.firstName}}" class="form-control"
+											placeholder="first Name" />
+									</div>
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="lastName" class="">last Name</label>
+									<div class="">
+										<input type="text" name="lastName"="lastName" [(ngModel)]="serviceUser.lastName" value="{{serviceUser?.lastName}}" class="form-control"
+											placeholder="last Name" />
+									</div>
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="crnNumber" class="">crn Number</label>
+									<div class="">
+										<input type="text" name="crnNumber"="crnNumber" [(ngModel)]="serviceUser.crnNumber" value="{{serviceUser?.crnNumber}}" class="form-control"
+											placeholder="crn Number" />
+									</div>
+								</div>
+								<!--<div class="form-group col-sm-6">
+					<label for="createdBy"  class="">created By</label> 
+					<div class="">
+						<input type="text" name="createdBy"="createdBy" [(ngModel)]="serviceUser.createdBy" value="{{serviceUser?.createdBy}}" class="form-control" placeholder="created By" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="createdDate"  class="">created Date</label> 
+					<div class="">
+						<input type="text" name="createdDate"="createdDate" [(ngModel)]="serviceUser.createdDate" value="{{serviceUser?.createdDate}}" class="form-control" placeholder="created Date" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="deleted"  class="">deleted</label> 
+					<div class="">
+						<input type="text" name="deleted"="deleted" [(ngModel)]="serviceUser.deleted" value="{{serviceUser?.deleted}}" class="form-control" placeholder="deleted" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="deletedBy"  class="">deleted By</label> 
+					<div class="">
+						<input type="text" name="deletedBy"="deletedBy" [(ngModel)]="serviceUser.deletedBy" value="{{serviceUser?.deletedBy}}" class="form-control" placeholder="deleted By" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="deletedDate"  class="">deleted Date</label> 
+					<div class="">
+						<input type="text" name="deletedDate"="deletedDate" [(ngModel)]="serviceUser.deletedDate" value="{{serviceUser?.deletedDate}}" class="form-control" placeholder="deleted Date" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="modifiedBy"  class="">modified By</label> 
+					<div class="">
+						<input type="text" name="modifiedBy"="modifiedBy" [(ngModel)]="serviceUser.modifiedBy" value="{{serviceUser?.modifiedBy}}" class="form-control" placeholder="modified By" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="modifiedDate"  class="">modified Date</label> 
+					<div class="">
+						<input type="text" name="modifiedDate"="modifiedDate" [(ngModel)]="serviceUser.modifiedDate" value="{{serviceUser?.modifiedDate}}" class="form-control" placeholder="modified Date" />
+					</div>
+				</div>-->
+								<div class="form-group col-sm-12">
+
+									<button class="btn btn-default btn-purple">Save</button>
+
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

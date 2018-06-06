@@ -1,0 +1,148 @@
+<div class="detail-view-layout one-line-view">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Registrations</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Registration" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Registrations </legend>
+                    <div class="row">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                            <div class="view-title col-sm-5" id="label_profileId" title="Profile Id">Profile Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="profileId">{{registration?.profileId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registrationId')">
+                            <div class="view-title col-sm-5" id="label_registrationId" title="Registration Id">Registration Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registrationId">{{registration?.registrationId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                            <div class="view-title col-sm-5" id="label_spgVersion" title="Spg Version">Spg Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgVersion">{{registration?.spgVersion}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                            <div class="view-title col-sm-5" id="label_spgUpdateUser" title="Spg Update User">Spg Update User<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgUpdateUser">{{registration?.spgUpdateUser}}</div>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registerTypeId')">
+                            <div class="view-title col-sm-5" id="label_registerTypeId" title="Register Type">Register Type<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registerTypeId">
+                                <tr-list-label *ngIf="registration?.registerTypeId" [tableId]="207" [pkValue]="registration?.registerTypeId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registrationDate')">
+                            <div class="view-title col-sm-5" id="label_registrationDate" title="Registration Date">Registration Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registrationDate">{{registration?.registrationDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('nextReviewDate')">
+                            <div class="view-title col-sm-5" id="label_reviewPeriod" title="Review Period">Review Period<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="reviewPeriod">{{registration?.reviewPeriod}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('nextReviewDate')">
+                            <div class="view-title col-sm-5" id="label_nextReviewDate" title="Next Review Date">Next Review Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="nextReviewDate">{{registration?.nextReviewDate}}</div>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registrationCategoryId')">
+                            <div class="view-title col-sm-5" id="label_registrationCategoryId" title="Registration Category">Registration Category<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registrationCategoryId">
+                                <tr-list-label *ngIf="registration?.registrationCategoryId" [tableId]="205" [pkValue]="registration?.registrationCategoryId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registrationLevelId')">
+                            <div class="view-title col-sm-5" id="label_registrationLevelId" title="Registration Level">Registration Level<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registrationLevelId">
+                                <tr-list-label *ngIf="registration?.registrationLevelId" [tableId]="206" [pkValue]="registration?.registrationLevelId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registrationProviderId')">
+                            <div class="view-title col-sm-5" id="label_registrationProviderId" title="Registering Officer's Provider">Registering Officer's Provider<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registrationProviderId">
+                                <span *ngFor="let registrationProvider of registrationProviderIdList | filter :'key' : registration?.registrationProviderId">
+                                    {{registrationProvider?.value}}</span>
+                            </div>
+                        </div>
+                        <div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('registeringTeam')">
+                            <div class="view-title col-sm-5" id="label_registeringTeam" title="Registering Officer's Team">Registering Officer's Team<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registeringTeam">{{registration?.registeringTeam?.split("/")[1]}}
+                            </div>
+                        </div>
+                        <div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('registeringOfficer')">
+                            <div class="view-title col-sm-5" id="label_registeringOfficer" title="Registering Officer">Registering Officer<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registeringOfficer">{{registration?.registeringOfficer?.split("/")[1]}}
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 nopadding">
+                            <div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('registrationNote')">
+                                <div class="view-title col-sm-5" id="label_registrationNote" title="Notes">Notes<span class="pull-right">:</span></div>
+                                <div class="detail-value-note text-box" id="registrationNote">{{registration?.registrationNote}}</div>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgRegistrationId')">
+                            <div class="view-title col-sm-5" id="label_spgRegistrationId" title="Spg Registration Id">Spg Registration Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="spgRegistrationId">{{registration?.spgRegistrationId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5" id="label_createdBy" title="Created By">Created By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdBy">{{registration?.createdBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5" id="label_createdByUserId" title="Created By User Id">Created By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdByUserId">{{registration?.createdByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5" id="label_createdDate" title="Created Date">Created Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdDate">{{registration?.createdDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5" id="label_modifiedBy" title="Modified By">Modified By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedBy">{{registration?.modifiedBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5" id="label_modifiedByUserId" title="Modified By User Id">Modified By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedByUserId">{{registration?.modifiedByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5" id="label_modifiedDate" title="Modified Date">Modified Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedDate">{{registration?.modifiedDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5" id="label_deleted" title="Deleted">Deleted<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deleted">{{registration?.deleted}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5" id="label_deletedBy" title="Deleted By">Deleted By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedBy">{{registration?.deletedBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5" id="label_deletedByUserId" title="Deleted By User Id">Deleted By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedByUserId">{{registration?.deletedByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5" id="label_deletedDate" title="Deleted Date">Deleted Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedDate">{{registration?.deletedDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5" id="label_locked" title="Locked">Locked<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="locked">{{registration?.locked}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5" id="label_version" title="Version">Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="version">{{registration?.version}}</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

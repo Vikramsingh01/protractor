@@ -1,0 +1,45 @@
+<div class="detail-view-layout">
+
+	<!--<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Terminate Requirement</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>-->
+	<!--<div class="double-divider-purple mt10"></div>-->
+
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Terminate Requirement" [selected]="false">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> TerminateRequirement </legend>
+					<div class="row">
+						
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+							<div class="view-title col-sm-5" title="Termination Date" id="label_expectedEndDate">Termination Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="expectedEndDate">{{terminateRequirement?.expectedEndDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('terminationReasonId')">
+							<div class="view-title col-sm-5" title="Termination Reason" id="label_terminationReasonId">Termination Reason <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="terminationReasonId">{{terminateRequirement?.terminationReasonId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('attendanceCount')">
+							<div class="view-title col-sm-5" title="Attendance Count" id="label_attendanceCount">Attendance Count <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" id="attendanceCount">{{terminateRequirement?.attendanceCount}}</div>
+						</div>
+						<div class="col-sm-12 nopadding">
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('note')">
+							<div class="view-title col-sm-5" title="Notes" id="label_note">Notes <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7" class="detail-value text-box" id="note">{{terminateRequirement?.note}}</div>
+						</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

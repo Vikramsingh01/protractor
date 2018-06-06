@@ -1,0 +1,142 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Approved Premises Referral" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['approvedpremisesreferral', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter" name="Approved Premises Referral" [selected]="false">
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="search($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('referralDate')" trSortBy="referralDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">referral Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'referralDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('expectedArrivalDate')" trSortBy="expectedArrivalDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">expected Arrival Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'expectedArrivalDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+
+											<th *ngIf="isFeildAuthorized('referringProviderId')" trSortBy="referringProviderId" (sortCommand)="sort($event)"><span class="th-div">referring Provider<span *ngIf="sortSearchPaginationObj.sortObj.field == 'referringProviderId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<!--<th *ngIf="isFeildAuthorized('approvedPremiseReferralId')">approved Premise Referral</th>
+						<th *ngIf="isFeildAuthorized('apReferralSourceId')">ap Referral Source</th>
+						<th *ngIf="isFeildAuthorized('approvedPremiseId')">approved Premise</th>
+						<th *ngIf="isFeildAuthorized('decisionDate')">decision Date</th>
+						<th *ngIf="isFeildAuthorized('decisionNote')">decision Notes
+						<th *ngIf="isFeildAuthorized('decisionOfficer')">decision Officer</th>
+						<th *ngIf="isFeildAuthorized('decisionProviderId')">decision Provider</th>
+						<th *ngIf="isFeildAuthorized('decisionTeam')">decision Team</th>
+						<th *ngIf="isFeildAuthorized('eventId')">event</th>
+						<th *ngIf="isFeildAuthorized('expectedDepartureDate')">expected Departure Date</th>
+						<th *ngIf="isFeildAuthorized('nonArrivalDate')">non Arrival Date</th>
+						<th *ngIf="isFeildAuthorized('nonArrivalNote')">non Arrival Notes
+						<th *ngIf="isFeildAuthorized('nonArrivalReasonId')">non Arrival Reason</th>
+						<th *ngIf="isFeildAuthorized('referralCategoryId')">referral Category</th>
+						<th *ngIf="isFeildAuthorized('referralDecisionId')">referral Decision</th>
+						<th *ngIf="isFeildAuthorized('referralGroupId')">referral Group</th>
+						<th *ngIf="isFeildAuthorized('referralNote')">referral Notes
+						<th *ngIf="isFeildAuthorized('referringOfficer')">referring Officer</th>	
+						<th *ngIf="isFeildAuthorized('referringTeam')">referring Team</th>
+						<th *ngIf="isFeildAuthorized('rejectReasonId')">reject Reason</th>
+						<th *ngIf="isFeildAuthorized('sourceTypeId')">source Type</th>
+						<th *ngIf="isFeildAuthorized('spgApprovedPremiseReferralId')">SPG Approved Premise Referral</th>
+						<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+					<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+					<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+					<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+					<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+					<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+					<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+					<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+					<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+					<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+					<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+					<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+					<th *ngIf="isFeildAuthorized('locked')">locked</th>
+					<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let approvedPremisesReferral of approvedPremisesReferrals">
+											<td class="text-center" *ngIf="isFeildAuthorized('referralDate')">{{approvedPremisesReferral.referralDate}}</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('expectedArrivalDate')">{{approvedPremisesReferral.expectedArrivalDate}}</td>
+											<td *ngIf="isFeildAuthorized('referringProviderId')"><span *ngFor="let provider of providerList | filter :'key' : approvedPremisesReferral?.referringProviderId">{{provider.value}}</span></td>
+											<!--<td *ngIf="isFeildAuthorized('approvedPremiseReferralId')">{{approvedPremisesReferral.approvedPremiseReferralId}}</td>
+						<td *ngIf="isFeildAuthorized('apReferralSourceId')">{{approvedPremisesReferral.apReferralSourceId}}</td>
+						<td *ngIf="isFeildAuthorized('approvedPremiseId')">{{approvedPremisesReferral.approvedPremiseId}}</td>
+						<td *ngIf="isFeildAuthorized('approvedPremiseId')"><span *ngFor="let approvedPremiseId of approvedPremisesList | filter :'key' : approvedPremisesReferral.approvedPremiseId">{{approvedPremiseId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('decisionDate')">{{approvedPremisesReferral.decisionDate}}</td>
+						<td *ngIf="isFeildAuthorized('decisionNote')">{{approvedPremisesReferral.decisionNote}}</td>
+						<td *ngIf="isFeildAuthorized('decisionOfficer')">{{approvedPremisesReferral.decisionOfficer}}</td>
+						<td *ngIf="isFeildAuthorized('decisionProviderId')">{{approvedPremisesReferral.decisionProviderId}}</td>
+						<td *ngIf="isFeildAuthorized('decisionTeam')">{{approvedPremisesReferral.decisionTeam}}</td>
+						<td *ngIf="isFeildAuthorized('eventId')">{{approvedPremisesReferral.eventId}}</td>
+						<td *ngIf="isFeildAuthorized('expectedDepartureDate')">{{approvedPremisesReferral.expectedDepartureDate}}</td>
+						<td *ngIf="isFeildAuthorized('nonArrivalDate')">{{approvedPremisesReferral.nonArrivalDate}}</td>
+						<td *ngIf="isFeildAuthorized('nonArrivalNote')">{{approvedPremisesReferral.nonArrivalNote}}</td>
+						<td *ngIf="isFeildAuthorized('nonArrivalReasonId')"><span *ngFor="let nonArrivalReasonId of nonArrivalReasonList | filter :'key' : approvedPremisesReferral.nonArrivalReasonId">{{nonArrivalReasonId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('referralCategoryId')"><span *ngFor="let referralCategoryId of apReferralCategoryList | filter :'key' : approvedPremisesReferral.referralCategoryId">{{referralCategoryId.value}}</span></td>
+						<!--<td *ngIf="isFeildAuthorized('referralDecisionId')"><span *ngFor="let referralDecisionId of referralDecisonList | filter :'key' : approvedPremisesReferral.referralDecisionId">{{referralDecisionId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('referralGroupId')"><span *ngFor="let referralGroupId of referralGroupList | filter :'key' : approvedPremisesReferral.referralGroupId">{{referralGroupId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('referralNote')">{{approvedPremisesReferral.referralNote}}</td>
+						<td *ngIf="isFeildAuthorized('referringOfficer')">{{approvedPremisesReferral.referringOfficer}}</td>
+						<td *ngIf="isFeildAuthorized('referringTeam')">{{approvedPremisesReferral.referringTeam}}</td>
+						<td *ngIf="isFeildAuthorized('rejectReasonId')"><span *ngFor="let rejectReasonId of rejectReasonList | filter :'key' : approvedPremisesReferral.rejectReasonId">{{rejectReasonId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('sourceTypeId')"><span *ngFor="let sourceTypeId of sourceTypeIdList | filter :'key' : approvedPremisesReferral.sourceTypeId">{{sourceTypeId.value}}</span></td>
+						<td *ngIf="isFeildAuthorized('spgApprovedPremiseReferralId')">{{approvedPremisesReferral.spgApprovedPremiseReferralId}}</td>
+						<td *ngIf="isFeildAuthorized('spgVersion')">{{approvedPremisesReferral.spgVersion}}</td>
+					<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{approvedPremisesReferral.spgUpdateUser}}</td>
+					<td *ngIf="isFeildAuthorized('createdDate')">{{approvedPremisesReferral.createdDate}}</td>
+					<td *ngIf="isFeildAuthorized('createdBy')">{{approvedPremisesReferral.createdBy}}</td>
+					<td *ngIf="isFeildAuthorized('createdByUserId')">{{approvedPremisesReferral.createdByUserId}}</td>
+					<td *ngIf="isFeildAuthorized('modifiedDate')">{{approvedPremisesReferral.modifiedDate}}</td>
+					<td *ngIf="isFeildAuthorized('modifiedBy')">{{approvedPremisesReferral.modifiedBy}}</td>
+					<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{approvedPremisesReferral.modifiedByUserId}}</td>
+					<td *ngIf="isFeildAuthorized('deleted')">{{approvedPremisesReferral.deleted}}</td>
+					<td *ngIf="isFeildAuthorized('deletedDate')">{{approvedPremisesReferral.deletedDate}}</td>
+					<td *ngIf="isFeildAuthorized('deletedBy')">{{approvedPremisesReferral.deletedBy}}</td>
+					<td *ngIf="isFeildAuthorized('deletedByUserId')">{{approvedPremisesReferral.deletedByUserId}}</td>
+					<td *ngIf="isFeildAuthorized('locked')">{{approvedPremisesReferral.locked}}</td>
+					<td *ngIf="isFeildAuthorized('version')">{{approvedPremisesReferral.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['approvedpremisesreferral', approvedPremisesReferral.approvedPremiseReferralId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center">
+												<button class="btn btn-default btn-small" *ngIf="approvedPremisesReferral?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!approvedPremisesReferral?.locked" [routerLink]="['approvedpremisesreferral', approvedPremisesReferral.approvedPremiseReferralId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(approvedPremisesReferral.approvedPremiseReferralId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+
+
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="approvedPremisesReferrals?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'approvedPremisesReferrals'" *ngIf="approvedPremisesReferrals?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

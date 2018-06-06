@@ -1,0 +1,71 @@
+<div class="list-view-layout">
+	<h2 class="page-title">Case Manager History</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Case Manager History" [selected]="false">
+				<div class="grid-head">
+					
+				</div>
+				<div class="pad15">
+					
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th  trSortBy="transferFromProviderId" (sortCommand)="sort($event)">
+												<span class="th-div" id="label_transferFromProviderId">From Provider<span *ngIf="sortFilterPaginationObj.sortObj.field == 'transferFromProviderId'"
+												[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon">
+												</span></span>
+											</th>
+											<th trSortBy="transferToResponsibleOfficer" (sortCommand)="sort($event)">
+												<span class="th-div" id="label_transferToResponsibleOfficer">Case Manager<span *ngIf="sortFilterPaginationObj.sortObj.field == 'transferToResponsibleOfficer'"
+												[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon">
+												</span></span>
+											</th>
+											<th trSortBy="allocationDate" (sortCommand)="sort($event)" class="text-center">
+												<span class="th-div" id="label_allocationDate">Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'allocationDate'"
+												[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon">
+												</span></span>
+											</th>
+											<th class="wid230" trSortBy="transferReasonId" (sortCommand)="sort($event)">
+												<span class="th-div" id="label_transferReasonId">Transfer for Reason<span *ngIf="sortFilterPaginationObj.sortObj.field == 'transferReasonId'"
+												[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon">
+												</span></span>
+											</th>
+											<th class="wid150" trSortBy="transferToProviderId" (sortCommand)="sort($event)">
+												<span class="th-div" id="label_transferToProviderId">To Provider<span *ngIf="sortFilterPaginationObj.sortObj.field == 'transferToProviderId'"
+												[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon">
+												</span></span>
+											</th>
+
+										</tr> 
+									</thead>
+									<tbody>
+										<tr *ngFor="let caseManagerHistory of caseManagerHistoryList">
+											<td *ngIf="isFeildAuthorized('transferFromProviderId')">{{caseManagerHistory?.fromProvider}}</td>
+
+											<td *ngIf="isFeildAuthorized('transferToResponsibleOfficer')">{{caseManagerHistory?.caseManager}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('allocationDate')">{{caseManagerHistory?.allocationDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('transferReasonId')">{{caseManagerHistory?.transferReason}}</td>
+
+											<td *ngIf="isFeildAuthorized('transferToProviderId')">{{caseManagerHistory?.toProvider}}</td>
+
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="caseManagerHistoryList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,112 @@
+<div class="list-view-layout">
+	<!--<h2 class="page-title hide-heading">Licence Condition</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>-->
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Licence Conditions" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create') && isActiveRelease" class="pull-right">
+							<button [routerLink]="['licence-condition', 'new']" id="licenceCondition_addButton" class="btn btn-default btn-small" title="Add Record"><span class="glyphicon glyphicon-plus">aa</span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<!--<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="searchLicenceCondition($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>-->
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+
+											<th *ngIf="isFeildAuthorized('licCondTypeMainCategoryId')" id="licCondTypeMainCategoryId" trSortBy="licCondTypeMainCategoryId"
+											 (sortCommand)="sort($event)"><span class="th-div">Licence Condition Main Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'licCondTypeMainCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid230" *ngIf="isFeildAuthorized('licCondTypeSubCategoryId')" id="licCondTypeSubCategoryId" trSortBy="licCondTypeSubCategoryId"
+											 (sortCommand)="sort($event)"><span class="th-div">Licence Condition Sub Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'licCondTypeSubCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('expectedStartDate')" id="expectedStartDate1" trSortBy="expectedStartDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Expected Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'expectedStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('actualStartDate')" id="actualStartDate1" trSortBy="actualStartDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Actual Start Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'actualStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th class="wid150" *ngIf="isFeildAuthorized('actualEndDate')" id="actualEndDate1" trSortBy="actualEndDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Termination Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'actualEndDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+
+											<th *ngIf="isAuthorized('Read')" class="text-center wid120"><span class="hidden">View</span></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let licenceCondition of licenceConditionList; let i = index">
+											<td *ngIf="isFeildAuthorized('licCondTypeMainCategoryId')">
+												<span *ngFor="let licCondTypeMainCategoryId of licCondTypeMainCategoryIdList | filter :'key' : licenceCondition?.licCondTypeMainCategoryId">{{licCondTypeMainCategoryId.value}}</span>
+											</td>
+
+											<td *ngIf="isFeildAuthorized('licCondTypeSubCategoryId')">
+												<span *ngFor="let licCondTypeSubCategoryId of licCondTypeSubCategoryIdList | filter :'key' : licenceCondition?.licCondTypeSubCategoryId">{{licCondTypeSubCategoryId.value}}</span>
+											</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('expectedStartDate')">{{licenceCondition?.expectedStartDate}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('actualStartDate')">{{licenceCondition?.actualStartDate}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('actualEndDate')">{{licenceCondition?.actualEndDate}}</td>
+
+
+
+											<td class="text-center wid100">
+												<span *ngIf="isAuthorized('Read')">
+													 <button class="btn btn-default btn-small" id="licenceCondition_view{{i}}" [routerLink]="['licence-condition', licenceCondition?.licenceConditionId]" title="View Record">
+                                                     <span class="glyphicon glyphicon-search">aa</span>
+												</button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+														<button id="licenceCondition_edit{{i}}" class="btn btn-default btn-small" *ngIf="licenceCondition?.locked && licenceCondition?.terminationReasonId == null " title="Edit record is locked.">
+                                                  <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!licenceCondition?.locked && licenceCondition?.terminationReasonId == null" [routerLink]="['licence-condition', 'edit', licenceCondition?.licenceConditionId]"
+												 id="licenceCondition_edit{{i}}" class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+													<button id="licenceCondition_delete{{i}}" class="btn btn-default btn-small" *ngIf="licenceCondition?.locked" title="Delete record is locked.">
+												 <span class="glyphicon glyphicon-lock">aa</span>
+												</button>
+												<button *ngIf="!licenceCondition?.locked" (click)="delete(licenceCondition?.licenceConditionId)" id="licenceCondition_delete{{i}}"
+												 class="btn btn-default btn-small" title="Delete record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="licenceConditionList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'licenceConditionList'" *ngIf="licenceConditionList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	
+</div>

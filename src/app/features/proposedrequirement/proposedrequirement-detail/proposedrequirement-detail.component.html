@@ -1,0 +1,159 @@
+<div class="detail-view-layout">
+	<h2 class="page-title">VIEW proposed Requirement</h2>
+	<button class="btn btn-default btn-purple pull-right" [routerLink]="['../..']" >Back</button>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Proposed Requirement" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<fieldset class="three-column">
+					<legend> <span class="glyphicon glyphicon-flash"></span> proposed Requirement</legend>
+					<div class="row">
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('proposedRequirementId')">
+								<div class="view-title col-sm-5">proposed Requirement </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.proposedRequirementId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('additionalRequirementTypeMainCategoryId')">
+								<div class="view-title col-sm-5">additional Requirement Type Main Category </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="proposedRequirement?.additionalRequirementTypeMainCategoryId" [tableId]="80" [pkValue]="proposedRequirement?.additionalRequirementTypeMainCategoryId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('additionalRequirementTypeSubCategoryId')">
+								<div class="view-title col-sm-5">additional Requirement Type Sub Category </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="proposedRequirement?.additionalRequirementTypeSubCategoryId" [tableId]="81" [pkValue]="proposedRequirement?.additionalRequirementTypeSubCategoryId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('courtReportId')">
+								<div class="view-title col-sm-5">court Reports </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.courtReportId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('length')">
+								<div class="view-title col-sm-5">length </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.length}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requirementTypeMainCategoryId')">
+								<div class="view-title col-sm-5">requirement Type Main Category </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="proposedRequirement?.requirementTypeMainCategoryId" [tableId]="215" [pkValue]="proposedRequirement?.requirementTypeMainCategoryId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requirementTypeSubCategoryId')">
+								<div class="view-title col-sm-5">requirement Type Sub Category </div>
+								<div class="detail-value col-sm-7">
+									<tr-list-label *ngIf="proposedRequirement?.requirementTypeSubCategoryId" [tableId]="216" [pkValue]="proposedRequirement?.requirementTypeSubCategoryId"></tr-list-label>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgProposedRequirementId')">
+								<div class="view-title col-sm-5">SPG Proposed Requirement </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.spgProposedRequirementId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+								<div class="view-title col-sm-5">SPG Version </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.spgVersion}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+								<div class="view-title col-sm-5">SPG Update User </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.spgUpdateUser}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+								<div class="view-title col-sm-5">created Date </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.createdDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+								<div class="view-title col-sm-5">created By </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.createdBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+								<div class="view-title col-sm-5">created By User </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.createdByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+								<div class="view-title col-sm-5">modified Date </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.modifiedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+								<div class="view-title col-sm-5">modified By </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.modifiedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+								<div class="view-title col-sm-5">modified By User </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.modifiedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+								<div class="view-title col-sm-5">deleted </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.deleted}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+								<div class="view-title col-sm-5">deleted Date </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.deletedDate}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+								<div class="view-title col-sm-5">deleted By </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.deletedBy}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+								<div class="view-title col-sm-5">deleted By User </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.deletedByUserId}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+								<div class="view-title col-sm-5">locked </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.locked}}</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+								<div class="view-title col-sm-5">version </div>
+								<div class="detail-value col-sm-7">{{proposedRequirement?.version}}</div>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

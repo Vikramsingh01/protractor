@@ -1,0 +1,118 @@
+<div class="detail-view-layout">
+  <div class="row hide-heading">
+    <div class="col-sm-12">
+      <h2 class="page-title pull-left">VIEW Community Payback Appointment</h2>
+      <div class="pull-right">
+        <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="double-divider-purple mt10 hide-heading"></div>
+  <div class="grid-style" *ngIf="authorizedFlag">
+    <tr-accordion>
+      <tr-accordionTab header="Community Payback Appointment" [selected]="true">
+        <div class="grid-head"></div>
+        <fieldset class="three-column shrink-view">
+          <legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Appointment </legend>
+          <div class="row">
+
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('appointmentDate')">
+              <div class="view-title col-sm-5" title="Appointment Date" id="label_appointmentDate">Appointment Date<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="appointmentDate">{{upwAppointment?.appointmentDate}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('providerId')">
+                <div class="view-title col-sm-5" title="Provider" id="label_providerId">Provider<span class="pull-right">:</span></div>
+                <div class="detail-value col-sm-7" id="providerId">
+                    <tr-list-label *ngIf="upwAppointment?.providerId" [tableId]="193" [pkValue]="upwAppointment?.providerId"></tr-list-label>
+                </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('projectTypeId')">
+              <div class="view-title col-sm-5" title="Project Type" id="label_projectTypeId">Project Type<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="projectTypeId">
+                <tr-list-label *ngIf="upwAppointment?.projectTypeId" [tableId]="239" [pkValue]="upwAppointment?.projectTypeId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('projectName')">
+              <div class="view-title col-sm-5" title="Project Name" id="label_projectName">Project Name<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="projectName">{{upwAppointment?.projectName}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('startTime')">
+              <div class="view-title col-sm-5" title="Start Time" id="label_startTime">Start Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="startTime">{{upwAppointment?.startTime}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('endTime')">
+              <div class="view-title col-sm-5" title="End Time" id="label_endTime">End Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="endTime">{{upwAppointment?.endTime}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('upwOutcomeTypeId')">
+              <div class="view-title col-sm-5" title="Outcome Type" id="label_upwOutcomeTypeId"> Outcome Type<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="upwOutcomeTypeId">
+                <tr-list-label *ngIf="upwAppointment?.upwOutcomeTypeId" [tableId]="103" [pkValue]="upwAppointment?.upwOutcomeTypeId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="nsrdData['enforcementActionId']?.active">
+              <div class="view-title col-sm-5" title="Enforcement Actoin" id="label_enforcementActionId">Enforcement Action<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="enforcementActionId">
+                <tr-list-label *ngIf="upwAppointment?.enforcementActionId" [tableId]="121" [pkValue]="upwAppointment?.enforcementActionId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('highVisibilityVest') && nsrdData['highVisibilityVestYesNoId']?.active">
+              <div class="view-title col-sm-5" title="High Visibility Vest Worn?" id="label_highVisibilityVest">High Visibility Vest Worn?<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="highVisibilityVest">
+                <tr-list-label *ngIf="upwAppointment?.highVisibilityVestYesNoId" [tableId]="244" [pkValue]="upwAppointment?.highVisibilityVestYesNoId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('intensive') && nsrdData['intensiveYesNoId']?.active">
+              <div class="view-title col-sm-5" title="Worked Intensively?" id="label_intensive">Worked Intensively?<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="intensive">
+                <tr-list-label *ngIf="upwAppointment?.intensiveYesNoId" [tableId]="244" [pkValue]="upwAppointment?.intensiveYesNoId"></tr-list-label>
+              </div>
+            </div>
+
+
+
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('minutesOffered') && nsrdData['minutesOffered']?.active">
+              <div class="view-title col-sm-5" title="Minutes Offered" id="label_minutesOffered">Hours Offered<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="minutesOffered">{{upwAppointment?.minutesOffered}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('penaltyTime') && nsrdData['penaltyTime']?.active">
+              <div class="view-title col-sm-5" title="Penalty Time" id="label_penaltyTime">Penalty Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="penaltyTime">{{upwAppointment?.penaltyTime}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('minutesCredited') && nsrdData['minutesCredited']?.active">
+              <div class="view-title col-sm-5" title="Minutes Credited" id="label_minutesCredited">Hours Credited<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="minutesCredited">{{upwAppointment?.minutesCredited}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('workQualityId') && nsrdData['workQualityId']?.active">
+              <div class="view-title col-sm-5" title="Work Quality" id="label_workQualityId">Work Quality<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="workQualityId">
+                <tr-list-label *ngIf="upwAppointment?.workQualityId" [tableId]="243" [pkValue]="upwAppointment?.workQualityId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('behaviourId') && nsrdData['behaviourId']?.active">
+              <div class="view-title col-sm-5" title="Behaviour" id="label_behaviourId">Behaviour<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="behaviourId">
+                <tr-list-label *ngIf="upwAppointment?.behaviourId" [tableId]="234" [pkValue]="upwAppointment?.behaviourId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('upwTeam')">
+              <div class="view-title col-sm-5" title="Team" id="label_upwTeam">Team<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="upwTeam">{{upwAppointment?.upwTeam}}</div>
+            </div>
+            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('upwContactOfficer')">
+              <div class="view-title col-sm-5" title="Contact Officer" id="label_upwContactOfficer">Contact Officer<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7" id="upwContactOfficer">{{upwAppointment?.upwContactOfficer}}</div>
+            </div>
+            <div class="col-sm-12 nopadding">
+              <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+                <div class="view-title col-sm-5" title="note ">Notes <span class="pull-right">:</span></div>
+                <div class="detail-value-note col-sm-7">{{upwAppointment?.note}}</div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,97 @@
+<div class="list-view-layout">
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Requirements" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['community-requirement', 'new']" class="btn btn-default btn-white pull-right" title="Add Record"><span class="glyphicon glyphicon-plus"></span></button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="text-center">Sr. No.</th>
+											<th *ngIf="isFeildAuthorized('imposedDate')" trSortBy="imposedDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Sentence Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'imposedDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isFeildAuthorized('requirementTypeMainCategoryId')" trSortBy="requirementTypeMainCategoryId" (sortCommand)="sort($event)"><span class="th-div">Description<span *ngIf="sortSearchPaginationObj.sortObj.field == 'requirementTypeMainCategoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+												
+												<th *ngIf="isFeildAuthorized('length')" trSortBy="length" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Length<span *ngIf="sortSearchPaginationObj.sortObj.field == 'length'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+												</th>
+												<th *ngIf="isFeildAuthorized('actualStartDate')" trSortBy="actualStartDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Commenced<span *ngIf="sortSearchPaginationObj.sortObj.field == 'actualStartDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+												</th>
+												<th *ngIf="isFeildAuthorized('actualEndDate')" trSortBy="actualEndDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Terminated<span *ngIf="sortSearchPaginationObj.sortObj.field == 'actualEndDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+												</th>
+												<th class="wid180" *ngIf="isFeildAuthorized('rqResponsibleOfficer')" trSortBy="rqResponsibleOfficer" (sortCommand)="sort($event)"><span class="th-div">Requirement Manager<span *ngIf="sortSearchPaginationObj.sortObj.field == 'rqResponsibleOfficer'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+												</th>
+
+												<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+												
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr *ngFor="let communityRequirement of communityRequirementList; let i = index">
+											<td class="wid80 text-center">{{i+1}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('imposedDate')">{{communityRequirement?.imposedDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('requirementTypeMainCategoryId')">
+												<span *ngFor="let requirementTypeMainCategoryId of requirementTypeMainCategoryIdList | filter :'key' : communityRequirement?.requirementTypeMainCategoryId">{{requirementTypeMainCategoryId.value}}</span> </td>
+											<!--<td *ngIf="isFeildAuthorized('requirementTypeSubCategoryId')"> 
+												<span *ngFor="let requirementTypeSubCategoryId of requirementTypeSubCategoryIdList | filter :'key' : communityRequirement?.requirementTypeSubCategoryId">{{requirementTypeSubCategoryId.value}}</span>
+											</td>-->
+
+											<td class="text-center" *ngIf="isFeildAuthorized('length')"><span *ngIf="communityRequirement?.length!=null && communityRequirement?.length!= ''">{{communityRequirement?.length}} {{communityRequirement?.unitsCode}}</span></td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('actualStartDate')">{{communityRequirement?.actualStartDate}}</td>
+
+											<td class="text-center" *ngIf="isFeildAuthorized('actualEndDate')">{{communityRequirement?.actualEndDate}}</td>
+
+											<td *ngIf="isFeildAuthorized('rqResponsibleOfficer')">{{parseOfficer(communityRequirement?.rqResponsibleOfficer)}}</td>
+
+											<td class="text-center wid150"> 
+												<span *ngIf="isAuthorized('Read')" >
+													<button [routerLink]="['community-requirement', communityRequirement?.communityRequirementId]" class="btn btn-default btn-small"
+													 title="View Record"><span class="glyphicon glyphicon-search">aa</span>
+												</button>
+												</span>
+												<span *ngIf="isAuthorized('Update')" >
+													<button class="btn btn-default btn-small" *ngIf="communityRequirement?.locked && communityRequirement?.terminationReasonId == null" title="The record is locked.">
+                                                    <span class="glyphicon glyphicon-lock"></span>
+												</button>
+												<button *ngIf="!communityRequirement?.locked && communityRequirement?.terminationReasonId == null" [routerLink]="['community-requirement','edit', communityRequirement?.communityRequirementId]"
+												 class="btn btn-default btn-small">
+													 <span class="glyphicon glyphicon-pencil">aa</span>
+													 </button>
+												</span>
+												
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="communityRequirementList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'communityRequirementList'" *ngIf="communityRequirementList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+						 (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

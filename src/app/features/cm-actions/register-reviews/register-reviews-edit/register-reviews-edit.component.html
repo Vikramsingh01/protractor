@@ -1,0 +1,207 @@
+<div class="edit-view-layout">
+
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title" *ngIf="action == 'Update'">Update Registration Review</h2>
+
+        <form [formGroup]="registrationReviewEditForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Registration Review </legend>
+                <div class="row">
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('registrationReviewId')">
+                        <label for="registrationReviewId" title="Registration Review Id">Registration Review Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="registrationReviewId" id="registrationReviewId" class="form-control" placeholder="Registration Review Id"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.registrationReviewId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('registrationId')">
+                        <label for="registrationId" title="Registration Id">Registration Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="registrationId" id="registrationId" class="form-control" placeholder="Registration Id"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.registrationId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="registrationReviewId" title="Registration Type">Registration Type
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="207" [controlName]="'registrationType'" [dropdown]="registrationReviewEditForm"></tr-dropdown>
+                        <control-messages [control]="registrationReviewEditForm.controls.registrationType"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateOfReview')">
+                        <label for="dateOfReview" title="Date Of Review">Date Of Review
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'dateOfReview'" [form]="registrationReviewEditForm"></date-picker>
+                        <control-messages [control]="registrationReviewEditForm.controls.dateOfReview"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('timeOfReview')">
+                        <label for="timeOfReview" title="Time Of Review">Time Of Review
+                                                                     <span class="mand-text">*</span> </label>
+                        <timepicker [controlName]="'timeOfReview'" [form]="registrationReviewEditForm" [showMeridian]="false" [showSeconds]="false"
+                            (timepicker)="close()"></timepicker>
+                        <control-messages [control]="registrationReviewEditForm.controls.timeOfReview"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                        <label for="spgVersion" title="Spg Version">Spg Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+                        <control-messages [control]="registrationReviewEditForm.controls.spgVersion"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                        <label for="spgUpdateUser" title="Spg Update User">Spg Update User
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.spgUpdateUser"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('reviewCompletedYesNoId')">
+                        <label for="reviewCompletedYesNoId" title="Review Completed Yes No Id">Completed
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="244" [isDataNsrd]="true" (updateDataNsrd)="updateDataNsrd($event)" [controlName]="'reviewCompletedYesNoId'" [excludeCodes]="['U']"
+                            [dropdown]="registrationReviewEditForm"></tr-dropdown>
+                        <control-messages [control]="registrationReviewEditForm.controls.reviewCompletedYesNoId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgRegistrationReviewId')">
+                        <label for="spgRegistrationReviewId" title="Spg Registration Review Id">Spg Registration Review Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgRegistrationReviewId" id="spgRegistrationReviewId" class="form-control" placeholder="Spg Registration Review Id"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.spgRegistrationReviewId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('nextReviewDate') && nsrdData['nextReviewDate']?.active ">
+                        <label for="nextReviewDate" title="Next Review Date">Next Review Date <span *ngIf="nsrdData['nextReviewDate']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'nextReviewDate'" [form]="registrationReviewEditForm"></date-picker>
+                        <control-messages [control]="registrationReviewEditForm.controls.nextReviewDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('nextReviewTime') && nsrdData['nextReviewTime']?.active ">
+                        <label for="nextReviewTime" title="Next Review Time">Next Review Time <span *ngIf="nsrdData['nextReviewTime']?.mandatory" class="mand-text">*</span>
+                                                                    </label>
+                        <timepicker [controlName]="'nextReviewTime'" [form]="registrationReviewEditForm" [showMeridian]="false" [showSeconds]="false"
+                            (timepicker)="close()"></timepicker>
+                        <control-messages [control]="registrationReviewEditForm.controls.nextReviewTime"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                        <label for="createdBy" title="Created By">Created By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+                        <control-messages [control]="registrationReviewEditForm.controls.createdBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                        <label for="createdByUserId" title="Created By User Id">Created By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.createdByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                        <label for="createdDate" title="Created Date">Created Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'createdDate'" [form]="registrationReviewEditForm"></date-picker>
+                        <control-messages [control]="registrationReviewEditForm.controls.createdDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                        <label for="modifiedBy" title="Modified By">Modified By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+                        <control-messages [control]="registrationReviewEditForm.controls.modifiedBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                        <label for="modifiedByUserId" title="Modified By User Id">Modified By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.modifiedByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                        <label for="modifiedDate" title="Modified Date">Modified Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'modifiedDate'" [form]="registrationReviewEditForm"></date-picker>
+                        <control-messages [control]="registrationReviewEditForm.controls.modifiedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                        <label for="deleted" title="Deleted">Deleted
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+                        <control-messages [control]="registrationReviewEditForm.controls.deleted"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                        <label for="deletedBy" title="Deleted By">Deleted By
+                                                                </label>
+                        <input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+                        <control-messages [control]="registrationReviewEditForm.controls.deletedBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                        <label for="deletedByUserId" title="Deleted By User Id">Deleted By User Id
+                                                                </label>
+                        <input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+                        />
+                        <control-messages [control]="registrationReviewEditForm.controls.deletedByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                        <label for="deletedDate" title="Deleted Date">Deleted Date
+                                                                    </label>
+                        <date-picker [controlName]="'deletedDate'" [form]="registrationReviewEditForm"></date-picker>
+                        <control-messages [control]="registrationReviewEditForm.controls.deletedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                        <label for="locked" title="Locked">Locked
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+                        <control-messages [control]="registrationReviewEditForm.controls.locked"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+                        <label for="version" title="Version">Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+                        <control-messages [control]="registrationReviewEditForm.controls.version"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('reviewProviderId')">
+                        <label for="reviewProviderId" title="Reviewing Officer's Provider">Reviewing Officer's Provider
+                        <span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'reviewProviderId'" [dropdown]="registrationReviewEditForm"></tr-dropdown>
+                        <control-messages [control]="registrationReviewEditForm.controls.reviewProviderId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('reviewingTeam')">
+                        <label for="reviewingTeam" title="Reviewing Officer's Team">Reviewing Officer's Team <span class="mand-text">*</span></label>
+                        <input type="text" formControlName="reviewingTeam" id="reviewingTeam" class="form-control" placeholder="Team">
+                        <control-messages [control]="registrationReviewEditForm.controls.reviewingTeam"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('reviewingOfficer')">
+                        <label for="reviewingOfficer" title="Reviewed By">Reviewed By<span class="mand-text">*</span></label>
+                        <input type="text" formControlName="reviewingOfficer" id="reviewingOfficer" class="form-control" placeholder="Officer">
+                        <control-messages [control]="registrationReviewEditForm.controls.reviewingOfficer"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="registrationReviewEditForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="registrationReviewEditForm.controls.note"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="registrationReviewEditForm">Submit</button>
+                        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+</div>

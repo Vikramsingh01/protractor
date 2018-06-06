@@ -1,0 +1,28 @@
+<div class="edit-view-layout">
+
+	
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+	<h2 class="page-title">Generate Letter</h2>
+		<form [formGroup]="generateLetterForm" (ngSubmit)="generateSubmit(generateLetterForm.controls.templateNameId.value)" autocomplete="off">
+			<fieldset class="two-column">
+				<div class="row">
+					<div class="form-group col-sm-6 ">
+						<label for="templateNameId" title="Please Select A Letter">Please Select A Letter<span class="mand-text">*</span>
+                        </label>
+						
+						<select class="form-control" formControlName="templateNameId" id="templateNameId">
+						<option value=''>- Select -</option>
+							<option *ngFor="let item of itemList" value="{{item.templateName}}" >{{item.templateName}}</option>
+							
+						</select>
+						 <control-messages [control]="generateLetterForm.controls.templateNameId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6 " >
+						<button class="btn btn-default btn-purple" id="submitButton" fromServerMessageValidator [form]="generateLetterForm">Generate Letter</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

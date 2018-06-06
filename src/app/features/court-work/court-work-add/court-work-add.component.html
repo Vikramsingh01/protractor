@@ -1,0 +1,269 @@
+<div class="edit-view-layout one-line-view">
+
+    <div class="grid-style shrink-view grey-bg nomargin" *ngIf="authorizedFlag">
+        <form [formGroup]="courtWorkAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column nopadding">
+                <legend> <span class="glyphicon glyphicon-flash"></span> Court Work </legend>
+                <div class="row">
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processId')">
+                        <label for="processId" title="Process Id">Process Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="processId" id="processId" class="form-control" placeholder="Process Id" />
+                        <control-messages [control]="courtWorkAddForm.controls.processId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                        <label for="profileId" title="Profile Id"> Profile Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="profileId" id="profileId" class="form-control" placeholder="Profile Id" />
+                        <control-messages [control]="courtWorkAddForm.controls.profileId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('eventId')">
+                        <label for="eventId" title="Event Id"> Event Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="eventId" id="eventId" class="form-control" placeholder="Event Id" />
+                        <control-messages [control]="courtWorkAddForm.controls.eventId"></control-messages>
+                    </div>
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+                        <label for="spgVersion">Spg Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+                        <control-messages [control]="courtWorkAddForm.controls.spgVersion"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+                        <label for="spgUpdateUser">Spg Update User
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.spgUpdateUser"></control-messages>
+                    </div>-->
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processTypeId')">
+						<label for="processTypeIdwork-request" title="Request Type">Request Type<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" name="work-request" [tableId]="192" [hasChildAnswers]="true" (updateAnswers)="updateAnswers($event)" (change)="onChange($event.target.value)" [controlName]="'processTypeId'" [excludeItems]="reqTypeIds" [dropdown]="courtWorkAddForm"></tr-dropdown>
+						<control-messages [control]="courtWorkAddForm.controls.processTypeId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processSubTypeId')">
+						<label for="processSubTypeId" title="Request Sub Type">Request Sub Type<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="170" [isDependent]="true" [list]="childAnswers[170]" [controlName]="'processSubTypeId'" [dropdown]="courtWorkAddForm"></tr-dropdown>
+						<control-messages [control]="courtWorkAddForm.controls.processSubTypeId"></control-messages>
+					</div>
+
+
+
+
+
+
+
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processTypeId')">
+                        <label for="processTypeId">Request Type<span class="mand-text">*</span></label>
+                        <tr-dropdown [operation] = "action" [tableId]="2536" [controlName]="'processTypeId'" [dropdown]="courtWorkAddForm" (change)="onChange($event.target.value)"></tr-dropdown>
+                        <control-messages [control]="courtWorkAddForm.controls.processTypeId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processSubTypeId')">
+                        <label for="processSubTypeId">Request Sub Type<span class="mand-text">*</span></label>
+                        <select class="form-control" formControlName="processSubTypeId" required>
+                                    <option value="">- Select -</option>
+					                <option *ngFor="let requestSubType of requestSubTypes" [value]="requestSubType?.key">{{requestSubType?.value}}</option>
+                                </select>
+                        <control-messages [control]="courtWorkAddForm.controls.processSubTypeId"></control-messages>
+                    </div>-->
+
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processRefDate')">
+                        <label for="processRefDate" title="Referral Date">Referral Date<span class="mand-text">*</span></label>
+                        <date-picker [controlName]="'processRefDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.processRefDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('processNote')">
+                        <tr-notes [controlName]="'processNote'" [form]="courtWorkAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="courtWorkAddForm.controls.processNote"></control-messages>
+                    </div>
+
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processRefDate')">
+                        <label for="processStageId" title="Request Type">Status<span class="mand-text">*</span></label>
+                                            <tr-dropdown [operation] = "action" [tableId]="191" [controlName]="'processStageId'" [dropdown]="courtWorkAddForm"></tr-dropdown>
+                        <control-messages [control]="courtWorkAddForm.controls.processStageId"></control-messages>
+                        </div>
+
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processRefDate')">
+                                            <label for="processRefDate" title="Referral Date">Status Date<span class="mand-text">*</span></label>
+                                            <date-picker [controlName]="'processRefDate'" [form]="courtWorkAddForm"></date-picker>
+                                            <control-messages [control]="courtWorkAddForm.controls.processRefDate"></control-messages>
+                    </div>-->
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processExpectedStartDate')">
+                        <label for="processExpectedStartDate">Process Expected Start Date
+                                                                    </label>
+                        <date-picker [controlName]="'processExpectedStartDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.processExpectedStartDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStartDate')">
+                        <label for="processStartDate">Process Start Date
+                                                                    </label>
+                        <date-picker [controlName]="'processStartDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.processStartDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processExpectedEndDate')">
+                        <label for="processExpectedEndDate">Process Expected End Date
+                                                                    </label>
+                        <date-picker [controlName]="'processExpectedEndDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.processExpectedEndDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processEndDate')">
+                        <label for="processEndDate">Process End Date
+                                                                    </label>
+                        <date-picker [controlName]="'processEndDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.processEndDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStageId')">
+                        <label for="processStageId">Process Stage Id
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <tr-dropdown [operation] = "action" [tableId]="2537" [controlName]="'processStageId'" [dropdown]="courtWorkAddForm"></tr-dropdown>
+                        <control-messages [control]="courtWorkAddForm.controls.processStageId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processStageDate')">
+                        <label for="processStageDate">Process Stage Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'processStageDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.processStageDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processNote')">
+                        <label for="processNote">Process Note
+                                                                </label>
+                        <input type="text" formControlName="processNote" id="processNote" class="form-control" placeholder="Process Note" />
+                        <control-messages [control]="courtWorkAddForm.controls.processNote"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processOutcomeId')">
+                        <label for="processOutcomeId">Process Outcome Id
+                                                                </label>
+                        <input type="text" formControlName="processOutcomeId" id="processOutcomeId" class="form-control" placeholder="Process Outcome Id"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.processOutcomeId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('processEndAttCount')">
+                        <label for="processEndAttCount">Process End Att Count
+                                                                </label>
+                        <input type="text" formControlName="processEndAttCount" id="processEndAttCount" class="form-control" placeholder="Process End Att Count"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.processEndAttCount"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('intendedProviderId')">
+                        <label for="intendedProviderId">Intended Provider Id
+                                                                </label>
+                        <input type="text" formControlName="intendedProviderId" id="intendedProviderId" class="form-control" placeholder="Intended Provider Id"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.intendedProviderId"></control-messages>
+                    </div>-->
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgProcessContactId')">
+                        <label for="spgProcessContactId" title="Spg Process Contact Id">Spg Process Contact Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="spgProcessContactId" id="spgProcessContactId" class="form-control" placeholder="Spg Process Contact Id"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.spgProcessContactId"></control-messages>
+                    </div>
+                    <!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                        <label for="createdBy">Created By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+                        <control-messages [control]="courtWorkAddForm.controls.createdBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                        <label for="createdByUserId">Created By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.createdByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                        <label for="createdDate">Created Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'createdDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.createdDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                        <label for="modifiedBy">Modified By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+                        <control-messages [control]="courtWorkAddForm.controls.modifiedBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                        <label for="modifiedByUserId">Modified By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.modifiedByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                        <label for="modifiedDate">Modified Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+                        <date-picker [controlName]="'modifiedDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.modifiedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                        <label for="deleted">Deleted
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+                        <control-messages [control]="courtWorkAddForm.controls.deleted"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                        <label for="deletedBy">Deleted By
+                                                                </label>
+                        <input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+                        <control-messages [control]="courtWorkAddForm.controls.deletedBy"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                        <label for="deletedByUserId">Deleted By User Id
+                                                                </label>
+                        <input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+                        />
+                        <control-messages [control]="courtWorkAddForm.controls.deletedByUserId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                        <label for="deletedDate">Deleted Date
+                                                                    </label>
+                        <date-picker [controlName]="'deletedDate'" [form]="courtWorkAddForm"></date-picker>
+                        <control-messages [control]="courtWorkAddForm.controls.deletedDate"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                        <label for="locked">Locked
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+                        <control-messages [control]="courtWorkAddForm.controls.locked"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+                        <label for="version">Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+                        <input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+                        <control-messages [control]="courtWorkAddForm.controls.version"></control-messages>
+                    </div>-->
+                    <div class="form-group text-right nomargin">
+                        <div class="col-sm-12">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="courtWorkAddForm">Send Request</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

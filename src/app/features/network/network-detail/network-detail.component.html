@@ -1,0 +1,211 @@
+<div class="detail-value-layout">
+	<div class="row hide-heading">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">VIEW Network</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Network" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend> <span class="glyphicon glyphicon-flash"></span> Network </legend>
+					<div class="row">
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('titleId')">
+							<div class="view-title col-sm-5" title="Title">Title <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="network?.titleId" [tableId]="227" [pkValue]="network?.titleId"></tr-list-label>
+							</div>
+						</div>
+
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('firstName')">
+							<div class="view-title col-sm-5" title="First Name">First Name <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.firstName}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('otherName')">
+							<div class="view-title col-sm-5" title="Other Name">Other Name <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.otherName}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('previousSurname')">
+							<div class="view-title col-sm-5" title="Previous Surname">Previous Surname <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.previousSurname}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('familyName')">
+							<div class="view-title col-sm-5" title="Family Name">Family Name <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.familyName}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('relationshipId')">
+							<div class="view-title col-sm-5" title="Relationship Type">Relationship Type <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="network?.relationshipId" [tableId]="187" [pkValue]="network?.relationshipId"></tr-list-label>
+							</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('relationshipToOffenderId')">
+							<div class="view-title col-sm-5" title="Relationship To SU">Relationship To SU <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.relationshipToOffenderId}}</div>
+						</div>
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('genderId')">
+							<div class="view-title col-sm-5" title="Gender">Gender <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">
+								<tr-list-label *ngIf="network?.genderId" [tableId]="2" [pkValue]="network?.genderId"></tr-list-label>
+							</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('buildingName')">
+							<div class="view-title col-sm-5" title="Building Name">Building Name <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.buildingName}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('houseNumber')">
+							<div class="view-title col-sm-5" title="House Number">House Number <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.houseNumber}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('streetName')">
+							<div class="view-title col-sm-5" title="Street Name">Street Name <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.streetName}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('district')">
+							<div class="view-title col-sm-5" title="District">District <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.district}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('townCity')">
+							<div class="view-title col-sm-5" title="Town/City">Town/City <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.townCity}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('county')">
+							<div class="view-title col-sm-5" title="County">County <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.county}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('postCode')">
+							<div class="view-title col-sm-5" title="Post Code">Post Code <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.postCode}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('mobileNumber')">
+							<div class="view-title col-sm-5" title="Mobile Number">Mobile Number <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.mobileNumber}}</div>
+						</div>
+
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('telephoneNumber')">
+							<div class="view-title col-sm-5" title="Telephone Number">Telephone Number <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.telephoneNumber}}</div>
+						</div>
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+							<div class="view-title col-sm-5" title="Start Date">Start Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.startDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+							<div class="view-title col-sm-5" title="End Date">End Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.endDate}}</div>
+						</div>
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('emailAddress')">
+							<div class="view-title col-sm-5" title="Email Address">Email Address <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.emailAddress}}</div>
+						</div>
+
+						<div class="col-sm-12 nopadding">
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('note')">
+							<div class="view-title col-sm-5" title="Notes">Notes <span class="pull-right">:</span></div>
+							<div class="detail-value-note text-box">{{network?.note}}</div>
+						</div>
+						</div>
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+							<div class="view-title col-sm-5" title="Profile Id">Profile Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.profileId}}</div>
+						</div>
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('personalContactId')">
+							<div class="view-title col-sm-5" title="Personal Contact Id">Personal Contact Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.personalContactId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+							<div class="view-title col-sm-5" title="Spg Version">Spg Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.spgVersion}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+							<div class="view-title col-sm-5" title="Spg Update User">Spg Update User <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.spgUpdateUser}}</div>
+						</div>
+
+
+
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('spgPersonalContactId')">
+							<div class="view-title col-sm-5" title="Spg Personal Contact Id">Spg Personal Contact Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.spgPersonalContactId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+							<div class="view-title col-sm-5" title="Created By">Created By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.createdBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+							<div class="view-title col-sm-5" title="Created By User Id">Created By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.createdByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+							<div class="view-title col-sm-5" title="Created Date">Created Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.createdDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+							<div class="view-title col-sm-5" title="Modified By">Modified By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.modifiedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+							<div class="view-title col-sm-5" title="Modified By User Id">Modified By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.modifiedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+							<div class="view-title col-sm-5" title="Modified Date">Modified Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.modifiedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+							<div class="view-title col-sm-5" title="Deleted">Deleted <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.deleted}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+							<div class="view-title col-sm-5" title="Deleted By">Deleted By <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.deletedBy}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+							<div class="view-title col-sm-5" title="Deleted By User Id">Deleted By User Id <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.deletedByUserId}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+							<div class="view-title col-sm-5" title="Deleted Date">Deleted Date <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.deletedDate}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+							<div class="view-title col-sm-5" title="Locked">Locked <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.locked}}</div>
+						</div>
+						<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+							<div class="view-title col-sm-5" title="Version">Version <span class="pull-right">:</span></div>
+							<div class="detail-value col-sm-7">{{network?.version}}</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

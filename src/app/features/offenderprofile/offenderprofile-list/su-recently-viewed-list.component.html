@@ -1,0 +1,82 @@
+<router-outlet></router-outlet>
+	  
+<div class="list-view-layout">
+		<div class="grid-grey" >
+		<h2>Recently Viewed Service Users</h2>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th  trSortBy="familyName" (sortCommand)="sort($event)" class="wid120">
+												<span class="th-div">Family Name<span *ngIf="sortFilterPaginationObj.sortObj.field == 'familyName'"
+											    [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('firstName') " trSortBy="firstName" (sortCommand)="sort($event)" class="wid120">
+												<span class="th-div">First Name<span *ngIf="sortFilterPaginationObj.sortObj.field == 'firstName'"
+											    [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+
+											<th class="wid110 text-center">
+												<span>date Of Birth</span>
+											</th>
+
+											<th trSortBy="caseReferenceNumber" class="wid80 text-center">
+												<span>CRN</span>
+											</th>
+
+											<th trSortBy="pncNumber" class="wid100 text-center">
+												<span>PNC</span>
+											</th>
+
+											<th trSortBy="genderId" >
+												<span>Gender</span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('offenderManagerProviderId')" >
+												<span>Provider</span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('offenderManagerResponsibleTeam')" >
+												<span>Team</span>
+											</th>
+
+											<th *ngIf="isFeildAuthorized('offenderManagerResponsibleOfficer')" class="wid150">
+												<span>Case Manager</span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center">
+												<span class="hidden">View</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let offenderProfile of offenderProfiles; let i = index ">
+											<td >{{offenderProfile?.familyName}}</td>
+											<td >{{offenderProfile?.firstName}}</td>
+											<td  class="text-center">{{offenderProfile?.dateOfBirth}}</td>
+											<td class="text-center">{{offenderProfile?.caseReferenceNumber}}</td>
+											<td class="text-center">{{offenderProfile?.pncNumber}}</td>
+											<td ><span *ngFor="let item of genderList | filter :'key' : offenderProfile?.genderId">{{item.value}}</span></td>
+											<td ><span *ngFor="let item of providerList | filter :'key' : offenderProfile?.offenderManagerProviderId">{{item.value}}</span></td>
+											<td ><span *ngFor="let item of teamList | filter :'key' : offenderProfile?.officeTeamId">{{item.value}}</span></td>
+											<td ><span *ngFor="let item of officerList | filter :'key' : offenderProfile?.caseManagerId">{{item.value}}</span></td>
+											<td class="text-center"><span *ngIf="isAuthorized('Read')">
+											<button id="offenderProfilesu_view{{i}}" class="btn btn-default btn-small" [routerLink]="['../', 'crc-service-user',offenderProfile?.profileId, 'profile']" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+											</span>
+											</td>
+											
+											
+										</tr>
+									</tbody>
+								</table>
+									<div *ngIf="offenderProfiles?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<!--<tr-pagination [name]="'offenderProfiles'" *ngIf="offenderProfiles?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>-->
+					</div>
+				</div>
+				
+	</div>
+

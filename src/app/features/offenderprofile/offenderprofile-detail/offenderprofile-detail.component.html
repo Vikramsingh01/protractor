@@ -1,0 +1,165 @@
+<div class="detail-view-layout">
+	<div class="relative">
+		<tr-main-tabs></tr-main-tabs>
+		<tr-tabs [structure]="'SU'"></tr-tabs>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="TITLE" [selected]="true">
+					<div class="grid-head" *ngIf="isAuthorized('Update')">
+						<div class="pull-right">
+							<button class="btn btn-default btn-small" *ngIf="!offenderProfile?.locked" [routerLink]="['edit']"><span class="glyphicon glyphicon-pencil" title="Edit Record"></span></button>
+							<button class="btn btn-default btn-small" *ngIf="offenderProfile?.locked" title="The record is locked.">
+							<span class="glyphicon glyphicon-lock">aa</span>
+						</button>
+						</div>
+					</div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> TITLE </legend>
+
+						<div class="row">
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('titleId')">
+									<div class="view-title col-sm-5" title="title ">title <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">
+										<tr-list-label *ngIf="offenderProfile?.titleId" [tableId]="227" [pkValue]="offenderProfile?.titleId"></tr-list-label>
+									</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('firstName')">
+									<div class="view-title col-sm-5" title="first Name ">first Name <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.firstName}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('secondName')">
+									<div class="view-title col-sm-5" title="second Name ">second Name <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.secondName}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('thirdName')">
+									<div class="view-title col-sm-5" title="third Name ">third Name <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.thirdName}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('familyName')">
+									<div class="view-title col-sm-5" title="family Name ">family Name <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.familyName}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('previousName')">
+									<div class="view-title col-sm-5" title="previous Name ">previous Name <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.previousName}}</p>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateOfBirth')">
+									<div class="view-title col-sm-5" title="date of birth ">date <span class="txt-trasilower">o</span>f birth <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.dateOfBirth}}</p>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('genderId')">
+									<div class="view-title col-sm-5" title="gender ">gender <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">
+										<tr-list-label *ngIf="offenderProfile?.genderId" [tableId]="2" [pkValue]="offenderProfile?.genderId"></tr-list-label>
+									</p>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateDied')">
+
+									<div class="view-title col-sm-5" title="Date of Death ">Date <span class="txt-trasilower">o</span>f Death <span class="pull-right">:</span></div>
+
+									<p class="detail-value col-sm-7">{{offenderProfile?.dateDied}}</p>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+		<div class="grid-style">
+			<tr-accordion>
+				<tr-accordionTab header="IDENTIFIERS" [selected]="false">
+					<div class="grid-head" *ngIf="isAuthorized('Update')">
+						<div class="pull-right">
+							<button class="btn btn-default btn-small" *ngIf="offenderProfile?.locked" title="The record is locked.">
+							<span class="glyphicon glyphicon-lock">aa</span>
+						</button>
+						</div>
+					</div>
+					<fieldset class="three-column shrink-view">
+						<legend> <span class="glyphicon glyphicon-flash"></span> IDENTIFIERS </legend>
+						<div class="row">
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized()">
+									<div class="view-title col-sm-5" title="Case Reference Number ">Case Reference Number <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.caseReferenceNumber}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized()">
+									<div class="view-title col-sm-5" title="PNC Number ">PNC Number <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.pncNumber}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized()">
+									<div class="view-title col-sm-5" title="CRO Number ">CRO Number <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.croNumber}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized()">
+									<div class="view-title col-sm-5" title="NOMS Number ">NOMS Number <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.nomsNumber}}</p>
+								</div>
+							</div>
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized()">
+									<div class="view-title col-sm-5" title="NI Number ">NI Number <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">{{offenderProfile?.niNumber}}</p>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('tierId')">
+									<div class="view-title col-sm-5" title="NPS TIER ">NPS TIER <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">
+										<tr-list-label *ngIf="offenderProfile?.tierId" [tableId]="225" [pkValue]="offenderProfile?.tierId"></tr-list-label>
+									</p>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="form-field-div col-sm-6" >
+									<div class="view-title col-sm-5" title="Band ">BAND <span class="pull-right">:</span></div>
+									<p class="detail-value col-sm-7">
+										<tr-list-label *ngIf="offenderProfile?.bandId" [tableId]="2548" [pkValue]="offenderProfile?.bandId"></tr-list-label>
+									</p>
+								</div>
+							</div>
+							
+
+
+						</div>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+
+		<tr-alias></tr-alias>
+		<!--	<tr-personalcircumstance></tr-personalcircumstance>
+				<tr-rate-card-intervention></tr-rate-card-intervention> -->
+		<tr-additional-identifier></tr-additional-identifier>
+		<!--	<tr-registration></tr-registration>
+				<tr-offendermanager></tr-offendermanager>  -->

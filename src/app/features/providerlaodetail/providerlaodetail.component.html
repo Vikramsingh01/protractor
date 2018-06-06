@@ -1,0 +1,80 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Provider LASU Detail" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('providerLaoDetailId')">provider LASU Detail</th>
+											<th *ngIf="isFeildAuthorized('exclusionMessage')">exclusion Message</th>
+											<th *ngIf="isFeildAuthorized('laoProviderId')">LASU Provider</th>
+											<th *ngIf="isFeildAuthorized('restrictionMessage')">restriction Message</th>
+											<th *ngIf="isFeildAuthorized('spgProviderLaoDetailId')">SPG Provider LASU Detail</th>
+											<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+											<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+											<th *ngIf="isFeildAuthorized('createdDate')" class="text-center">created Date</th>
+											<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+											<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+											<th *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">modified Date</th>
+											<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+											<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+											<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+											<th *ngIf="isFeildAuthorized('deletedDate')" class="text-center">deleted Date</th>
+											<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+											<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+											<th *ngIf="isFeildAuthorized('locked')">locked</th>
+											<th *ngIf="isFeildAuthorized('version')">version</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let providerLaoDetail of providerLaoDetails">
+											<td *ngIf="isFeildAuthorized('providerLaoDetailId')">{{providerLaoDetail.providerLaoDetailId}}</td>
+											<td *ngIf="isFeildAuthorized('exclusionMessage')">{{providerLaoDetail.exclusionMessage}}</td>
+											<td *ngIf="isFeildAuthorized('laoProviderId')">{{providerLaoDetail.laoProviderId}}</td>
+											<td *ngIf="isFeildAuthorized('restrictionMessage')">{{providerLaoDetail.restrictionMessage}}</td>
+											<td *ngIf="isFeildAuthorized('spgProviderLaoDetailId')">{{providerLaoDetail.spgProviderLaoDetailId}}</td>
+											<td *ngIf="isFeildAuthorized('spgVersion')">{{providerLaoDetail.spgVersion}}</td>
+											<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{providerLaoDetail.spgUpdateUser}}</td>
+											<td *ngIf="isFeildAuthorized('createdDate')" class="text-center">{{providerLaoDetail.createdDate}}</td>
+											<td *ngIf="isFeildAuthorized('createdBy')">{{providerLaoDetail.createdBy}}</td>
+											<td *ngIf="isFeildAuthorized('createdByUserId')">{{providerLaoDetail.createdByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedDate')" class="text-center">{{providerLaoDetail.modifiedDate}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedBy')">{{providerLaoDetail.modifiedBy}}</td>
+											<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{providerLaoDetail.modifiedByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('deleted')">{{providerLaoDetail.deleted}}</td>
+											<td *ngIf="isFeildAuthorized('deletedDate')" class="text-center">{{providerLaoDetail.deletedDate}}</td>
+											<td *ngIf="isFeildAuthorized('deletedBy')">{{providerLaoDetail.deletedBy}}</td>
+											<td *ngIf="isFeildAuthorized('deletedByUserId')">{{providerLaoDetail.deletedByUserId}}</td>
+											<td *ngIf="isFeildAuthorized('locked')">{{providerLaoDetail.locked}}</td>
+											<td *ngIf="isFeildAuthorized('version')">{{providerLaoDetail.version}}</td>
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="[providerLaoDetail.providerLaoDetailId]"><span class="glyphicon glyphicon-search"></span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="providerLaoDetail?.locked"><span class="glyphicon glyphicon-lock"></span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!providerLaoDetail?.locked" [routerLink]="[providerLaoDetail?.providerLaoDetailId,'edit']"><span class="glyphicon glyphicon-pencil"></span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(providerLaoDetail.providerLaoDetailId)"><span class="glyphicon glyphicon-trash"></span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="providerLaoDetails?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

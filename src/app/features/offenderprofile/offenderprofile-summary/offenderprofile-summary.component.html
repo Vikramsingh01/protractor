@@ -1,0 +1,48 @@
+<div class="detail-view-layout">
+	<div class="relative">
+		
+	</div>
+	<div class="su-detail-div">
+		<tr-main-tabs></tr-main-tabs>
+		<tr-tabs [structure]="'SU'"></tr-tabs>
+		<div class="col-sm-6 nopadleft">
+			<div class="grey-bg nopadright">
+				<h2 tabindex="0">Details</h2>
+				<div class="sum-det-inner-div">
+				<div class="label-style" tabindex="0">Name: <strong>{{offenderProfileSummary?.name}}</strong></div>
+				<div class="label-style" tabindex="0">Date of Birth: <strong>{{offenderProfileSummary?.dateOfBirth}}</strong> </div>
+				<div class="label-style" tabindex="0">Alias: <strong>{{offenderProfileSummary?.alias}}</strong></div>
+				<!--<div class="label-style">Full Address: <strong>{{offenderProfileSummary?.fullAddress}}</strong> </div>
+				<div class="mb15"></div>-->
+				<div class="label-style" tabindex="0">Mobile Number: <strong>{{offenderProfileSummary?.mobileNumber}}</strong></div>
+				<!--<div class="label-style">PNC: <strong>{{offenderProfileSummary?.pncNumber}}</strong></div>
+				<div class="label-style">Ethnicity:<strong><tr-list-label *ngIf="offenderProfileSummary?.ethnicityId" [tableId]="68" [pkValue]="offenderProfileSummary?.ethnicityId"></tr-list-label></strong> </div>
+				<div class="label-style">Nationality: <strong><tr-list-label *ngIf="offenderProfileSummary?.nationalityId" [tableId]="165" [pkValue]="offenderProfileSummary?.nationalityId"></tr-list-label></strong></div>
+				<div class="mb15"></div>-->
+				<div class="label-style" tabindex="0">Accessibility Status: <strong>{{offenderProfileSummary?.accessibilityStatus}}</strong> </div>
+				<!--<div class="label-style">Prison Location: <strong><div *ngIf="!offenderProfileSummary?.prisonLocationId">In The Community </div></strong>
+								 <strong><tr-list-label *ngIf="offenderProfileSummary?.prisonLocationId" [tableId]="135" [pkValue]="offenderProfileSummary?.prisonLocationId"></tr-list-label></strong></div>
+				
+				<div class="label-style">Team: <strong><span *ngFor="let item of teamList | filter :'key' : offenderProfileSummary?.teamId">{{item.value}}</span></strong> </div>-->
+				
+				<div class="label-style" tabindex="0">Case Manager: <strong>{{offenderProfileSummary?.offenderManagerResponsibleOfficer}}</strong></div>
+				
+				<!--<div class="label-style">Team Contact No.: <strong>{{offenderProfileSummary?.teamContactNumber}}</strong></div>-->
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 nopadright">
+			<div class="grey-bg">
+				<h2 tabindex="0">Notes</h2>
+				<div class="sum-det-inner-div" tabindex="0">
+				{{offenderProfileSummary?.note}}
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+		
+	</div>
+
+</div>
+<tr-summary-event></tr-summary-event>

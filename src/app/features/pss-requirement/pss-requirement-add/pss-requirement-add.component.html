@@ -1,0 +1,101 @@
+<div class="edit-view-layout one-line-view">
+
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Pss Requirement</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Pss Requirement</h2>
+
+		<form [formGroup]="pssRequirementAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Pss Requirement </legend>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('pssRequirementTypeMainCategoryId')">
+						<label for="pssRequirementTypeMainCategoryId" title="PSS Main Type">PSS Main Type<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="197" [hasChildAnswers]="true" (updateAnswers)="updateAnswers($event)" [controlName]="'pssRequirementTypeMainCategoryId'"
+							[dropdown]="pssRequirementAddForm" [isDataNsrd]="true" (updateAd)="updateAd($event)" (updateDataNsrd)="updateDataNsrd($event)"></tr-dropdown>
+						<control-messages [control]="pssRequirementAddForm.controls.pssRequirementTypeMainCategoryId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('pssRequirementTypeSubCategoryId')">
+						<label for="pssRequirementTypeSubCategoryId" title="PSS Sub Type">PSS Sub Type<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="198" [isDependent]="true" [list]="childAnswers[198]" [controlName]="'pssRequirementTypeSubCategoryId'"
+							[dropdown]="pssRequirementAddForm"></tr-dropdown>
+						<control-messages [control]="pssRequirementAddForm.controls.pssRequirementTypeSubCategoryId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('length') && !hideLength">
+						<label for="length" title="Length">Length<span *ngIf="length_is_mandatory" class="mand-text">*</span></label>
+						<input type="text" formControlName="length" id="length" class="form-control" placeholder="Length" />
+						<control-messages [control]="pssRequirementAddForm.controls.length"></control-messages>
+						<div class="form-group col-sm-6 custom-fix-day" *ngIf="nsrdData['unitsCode']?.active">
+
+							<input type="text" formControlName="unitsCode" id="unitsCode" class="form-control" placeholder="" disabled="true" />
+							<control-messages [control]="pssRequirementAddForm.controls.unitsCode"></control-messages>
+						</div>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('imposedDate')">
+						<label for="imposedDate" title="Imposed Date">Imposed Date<span class="mand-text">*</span></label>
+						<date-picker [controlName]="'imposedDate'" [form]="pssRequirementAddForm"></date-picker>
+						<control-messages [control]="pssRequirementAddForm.controls.imposedDate"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedStartDate')">
+						<label for="expectedStartDate" title="Expected Start Date">Expected Start Date</label>
+						<date-picker [controlName]="'expectedStartDate'" [form]="pssRequirementAddForm"></date-picker>
+						<control-messages [control]="pssRequirementAddForm.controls.expectedStartDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('actualStartDate')">
+						<label for="actualStartDate" title="Actual Start Date">Actual Start Date</label>
+						<date-picker [controlName]="'actualStartDate'" [form]="pssRequirementAddForm"></date-picker>
+						<control-messages [control]="pssRequirementAddForm.controls.actualStartDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+						<label for="expectedEndDate" title="Expected End Date">Expected End Date</label>
+						<date-picker [controlName]="'expectedEndDate'" [form]="pssRequirementAddForm"></date-picker>
+						<control-messages [control]="pssRequirementAddForm.controls.expectedEndDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="psResponsibleTeam" title="Team">Team<span class="mand-text">*</span></label>
+						<div *ngIf="action!='Update'">
+							<select class="form-control" formControlName="psResponsibleTeam" (change)="change($event.target.options)" id="psResponsibleTeam">
+							<option value=null>--Select--</option>
+							<option *ngFor="let org of orgs" [value]="org?.value" >{{org?.value}}</option>
+						</select>
+						</div>
+						<div *ngIf="action=='Update'">
+							<input type="text" formControlName="psResponsibleTeam" id="psResponsibleTeam" class="form-control" placeholder="Team" />
+						</div>
+						<control-messages [control]="pssRequirementAddForm.controls.psResponsibleTeam"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="psResponsibleOfficer" title="Officer">Officer<span class="mand-text">*</span></label>
+						<div *ngIf="action!='Update'">
+							<select class="form-control" formControlName="psResponsibleOfficer" id="psResponsibleOfficer">
+                            <option value=null>--Select--</option>
+                            	<option *ngFor="let user of officerIds" [value]="user?.value">
+									{{user?.value?.split("/")[1]}}
+								</option>
+                        </select>
+						</div>
+						<div *ngIf="action=='Update'">
+							<input type="text" formControlName="psResponsibleOfficer" id="psResponsibleOfficer" class="form-control" placeholder="Officer"
+							/>
+						</div>
+						<control-messages [control]="pssRequirementAddForm.controls.psResponsibleOfficer"></control-messages>
+					</div>
+					<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('notes')">
+						<tr-notes [controlName]="'notes'" [form]="pssRequirementAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+						<control-messages [control]="pssRequirementAddForm.controls.notes"></control-messages>
+					</div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="pssRequirementAddForm">Submit</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

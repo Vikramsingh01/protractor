@@ -1,0 +1,68 @@
+<div class="detail-view-layout one-line-view" *ngIf="authorizedFlag">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Community Payback Detail</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Community Payback Details" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Community Payback Detail </legend>
+                    <div class="row">
+                         <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Event Type" id="label_event">Event<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">{{upwDetail?.eventNumber}} - 
+                                <tr-list-label *ngIf="upwDetail?.orderTypeDisposalTypeId" [tableId]="421" [pkValue]="upwDetail?.orderTypeDisposalTypeId"></tr-list-label>
+                            </div>
+                        </div>
+                         <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Total Hours Ordered" id="label_totalHoursOrdered">Total Hours Ordered<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">{{upwDetail?.totalHoursOrdered}}</div>
+                        </div>
+                         <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('agreedTravelFare')">
+                            <div class="view-title col-sm-5" title="Agreed Travel Fare (£)" id="label_agreedTravelFare">Agreed Travel Fare (£)<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">{{upwDetail?.agreedTravelFare}}</div>
+                        </div>
+                         <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Adjustments" id="label_totalAdjustment">Adjustments<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">{{upwDetail?.totalAdjustment}}</div>
+                        </div>
+                         <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('upwStatusId')">
+                            <div class="view-title col-sm-5" title="Status" id="label_upwStatusId">Status<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="upwDetail?.upwStatusId" [tableId]="242" [pkValue]="upwDetail?.upwStatusId"></tr-list-label>
+                            </div>
+                        </div>
+                         <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Total Hours Worked" id="label_totalHoursWorked">Total Hours Worked<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">{{upwDetail?.totalHoursWorked}}</div>
+                        </div>
+                         <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('workedIntensivelyYesNoId')">
+                            <div class="view-title col-sm-5" title="Worked Intensively" id="label_workedIntensivelyYesNoId">Worked Intensively<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="upwDetail?.workedIntensivelyYesNoId" [tableId]="244" [pkValue]="upwDetail?.workedIntensivelyYesNoId"></tr-list-label>
+                            </div>
+                        </div>
+                       <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Total Hours Left" id="label_totalHoursLeft">Total Hours Left<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">{{upwDetail?.totalHoursLeft}}</div>
+                        </div>
+                       
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+                            <div class="view-title col-sm-5" title="Notes" id="label_note">Notes<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" class="detail-value text-box">{{upwDetail?.note}}</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+</div>
+<tr-upw-appointment></tr-upw-appointment>
+<tr-upw-project-delete></tr-upw-project-delete>

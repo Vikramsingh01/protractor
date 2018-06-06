@@ -1,0 +1,130 @@
+<tr-tabs [structure]="'cmaction'"></tr-tabs>
+<div class="list-view-layout">
+	
+
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Recent Allocations" [selected]="true">
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+								</div>
+								<div class="pad15 nopadbtm">
+										<form [formGroup]="recentAllocationsFilterForm"  class="collapse in" id="collapseExample" autocomplete="off">
+												<div class="row">
+													<div class="form-group col-sm-6">
+														<label for="inputFamilyName">Family Name</label>
+														<input type="text" formControlName="familyName"  name="inputFamilyName" id="inputFamilyName" class="form-control" placeholder="Family Name"/>
+													</div>
+													<div class="form-group col-sm-6">
+														<label for="inputFirstName">First Name</label>
+														<input type="text" formControlName="firstName"  name="inputFirstName" id="inputFirstName" class="form-control" placeholder="First Name"/>
+													</div>
+													<div class="form-group col-sm-6">
+														<label for="inputType">Component</label>
+														<input type="text" formControlName="type"  name="inputType" id="inputType" class="form-control" placeholder="Component"/>
+													</div>
+													<div class="form-group col-sm-6">
+														<label for="inputStartDate">Allocation Date</label>
+														<date-picker [options]="dateOption" [controlName]="'startDate'" [form]="recentAllocationsFilterForm"></date-picker>
+														<control-messages [control]="recentAllocationsFilterForm.controls.startDate"></control-messages>
+													</div>
+													<div class="form-group col-sm-6">
+														<label for="serviceUser">Team</label>
+														<select class="form-control" name="serviceUser" formControlName="serviceUser" id="serviceUser">
+															<option value=null>- Select -</option>
+															<option value="1">My Allocations</option>
+															<option value="0">My Team's Allocations</option>
+														</select>
+													</div>
+													
+													<div class="form-group col-sm-6" *ngIf="recentAllocationsFilterForm.value.serviceUser==0" >
+															<label for="inputPersonIdentifier">Case Manager</label>
+															<select class="form-control"  name="inputPersonIdentifier" formControlName="personIdentifier" id="inputPersonIdentifier">
+																<option value=null>- Select -</option>
+																<option *ngFor="let user of officerIds" [value]="user?.key">{{user?.value}}</option>
+															</select>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="form-group col-sm-4 pull-right text-right">
+														<button type="button" class="btn btn-default btn-purple" (click)="searchRecentAllocations()">Search</button>
+														<button type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+													</div>
+												</div>
+											</form>
+									
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th  id="allocationDate" trSortBy="allocationDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Allocation Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'allocationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid120"  id="familyName" trSortBy="familyName" (sortCommand)="sort($event)"><span class="th-div">Family Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'familyName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid120"  id="firstName" trSortBy="firstName" (sortCommand)="sort($event)"><span class="th-div">First Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid120"  id="caseReferenceNumber" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)"><span class="th-div">Crn<span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseReferenceNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th class="wid120" id="caseManager" trSortBy="caseManager" (sortCommand)="sort($event)"><span class="th-div">Case Manager<span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseManager'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th  id="type" trSortBy="type" (sortCommand)="sort($event)"><span class="th-div">Component<span *ngIf="sortSearchPaginationObj.sortObj.field == 'type'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th  id="commencementDate" trSortBy="commencementDate" (sortCommand)="sort($event)"><span class="th-div">Component Commenncement Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'commencementDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th  id="crcTramsferDate" trSortBy="crcTramsferDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Transfer To CRC Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'crcTramsferDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let recentAllocations of recentAllocationsList; let i = index">
+											<td class="text-center"> {{recentAllocations?.startDate}}</td>
+											<td > {{recentAllocations?.familyName}}</td>
+											<td > {{recentAllocations?.firstName}}</td>
+											<td class="text-center"> {{recentAllocations?.caseReferenceNumber}}</td>
+											<td > {{recentAllocations?.caseManager}}</td>
+											<td > {{recentAllocations?.type}}</td>
+											<td class="text-center"> {{recentAllocations?.commencementDate}}</td>
+											<td class="text-center"> {{recentAllocations?.crcTramsferDate}}</td>
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')" >
+													<button class="btn btn-default btn-small" id="recentAllocations_view{{i}}" [routerLink]="['../../', 'crc-service-user', recentAllocations?.profileId,'profile']"  title="View Record">
+														<span class="glyphicon glyphicon-search">aa</span>
+													</button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="recentAllocationsList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'recentAllocations'" *ngIf="recentAllocationsList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+        <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

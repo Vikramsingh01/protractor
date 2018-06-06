@@ -1,0 +1,115 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-grey" *ngIf="authorizedFlag">
+		<h2>Terminations</h2>
+		<div class="mt20">
+
+			<div class="grid-style filter-div">
+				<tr-accordion>
+					<tr-accordionTab header="filter" [selected]="false">
+						<div class="grid-head">
+						</div>
+						<div class="pad15 nopadbtm">
+							<div class="filter-div">
+								<form [formGroup]="terminationFilterForm" (ngSubmit)="searchTermination()" class="collapse in" id="collapseExample" autocomplete="off">
+									<div class="row">
+										<div class="form-group col-sm-4">
+											<label for="terminationTypeId">TERMINATION TYPE</label>
+											<tr-dropdown [operation] = "action" [tableId]="2552" [controlName]="'terminationTypeId'" [dropdown]="terminationFilterForm" ></tr-dropdown>
+											<control-messages [control]="terminationFilterForm.controls.terminationTypeId"></control-messages>
+										</div>
+										<div class="form-group col-sm-4">
+											<label for="terminationDueId">TERMINATION DUE</label>
+											<tr-dropdown [operation] = "action" [tableId]="2553" [controlName]="'terminationDueId'" [dropdown]="terminationFilterForm" ></tr-dropdown>
+											<control-messages [control]="terminationFilterForm.controls.terminationDueId"></control-messages>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-4">
+											<label for="team">Team </label>
+											<select class="form-control" formControlName="officeTeamId">
+													<option value='' >--Select--</option>
+													<option *ngFor="let officeTeam of officeTeams" [value]="officeTeam?.key" >{{officeTeam?.value}}</option>
+												</select>
+										</div>
+
+										<div class="form-group col-sm-4">
+												<label for="caseReferenceNumber">CRN</label>
+												<input type="text" formControlName="caseReferenceNumber" id="caseReferenceNumber" class="form-control" placeholder="CRN">
+										</div>
+
+
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-6 pull-right text-right">
+											<button type="submit" class="btn btn-default btn-purple">Search</button>
+											<button type="button" class="btn btn-default btn-white" (click)="reset()">Reset</button>
+										</div>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</tr-accordionTab>
+				</tr-accordion>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-div">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th id="familyName" trSortBy="familyName" (sortCommand)="sort($event)"><span class="th-div">Family Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'familyName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="firstName" trSortBy="firstName" (sortCommand)="sort($event)"><span class="th-div">First Name<span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="caseReferenceNumber" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)" class="text-center"><span class="th-div">CRN<span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseReferenceNumber'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="officeTeam" trSortBy="officeTeam" (sortCommand)="sort($event)"><span class="th-div">Team<span *ngIf="sortSearchPaginationObj.sortObj.field == 'officeTeam'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="disposalType" trSortBy="disposalType" (sortCommand)="sort($event)"><span class="th-div">Associated Event<span *ngIf="sortSearchPaginationObj.sortObj.field == 'disposalType'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th id="terminationDate" trSortBy="terminationDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Termination Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'terminationDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+									</th>
+									<th class="text-center wid120"><span class="hidden">View</span></th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let terminations of terminationsList; let i = index">
+									<td>{{terminations?.familyName}}</td>
+									<td>{{terminations?.firstName}}</td>
+									<td class="text-center">{{terminations?.caseReferenceNumber}}</td>
+									<td>{{terminations?.officeTeam}}</td>
+
+									<td>{{terminations?.disposalType}}</td>
+
+									<td class="text-center">{{terminations?.terminationDate}}</td>
+									<td *ngIf="isAuthorized('Read')" class="text-center">
+												<button id="event_view{{i}}" class="btn btn-default btn-small" [routerLink]="['/my-service-user',terminations?.profileId,'event',terminations?.eventId]" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+											</td>
+
+
+
+
+								</tr>
+							</tbody>
+
+						</table>
+						<div *ngIf="terminationsList?.length<=0" class="no-records">No Records Found</div>
+					</div>
+				</div>
+				<tr-pagination [name]="'terminationsList'" *ngIf="terminationsList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,93 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW National Search</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Events</legend>
+                
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											 <!--<th  id="nationalSearchQueryId"  ><span class="th-div">National Search Query Id<span class="glyphicon"></span></span></th> -->
+											 <th id="crcSearchId"  title="Crc Search Id" class="text-center"><span class="th-div">No<span class="glyphicon"></span></span></th> 
+											 <th  id="surname" title="Surname" class="text-center"><span class="th-div">Referral Date<span  class="glyphicon"></span></span></th> 
+											 <th  id="forename"  title="Forename"><span class="th-div">Main Offence<span class="glyphicon"></span></span></th> 
+											 <th  id="middleName"  title="Middle Name"><span class="th-div">Disposal<span  class="glyphicon"></span></span></th> 
+											 <th  id="dateOfBirth" title="Date Of Birth" class="text-center"><span class="th-div">Sentence Date<span  class="glyphicon"></span></span></th> 
+											 <th id="genderId" title="Gender Id" class="text-center" ><span class="th-div">Sentence Length<span  class="glyphicon"></span></span></th> 
+											 <th  id="caseReferenceNumber"  title="Case Reference Number"><span class="th-div">Provider<span class="glyphicon"></span></span></th> 
+											 <th  id="pncNumber"  title="Pnc Number"><span class="th-div">Team<span class="glyphicon"></span></span></th> 
+											 <th   title="Cro Number"><span class="th-div">officer<span class="glyphicon"></span></span></th> 
+
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let nationalSearch of nationalSearchList; let i = index">
+												<td class="text-center">
+														<span>
+															 <p>{{i+1}}</p>
+														</span>
+												</td>
+												<td class="text-center">
+													<span>
+															<p>{{nationalSearch?.referralDate}}</p>
+													</span>
+												</td>
+												<td>
+													<span>
+															<span *ngFor="let mainOffenceId of mainOffenceList | filter :'key' : nationalSearch?.mainOffence">{{mainOffenceId.value}} </span>
+													</span>
+												</td>
+												<td>
+													<span>
+															<span *ngFor="let  disposalId of disposalList | filter :'key' : nationalSearch?.disposal">{{disposalId.value}}</span>
+													</span>
+												</td>
+												<td class="text-center">
+													<span>
+															<p>{{nationalSearch?.sentenceDate}}</p>
+													</span>
+												</td>
+												<td class="text-center">
+													<span>
+															<p>{{nationalSearch?.sentenceLength}}</p>
+													</span>
+												</td>
+												<td>
+													<span>
+															<span *ngFor="let orderProviderId of orderProviderList | filter :'key' : nationalSearch?.orderProvider">{{orderProviderId.value}} </span>
+													</span>
+												</td>
+												<td>
+													<span>
+															<p>{{nationalSearch?.sentenceTeam}}</p>
+													</span>
+												</td>
+												<td>
+													<span>
+															<p>{{nationalSearch?.sentenceOfficer}}</p>
+													</span>
+												</td>
+											
+											
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="nationalSearchList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+                </fieldset>
+       
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

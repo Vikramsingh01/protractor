@@ -1,0 +1,108 @@
+<div class="list-view-layout" *ngIf="authorizedFlag">
+	<h2 class="page-title">Community Payback Details</h2>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" >
+		<tr-accordion>
+			<tr-accordionTab header="Community Payback Details" [selected]="true">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right">
+							<button [routerLink]="['upw-detail', 'new']" class="btn btn-default btn-white pull-right">Add</button>
+						</div>
+					</tr-accordion-header>
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<!--<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search [searchObjs]="searchObjs" (searchCommand)="searchUpwDetail($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>-->
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th id="eventId" trSortBy="eventId" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Event ID<span *ngIf="sortSearchPaginationObj.sortObj.field == 'eventId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th id="eventType" trSortBy="eventType" (sortCommand)="sort($event)"><span class="th-div">Event Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'eventType'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th id="requirementTypeMainCategoryId" trSortBy="requirementTypeMainCategoryId" (sortCommand)="sort($event)"><span class="th-div">Requirement Type<span *ngIf="sortSearchPaginationObj.sortObj.field == 'requirementTypeMainCategoryId'"
+												[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+												</th>
+											<th id="upwLengthInMinutes" *ngIf="isFeildAuthorized('upwLengthInMinutes')" trSortBy="upwLengthInMinutes" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Hours Ordered<span *ngIf="sortSearchPaginationObj.sortObj.field == 'upwLengthInMinutes'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th id="upwStatusId" *ngIf="isFeildAuthorized('upwStatusId')" trSortBy="upwStatusId" (sortCommand)="sort($event)"><span class="th-div">Status<span *ngIf="sortSearchPaginationObj.sortObj.field == 'upwStatusId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th id="adjustmentAmount" trSortBy="adjustmentAmount" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Adjustment<span *ngIf="sortSearchPaginationObj.sortObj.field == 'adjustmentAmount'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th id="adjustmentDate" trSortBy="adjustmentDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">Adjustment Date<span *ngIf="sortSearchPaginationObj.sortObj.field == 'adjustmentDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+											</th>
+											<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let upwDetail of upwDetailList; let i = index">
+											<td class="text-center">{{upwDetail?.eventNumber}}</td>
+											<td *ngIf="isFeildAuthorized('upwStatusId')">
+												<span *ngFor="let orderType of orderTypeList | filter :'key' : upwDetail?.orderTypeDisposalTypeId">{{orderType?.value}}</span>
+											</td>
+
+										 <td class="text-center">
+												<span *ngFor="let requirementTypeMainCategoryId of requirementTypeMainCategoryIdList | filter :'key' : upwDetail?.requirementTypeMainCategoryId">{{requirementTypeMainCategoryId?.value}}</span> - 
+												<span *ngFor="let requirementTypeSubCategoryId of requirementTypeSubCategoryIdList | filter :'key' : upwDetail?.requirementTypeSubCategoryId">{{requirementTypeSubCategoryId?.value}}</span>
+											</td> 
+										
+											<td class="text-center" *ngIf="isFeildAuthorized('upwLengthInMinutes')">{{upwDetail?.totalHoursWorkedForAll}}</td>
+											<td *ngIf="isFeildAuthorized('upwStatusId')">
+												<span *ngFor="let upwStatusId of upwStatusIdList | filter :'key' : upwDetail?.upwStatusId">{{upwStatusId.value}}</span>
+											</td>
+											<td class="text-center">{{upwDetail?.adjustmentAmount}}</td>
+											<td class="text-center">{{upwDetail?.adjustmentDate}}</td>
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')" >
+													<button id="upw_detail_view{{i}}" [routerLink]="['upw-detail', upwDetail?.upwDetailId, 'event', upwDetail?.eventId]" class="btn btn-default btn-small" title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Update')">
+													<button id="upw_detail_edit{{i}}" class="btn btn-default btn-small" *ngIf="upwDetail?.locked" title="Edit record is locked.">
+                                                    <span class="glyphicon glyphicon-lock">aa</span>
+                                                 </button>
+												<button id="upw_detail_edit{{i}}" *ngIf="!upwDetail?.locked" [routerLink]="['upw-detail', 'edit', upwDetail?.upwDetailId]" class="btn btn-default btn-small" title="Edit Record"><span class="glyphicon glyphicon-pencil">aa</span></button>
+												</span>
+												<span *ngIf="isAuthorized('Archive')">
+													<button id="upw_detail_delete{{i}}" class="btn btn-default btn-small" *ngIf="upwDetail?.locked" title="Delete record is locked.">
+                                                    <span class="glyphicon glyphicon-lock">aa</span>
+                                                </button>
+												<button id="upw_detail_delete{{i}}" *ngIf="!upwDetail?.locked" (click)="delete(upwDetail?.upwDetailId)" class="btn btn-default btn-small" title="Delete Record"><span class="glyphicon glyphicon-trash">aa</span></button>
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="upwDetailList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'upwDetailList'" *ngIf="upwDetailList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	
+</div>

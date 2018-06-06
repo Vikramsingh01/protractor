@@ -1,0 +1,29 @@
+<div class="detail-view-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'Plan'"></tr-tabs>
+	<div class="relative">
+		<div class="su-detail-div">
+			<div class="col-sm-6 nopadleft">
+				<div class="grey-bg nopadright">
+					<h2>Overview</h2>
+					<div class="sum-det-inner-div upw-summary">
+						<div class="label-style">Total Hours Ordered: <strong>{{upwSummary?.serviceUserTotalHoursOrdered}}</strong></div>
+						<div class="label-style">Adjustment Amount: <strong>{{upwSummary?.serviceUserTotalAdjustment}}</strong> </div>
+						<div class="label-style">Total Hours Worked: <strong>{{upwSummary?.serviceUserTotalHoursWorked}}</strong></div>
+						<div class="label-style">Total Hours Left: <strong>{{upwSummary?.serviceUserTotalHoursLeft}}</strong></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 nopadright">
+				<div class="grey-bg">
+					<h2>Notes</h2>
+					<div class="sum-det-inner-div upw-summary">
+						{{offenderProfileSummary?.note}}
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+<tr-upw-detail></tr-upw-detail>

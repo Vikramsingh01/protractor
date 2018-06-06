@@ -1,0 +1,34 @@
+export class RateCardIntervention {
+	rateCardInterventionId: number;
+	actualStartDate: Date;
+	attendanceCount: number;
+	expectedEndDate: Date;
+	expectedStartDate: Date;
+	intendedProviderId: number;
+	interventionOutcomeId: number;
+	interventionStatusDate: Date;
+	interventionStatusId: number;
+	interventionTypeMainCategoryId: number;
+	interventionTypeSubCategoryId: number;
+	length: number;
+	note: string;
+	profileId: number;
+	referralDate: Date;
+	spgRateCardInterventionId: number;
+	actualEndDate: Date;
+	interventionProviderId: number;
+	spgVersion: string;
+	spgUpdateUser: string;
+	createdDate: Date;
+	createdBy: string;
+	createdByUserId: number;
+	modifiedDate: Date;
+	modifiedBy: string;
+	modifiedByUserId: number;
+	deleted: number;
+	deletedDate: Date;
+	deletedBy: string;
+	deletedByUserId: number;
+	locked: number;
+	version: number;
+}

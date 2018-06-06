@@ -1,0 +1,80 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="PSS Contact" [selected]="false">
+				<div class="grid-head">
+					<tr-accordion-header>
+						<div *ngIf="isAuthorized('Create')" class="pull-right"><button class="btn btn-default btn-white pull-right" [routerLink]="['psscontact', 'new']">Add</button></div>
+					</tr-accordion-header>
+				</div>
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th *ngIf="isFeildAuthorized('pssContactId')">pss Contact</th>
+											<th *ngIf="isFeildAuthorized('eventId')">event</th>
+											<th *ngIf="isFeildAuthorized('pssDate')" trSortBy="pssDate" (sortCommand)="sort($event)" class="text-center"><span class="th-div">pss Date<span *ngIf="sortFilterPaginationObj.sortObj.field == 'pssDate'"
+											[ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span></th>
+											<th *ngIf="isFeildAuthorized('spgPssContactId')">SPG Pss Contact</th>
+											<th *ngIf="isFeildAuthorized('spgVersion')">SPG Version</th>
+											<th *ngIf="isFeildAuthorized('spgUpdateUser')">SPG Update User</th>
+											<!--<th *ngIf="isFeildAuthorized('createdDate')">created Date</th>
+						<th *ngIf="isFeildAuthorized('createdBy')">created By</th>
+						<th *ngIf="isFeildAuthorized('createdByUserId')">created By User</th>
+						<th *ngIf="isFeildAuthorized('modifiedDate')">modified Date</th>
+						<th *ngIf="isFeildAuthorized('modifiedBy')">modified By</th>
+						<th *ngIf="isFeildAuthorized('modifiedByUserId')">modified By User</th>
+						<th *ngIf="isFeildAuthorized('deleted')">deleted</th>
+						<th *ngIf="isFeildAuthorized('deletedDate')">deleted Date</th>
+						<th *ngIf="isFeildAuthorized('deletedBy')">deleted By</th>
+						<th *ngIf="isFeildAuthorized('deletedByUserId')">deleted By User</th>
+						<th *ngIf="isFeildAuthorized('locked')">locked</th>
+						<th *ngIf="isFeildAuthorized('version')">version</th>-->
+											<th *ngIf="isAuthorized('Read')" class="text-center">View</th>
+											<th *ngIf="isAuthorized('Update')" class="text-center">Edit</th>
+											<th *ngIf="isAuthorized('Archive')" class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let pssContact of pssContacts">
+											<td *ngIf="isFeildAuthorized('pssContactId')">{{pssContact.pssContactId}}</td>
+											<td *ngIf="isFeildAuthorized('eventId')">{{pssContact.eventId}}</td>
+											<td class="text-center" *ngIf="isFeildAuthorized('pssDate')">{{pssContact.pssDate}}</td>
+											<td *ngIf="isFeildAuthorized('spgPssContactId')">{{pssContact.spgPssContactId}}</td>
+											<td *ngIf="isFeildAuthorized('spgVersion')">{{pssContact.spgVersion}}</td>
+											<td *ngIf="isFeildAuthorized('spgUpdateUser')">{{pssContact.spgUpdateUser}}</td>
+											<!--<td *ngIf="isFeildAuthorized('createdDate')">{{pssContact.createdDate}}</td>
+						<td *ngIf="isFeildAuthorized('createdBy')">{{pssContact.createdBy}}</td>
+						<td *ngIf="isFeildAuthorized('createdByUserId')">{{pssContact.createdByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedDate')">{{pssContact.modifiedDate}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedBy')">{{pssContact.modifiedBy}}</td>
+						<td *ngIf="isFeildAuthorized('modifiedByUserId')">{{pssContact.modifiedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('deleted')">{{pssContact.deleted}}</td>
+						<td *ngIf="isFeildAuthorized('deletedDate')">{{pssContact.deletedDate}}</td>
+						<td *ngIf="isFeildAuthorized('deletedBy')">{{pssContact.deletedBy}}</td>
+						<td *ngIf="isFeildAuthorized('deletedByUserId')">{{pssContact.deletedByUserId}}</td>
+						<td *ngIf="isFeildAuthorized('locked')">{{pssContact.locked}}</td>
+						<td *ngIf="isFeildAuthorized('version')">{{pssContact.version}}</td>-->
+											<td *ngIf="isAuthorized('Read')" class="text-center"><button class="btn btn-default btn-small" [routerLink]="['psscontact', pssContact.pssContactId]"><span class="glyphicon glyphicon-search">aa</span></button></td>
+											<td *ngIf="isAuthorized('Update')" class="text-center"><button class="btn btn-default btn-small" *ngIf="psscontact?.locked"><span class="glyphicon glyphicon-lock">aa</span></button>
+												<button class="btn btn-default btn-small"
+													*ngIf="!psscontact?.locked" [routerLink]="['psscontact', pssContact.pssContactId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+											</td>
+											<td *ngIf="isAuthorized('Archive')" class="text-center"><button class="btn btn-default btn-small" (click)="delete(pssContact.pssContactId)"><span class="glyphicon glyphicon-trash">aa</span></button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="pssContacts?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'pssContacts'" *ngIf="pssContacts?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

@@ -1,0 +1,122 @@
+<div class="list-view-layout">
+	<h2 class="page-title hide-heading">Pending Transfers</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Pending Transfers" [selected]="true">
+				<div class="grid-head">
+					<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortSearchPaginationObj?.filterObj, sortSearchPaginationObj?.paginationObj, sortSearchPaginationObj?.sortObj)"></tr-list-refresh>
+				</div>
+				<div class="pad15">
+					<div class="grid-style filter-div">
+						<tr-accordion>
+							<tr-accordionTab header="filter">
+
+								<div class="grid-head">
+
+								</div>
+								<div class="pad15 nopadbtm">
+									<tr-search *ngIf="providerList" [searchObjs]="searchObjs" (searchCommand)="searchPendingTransfer($event)"></tr-search>
+								</div>
+							</tr-accordionTab>
+						</tr-accordion>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th id="rosh" class="text-center"><span class="th-div">Rosh</span>
+											</th>
+											<th id="rsr" class="text-center"><span class="th-div">Rsr</span>
+											</th>
+											<th id="re"><span class="th-div">LASU</span>
+											</th>
+											<th id="ogrs1" class="text-center"><span class="th-div">OGRS 1YR</span>
+											</th>
+											<th id="ogrs2" class="text-center"><span class="th-div">OGRS 2YR</span>
+											</th>
+
+											<th id="dateTimeReceived" trSortBy="dateTimeReceived" (sortCommand)="sort($event)" class="text-center"><span class="th-div">DATE SENT<span *ngIf="sortSearchPaginationObj.sortObj.field == 'dateTimeReceived'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+
+
+												<th id="transferReason" trSortBy="transferReason" (sortCommand)="sort($event)"><span class="th-div">Transfer Reason<span *ngIf="sortSearchPaginationObj.sortObj.field == 'transferReason'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+
+													<th id="categoryIdhead" trSortBy="categoryId" (sortCommand)="sort($event)"><span class="th-div">Category<span *ngIf="sortSearchPaginationObj.sortObj.field == 'categoryId'"
+											[ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}" class="glyphicon"></span></span>
+
+														<th id="serviceUserName" class="wid120"><span class="th-div">Service User Name</span>
+														</th>
+														<th id="crnhead" class="text-center"><span class="th-div">Crn</span>
+														</th>
+														<th id="senderIdhead" class="wid120"><span class="th-div">Sender</span>
+														</th>
+														<th id="targetId" class="wid120"><span class="th-div">Target</span>
+														</th>
+														<th class="text-center"></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let pendingTransfer of pendingTransferList; let i = index">
+											<td *ngIf="isFeildAuthorized('rosh')" class="text-center">
+												<span *ngIf="pendingTransfer?.rosh == 'HR'" class="red-circle"></span>
+												<span *ngIf="pendingTransfer?.rosh == 'MR'" class="orange-circle"></span>
+												<span *ngIf="pendingTransfer?.rosh == 'LR'" class="green-circle"></span>
+											</td>
+
+											<td class="text-center">{{pendingTransfer?.rsr}}</td>
+											<td *ngIf="pendingTransfer?.restrictionsExistYesNoId == 1 || pendingTransfer?.exclusionsExistYesNoId == 1 " class="text-center">Yes</td>
+											<td *ngIf="pendingTransfer?.restrictionsExistYesNoId != 1 && pendingTransfer?.exclusionsExistYesNoId != 1 " class="text-center"></td>
+											<td class="text-center">{{pendingTransfer?.ogrs1}}</td>
+											<td class="text-center">{{pendingTransfer?.ogrs2}}</td>
+											<td class="text-center">{{pendingTransfer?.dateTimeReceived}}</td>
+											<td>{{pendingTransfer?.transferReason}}</td>
+
+											<td>
+												<tr-list-label [tableId]="2546" [pkValue]="pendingTransfer?.categoryId"></tr-list-label>
+											</td>
+
+											<td>{{pendingTransfer?.serviceUserName}}</td>
+											<td class="text-center" [ngClass]="{'event-green': pendingTransfer.managedByCrc == true}">{{pendingTransfer?.crn}}</td>
+											<td>
+												<span *ngFor="let senderId of senderIdList | filter :'key' : pendingTransfer?.senderId">{{senderId.value}}</span>
+											</td>
+
+											<td>
+												<span *ngFor="let targetId of targetIdList | filter :'key' : pendingTransfer?.targetId">{{targetId.value}}</span>
+											</td>
+
+											<td class="text-center">
+												<span *ngIf="isAuthorized('Read')">
+
+												<button class="btn btn-default btn-small" id="pendingTransfer_view{{i}}" *ngIf="pendingTransfer?.restrictionsExistYesNoId == yesValue || pendingTransfer?.exclusionsExistYesNoId == yesValue " (click)="openPopup(pendingTransfer?.profileId, pendingTransfer?.transferRequestId)" title="View Record">
+													<span class="glyphicon glyphicon-search">aa</span>
+												</button>
+
+												<button class="btn btn-default btn-small" id="pendingTransfer_view{{i}}" *ngIf="pendingTransfer?.restrictionsExistYesNoId == noValue && pendingTransfer?.exclusionsExistYesNoId == noValue "
+													[routerLink]="[pendingTransfer?.profileId +'/'+ pendingTransfer?.transferRequestId]" title="View Record">
+													<span class="glyphicon glyphicon-search">aa</span>
+												</button>
+
+												</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="pendingTransferList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+						<tr-pagination [name]="'pendingTransferList'" *ngIf="pendingTransferList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+							(paginationCommand)="paginate($event)"></tr-pagination>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

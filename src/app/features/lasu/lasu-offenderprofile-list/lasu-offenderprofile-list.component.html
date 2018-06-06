@@ -1,0 +1,189 @@
+<router-outlet></router-outlet>
+
+<div class="list-view-layout">
+
+  <div>
+    <div class="grid-grey">
+       <tr-list-refresh (refreshCommand)="paginate( sortSearchPaginationObj?.paginationObj)"></tr-list-refresh>
+      <h2>CRC Service Users</h2>
+
+      <div class="mt20">
+        <div class="grid-style filter-div">
+          <tr-accordion>
+            <tr-accordionTab header="filter" [selected]="false">
+              <div class="grid-head">
+              </div>
+              <div class="pad15 nopadbtm">
+                <form [formGroup]="offenderProfileFilterForm" (ngSubmit)="searchOffenderProfile()" autocomplete="off"
+                      class="collapse in"
+                      id="collapseExample">
+                  <div class="row">
+                    <div class="form-group col-sm-6">
+                      <label for="familyName">Family Name</label>
+                      <input type="text" formControlName="familyName" id="familyName" class="form-control"
+                             placeholder="Family Name">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                      <label for="firstName">First Name</label>
+                      <input type="text" formControlName="firstName" id="firstName" class="form-control"
+                             placeholder="First Name">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                      <label for="caseReferenceNumber">CRN</label>
+                      <input type="text" formControlName="caseReferenceNumber" id="caseReferenceNumber"
+                             class="form-control" placeholder="CRN">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="pncNumber">PNC</label>
+                      <input type="text" formControlName="pncNumber" id="pncNumber" class="form-control"
+                             placeholder="PNC Number">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="officeTeamId">Team</label>
+                      <tr-dropdown [operation] = "action" [tableId]="0" [controlName]="'officeTeamId'" [lookup]="533" [inputParam]="userId"
+                                   [dropdown]="offenderProfileFilterForm"></tr-dropdown>
+                    </div>
+
+
+                    <div class="form-group col-sm-6">
+                      <label for="lasu">LASU</label>
+                      <select class="form-control" id="{{name}}_offPreference" #offPreference
+                              (change)="changeLasu(offPreference.value)">
+                        <option value="all">All</option>
+                        <option value="limited_access">Limited Access</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-sm-6 pull-right text-right">
+                      <button type="submit" class="btn btn-default btn-purple mt28">Search</button>
+                      <button type="button" class="btn btn-default btn-white mt28" (click)="reset()">Reset</button>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </tr-accordionTab>
+          </tr-accordion>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-div">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th trSortBy="familyName" (sortCommand)="sort($event)"
+                      class="wid120">
+												<span class="th-div">Family Name<span
+                          *ngIf="sortFilterPaginationObj.sortObj.field == 'familyName'"
+                          [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                          class="glyphicon"></span></span>
+                  </th>
+
+                  <th trSortBy="firstName" (sortCommand)="sort($event)"
+                      class="wid120">
+												<span class="th-div">First Name<span
+                          *ngIf="sortFilterPaginationObj.sortObj.field == 'firstName'"
+                          [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                          class="glyphicon"></span></span>
+                  </th>
+
+                  <th class="wid110 text-center">
+                    <span>date Of Birth</span>
+                  </th>
+
+                  <th trSortBy="caseReferenceNumber" class="wid80 text-center">
+                    <span>CRN</span>
+                  </th>
+
+                  <th trSortBy="pncNumber" class="wid100 text-center">
+                    <span>PNC</span>
+                  </th>
+
+                  <th trSortBy="genderId">
+                    <span>Gender</span>
+                  </th>
+
+                  <th trSortBy="offenderManagerProviderId">
+                    <span>Provider</span>
+                  </th>
+
+                  <th trSortBy="offenderManagerResponsibleTeam">
+                    <span>Team</span>
+                  </th>
+
+                  <th trSortBy="offenderManagerResponsibleOfficer" class="wid150">
+                    <span>Case Manager</span>
+                  </th>
+                  <th class="text-center">
+                    <span>LASU</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let offenderProfile of offenderProfiles">
+                  <td>{{offenderProfile.familyName}}</td>
+                  <td>{{offenderProfile?.firstName}}</td>
+                  <td class="text-center">{{offenderProfile?.dateOfBirth}}</td>
+                  <td class="text-center">{{offenderProfile?.caseReferenceNumber}}</td>
+                  <td class="text-center">{{offenderProfile?.pncNumber}}</td>
+                  <td><span
+                    *ngFor="let item of genderList | filter :'key' : offenderProfile?.genderId">{{item.value}}</span>
+                  </td>
+                  <td><span
+                    *ngFor="let item of providerList | filter :'key' : offenderProfile?.offenderManagerProviderId">{{item.value}}</span>
+                  </td>
+                  <td><span
+                    *ngFor="let item of teamList | filter :'key' : offenderProfile?.officeTeamId">{{item.value}}</span>
+                  </td>
+                  <td><span *ngFor="let item of officerList | filter :'key' : offenderProfile?.caseManagerId">{{item.value}}</span>
+                  </td>
+
+                  <td class="text-center">
+                    <span *ngIf="!checkIsLasu(offenderProfile)">
+                      <span *ngIf="isAuthorized('Create')">
+                      <button [routerLink]="[offenderProfile.profileId,'restriction','new']" id="lasu_add{{i}}"
+                              class="btn btn-default btn-small" title="Add Record">
+                        <span class="glyphicon glyphicon-plus">aa</span>
+                      </button>
+                      </span>
+                    </span>
+                    <span *ngIf="checkIsLasu(offenderProfile)">
+                      <span *ngIf="offenderProfile.hasActiveRestrictions || offenderProfile.hasActiveExclusions">
+
+                      <span *ngIf="isAuthorized('Read')">
+                          <button class="btn btn-default btn-small" id="lasu_view{{i}}"
+                              [routerLink]="[offenderProfile.profileId,'restriction','detail']"
+                              title="View Record">
+                            <span class="glyphicon glyphicon-search">aa</span>
+                          </button>
+                      </span>
+
+                      <span *ngIf="isAuthorized('Update')">
+                      <button class="btn btn-default btn-small" id="lasu_edit{{i}}"
+                              [routerLink]="[offenderProfile.profileId,'restriction','edit']"
+                              title="Edit Record">
+                        <span class="glyphicon glyphicon-pencil">aa</span>
+                      </button>
+                      </span>
+                      </span>
+                    </span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div *ngIf="offenderProfiles?.length<=0" class="no-records">No Records Found</div>
+            </div>
+
+          </div>
+          <tr-pagination [name]="'offenderProfiles'" *ngIf="offenderProfiles?.length>0"
+                         [paginationObj]="sortFilterPaginationObj?.paginationObj"
+                         (paginationCommand)="paginate($event)"></tr-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

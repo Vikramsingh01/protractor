@@ -1,0 +1,39 @@
+<div class="list-view-layout">
+	<h2 class="page-title hide-heading">Throughcare History</h2>
+	<div class="double-divider-purple mt10 hide-heading"></div>
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="History" [selected]="false">
+				
+				<div class="pad15">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th id="description" title="Description"><span class="th-div">Description</span>
+											</th>
+											<th id="date" title="Date" class="text-center"><span class="th-div">Date</span>
+											</th>
+											<th id="notes" title="Notes"><span class="th-div">Notes</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let throughcareHistory of throughcareHistoryList; let i = index">
+											<td>{{throughcareHistory?.description}}</td>
+											<td class="text-center">{{throughcareHistory?.date}}</td>
+											<td>{{throughcareHistory?.notes}}</td>
+										</tr>
+									</tbody>
+								</table>
+								<div *ngIf="throughcareHistoryList?.length<=0" class="no-records">No Records Found</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

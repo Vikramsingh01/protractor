@@ -1,0 +1,41 @@
+<div class="detail-view-layout">
+	<tr-tabs [structure]="'PendingTransfer'"></tr-tabs>
+	<div class="relative grid-style shrink-view">
+		<h2 class="page-title nomargin">COMPONENTS TO ALLOCATE</h2>
+	</div>
+	<div class="col-sm-12 nopadding">
+		<div class="form-group col-sm-6 nopadleft">
+			<div class="view-title col-sm-2 nopadleft" title="Date " >Date<span class="pull-right">:</span></div>
+			<div class="col-sm-7">{{pendingTransfer?.dateTimeReceived}}</div>
+		</div>
+	</div>
+	<div class="col-sm-12 nopadding">
+		<tr-address-detail-pending-transfer></tr-address-detail-pending-transfer>
+	</div>
+	<div class="clearfix"></div>
+	<div class="detail-view-layout">
+		<div class="grid-style ">
+			<tr-accordion>
+				<tr-accordionTab header="Registrations" [selected]="false">
+					<fieldset class="shrink-view">
+						<tr-registration-detail-pending-transfer></tr-registration-detail-pending-transfer>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+	<div class="detail-view-layout">
+		<div class="grid-style nomarbtm">
+			<tr-accordion>
+				<tr-accordionTab header="Pending Components" [selected]="true">
+					<fieldset class="shrink-view">
+							<tr-consolated-transfer-requests></tr-consolated-transfer-requests>
+					</fieldset>
+				</tr-accordionTab>
+			</tr-accordion>
+		</div>
+	</div>
+
+</div>

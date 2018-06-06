@@ -1,0 +1,159 @@
+<div class="edit-view-layout">
+
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Schedule Recurring Community Payback Appointment</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Schedule Recurring Community Payback Appointment</h2>
+		<form [formGroup]="upwProjectSearchForm" (ngSubmit)="getUPWData()" autocomplete="off">
+			<fieldset class="three-column">
+				<div class="row">
+					<!---------------------------- Recurring search Form start -------------------------->
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('appointmentDate')">
+						<label for="startDate" title="Start Date">Start Date<span class="mand-text">*</span></label>
+						<date-picker [controlName]="'startDate'" [form]="upwProjectSearchForm"></date-picker>
+						<control-messages [control]="upwProjectSearchForm.controls.startDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="dayOfWeekId" title="Selection Day">Selection Day<span class="mand-text">*</span></label>
+						<tr-dropdown [operation] = "action" [tableId]="0" [controlName]="'dayOfWeekId'" [dropdown]="upwProjectSearchForm" [list]="dayOfWeekList"></tr-dropdown>
+						<control-messages [control]="upwProjectSearchForm.controls.dayOfWeekId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="officeTeamId" title="Team">Team</label>
+						<tr-dropdown [operation] = "action" [tableId]="0" [controlName]="'officeTeamId'" [dropdown]="upwProjectSearchForm" [list]="officeTeams"></tr-dropdown>
+						<control-messages [control]="upwProjectSearchForm.controls.officeTeamId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectTypeId')">
+						<label for="projectTypeId" title="Project Type">Project Type</label>
+						<tr-dropdown [operation] = "action" [tableId]="239" [controlName]="'projectTypeId'" [dropdown]="upwProjectSearchForm"></tr-dropdown>
+						<control-messages [control]="upwProjectSearchForm.controls.projectTypeId"></control-messages>
+					</div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" id="searchButton" type="submit">Search</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectName')">
+						<label for="projectName" title="Project Name">Project Name<span class="mand-text">*</span></label>
+						<select class="form-control" formControlName="projectId" (change)="upwProjectUpdate($event.target.value)" id="projectName">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let project of upwProjects" value="{{project?.upwProjectId}}">{{project?.projectName}}</option>
+                        </select>
+						<control-messages [control]="upwProjectSearchForm.controls.projectName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('projectName')">
+						<label for="projectAvailability" title="Project Availability">Project Availability<span class="mand-text">*</span></label>
+						<select class="form-control" formControlName="projectAvailability" (change)="projectAvailabilityUpdate($event.target.value)" id="projectAvailability">
+                            <option value=''>- Select - </option>
+                            <option *ngFor="let projectAvailability of upwProjectForAvailability?.projectAvailability" value="{{projectAvailability?.projectAvailabilityId}}">
+                                <tr-list-label *ngIf="projectAvailability?.dayOfWeekId" [tableId]="357" [pkValue]="projectAvailability?.dayOfWeekId"></tr-list-label> ({{projectAvailability?.start}} - {{projectAvailability?.end}})</option>
+                        </select>
+						<control-messages [control]="upwProjectSearchForm.controls.projectAvailability"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('startTime')">
+						<label for="startTime" title="Start Time">Start Time<span class="mand-text">*</span></label>
+						<timepicker [controlName]="'startTime'" [form]="upwProjectSearchForm" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+						<control-messages [control]="upwProjectSearchForm.controls.startTime"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('endTime')">
+						<label for="endTime" title="End Time">End Time<span class="mand-text">*</span></label>
+						<timepicker [controlName]="'endTime'" [form]="upwProjectSearchForm" [showMeridian]="false" [showSeconds]="false" (timepicker)="close()"></timepicker>
+						<control-messages [control]="upwProjectSearchForm.controls.endTime"></control-messages>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="endDate" title="End Date">End Date</label>
+						<date-picker [controlName]="'endDate'" [form]="upwProjectSearchForm"></date-picker>
+						<control-messages [control]="upwProjectSearchForm.controls.endDate"></control-messages>
+					</div>
+                    <div class="col-sm-6 mt10">
+                    <button class="btn btn-default btn-purple pull-right" type="button" id="addAppointmentButton" fromServerMessageValidator
+				[form]="upwProjectSearchForm" (click)="addUpwAppointment()" title="Add Record">Add</button>
+                    </div>
+
+				</div>
+			</fieldset>
+
+		</form>
+        <div class="grid-grey">
+		<div class="form-group col-sm-12 nopadding">
+			<button class="btn btn-default btn-purple" type="button" (click)="getAllocatedServiceUsers()">Show / Hide Allocated Service Users</button>
+		</div>
+		<div class="col-sm-12 nopadding">
+            <div class="col-sm-12 nopadding mb25" *ngIf="showHideAllocatedServiceUsers">
+			<table class="table table-bordered nomarbtm">
+				<thead>
+					<tr>
+						<th class="text-center">CRN</th>
+						<th>Family Name</th>
+						<th>First Name</th>
+						<th class="text-center">Date of Birth</th>
+						<th>Gender</th>
+					</tr>
+				</thead>
+				<tr *ngFor="let serviceUser of allocatedServiceUsers">
+					<td class="text-center">{{serviceUser?.caseReferenceNumber}}</td>
+					<td>{{serviceUser?.familyName}}</td>
+					<td>{{serviceUser?.firstName}}</td>
+					<td class="text-center">{{serviceUser?.dateOfBirth}}</td>
+					<td>
+						<tr-list-label *ngIf="serviceUser?.genderId" [tableId]="2" [pkValue]="serviceUser?.genderId"></tr-list-label>
+					</td>
+				</tr>
+			</table>
+
+			<div *ngIf="showHideAllocatedServiceUsers && allocatedServiceUsers?.length<=0" class="no-records">No Service Users Allocated</div>
+            </div>
+            <!---------------------------- Recurring search Form end -------------------------->
+			<form [formGroup]="upwAppointmentAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="">Day</th>
+							<th class="">Project</th>
+							<th class="text-center">Start Date</th>
+							<th class="text-center">End Date</th>
+							<th class="text-center">Start Time</th>
+							<th class="text-center">End Time</th>
+							<th class="text-center">Hours</th>
+							<th class=""></th>
+						</tr>
+					</thead>
+					<tbody formArrayName="upwAppointment">
+						<tr *ngFor="let upwAppointment of upwAppointmentAddForm.controls.upwAppointment.controls; let i=index" [formGroupName]="i">
+							<td>
+								<tr-list-label *ngIf="upwAppointment.controls.dayOfWeekId.value" [tableId]="357" [pkValue]="upwAppointment.controls.dayOfWeekId.value"></tr-list-label>
+							</td>
+							<td>
+								{{upwAppointment.controls.projectName.value}}
+							</td>
+							<td class="text-center">
+								{{upwAppointment.controls.startDate.value}}
+							</td>
+							<td class="text-center">
+								{{upwAppointment.controls.endDate.value}}
+							</td>
+							<td class="text-center">
+								{{upwAppointment.controls.startTime.value}}
+							</td>
+							<td class="text-center">
+								{{upwAppointment.controls.endTime.value}}
+							</td>
+							<td class="text-center">
+								{{upwAppointment.controls.hours.value}}
+							</td>
+
+							<td class="text-center"><button type="button" class="btn btn-default btn-white" (click)="removeUpwAppointment(i)">Remove</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-group text-right nomarbtm">
+					<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="upwAppointmentAddForm">Submit</button>
+					<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+					<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+				</div>
+			</form>
+		</div>
+        <div class="clearfix"></div>
+        </div>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

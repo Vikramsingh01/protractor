@@ -1,0 +1,102 @@
+<tr-accordion [multiple]="false">
+	<ul class="main-nav out-side-drop">
+		<li title="National Search" *ngIf="isFeatureAuthorized('112')" >
+			<button role="button" routerLinkActive="active" [routerLink]="['/national-search']" id="NationaSearchFirst">National Search</button>
+		</li>
+		<li title="LASU" *ngIf="isFeatureAuthorized('117')" >
+			<button role="button" routerLinkActive="active" [routerLink]="['/lasu']" id="LaseSecond">LASU</button>
+		</li>
+		<li title="SU Management">
+			<tr-accordionTab header="SU Management" [selected]="true">
+				<div class="grid-head">
+				</div>
+				<ul>
+					<li title="Service Users" *ngIf="isFeatureAuthorized('2')">
+						<button role="button" [ngClass]="{'active':isServiceUser}" [routerLink]="['/my-service-user']" id="sumanagementServiceUser">Service Users</button>
+					</li>
+					<li title="Recently Viewed" >
+						<button role="button" routerLinkActive="active" [routerLink]="['/recently-viewed']" id="sumanagementRecentlyViewed">Recently Viewed</button>
+					</li>
+					<li title="CMS Actions" *ngIf="isFeatureAuthorized('119')">
+						<button routerLinkActive="active" role="button" [routerLink]="['/cm-actions']" id="sumanagementCMSActions">CM Actions</button>
+					</li>
+
+				</ul>
+			</tr-accordionTab>
+		</li>
+		<li title="SU Admin" >
+
+			<tr-accordionTab header="SU Admin" [selected]="false">
+				<div class="grid-head">
+				</div>
+				<ul>
+					<li title="Pending Transfer" *ngIf="isFeatureAuthorized('108')" >
+						<button routerLinkActive="active" [routerLink]="['/pending-transfer']" id="suadminPendingTransfer">
+							Pending Transfers
+						</button>
+					</li>
+					<li title="Recently Allocated" *ngIf="isFeatureAuthorized('118')">
+						<button routerLinkActive="active" [routerLink]="['/recently-allocated']" id="suadminRecentlyAllocated">
+							Recently Allocated
+						</button>
+					</li>
+					<!--<li title="Recently Viewed">
+						<button routerLinkActive="active" [routerLink]="['/recently-viewed']">
+							Recently Viewed
+						</button>
+					</li>-->
+					<li title="Transfer Out" *ngIf="isFeatureAuthorized('106')">
+						<button routerLinkActive="active" [routerLink]="['/pending-transfer-out']" id="suadminTransferOut">
+							Transfer Out
+						</button>
+					</li>
+					<li title="Court Work" *ngIf="isFeatureAuthorized('110')" >
+						<button routerLinkActive="active" role="button" [routerLink]="['/admin-court-work']" id="suadminCourtWork">Court Work</button>
+					</li>
+
+					<li title="Enforcement" *ngIf="isFeatureAuthorized('111')" >
+						<button routerLinkActive="active" role="button" [routerLink]="['/enforcement']" id="suadminEnforcement">Enforcements</button>
+					</li>
+					<!--<li title="Terminations" *ngIf="isFeatureAuthorized('111')">
+						<button routerLinkActive="active" role="button" [routerLink]="['/terminations']">Terminations</button>
+					</li>-->
+				</ul>
+			</tr-accordionTab>
+		</li>
+		<li title="CP Project Admin" *ngIf="isFeatureAuthorized('110')">
+			<button routerLinkActive="active" [routerLink]="['/upw-project']" id="UpwProjectAdminlast">
+				CP Project Admin
+			</button>
+    </li>
+    <li title="Administration" *ngIf="isFeatureAuthorized('2582') || isFeatureAuthorized('2583') || isFeatureAuthorized('2584')
+    || isFeatureAuthorized('2585') || isFeatureAuthorized('2586') || isFeatureAuthorized('2587')">
+
+			<tr-accordionTab header="Administration" [selected]="false">
+				<div class="grid-head">
+				</div>
+				<ul>
+					<li title="Manage People" *ngIf="isFeatureAuthorized('2582')" >
+						<button routerLinkActive="active" [routerLink]="['/person']" id="adminPerson">Manage People</button>
+					</li>
+					<li title="Manage Teams" *ngIf="isFeatureAuthorized('2583')">
+						<button routerLinkActive="active" [routerLink]="['/office-team']" id="adminTeam">Manage Teams</button>
+					</li>
+					<li title="Manage Office Locations" *ngIf="isFeatureAuthorized('2584')">
+						<button routerLinkActive="active" [routerLink]="['/office-location']" id="adminOfficeLocation">Manage Office Locations</button>
+					</li>
+					<li title="Manage Roles" *ngIf="isFeatureAuthorized('2585')" >
+						<button routerLinkActive="active" role="button" [routerLink]="['/roles']" id="adminRoles">Manage Roles</button>
+					</li>
+
+					<li title="Audit Visualisation" *ngIf="isFeatureAuthorized('2586')" >
+						<button routerLinkActive="active" role="button" [routerLink]="['/audit-visualisation']" id="adminAuditVisualisation">Audit Visualisation</button>
+					</li>
+					<li title="Data Management" *ngIf="isFeatureAuthorized('2587')">
+						<button routerLinkActive="active" role="button" [routerLink]="['/data-management']" id="adminDataManagement">Data Management</button>
+					</li>
+				</ul>
+			</tr-accordionTab>
+		</li>
+	</ul>
+</tr-accordion>
+<div class="clearfix"></div>

@@ -1,0 +1,149 @@
+<div class="edit-view-layout">
+	<h2 class="page-title">Profile</h2>
+
+	<form [formGroup]="serviceUserAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+		<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+
+			<h2 class="page-title">Title</h2>
+
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> TITLE </legend>
+				<div class="row">
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('titleId')">
+						<label for="titleId" title="Title">Title
+                                                                </label>
+						<tr-dropdown [operation] = "action" [tableId]="227" [controlName]="'titleId'" [dropdown]="serviceUserAddForm"></tr-dropdown>
+						<control-messages [control]="serviceUserAddForm.controls.titleId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('firstName')">
+						<label for="firstName" title="First Name">First Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="firstName" id="firstName" class="form-control" placeholder="First Name" />
+						<control-messages [control]="serviceUserAddForm.controls.firstName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('secondName')">
+						<label for="secondName" title="Second Name">Second Name
+                                                                </label>
+						<input type="text" formControlName="secondName" id="secondName" class="form-control" placeholder="Second Name" />
+						<control-messages [control]="serviceUserAddForm.controls.secondName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('thirdName')">
+						<label for="thirdName" title="Third Name">Third Name
+                                                                </label>
+						<input type="text" formControlName="thirdName" id="thirdName" class="form-control" placeholder="Third Name" />
+						<control-messages [control]="serviceUserAddForm.controls.thirdName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('familyName')">
+						<label for="familyName" title="Family Name">Family Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="familyName" id="familyName" class="form-control" placeholder="Family Name" />
+						<control-messages [control]="serviceUserAddForm.controls.familyName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('previousName')">
+						<label for="previousName" title="Previous Name">Previous Name
+                                                                </label>
+						<input type="text" formControlName="previousName" id="previousName" class="form-control" placeholder="Previous Name" />
+						<control-messages [control]="serviceUserAddForm.controls.previousName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateOfBirth')">
+						<label for="dateOfBirth" title="Date of Birth">Date <span class="txt-trasilower">o</span>f Birth
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<date-picker [controlName]="'dateOfBirth'" [form]="serviceUserAddForm"></date-picker>
+						<control-messages [control]="serviceUserAddForm.controls.dateOfBirth"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('genderId')">
+						<label for="genderId" title="Gender">Gender
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'genderId'" [dropdown]="serviceUserAddForm"></tr-dropdown>
+						<control-messages [control]="serviceUserAddForm.controls.genderId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('dateDied')">
+						<label for="dateDied" title="Date of Death">Date <span class="txt-trasilower">o</span>f Death
+                                                                </label>
+						<date-picker [controlName]="'dateDied'" [form]="serviceUserAddForm"></date-picker>
+						<control-messages [control]="serviceUserAddForm.controls.dateDied"></control-messages>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+
+		<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+			<div class="col-sm-12">
+				<div class="divider-grey mb25"></div>
+			</div>
+			<h2 class="page-title">IDENTIFIERS</h2>
+
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> IDENTIFIERS </legend>
+				<div class="row">
+
+					<div class="form-group col-sm-6">
+						<label for="caseReferenceNumber" title="Case Reference Number">Case Reference Number
+                                                                <span class="mand-text">*</span>
+								</label>
+
+						<input type="" formControlName="caseReferenceNumber" id="caseReferenceNumber" readonly="readonly" disabled class="form-control"
+							placeholder="Case Reference Number" />
+						<control-messages [control]="serviceUserAddForm.controls.caseReferenceNumber"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6">
+						<label for="pncNumber" title="PNC Number">PNC Number
+                                                                </label>
+						<input type="text" formControlName="pncNumber" id="pncNumber" class="form-control" placeholder="PNC Number" />
+						<control-messages [control]="serviceUserAddForm.controls.pncNumber"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6">
+						<label for="croNumber" title="CRO Number">CRO Number
+                                                                </label>
+						<input type="text" formControlName="croNumber" id="croNumber" class="form-control" placeholder="CRO Number" />
+						<control-messages [control]="serviceUserAddForm.controls.croNumber"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6">
+						<label for="nomsNumber" title="NOMS Number">NOMS Number
+                                                                </label>
+						<input type="text" formControlName="nomsNumber" id="nomsNumber" class="form-control" placeholder="NOMS Number" />
+						<control-messages [control]="serviceUserAddForm.controls.nomsNumber"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6">
+						<label for="niNumber" title="NI Number">NI Number
+                                                                </label>
+						<input type="text" formControlName="niNumber" id="niNumber" class="form-control" placeholder="NI Number" />
+						<control-messages [control]="serviceUserAddForm.controls.niNumber"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('tierId')">
+						<label for="tierId" title="Nps Tier">Nps Tier
+                                                                </label>
+						<tr-dropdown [operation] = "action" [tableId]="225" [controlName]="'tierId'" [dropdown]="serviceUserAddForm" ></tr-dropdown>
+						<control-messages [control]="serviceUserAddForm.controls.tierId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" >
+						<label for="Band" title="Band">Band </label>
+						<tr-dropdown [operation] = "action" [tableId]="2548" [controlName]="'bandId'" [dropdown]="serviceUserAddForm"></tr-dropdown>
+						<control-messages [control]="serviceUserAddForm.controls.bandId"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" fromServerMessageValidator [form]="serviceUserAddForm">Submit</button>
+
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+
+	</form>
+</div>

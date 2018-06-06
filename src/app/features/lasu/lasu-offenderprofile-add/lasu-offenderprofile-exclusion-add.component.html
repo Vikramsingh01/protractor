@@ -1,0 +1,154 @@
+<router-outlet></router-outlet>
+<div class="sub-menu">
+  <ul *ngIf="action=='Create'">
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'restriction','new'])">
+        Restriction
+      </button>
+    </li>
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'exclusion','new'])">Exclusion
+      </button>
+    </li>
+  </ul>
+  <ul *ngIf="action=='Update'">
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'restriction','edit'])">
+        Restriction
+      </button>
+    </li>
+    <li>
+      <button class="btn btn-default btn-purple" (click)="navigateTo(['/lasu',profileId,'exclusion','edit'])">Exclusion
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="edit-view-layout">
+
+  <div class="row">
+    <div class="grid-style shrink-view">
+
+      <h2 class="page-title" *ngIf="action == 'Update'">Edit Exclusion</h2>
+      <h2 class="page-title" *ngIf="action == 'Create'">Add Exclusion</h2>
+
+      <form [formGroup]="exclusionAddForm" (ngSubmit)="addExclusionToList()" autocomplete="off">
+        <fieldset class="three-column">
+          <legend><span class="glyphicon glyphicon-flash"></span>Add Exclusion</legend>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="excludedStaffId" title="excludedStaff">Excluded Staff<span class="mand-text">*</span></label>
+              <tr-dropdown [operation] = "action" [tableId]="0" [controlName]="'excludedStaffId'" [dropdown]="exclusionAddForm"
+                           [lookup]="537" [inputParam]="dataService.getLoggedInUserId()"></tr-dropdown>
+              <control-messages [control]="exclusionAddForm.controls.excludedStaffId"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="exclusionReasonId" title="exclusionReason">Exclusion Reason<span
+                class="mand-text">*</span></label>
+              <tr-dropdown [operation] = "action" [tableId]="152" [controlName]="'exclusionReasonId'"
+                           [dropdown]="exclusionAddForm"></tr-dropdown>
+              <control-messages [control]="exclusionAddForm.controls.exclusionReasonId"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="exclusionStartDate" title="exclusionStartDate">Exclusion Start Date<span
+                class="mand-text">*</span></label>
+              <date-picker [controlName]="'exclusionStartDate'" [form]="exclusionAddForm"></date-picker>
+              <control-messages [control]="exclusionAddForm.controls.exclusionStartDate"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="exclusionEndDate" title="exclusionEndDate">Exclusion End Date</label>
+              <date-picker [controlName]="'exclusionEndDate'" [form]="exclusionAddForm"></date-picker>
+              <control-messages [control]="exclusionAddForm.controls.exclusionEndDate"></control-messages>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <div class="col-sm-4 mb10 nopadding">
+                <button type="button" class="btn btn-purple mt5" id="addToListButton" (click)="addExclusionToList()" fromServerMessageValidator
+                        [form]="exclusionAddForm">Add To List
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="pad15">
+        <table class="table table-bordered nomargin">
+          <thead>
+          <tr>
+            <th class="" trSortBy="user" (sortCommand)="sort($event)">
+              <span class="th-div">User<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'user'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+            </th>
+            <th class="text-center">Reason</th>
+            <th class="text-center" trSortBy="startDate" (sortCommand)="sort($event)">
+              <span class="th-div">Start Date<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'startDate'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+            </th>
+            <th class="text-center" trSortBy="endDate" (sortCommand)="sort($event)">
+              <span class="th-div">End Date<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'endDate'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span>
+            </th>
+            <th *ngIf="action=='Update'" class="text-center" trSortBy="action" (sortCommand)="sort($event)">
+              <span class="th-div">Action<span
+                *ngIf="sortFilterPaginationObj.sortObj.field == 'action'"
+                [ngClass]="{'glyphicon-chevron-up':sortFilterPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortFilterPaginationObj.sortObj.sort=='desc'}"
+                class="glyphicon"></span></span></th>
+            <th *ngIf="action=='Create'" class="text-center">Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let lasuExclusion of lasuExclusionList">
+            <td>
+              {{getPersonName(lasuExclusion?.excludedStaffId)}}
+            </td>
+            <td>
+              <tr-list-label [tableId]="153" [pkValue]="lasuExclusion.exclusionReasonId"></tr-list-label>
+            </td>
+            <td>
+              {{lasuExclusion?.exclusionStartDate.split(' ')[0]}}
+            </td>
+            <td>
+                <span *ngIf="lasuExclusion?.exclusionEndDate">
+                  {{lasuExclusion?.exclusionEndDate.split(' ')[0]}}
+                </span>
+            </td>
+            <td class="text-center" *ngIf="action=='Update'">
+              <button type="button" *ngIf="lasuExclusion?.active" class="btn btn-default btn-white"
+                      (click)="endExclusion(lasuExclusion)">End
+              </button>
+            </td>
+            <td class="text-center" *ngIf="action=='Create'">
+              <span *ngIf="lasuExclusion?.active">Active</span>
+              <span *ngIf="!lasuExclusion?.active && lasuExclusion.lasuExclusionId">Inactive</span>
+              <span *ngIf="!lasuExclusion?.active && !lasuExclusion.lasuExclusionId">Not Started</span>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+        <div *ngIf="lasuExclusionList?.length<=0" class="no-records text-center">No Persons Added</div>
+      </div>
+
+      <div class="form-group col-sm-12 text-right">
+        <button class="btn btn-default btn-purple" id="saveButton" (click)="onSubmit()">Submit
+        </button>
+        <button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../../..'])" id="cancelButton"
+                class="btn btn-default btn-white">Cancel
+        </button>
+        <button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" id="cancelButton"
+                class="btn btn-default btn-white">Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

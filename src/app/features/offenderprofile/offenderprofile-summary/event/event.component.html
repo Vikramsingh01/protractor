@@ -1,0 +1,47 @@
+<router-outlet></router-outlet>
+<div class="list-view-layout">
+	<div class="grid-grey">
+		<tr-list-refresh (refreshCommand)="sortFilterAndPaginate(sortFilterPaginationObj?.filterObj, sortFilterPaginationObj?.paginationObj, sortFilterPaginationObj?.sortObj)"></tr-list-refresh>
+		<h2>List of Active Events </h2>
+		<div class="mt20">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-div">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th *ngIf="isFeildAuthorized('eventNumber')" class="wid80 text-center"><span>No.</span></th>
+									<th class="wid150 text-center"><span>Appearance Date </span></th>
+									<th><span>Main Offence</span></th>
+									<th class="wid230"><span>Sentence</span></th>
+									<th *ngIf="isAuthorized('Read')" class="text-center"><span class="hidden">View</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let event of events; let i = index" [ngClass]="{'event-red': event.terminationDate != null, 'event-green': event.terminationDate == null}">
+									<td *ngIf="event.terminationDate == null" class="text-center">{{event.eventNumber}}</td>
+									<td *ngIf="event.terminationDate == null" class="text-center">{{event.referralDate}}</td>
+									<td *ngIf="event.terminationDate == null"><span *ngFor="let item of listMainOffence | filter :'key' : event?.offenceCodeId">{{item.value}}</span></td>
+									<td *ngIf="event.terminationDate == null"><span *ngFor="let item of lisOfOrderType | filter :'key' : event?.orderTypeDisposalTypeId">{{item.value}}</span></td>
+									<td *ngIf="isAuthorized('Read') && event.terminationDate == null" class="text-center">
+										<button id="event_view{{i}}" class="btn btn-default btn-small" [routerLink]="['..', 'event',event?.eventId, 'event-details']"
+											title="View Record"><span class="glyphicon glyphicon-search">aa</span></button>
+										<span *ngIf="isAuthorized('Update')">
+													<button class="btn btn-default btn-small" *ngIf="event?.locked && event.terminationDate == null "><span class="glyphicon glyphicon-lock">aa</span></button>
+										<button class="btn btn-default btn-small" *ngIf="!event?.locked && event.terminationDate == null" [routerLink]="['..', 'event',event?.eventId,'edit']"><span class="glyphicon glyphicon-pencil">aa</span></button>
+										</span>
+									</td>
+
+
+
+								</tr>
+							</tbody>
+						</table>
+						<div *ngIf="events?.length<=0 || events[0]?.terminationDate!=null" class="no-records">No Records Found</div>
+					</div>
+				</div>
+				<tr-pagination [name]="'events'" *ngIf="events?.length>0" [paginationObj]="sortFilterPaginationObj?.paginationObj" (paginationCommand)="paginate($event)"></tr-pagination>
+			</div>
+		</div>
+	</div>
+</div>

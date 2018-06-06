@@ -1,0 +1,114 @@
+<tr-main-tabs></tr-main-tabs>
+<tr-tabs [structure]="'Plan'"></tr-tabs>
+<div class="detail-view-layout one-line-view">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW ENFORCEMENT SUMMARY</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right" id="backButton">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Enforcement Summary" [selected]="true">
+                <div class="grid-head">
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                            <div class="form-field-div col-sm-4">
+                                <label for="event_dropdown" class="view-title nomargin">Select Event </label>
+                                <select class="form-control" name="eventId" [(ngModel)]="seachEvent.eventId" id="event_dropdown">
+                            <option value=''>- Select -</option>
+                            <option *ngFor="let listItem of showlist   let i = index" value="{{listItem.key}}">{{listItem.value}}</option>
+                            </select>
+                            </div>
+                            <div class="form-field-div col-sm-6">
+                                <button type="submit" class="btn btn-default btn-purple mt20">Search</button>
+                                <button type="button" class="btn btn-default btn-white mt20" (click)="reset(f)" id="cancelButton">Reset</button>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <fieldset class="three-column shrink-view">
+
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Enforcement Summary </legend>
+                    <div class="row">
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title=" No. of weeks since sentence date" id="label_profileId"> No. of weeks since sentence date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="weeks">{{enforcement?.weeks}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Next Appointment" id="label_spgVersion">Next Appointment <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="nextAppointment">{{enforcement?.nextAppointment}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Last Appointment" id="label_contactId">Last Appointment <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="lastAppointment">{{enforcement?.lastAppointment}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Last Home Visit " id="label_spgUpdateUser">Last Home Visit <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="lastHomeVisit">{{enforcement?.lastHomeVisit}}</div>
+                        </div>
+
+                        <!--<div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Last OA Sys Appointment" id="label_relatesToId">Last OA Sys Appointment <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="lastOASysAssessment">{{enforcement?.lastOASysAssessment}}</div>
+                        </div>-->
+
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Breaches Initiated" id="label_contactTypeId">Breaches Initiated <span class="pull-right">:</span></div>
+
+                            <div class="detail-value col-sm-7" id="breachInitiated">{{enforcement?.breachInitiated}}</div>
+
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Failures To Comply since {{enforcement?.sentenceDate}}" id="lable_failureToComply">Failures To Comply since <span class="pull-right">:</span></div>
+
+                            <div class="detail-value col-sm-7" id="failureToComply">{{enforcement?.failureToComply}}</div>
+
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="No. of Appointments Offered" id="label_offered">No. of Appointments Offered <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="offered">{{enforcement?.offered}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Attended Complied" id="label_contactStartTime">Attended Complied <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="contactStartTime">{{enforcement?.attendedOk}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Attended Failed To Comply " id="label_contactEndTime">Attended Failed To Comply <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="contactEndTime">{{enforcement?.attendedFailedToComply}}</div>
+                        </div>
+
+
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Attended To Failed(AA)" id="label_rarDay">Failed To Attend (AA) <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="rarDay">{{enforcement?.failedToAttendAA}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Attended To Failed(UA)" id="label_sensitiveContactYesNoId">Failed To Attend (UA) <span class="pull-right">:</span></div>
+
+                            <div class="detail-value col-sm-7" id="Attended To Failed(UA) ">{{enforcement?.failedToAttendUA}}</div>
+
+                        </div>
+                        <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Attendence Not Recorded" id="label_location">Undesignated Absence<span class="pull-right">:</span></div>
+
+                            <div class="detail-value col-sm-7" id="Attendence Not Recorded">{{enforcement?.AttendenceNotRecorded}}</div>
+
+                        </div>
+
+
+
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

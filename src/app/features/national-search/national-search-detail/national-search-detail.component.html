@@ -1,0 +1,53 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW National Search</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Service User Detail" [selected]="true">
+                <div class="grid-head"></div>
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Service User Detail </legend>
+                    <tr-national-search-service-user-detail></tr-national-search-service-user-detail>
+               
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div class="grid-style"> 
+        <tr-accordion>
+            <tr-accordionTab header="Registration" [selected]="false">
+                <div class="grid-head"></div>
+                
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Registration </legend>
+                    <tr-national-search-registration-detail></tr-national-search-registration-detail>
+                
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div class="grid-style">
+        <tr-accordion>
+            <tr-accordionTab header="Personal Circumstance" [selected]="false">
+                <div class="grid-head"></div>
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Personal Circumstance </legend>
+                    <tr-national-search-personal-circumstance-detail></tr-national-search-personal-circumstance-detail>
+                
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div class="grid-style">
+        <tr-accordion>
+            <tr-accordionTab header="Events" [selected]="false">
+                <div class="grid-head"></div>
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Events</legend>
+                    <tr-national-search-event-list></tr-national-search-event-list>
+               
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

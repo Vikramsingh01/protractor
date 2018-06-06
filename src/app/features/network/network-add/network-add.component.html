@@ -1,0 +1,298 @@
+<div class="edit-view-layout">
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style shrink-view" *ngIf="authorizedFlag">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Network</h2>
+		<h2 class="page-title" *ngIf="action == 'Create'">Add Network</h2>
+		<form [formGroup]="networkAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+			<fieldset class="three-column">
+				<legend> <span class="glyphicon glyphicon-flash"></span> Network </legend>
+				<div class="row">
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('titleId')">
+						<label for="titleId" title="Title">Title
+                                                                    </label>
+						<tr-dropdown [operation] = "action" [tableId]="227" [controlName]="'titleId'" [dropdown]="networkAddForm"></tr-dropdown>
+						<control-messages [control]="networkAddForm.controls.titleId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('firstName')">
+						<label for="firstName" title="First Name">First Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="firstName" id="firstName" class="form-control" placeholder="First Name" />
+						<control-messages [control]="networkAddForm.controls.firstName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('otherName')">
+						<label for="otherName" title="Other Name">Other Name
+                                                                </label>
+						<input type="text" formControlName="otherName" id="otherName" class="form-control" placeholder="Other Name" />
+						<control-messages [control]="networkAddForm.controls.otherName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('previousSurname')">
+						<label for="previousSurname" title="Previous Surname">Previous Surname
+                                                                </label>
+						<input type="text" formControlName="previousSurname" id="previousSurname" class="form-control" placeholder="Previous Surname"
+						/>
+						<control-messages [control]="networkAddForm.controls.previousSurname"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('familyName')">
+						<label for="familyName" title="Family Name">Family Name
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="familyName" id="familyName" class="form-control" placeholder="Family Name" />
+						<control-messages [control]="networkAddForm.controls.familyName"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('relationshipId')">
+						<label for="relationshipId" title="Relationship Type">Relationship Type
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+						<tr-dropdown [operation] = "action" [tableId]="187" [controlName]="'relationshipId'" [dropdown]="networkAddForm"></tr-dropdown>
+						<control-messages [control]="networkAddForm.controls.relationshipId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('relationshipToOffenderId')">
+						<label for="relationshipToOffenderId" title="Relationship To SU">Relationship To SU
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="relationshipToOffenderId" id="relationshipToOffenderId" class="form-control" placeholder="Relationship To SU"
+						/>
+						<control-messages [control]="networkAddForm.controls.relationshipToOffenderId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('genderId')">
+						<label for="genderId" title="Gender">Gender
+                                                          <span class="mand-text">*</span>
+                                                                    </label>
+						<tr-dropdown [operation] = "action" [tableId]="2" [controlName]="'genderId'" [dropdown]="networkAddForm"></tr-dropdown>
+						<control-messages [control]="networkAddForm.controls.genderId"></control-messages>
+					</div>
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('buildingName')">
+						<label for="buildingName" title="Building Name">Building Name
+                                                                </label>
+						<input type="text" formControlName="buildingName" id="buildingName" class="form-control" placeholder="Building Name" />
+						<control-messages [control]="networkAddForm.controls.buildingName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('houseNumber')">
+						<label for="houseNumber" title="House Number">House Number
+                                                                </label>
+						<input type="text" formControlName="houseNumber" id="houseNumber" class="form-control" placeholder="House Number" />
+						<control-messages [control]="networkAddForm.controls.houseNumber"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('streetName')">
+						<label for="streetName" title="Street Name">Street Name
+                                                                </label>
+						<input type="text" formControlName="streetName" id="streetName" class="form-control" placeholder="Street Name" />
+						<control-messages [control]="networkAddForm.controls.streetName"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('district')">
+						<label for="district" title="District">District
+                                                                </label>
+						<input type="text" formControlName="district" id="district" class="form-control" placeholder="District" />
+						<control-messages [control]="networkAddForm.controls.district"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('townCity')">
+						<label for="townCity" title="Town/City">Town/City
+                                                                </label>
+						<input type="text" formControlName="townCity" id="townCity" class="form-control" placeholder="Town City" />
+						<control-messages [control]="networkAddForm.controls.townCity"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('county')">
+						<label for="county" title="County">County
+                                                                </label>
+						<input type="text" formControlName="county" id="county" class="form-control" placeholder="County" />
+						<control-messages [control]="networkAddForm.controls.county"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('postCode')">
+						<label for="postCode" title="Post Code">Post Code
+                                                                </label>
+						<input type="text" formControlName="postCode" id="postCode" class="form-control" placeholder="Post Code" />
+						<control-messages [control]="networkAddForm.controls.postCode"></control-messages>
+					</div>
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('mobileNumber')">
+						<label for="mobileNumber" title="Mobile Number">Mobile Number
+                                                                </label>
+						<input type="text" formControlName="mobileNumber" id="mobileNumber" class="form-control" placeholder="Mobile Number" />
+						<control-messages [control]="networkAddForm.controls.mobileNumber"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('telephoneNumber')">
+						<label for="telephoneNumber" title="Telephone Number">Telephone Number
+                                                                </label>
+						<input type="text" formControlName="telephoneNumber" id="telephoneNumber" class="form-control" placeholder="Telephone Number"
+						/>
+						<control-messages [control]="networkAddForm.controls.telephoneNumber"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+						<label for="startDate" title="Start Date">Start Date
+                                                                    </label>
+						<date-picker [controlName]="'startDate'" [form]="networkAddForm"></date-picker>
+						<control-messages [control]="networkAddForm.controls.startDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+						<label for="endDate" title="End Date">End Date
+                                                                    </label>
+						<date-picker [controlName]="'endDate'" [form]="networkAddForm"></date-picker>
+						<control-messages [control]="networkAddForm.controls.endDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('emailAddress')">
+						<label for="emailAddress" title="Email Address">Email Address
+                                                                </label>
+						<input type="text" formControlName="emailAddress" id="emailAddress" class="form-control" placeholder="Email Address" />
+						<control-messages [control]="networkAddForm.controls.emailAddress"></control-messages>
+					</div>
+
+
+					<!--<div class="form-group col-sm-12" *ngIf="isFeildAuthorized('note')">
+                                <label for="note" title="Notes">Notes
+            					<textarea formControlName="note" id="note" placeholder="Note" class="form-control"></textarea>
+                                        </label>
+                                <input type="text" formControlName="note" id="note" class="form-control" placeholder="Note" />
+                                <control-messages [control]="networkAddForm.controls.note"></control-messages>
+                            </div>-->
+
+
+
+					 <div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('note')">
+                        <tr-notes [controlName]="'note'" [form]="networkAddForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+                        <control-messages [control]="networkAddForm.controls.note"></control-messages>
+                    </div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+						<label for="profileId" title="Profile Id">Profile Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="profileId" id="profileId" class="form-control" placeholder="Profile Id" />
+						<control-messages [control]="networkAddForm.controls.profileId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('personalContactId')">
+						<label for="personalContactId" title="Personal Contact Id">Personal Contact Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="personalContactId" id="personalContactId" class="form-control" placeholder="Personal Contact Id"
+						/>
+						<control-messages [control]="networkAddForm.controls.personalContactId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgVersion')">
+						<label for="spgVersion" title="Spg Version">Spg Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="spgVersion" id="spgVersion" class="form-control" placeholder="Spg Version" />
+						<control-messages [control]="networkAddForm.controls.spgVersion"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgUpdateUser')">
+						<label for="spgUpdateUser" title="Spg Update User">Spg Update User
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="spgUpdateUser" id="spgUpdateUser" class="form-control" placeholder="Spg Update User"
+						/>
+						<control-messages [control]="networkAddForm.controls.spgUpdateUser"></control-messages>
+					</div>
+
+
+
+
+
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('spgPersonalContactId')">
+						<label for="spgPersonalContactId" title="Spg Personal Contact Id">Spg Personal Contact Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="spgPersonalContactId" id="spgPersonalContactId" class="form-control" placeholder="Spg Personal Contact Id"
+						/>
+						<control-messages [control]="networkAddForm.controls.spgPersonalContactId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+						<label for="createdBy" title="Created By">Created By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="createdBy" id="createdBy" class="form-control" placeholder="Created By" />
+						<control-messages [control]="networkAddForm.controls.createdBy"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+						<label for="createdByUserId" title="Created By User Id">Created By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="createdByUserId" id="createdByUserId" class="form-control" placeholder="Created By User Id"
+						/>
+						<control-messages [control]="networkAddForm.controls.createdByUserId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+						<label for="createdDate" title="Created Date">Created Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+						<date-picker [controlName]="'createdDate'" [form]="networkAddForm"></date-picker>
+						<control-messages [control]="networkAddForm.controls.createdDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+						<label for="modifiedBy" title="Modified By">Modified By
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="modifiedBy" id="modifiedBy" class="form-control" placeholder="Modified By" />
+						<control-messages [control]="networkAddForm.controls.modifiedBy"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+						<label for="modifiedByUserId" title="Modified By User Id">Modified By User Id
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="modifiedByUserId" id="modifiedByUserId" class="form-control" placeholder="Modified By User Id"
+						/>
+						<control-messages [control]="networkAddForm.controls.modifiedByUserId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+						<label for="modifiedDate" title="Modified Date">Modified Date
+                                                                        <span class="mand-text">*</span>
+                                                                    </label>
+						<date-picker [controlName]="'modifiedDate'" [form]="networkAddForm"></date-picker>
+						<control-messages [control]="networkAddForm.controls.modifiedDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+						<label for="deleted" title="Deleted">Deleted
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="deleted" id="deleted" class="form-control" placeholder="Deleted" />
+						<control-messages [control]="networkAddForm.controls.deleted"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+						<label for="deletedBy" title="Deleted By">Deleted By
+                                                                </label>
+						<input type="text" formControlName="deletedBy" id="deletedBy" class="form-control" placeholder="Deleted By" />
+						<control-messages [control]="networkAddForm.controls.deletedBy"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+						<label for="deletedByUserId" title="Deleted By User Id">Deleted By User Id
+                                                                </label>
+						<input type="text" formControlName="deletedByUserId" id="deletedByUserId" class="form-control" placeholder="Deleted By User Id"
+						/>
+						<control-messages [control]="networkAddForm.controls.deletedByUserId"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+						<label for="deletedDate" title="Deleted Date">Deleted Date
+                                                                    </label>
+						<date-picker [controlName]="'deletedDate'" [form]="networkAddForm"></date-picker>
+						<control-messages [control]="networkAddForm.controls.deletedDate"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('locked')">
+						<label for="locked" title="Locked">Locked
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="locked" id="locked" class="form-control" placeholder="Locked" />
+						<control-messages [control]="networkAddForm.controls.locked"></control-messages>
+					</div>
+					<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('version')">
+						<label for="version" title="Version">Version
+                                                                    <span class="mand-text">*</span>
+                                                                </label>
+						<input type="text" formControlName="version" id="version" class="form-control" placeholder="Version" />
+						<control-messages [control]="networkAddForm.controls.version"></control-messages>
+					</div>
+					<div class="form-group col-sm-12 text-right">
+						<button class="btn btn-default btn-purple" fromServerMessageValidator [form]="networkAddForm">SUBMIT</button>
+						<button type="button" *ngIf="action == 'Create'" (click)="navigateTo(['../..'])" class="btn btn-default btn-white">CANCEL</button>
+						<button type="button" *ngIf="action == 'Update'" (click)="navigateTo(['../../..'])" class="btn btn-default btn-white">CANCEL</button>
+					</div>
+				</div>
+			</fieldset>
+
+		</form>
+	</div>
+
+</div>

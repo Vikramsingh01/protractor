@@ -1,0 +1,127 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW deregistration</h2>
+            <div class="pull-right">
+                <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="deregistration" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span>deregistration</legend>
+                    <div class="row">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deregistrationId')">
+                            <div class="view-title col-sm-5" id="label_deregistrationId" title="Deregistration Id">Deregistration<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deregistrationId">{{deregistration?.deregistrationId}}</div>
+                        </div>
+                        
+                        <!--<div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('registrationId')">
+                            <div class="view-title col-sm-5" id="label_registrationId" title="Registration Id">Registration<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registrationId">
+                                <tr-list-label *ngIf="deregistration?.registrationId" [tableId]="207" [pkValue]="deregistration?.registrationId"></tr-list-label>
+                            </div>
+                        </div>-->
+                   
+                   
+                   
+                    <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" id="label_registerTypeId" title="Registration Type">Register Type<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="registerTypeId">
+                                <tr-list-label *ngIf="deregistration?.registerTypeId" [tableId]="207" [pkValue]="deregistration?.registerTypeId"></tr-list-label>
+                            </div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deregistrationDate')">
+                            <div class="view-title col-sm-5" id="label_deregistrationDate" title="Deregistration Date">Deregistration Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deregistrationDate">{{deregistration?.deregistrationDate}}</div>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deregisteringProviderId')">
+                            <div class="view-title col-sm-5" id="label_deregisteringProviderId" title="Deregistering Officer's Provider">Deregistering Officer's Provider<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deregisteringProviderId">
+                                <tr-list-label *ngIf="deregistration?.deregisteringProviderId" [tableId]="193" [pkValue]="deregistration?.deregisteringProviderId"></tr-list-label>
+                            </div>
+                        </div>
+
+                          <div class="form-field-div col-sm-6"  *ngIf="isFeildAuthorized('deregisteringTeam')">
+                            <div class="view-title col-sm-5" title="Deregistering Officer's Team" id="label_deregisteringTeam">Deregistering Officer's Team<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                 <span >{{deregistration?.deregisteringTeam?.split('/')[1]}}</span>
+                                <!--<tr-list-label *ngIf="contact?.contactOutcomeId" [tableId]="177" [pkValue]="contact?.contactOutcomeId"></tr-list-label>-->
+                            </div>
+                        </div>
+
+                          <div class="form-field-div col-sm-6">
+                            <div class="view-title col-sm-5" title="Deregistered By" id="label_deregisteringOfficer">Deregistered By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                 <span>{{deregistration?.deregisteringOfficer?.split('/')[1]}}</span>
+                                <!--<tr-list-label *ngIf="contact?.contactOutcomeId" [tableId]="177" [pkValue]="contact?.contactOutcomeId"></tr-list-label>-->
+                            </div>
+                        </div>
+
+                   
+                       <div class="col-sm-12 nopadding">
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deregistrationNotes')">
+                            <div class="view-title col-sm-5" id="label_deregistrationNotes" title=" Notes"> Notes<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deregistrationNotes">{{deregistration?.deregistrationNotes}}</div>
+                        </div>
+                       </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5" id="label_createdBy" title="Created By">Created By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdBy">{{deregistration?.createdBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5" id="label_createdByUserId" title="Created By User Id">Created By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdByUserId">{{deregistration?.createdByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5" id="label_createdDate" title="Created Date">Created Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="createdDate">{{deregistration?.createdDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5" id="label_modifiedBy" title="Modified By">Modified By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedBy">{{deregistration?.modifiedBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5" id="label_modifiedByUserId" title="Modified By User Id">Modified By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedByUserId">{{deregistration?.modifiedByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5" id="label_modifiedDate" title="Modified Date">Modified Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="modifiedDate">{{deregistration?.modifiedDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5" id="label_deleted" title="Deleted">Deleted<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deleted">{{deregistration?.deleted}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5" id="label_deletedBy" title="Deleted By">Deleted By<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedBy">{{deregistration?.deletedBy}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5" id="label_deletedByUserId" title="Deleted By User Id">Deleted By User Id<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedByUserId">{{deregistration?.deletedByUserId}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5" id="label_deletedDate" title="Deleted Date">Deleted Date<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="deletedDate">{{deregistration?.deletedDate}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5" id="label_locked" title="Locked">Locked<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="locked">{{deregistration?.locked}}</div>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5" id="label_version" title="Version">Version<span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="version">{{deregistration?.version}}</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

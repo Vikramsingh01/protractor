@@ -1,0 +1,112 @@
+<div class="detail-view-layout one-line-view">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="page-title pull-left">Project Attendance List</h2>
+      <div class="pull-right">
+        <button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="double-divider-purple mt10"></div>
+  <div class="grid-style" *ngIf="authorizedFlag">
+    <tr-accordion>
+      <tr-accordionTab header="Project Attendance List" [selected]="true">
+        <div class="grid-head"></div>
+        <fieldset class="three-column shrink-view">
+          <legend> <span class="glyphicon glyphicon-flash"></span>Project Attendance List</legend>
+          <div class="row">
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Project Type" id="label_projectType">Project Type<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">
+                <tr-list-label *ngIf="upwAppointment?.projectTypeId" [tableId]="239" [pkValue]="upwAppointment?.projectTypeId"></tr-list-label>
+              </div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Project Name" id="label_projectName">Project Name<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.projectName}}</div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Date" id="label_projectName">Date<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.appointmentDate}}</div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="Start Time" id="label_startTime">Start Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.startTime}}</div>
+            </div>
+            <div class="form-field-div col-sm-6">
+              <div class="view-title col-sm-5" title="End Time" id="label_endTime">End Time<span class="pull-right">:</span></div>
+              <div class="detail-value col-sm-7">{{upwAppointment?.endTime}}</div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="col-sm-12">
+          <table class="table table-bordered mt10">
+            <thead>
+              <tr>
+                <th id="CRN" class="wid120 text-center" trSortBy="caseReferenceNumber" (sortCommand)="sort($event)">CRN
+                  <span *ngIf="sortSearchPaginationObj.sortObj.field == 'caseReferenceNumber'" [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                    class="glyphicon"></span>
+                </th>
+                <th id="Name" class="wid180" trSortBy="firstName" (sortCommand)="sort($event)">Name
+                  <span *ngIf="sortSearchPaginationObj.sortObj.field == 'firstName'" [ngClass]="{'glyphicon-chevron-up':sortSearchPaginationObj.sortObj.sort=='asc', 'glyphicon-chevron-down':sortSearchPaginationObj.sortObj.sort=='desc'}"
+                    class="glyphicon"></span>
+                </th>
+                <th id="DoB" class="text-center">DoB</th>
+                <th id="hrs_ordered" class="wid120 text-center">Hrs Ordered</th>
+                <th id="Hrs_left" class="text-center">Hrs Left</th>
+                <th id="Start_time" class="text-center">Start Time</th>
+                <th id="End_Time" class="text-center">End Time</th>
+                <th id="Hrs_credited" class="wid120 text-center">Hrs Credited</th>
+                <th class="text-center"><span class="hidden">View</span></th>
+              </tr>
+            </thead>
+            <tr *ngFor="let serviceUser of allocatedServiceUsers">
+              <td class="text-center">{{serviceUser?.caseReferenceNumber}}</td>
+              <td>{{serviceUser?.firstName}} {{serviceUser?.familyName}}</td>
+              <td class="text-center">{{serviceUser?.dateOfBirth}}</td>
+              <td class="text-center">{{serviceUser?.length}}</td>
+              <td class="text-center">{{serviceUser?.totalHoursLeft}}</td>
+              <td class="text-center"></td>
+              <td class="text-center"></td>
+              <td></td>
+
+              <td class="text-center wid120">
+                <span>
+                  <button class="btn btn-default btn-small" id="upwAppointment_view{{i}}" [routerLink]="[]" title="View Record">
+                    <span class="glyphicon glyphicon-search">aa</span>
+                  </button>
+                </span>
+                <span>
+                  <button *ngIf="serviceUser?.locked" [routerLink]="[]" id="upwAppointment_edit{{i}}" class="btn btn-default btn-small" title="Edit Record">
+                    <span class="glyphicon glyphicon-lock">aa</span>
+                  </button>
+                  <button *ngIf="!serviceUser?.locked" [routerLink]="[]" id="upwAppointment_edit{{i}}" class="btn btn-default btn-small" title="Edit Record">
+                    <span class="glyphicon glyphicon-pencil">aa</span>
+                  </button>
+                </span>
+                <span *ngIf="isAuthorized('Archive')">
+                  <button *ngIf="serviceUser?.locked" class="btn btn-default btn-small" (click)="delete(serviceUser?.upwAppointmentId)" id="upwAppointment_delete{{i}}"  title="Delete Record">
+                    <span class="glyphicon glyphicon-lock">aa</span>
+                  </button>
+                  <button *ngIf="!serviceUser?.locked" class="btn btn-default btn-small" (click)="delete(serviceUser?.upwAppointmentId)" id="upwAppointment_delete{{i}}"  title="Delete Record">
+                    <span class="glyphicon glyphicon-trash">aa</span>
+                  </button>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="showHideAllocatedServiceUsers && allocatedServiceUsers?.length<=0" class="no-records">No Service Users Allocated</div>
+        <div class="form-field-div col-sm-4 pull-right nomargin">
+          <div class="view-title col-sm-5" title="Supervisor Name" id="label_endTime">Supervisor Name<span class="pull-right">:</span></div>
+          <div class=" col-sm-7"></div>
+        </div>
+        <div class="clearfix"></div>
+
+        <tr-pagination [name]="'allocatedServiceUsers'" *ngIf="allocatedServiceUsers?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+          (paginationCommand)="paginate($event)"></tr-pagination>
+      </tr-accordionTab>
+    </tr-accordion>
+  </div>
+  <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

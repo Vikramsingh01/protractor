@@ -1,0 +1,99 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Institutional Report</h2>
+            <div class="pull-right">
+                <button [routerLink]="['..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" *ngIf="authorizedFlag">
+        <tr-accordion>
+            <tr-accordionTab header="Institutional Report" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> InstitutionalReport </legend>
+                    <div class="row">                    
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requestedDate')">
+                            <div class="view-title col-sm-5" title="Requested Date" id="label_requestedDate">Requested Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="requestedDate">{{institutionalReport?.requestedDate}}</p>
+                        </div>
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requiredByDate')">
+                            <div class="view-title col-sm-5" title="Required By Date" id="label_requiredByDate">Required By Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="requiredByDate">{{institutionalReport?.requiredByDate}}</p>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('requestedReportTypeId')">
+                            <div class="view-title col-sm-5" title="Requested Report Type" id="label_requestedReportTypeId">Requested Report Type <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="requestedReportTypeId">
+                                <tr-list-label *ngIf="institutionalReport?.requestedReportTypeId" [tableId]="149" [pkValue]="institutionalReport?.requestedReportTypeId"></tr-list-label>
+                            </p>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocatedDate')">
+                            <div class="view-title col-sm-5" title="Allocated Date" id="label_allocatedDate">Allocated Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="allocatedDate">{{institutionalReport?.allocatedDate}}</p>
+                        </div>
+                
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('videoLink')">
+                            <div class="view-title col-sm-5" title="Interview Conducted via video Link" id="label_videoLinkYesNoId">Interview Conducted via video Link <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="institutionalReport?.videoLinkYesNoId" [tableId]="244" [pkValue]="institutionalReport?.videoLinkYesNoId"></tr-list-label>
+                            </div>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('completedDate')">
+                            <div class="view-title col-sm-5" title="completed Date" id="label_completedDate">completed Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="completedDate">{{institutionalReport?.completedDate}}</p>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('institutionId')">
+                            <div class="view-title col-sm-5" title="Institution" id="label_institutionId">Institution <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="institutionId">
+                                <tr-list-label *ngIf="institutionalReport?.institutionId" [tableId]="135" [pkValue]="institutionalReport?.institutionId"></tr-list-label>
+                            </p>
+                        </div>
+                        
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deliveredToEstablishment')">
+                            <div class="view-title col-sm-5" title="Delivered To Establishment Date" id="label_deliveredToEstablishment">Delivered To Establishment Date <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="deliveredToEstablishment">{{institutionalReport?.deliveredToEstablishment}}</p>
+                        </div>
+
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('dateAbandoned')">
+                            <div class="view-title col-sm-5" title="Date Abandoned" id="label_dateAbandoned">Date Abandoned <span class="pull-right">:</span></div>
+                            <p class="detail-value col-sm-7" id="dateAbandoned">{{institutionalReport?.dateAbandoned}}</p>
+                        </div>
+       
+                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('institutionalReportProviderId')">
+                            <div class="view-title col-sm-5" title="CRC / NPS Division">CRC / NPS Division <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7">
+                                <tr-list-label *ngIf="institutionalReport?.institutionalReportProviderId" [tableId]="193" [pkValue]="institutionalReport?.institutionalReportProviderId"></tr-list-label>
+                            </div>
+                        </div>
+
+                        <div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('institutionalReportTeam')">
+                            <div class="view-title col-sm-5" title="Team" id="label_institutionalReportTeam">Team <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="institutionalReportTeam">{{institutionalReport?.institutionalReportTeam?.split("/")[1].split("(")[0].split("[")[0]}}</div>
+                        </div>
+
+                        <div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('institutionalReportTeam')">
+                            <div class="view-title col-sm-5" title="Case Manager" id="label_institutionalReportOfficer">Case Manager <span class="pull-right">:</span></div>
+                            <div class="detail-value col-sm-7" id="institutionalReportOfficer">{{parseOfficer(institutionalReport?.institutionalReportOfficer)}}</div>
+
+                        </div>
+
+                        <div class="col-sm-12 nopadding">
+                            <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('note')">
+                                <div class="view-title col-sm-5" title="Notes" id="label_note">Notes <span class="pull-right">:</span></div>
+                                <p class="detail-value-note col-sm-7" id="note">{{institutionalReport?.note}}</p>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

@@ -1,0 +1,122 @@
+<div class="detail-view-layout">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW Case Manager History</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" class="btn btn-default btn-white pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10"></div>
+  
+    <div class="grid-style" *ngIf="authorizedFlag">
+
+        <tr-accordion>
+            <tr-accordionTab header="Case Manager History" [selected]="true">
+                <div class="grid-head"></div>
+                <fieldset class="three-column">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> CaseManagerHistory </legend>
+                    <div class="row">
+                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('profileId')">
+                            <div class="view-title col-sm-5">Profile Id</div>
+                            <p>{{caseManagerHistory?.profileId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('teamId')">
+                            <div class="view-title col-sm-5">Team Id</div>
+                            <p>{{caseManagerHistory?.teamId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('userId')">
+                            <div class="view-title col-sm-5">User Id</div>
+                            <p>{{caseManagerHistory?.userId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('startDate')">
+                            <div class="view-title col-sm-5">Start Date</div>
+                            <p>{{caseManagerHistory?.startDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('caseManagerAllocationId')">
+                            <div class="view-title col-sm-5">Case Manager Allocation Id</div>
+                            <p>{{caseManagerHistory?.caseManagerAllocationId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('endDate')">
+                            <div class="view-title col-sm-5">End Date</div>
+                            <p>{{caseManagerHistory?.endDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transferReason')">
+                            <div class="view-title col-sm-5">Transfer Reason</div>
+                            <p>{{caseManagerHistory?.transferReason}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdBy')">
+                            <div class="view-title col-sm-5">Created By</div>
+                            <p>{{caseManagerHistory?.createdBy}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdByUserId')">
+                            <div class="view-title col-sm-5">Created By User Id</div>
+                            <p>{{caseManagerHistory?.createdByUserId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('createdDate')">
+                            <div class="view-title col-sm-5">Created Date</div>
+                            <p>{{caseManagerHistory?.createdDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedBy')">
+                            <div class="view-title col-sm-5">Modified By</div>
+                            <p>{{caseManagerHistory?.modifiedBy}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedByUserId')">
+                            <div class="view-title col-sm-5">Modified By User Id</div>
+                            <p>{{caseManagerHistory?.modifiedByUserId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('modifiedDate')">
+                            <div class="view-title col-sm-5">Modified Date</div>
+                            <p>{{caseManagerHistory?.modifiedDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deleted')">
+                            <div class="view-title col-sm-5">Deleted</div>
+                            <p>{{caseManagerHistory?.deleted}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedBy')">
+                            <div class="view-title col-sm-5">Deleted By</div>
+                            <p>{{caseManagerHistory?.deletedBy}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedByUserId')">
+                            <div class="view-title col-sm-5">Deleted By User Id</div>
+                            <p>{{caseManagerHistory?.deletedByUserId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('deletedDate')">
+                            <div class="view-title col-sm-5">Deleted Date</div>
+                            <p>{{caseManagerHistory?.deletedDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('locked')">
+                            <div class="view-title col-sm-5">Locked</div>
+                            <p>{{caseManagerHistory?.locked}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('version')">
+                            <div class="view-title col-sm-5">Version</div>
+                            <p>{{caseManagerHistory?.version}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transferFromProviderId')">
+                            <div class="view-title col-sm-5">Transfer From Provider Id</div>
+                            <p>{{caseManagerHistory?.transferFromProviderId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transferToResponsibleOfficer')">
+                            <div class="view-title col-sm-5">Transfer To Responsible Officer</div>
+                            <p>{{caseManagerHistory?.transferToResponsibleOfficer}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('allocationDate')">
+                            <div class="view-title col-sm-5">Allocation Date</div>
+                            <p>{{caseManagerHistory?.allocationDate}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transferReasonId')">
+                            <div class="view-title col-sm-5">Transfer Reason Id</div>
+                            <p>{{caseManagerHistory?.transferReasonId}}</p>
+                        </div>
+                                                                                                                        <div class="form-field-div col-sm-6" *ngIf="isFeildAuthorized('transferToProviderId')">
+                            <div class="view-title col-sm-5">Transfer To Provider Id</div>
+                            <p>{{caseManagerHistory?.transferToProviderId}}</p>
+                        </div>
+                                                                                            </div>
+                </fieldset>
+            </tr-accordionTab>
+        </tr-accordion>
+    </div>
+    <div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>

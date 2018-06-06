@@ -1,0 +1,41 @@
+<!--<div class="grey-bg nopadright">
+	<h2>Address</h2>
+	<div class="sum-det-inner-div">
+		<div class="label-style">Street: <strong>{{address?.streetName}}</strong></div>
+		<div class="label-style">Town: <strong>{{address?.townCity}}</strong></div>
+		<div class="label-style">County: <strong>{{address?.county}}</strong></div>
+		<div class="label-style">PostCode: <strong>{{address?.postcode}}</strong></div>
+		<div class="label-style">Type: <strong><tr-list-label *ngIf="address?.addressStatusId" [tableId]="83" [pkValue]="address?.addressStatusId"></tr-list-label></strong></div>
+	</div>
+</div>-->
+<div class="detail-view-layout">
+	<div class="grid-style">
+		<tr-accordion>
+			<tr-accordionTab header="Address" [selected]="true">
+				<fieldset class="shrink-view nopadright nopadleft">
+					<div class="form-field-div col-sm-6">
+						<div class="view-title col-sm-5" title="Street" id="label_streetName">Street <span class="pull-right">:</span></div>
+						<div class="detail-value col-sm-7" id="streetName">{{address?.streetName}}</div>
+					</div>
+					<div class="form-field-div col-sm-6">
+						<div class="view-title col-sm-5" title="Town" id="label_townCity">Town <span class="pull-right">:</span></div>
+						<div class="detail-value col-sm-7" id="townCity">{{address?.townCity}}</div>
+					</div>
+					<div class="form-field-div col-sm-6">
+						<div class="view-title col-sm-5" title="County" id="label_county">County <span class="pull-right">:</span></div>
+						<div class="detail-value col-sm-7" id="county">{{address?.county}}</div>
+					</div>
+					<div class="form-field-div col-sm-6">
+						<div class="view-title col-sm-5" title="PostCode" id="label_postcode">PostCode <span class="pull-right">:</span></div>
+						<div class="detail-value col-sm-7" id="postcode">{{address?.postcode}}</div>
+					</div>
+					<div class="form-field-div col-sm-6">
+					<div class="view-title col-sm-5" title="Type" id="label_addressStatusId">Type <span class="pull-right">:</span></div>
+					
+						<div class="detail-value col-sm-7"><strong><tr-list-label *ngIf="address?.addressStatusId" [tableId]="83" [pkValue]="address?.addressStatusId"></tr-list-label></strong></div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+	</div>
+</div>

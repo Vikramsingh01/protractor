@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:test-suite xmlns:ns2="urn:model.allure.qatools.yandex.ru" start="1526471685408" stop="1526471699314">
+	<name>Neo Tr LOGIN - </name>
+	<title>Neo Tr LOGIN - </title>
+	<test-cases>
+		<test-case start="1526471685408" stop="1526471698325" status="passed">
+			<name>going to login</name>
+			<title>going to login</title>
+			<description></description>
+			<labels>
+			</labels>
+			<steps>
+			</steps>
+			<attachments>
+				<attachment title="Screenshot" source="0b566020-4186-4f71-a78f-c44604194549-attachment.png" type="image/png" size="90309"/>
+			</attachments>
+		</test-case>
+		<test-case start="1526471698325" stop="1526471699314" status="passed">
+			<name>should display the Titile of Application</name>
+			<title>should display the Titile of Application</title>
+			<description></description>
+			<labels>
+			</labels>
+			<steps>
+			</steps>
+			<attachments>
+				<attachment title="Screenshot" source="41b2dc06-3dec-45db-88d2-61e64e660de0-attachment.png" type="image/png" size="35390"/>
+			</attachments>
+		</test-case>
+	</test-cases>
+</ns2:test-suite>

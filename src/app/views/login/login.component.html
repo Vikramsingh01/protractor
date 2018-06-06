@@ -1,0 +1,38 @@
+<div *ngIf="!isLoggedIn">
+	<div  class="log-in-container">
+	<form [formGroup]="loginForm" (ngSubmit)="login()">
+		<div class="logo-div">
+			<img src="../../../assets/images/interserve-white.png" alt="interserve" class="img-responsive">
+		</div>
+		<div ngmodelgroup="userLogin">
+			<div><h2 class="form-signin-heading"><span class="strikethrough"></span> Sign in <span class="strikethrough"></span></h2></div>
+			<p class="alert alert-danger text-center red-text" *ngIf="loginFailed"><span [innerHTML]="message"></span></p>
+			
+			<div class="form-group"><label class="sr-only" for="email">Email address</label>
+				<input type="text" id="email" class="form-control" formControlName="username" placeholder="Username">
+				<div class='alert-danger text-danger' *ngIf="!loginForm.controls.username.valid && loginForm.controls.username.touched">
+        			<p>Username is required</p>
+				</div>
+			</div>
+			<div class="form-group"><label class="sr-only" for="pwd">Password</label>
+				<input type="password" id="pwd" class="form-control" formControlName="password" placeholder="Password" />
+				<div class='alert-danger text-danger' *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.touched">
+        			<p>Password is required</p>
+				</div>
+			</div>
+			<button class="btn btn-default btn-warning mb10 col-sm-12 nopadleft nopadright" type="submit">LOGIN</button>
+			<!--<div class="checkbox pull-left nomargin">
+			<label>
+			<input type="checkbox"> Remember me
+			</label>
+			</div>-->
+			<div class="text-center"><a [routerLink]="['forgot-password']">Forgot Password?</a></div>
+			<div class="clearfix"></div>
+		</div>
+	</form>
+	</div>
+</div>
+<div *ngIf="isLoggedIn">
+	<p>You are already logged in. </p>
+	<a [routerLink]="['/']">Click here to go to Dashboard.</a>
+</div>

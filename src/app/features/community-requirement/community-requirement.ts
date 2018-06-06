@@ -1,0 +1,36 @@
+export class CommunityRequirement {
+       communityRequirementId: any;
+      eventId: any;
+      spgVersion: any;
+      spgUpdateUser: any;
+      additionalRequirementTypeMainCategoryId: any;
+      additionalRequirementTypeSubCategoryId: any;
+      expectedStartDate: any;
+      note: any;
+      expectedEndDate: any;
+      terminationReasonId: any;
+      attendanceCount: any;
+      rqProviderId: any;
+      rqResponsibleTeam: any;
+      spgCommunityRequirementId: any;
+      createdBy: any;
+      createdByUserId: any;
+      createdDate: any;
+      modifiedBy: any;
+      modifiedByUserId: any;
+      modifiedDate: any;
+      deleted: any;
+      deletedBy: any;
+      deletedByUserId: any;
+      deletedDate: any;
+      locked: any;
+      version: any;
+      imposedDate: any;
+      requirementTypeMainCategoryId: any;
+      requirementTypeSubCategoryId: any;
+      length: any;
+      actualStartDate: any;
+      actualEndDate: any;
+      rqResponsibleOfficer: any;
+      unitsCode:any;
+  }

@@ -1,0 +1,139 @@
+<div class="detail-view-layout">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page-title pull-left">Requirement Details</h2>
+			<div class="pull-right">
+				<button [routerLink]="['../..']" class="btn btn-default btn-purple pull-right" id="backButton">Back</button>
+			</div>
+		</div>
+	</div>
+	<div class="double-divider-purple mt10"></div>
+	<div class="grid-style" *ngIf="authorizedFlag">
+		<tr-accordion>
+			<tr-accordionTab header="Requirement Details" [selected]="true">
+				<div class="grid-head"></div>
+				<fieldset class="three-column shrink-view">
+					<legend>
+						<span class="glyphicon glyphicon-flash"></span> RequirementDetails </legend>
+					<div class="row">
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('additionalRequirementTypeMainCategoryId') && communityRequirement?.requirementTypeMainCategoryId == null">
+							<div class="view-title col-sm-5" title="Additional Requirement Type Main Category Id ">Additional Requirement Type Main Category Id
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">
+								<tr-list-label *ngIf="communityRequirement?.additionalRequirementTypeMainCategoryId" [tableId]="80" [pkValue]="communityRequirement?.additionalRequirementTypeMainCategoryId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('requirementTypeMainCategoryId') && communityRequirement?.additionalRequirementTypeMainCategoryId == null ">
+							<div class="view-title col-sm-5" title="Requirement Type Main Category " id="label_requirementTypeMainCategoryId">Requirement Type Main Category
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">
+								<tr-list-label *ngIf="communityRequirement?.requirementTypeMainCategoryId" [tableId]="215" [pkValue]="communityRequirement?.requirementTypeMainCategoryId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('additionalRequirementTypeSubCategoryId') && communityRequirement?.requirementTypeSubCategoryId == null">
+							<div class="view-title col-sm-5" title="Additional Requirement Type Sub Category Id ">Additional Requirement Type Sub Category Id
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">
+								<tr-list-label *ngIf="communityRequirement?.additionalRequirementTypeSubCategoryId" [tableId]="81" [pkValue]="communityRequirement?.additionalRequirementTypeSubCategoryId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('requirementTypeSubCategoryId') && communityRequirement?.additionalRequirementTypeSubCategoryId == null">
+							<div class="view-title col-sm-5" title="Requirement Type Sub Category " id="label_requirementTypeSubCategoryId">Requirement Type Sub Category
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">
+								<tr-list-label *ngIf="communityRequirement?.requirementTypeSubCategoryId" [tableId]="216" [pkValue]="communityRequirement?.requirementTypeSubCategoryId"></tr-list-label>
+							</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('imposedDate')">
+							<div class="view-title col-sm-5" title="Imposed(Sentence) Date " id="label_imposedDate">Imposed(Sentence) Date
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">{{communityRequirement?.imposedDate}}</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('length')">
+							<div class="view-title col-sm-5" title="Length " id="label_length">Length
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">{{communityRequirement?.length}}</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('expectedStartDate')">
+							<div class="view-title col-sm-5" title="Expected Start Date " id="label_expectedStartDate">Expected Start Date
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">{{communityRequirement?.expectedStartDate}}</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('actualStartDate')">
+							<div class="view-title col-sm-5" title="Actual Start Date " id="label_actualStartDate">Actual Start Date
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">{{communityRequirement?.actualStartDate}}</p>
+						</div>
+						<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+							<div class="view-title col-sm-5" title="Expected End Date(Termination) " id="label_expectedEndDate">Expected End Date(Termination)
+								<span class="pull-right">:</span>
+							</div>
+							<p class="detail-value col-sm-7">{{communityRequirement?.expectedEndDate}}</p>
+						</div>
+						<div class="col-sm-12 nopadding">
+							<div class="form-field-div  col-sm-6" *ngIf="isFeildAuthorized('note')">
+								<div class="view-title col-sm-5" title="Notes " id="label_note">Notes
+									<span class="pull-right">:</span>
+								</div>
+								<p class="detail-value-note col-sm-7" class="detail-value-note text-box">{{communityRequirement?.note}}</p>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</tr-accordionTab>
+		</tr-accordion>
+		<div class="pad15">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-div" *ngIf="rarCalculationList?.rarData.length> 0">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th class="text-center">Description</th>
+									<th class="text-center">Status</th>
+									<th class="text-center">Status Date</th>
+									<th class="text-center">Responsible Manager</th>
+									<th class="text-center">Termination Date</th>
+									<th class="text-center">RAR Count</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let requirement of rarCalculationList?.rarData; let i = index">
+									<td>{{requirement?.description}}</td>
+									<td class="text-center">{{requirement?.status}}</td>
+									<td class="text-center">{{requirement?.statusDate}}</td>
+									<td>{{requirement?.responsibleManager}}</td>
+									<td class="text-center">{{requirement?.terminationDate}}</td>
+									<td class="text-center">{{requirement?.rarCount}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<div *ngIf="rarCalculationList?.length<=0" class="no-records">No Records Found</div>
+					</div>
+				</div>
+				<tr-pagination [name]="'communityRequirementList'" *ngIf="communityRequirementList?.length>0" [paginationObj]="sortSearchPaginationObj?.paginationObj"
+				 (paginationCommand)="paginate($event)"></tr-pagination>
+			</div>
+		</div>
+		<div class="pad15" *ngIf="rarCalculationList?.rarData.length> 0">
+			<div class="row">
+				<div class="form-field-div col-sm-5">
+					<div class="view-title" title="totalNumberOfRarDays ">Total Number of RAR Days : {{completedLength}} </div>
+					<div class="view-title" title="completedRarDays ">Completed RAR Days : {{rarCalculationList?.completedRARDays}} </div>
+					<div class="view-title" title="remainingRarDays ">Remaining RAR Days : {{completedLength - rarCalculationList?.completedRARDays}} </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!authorizedFlag">Not Authorized</div>
+</div>
+<tr-terminate-requirement-add></tr-terminate-requirement-add>
+<!--<tr-terminate-requirement-detail></tr-terminate-requirement-detail>-->

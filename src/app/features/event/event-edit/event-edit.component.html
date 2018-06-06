@@ -1,0 +1,164 @@
+<div class="edit-view-layout">
+	<div class="grid-style shrink-view">
+		<h2 class="page-title" *ngIf="action == 'Update'">Edit Event</h2>
+        <h2 class="page-title" *ngIf="action == 'Create'">Add Event</h2>
+				<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" autocomplete="off">
+					<fieldset class="three-column">
+						<legend> <span class="glyphicon glyphicon-flash"></span> event </legend>
+						<div class="row">
+
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('orderTypeDisposalTypeId')">
+								<label for="orderTypeDisposalTypeId" class="">Sentence Type</label>
+								<div class="">
+									<tr-dropdown [operation] = "action" [tableId]="421" [controlName]="'orderTypeDisposalTypeId'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('sentenceDate')">
+								<label for="sentenceDate" class="">sentence Date</label>
+								<div class="">
+									<date-picker [controlName]="'sentenceDate'" [form]="eventForm" [disabled]="true"></date-picker>
+								</div>
+							</div>
+							<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rsrScore')">
+								<label for="rsrScore" class="">RSR Score</label>
+								<div class="">
+									<input type="text" formControlName="rsrScore" id="rsrScore" class="form-control"  disabled/>
+								</div>
+							</div>-->
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenceCodeId')">
+								<label for="offenceCodeId" class="">Main Offence<span class="mand-text">*</span></label>
+								<div class="">
+									<tr-dropdown [operation] = "action" [tableId]="173" [controlName]="'offenceCodeId'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>
+							<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rsrDate')">
+								<label for="rsrDate" class="">RSR Date</label>
+								<div class="">
+									<date-picker [controlName]="'rsrDate'" [form]="eventForm" [disabled]="true"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('offenceCount')">
+								<label for="offenceCount" class="">offence Count <span class="mand-text">*</span></label>
+								<div class="">
+									<input type="text" formControlName="offenceCount" id="offenceCount" class="form-control"  disabled/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('rsrProviderId')">
+								<label for="rsrProviderId" class="">RSR Provider</label>
+								<div class="">
+									<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'rsrProviderId'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('takenIntoConsideration')">
+								<label for="takenIntoConsideration" class="">TICS</label>
+								<div class="">
+									<tr-dropdown [operation] = "action" [tableId]="244" [controlName]="'takenIntoConsideration'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>-->
+							<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('allocationDecisionId')">
+								<label for="allocationDecisionId" class="">allocation Decision</label>
+								<div class="">
+									<input type="text" formControlName="allocationDecisionId" id="allocationDecisionId" class="form-control" placeholder="allocation Decision" />
+									<tr-dropdown [operation] = "action" [tableId]="84" [controlName]="'allocationDecisionId'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>-->
+							<!--<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('length')">
+								<label for="length" class="">length</label>
+								<div class="">
+									<input type="text" formControlName="length" id="length" class="form-control"  disabled />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('allocationDate')">
+								<label for="allocationDate" class="">allocation Date</label>
+								<div class="">
+									<date-picker [controlName]="'allocationDate'" [form]="eventForm" [disabled]="true"></date-picker>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('decisionProviderId')">
+								<label for="decisionProviderId" class="">decision Provider</label>
+								<div class="">
+									<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'decisionProviderId'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('allocatedProviderId')">
+								<label for="allocatedProviderId" class="">allocated Provider</label>
+								<div class="">
+									<tr-dropdown [operation] = "action" [tableId]="193" [controlName]="'allocatedProviderId'" [dropdown]="eventForm" [disabled]="true"></tr-dropdown>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('expectedEndDate')">
+								<label for="expectedEndDate" class="">expected End Date</label>
+								<div class="">
+									<date-picker [controlName]="'expectedEndDate'" [form]="eventForm" [disabled]="true"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('osResponsibleTeam')">
+								<label for="osResponsibleTeam" class="">Team <span class="mand-text">*</span></label>
+								<div class="">
+									<input type="text" formControlName="osResponsibleTeam" id="osResponsibleTeam" class="form-control"
+									 disabled />
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('osResponsibleOfficer')">
+								<label for="osResponsibleOfficer" class="">Case Manager <span class="mand-text">*</span></label>
+								<div class="">
+									<input type="text" formControlName="osResponsibleOfficer" id="osResponsibleOfficer" class="form-control"
+									 disabled />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('lengthDays')">
+								<label for="lengthDays" class="">length Days</label>
+								<div class="">
+									<input type="text" formControlName="lengthDays" id="lengthDays" class="form-control"  disabled />
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('ogrs2Score')">
+								<label for="ogrs2Score" class="">OGRS 2 Score</label>
+								<div class="">
+									<input type="text" formControlName="ogrs2Score" id="ogrs2Score" class="form-control"  disabled
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('ogrs3Score1')">
+								<label for="ogrs3Score1" class="">OGRS 3 Score 1</label>
+								<div class="">
+									<input type="text" formControlName="ogrs3Score1" id="ogrs3Score1" class="form-control"  disabled
+									/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('ogrs3Score2')">
+								<label for="ogrs3Score2" class="">OGRS 3 Score 2</label>
+								<div class="">
+									<input type="text" formControlName="ogrs3Score2" id="ogrs3Score2" class="form-control"  disabled/>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('convictionDate')">
+								<label for="convictionDate" class="">conviction Date</label>
+								<div class="">
+									<date-picker [controlName]="'convictionDate'" [form]="eventForm" [disabled]="true"></date-picker>
+								</div>
+							</div>
+							<div class="form-group col-sm-6" *ngIf="isFeildAuthorized('referralDate')">
+								<label for="referralDate" class="">referral Date <span class="mand-text">*</span></label>
+								<div class="">
+									<date-picker [controlName]="'referralDate'" [form]="eventForm" [disabled]="true"></date-picker>
+								</div>
+							</div>-->
+							<div class="form-group col-sm-12 note-style" *ngIf="isFeildAuthorized('notes')">
+								<tr-notes [controlName]="'notes'" [form]="eventForm" [action]="action" [previousNotes]="previousNotes" [label]="'Notes'"></tr-notes>
+								<control-messages [control]="eventForm.controls.notes"></control-messages>
+
+							</div>
+
+							<div class="form-group col-sm-12 text-right">
+								<button class="btn btn-default btn-purple">Save</button>
+								<button class="btn btn-default btn-white" (click)="navigateTo(['../../../profile'])">Cancel</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+	</div>
+</div>

@@ -1,0 +1,110 @@
+<div class="list-list-layout">
+	<tr-main-tabs></tr-main-tabs>
+	<tr-tabs [structure]="'SU'"></tr-tabs>
+
+	<div class="grid-style shrink-view" *ngIf=authorizedFlag>
+	<tr-accordion>
+		<tr-accordionTab header="SU Management" [selected]="true">
+			<div class="grid-head" >
+			</div>
+			<form [formGroup]="componentManagerAllocationAddForm" (ngSubmit)="onSubmit()" autocomplete="off">
+				<fieldset class="three-column grey-bg">
+					<div class="row edit-view-layout">
+						<div class="form-group col-sm-6">
+							<div class="form-group col-sm-12 nopadding">
+								<label for="officeTeamId" title="Team">Team<span class="mand-text">*</span> </label>
+								<select id="officeTeamId" class="form-control" formControlName="officeTeamId" (change)="change($event.target.options)">
+
+							<option value='' >--Select--</option>
+							<option *ngFor="let org of orgs" [value]="org?.key" >{{org?.value}}</option>
+						</select>
+								<control-messages [control]="componentManagerAllocationAddForm.controls.officeTeamId"></control-messages>
+							</div>
+
+							<div class="form-group col-sm-12 nopadding">
+								<label for="officerId" title="Officer">Officer<span class="mand-text">*</span> </label>
+								<select id="officerId" class="form-control" formControlName="officerId">
+                            <option value=''>--Select--</option>
+                            <option *ngFor="let user of officerIds" [value]="user?.key">{{user?.value}}</option>
+                        </select>
+								<control-messages [control]="componentManagerAllocationAddForm.controls.officerId"></control-messages>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-div">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th id="type" class="wid100"><span class="th-div">Type</span></th>
+											<th id="descriptionId" class="wid120"><span class="th-div">Description</span></th>
+											<th id="startDate" class="wid100 text-center"><span class="th-div">Start Date</span></th>
+											<th id="toProvider" class="wid100"><span class="th-div">PROVIDER</span></th>
+											<th id="officeTeamIdhead" class="wid100"><span class="th-div">TEAM</span></th>
+											<th id="officerIdhead" class="wid100"><span class="th-div">OFFICER</span></th>
+											<th id="ReasonId" class="wid120"><span class="th-div">Reason</span></th>
+										</tr>
+									</thead>
+									<tbody formArrayName="listOfCaseManagerAllocationJson">
+										<tr *ngFor="let tor of componentManagerAllocationAddForm.controls.listOfCaseManagerAllocationJson.controls; let i=index"
+											[formGroupName]="i">
+											<td>
+
+												{{tor?.controls['type']?.value}}
+											</td>
+											<td>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '337'" [tableId]="421" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '17'" [tableId]="215" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '18'" [tableId]="422" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '19'" [tableId]="197" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '31'" [tableId]="149" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '29'" [tableId]="108" [pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+												<tr-list-label *ngIf="tor?.controls['tableId']?.value == '38' || tor?.controls['tableId']?.value == '48'" [tableId]="192"
+													[pkValue]="tor?.controls['descriptionId']?.value"></tr-list-label>
+											</td>
+
+											<td class="text-center">
+
+												{{tor?.controls['startDate']?.value}}
+											</td>
+											<td>
+												<tr-list-label *ngIf="tor?.controls['transferToProviderId']?.value" [tableId]="193" [pkValue]="tor?.controls['transferToProviderId']?.value"></tr-list-label>
+											</td>
+											<td>
+												{{tor?.controls['officeTeam']?.value}}
+												<!--<tr-list-label [tableId]="445" [pkValue]="tor?.controls['teamId']?.value"></tr-list-label>-->
+											</td>
+											<td>
+												<!--<tr-list-label *ngIf="tor?.controls['transferToResponsibleOfficerId']?.value" [tableId]="270" [pkValue]="tor?.controls['transferToResponsibleOfficerId']?.value"></tr-list-label>-->
+												{{tor?.controls['officerName']?.value}}
+
+											</td>
+											<td>
+												<div *ngIf="tor?.controls['enableComponet']?.value">
+													<tr-dropdown [operation] = "action" [tableId]="2549" [controlName]="'transferReasonId'" name="{{i}}" [dropdown]="tor"></tr-dropdown>
+												</div>
+											</td>
+
+										</tr>
+									</tbody>
+								</table>
+								<!--<div *ngIf="caseManagerAllocationList?.length<=0" class="no-records">No Records Found</div>-->
+							</div>
+						</div>
+					</div>
+
+					<div class="row mt15">
+						<div class="form-group col-sm-12 text-right">
+							<button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="componentManagerAllocationAddForm" [disabled]="!allowSubmit">SUBMIT</button>
+							<button type="button" (click)="navigateTo(['..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</tr-accordionTab>
+
+	</tr-accordion>
+	</div>
+</div>

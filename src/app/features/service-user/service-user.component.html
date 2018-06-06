@@ -1,0 +1,103 @@
+<ol class="breadcrumb">
+	<li class="active">Service Users</li>
+</ol>
+<h2 class="page-title">Service Users</h2>
+<div class="filter-div">
+	<form name="addServiceUserForm" class="form-service-user" (ngSubmit)="onSubmit(f)" #f="ngForm">
+		<div ngmodelgroup="serviceUser">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+
+						<label for="serviceUserId">Service User</label>
+						<input type="text" name="serviceUserId"="serviceUserId" [(ngModel)]="serviceUser.serviceUserId" value="" class="form-control"
+							placeholder="Service User" />
+					</div>
+					<div class="form-group">
+						<label for="crnNumber">CRN Number</label>
+						<input type="text" name="crnNumber"="crnNumber" [(ngModel)]="serviceUser.crnNumber" value="{{serviceUser?.crnNumber}}"
+							class="form-control" placeholder="CRN Number" />
+						<label for="firstName" class="col-md-3">first Name</label>
+						<div class="col-md-9">
+							<input type="text" name="firstName"="firstName" [(ngModel)]="serviceUser.firstName" value="{{serviceUser?.firstName}}"
+								class="form-control" placeholder="first Name" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="firstName">First Name</label>
+						<input type="text" name="firstName"="firstName" [(ngModel)]="serviceUser.firstName" value="{{serviceUser?.firstName}}"
+							class="form-control" placeholder="First Name" />
+
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="lastName">Last Name</label>
+						<input type="text" name="lastName"="lastName" [(ngModel)]="serviceUser.lastName" value="{{serviceUser?.lastName}}" class="form-control"
+							placeholder="last Name" />
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<button class="btn btn-default btn-purple pull-right mb25">Search!</button>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</form>
+</div>
+<div class="rows" [hidden]="!flagForPaginatioStuff">
+	<div class="col-md-12 nopadding">
+		<div class="mb10">
+			<select class="control pull-right" #itemsPerPage (change)="getPage(numberOfPage,itemsPerPage.value)">
+  			<option *ngFor="let dropdown of dropdownItems"   >
+  			  {{dropdown}}
+  			</option>
+		 </select>
+			<label class="control pull-right">Items Per Page</label>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-div">
+			<div class="table-div">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>service User</th>
+							<th>first Name</th>
+							<th>last Name</th>
+							<th class="text-center">crn Number</th>
+							<th class="text-center">View</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let serviceUser of serviceUsers">
+							<td>{{serviceUser.serviceUserId}}</td>
+							<td>{{serviceUser.firstName}}</td>
+							<td>{{serviceUser.lastName}}</td>
+							<td class="text-center">{{serviceUser.crnNumber}}</td>
+							<td class="text-center"><a [routerLink]="[serviceUser.serviceUserId]"><span class="glyphicon glyphicon-search">aa</span></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<nav *ngIf="totalPages.length>1">
+	<ul class="pagination">
+		<!--<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>-->
+		<li *ngFor="let numberOfPage of totalPages"><a (click)="getPage(numberOfPage,itemsPerPage.value)">{{numberOfPage}}<span class="sr-only">aa</span></a></li>
+	</ul>
+</nav>

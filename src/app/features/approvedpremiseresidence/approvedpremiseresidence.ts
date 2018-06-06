@@ -1,0 +1,30 @@
+export class ApprovedPremiseResidence {
+	approvedPremiseResidenceId: number;
+	approvedPremiseReferralId: number;
+	apReferralId: number;
+	approvedPremiseId: number;
+	approvedPremiseKeyWorker: string;
+	approvedPremiseResponsibleOfficer: string;
+	approvedPremiseResponsibleTeam: string;
+	arrivalDate: Date;
+	arrivalNote: string;
+	departureDate: Date;
+	departureReasonId: number;
+	expectedDepartureDate: Date;
+	moveOnCategoryId: number;
+	spgApprovedPremiseResidenceId: number;
+	spgVersion: string;
+	spgUpdateUser: string;
+	createdDate: Date;
+	createdBy: string;
+	createdByUserId: number;
+	modifiedDate: Date;
+	modifiedBy: string;
+	modifiedByUserId: number;
+	deleted: number;
+	deletedDate: Date;
+	deletedBy: string;
+	deletedByUserId: number;
+	locked: number;
+	version: number;
+}

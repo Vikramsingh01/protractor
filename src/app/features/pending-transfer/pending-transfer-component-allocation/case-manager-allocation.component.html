@@ -1,0 +1,123 @@
+<tr-confirm-box *ngIf="confirmBox" (confirmFlag)="executeConfirmation($event)" (closePopup)="confirmBox = false"></tr-confirm-box>
+<div class="sub-menu pull-right">
+    <ul>
+        <li><button class="btn btn-default btn-purple pull-right" type="button" *ngIf="offenderProfile?.spgOffenderId" [routerLink]="['engagement-history', offenderProfile?.spgOffenderId ]"
+                disabled>Engagement History</button></li>
+    </ul>
+</div>
+<div class="edit-view-layout">
+    <div class="grid-style shrink-view" *ngIf="authorizedFlag">
+        <h2 class="page-title">Component Allocation</h2>
+        <form [formGroup]="cmaform" (ngSubmit)="onSubmit()" autocomplete="off">
+            <fieldset class="three-column">
+                <legend> <span class="glyphicon glyphicon-flash"></span>COMPONENT ALLOCATION</legend>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="component">Component<span class="mand-text">*</span> </label>
+                        <input class="form-control" id="component" formControlName="component" readonly />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="componentType">Component Type</label>
+                        <input class="form-control" id="componentType" formControlName="componentType" readonly />
+                    </div>
+                      <div class="col-sm-12 nopadding">
+                        <div *ngIf="componentAllocationPendingTransfer?.actionId===3 ">
+                        <div class="form-group col-sm-6">
+                            <!--<label for="actionId">Action<span class="mand-text">*</span> </label>
+                            <div class="radio-group-list nopadtop">
+                            <input type="radio" (change)="changeFlagAccept()"  value="true" formControlName="actionId" [checked]='true'/>Accept
+                            <input type="radio" (change)="changeFlagReject()" value="false" formControlName="actionId" class="ml10"  />Reject
+                            </div>
+                            <control-messages [control]="cmaform.controls.actionId"></control-messages>-->
+
+                           <div class="cust-label-div" title="RAR Day?">Action<span class="mand-text">*</span> </div>
+      <div class="radio-group-list">
+      <label class="radio-inline">
+      <input type="radio" id="yesRadio" (change)="changeFlagAccept()" value="true" formControlName="actionId" [checked]='true'> Accept
+      </label>
+      <label class="radio-inline">
+      <input type="radio" id="noRadio" (change)="changeFlagReject()" value="false" formControlName="actionId" /> Reject
+      </label>
+      <control-messages [control]="cmaform.controls.actionId"></control-messages>
+      </div>
+
+                         </div>
+                    </div>
+                      <div *ngIf="componentAllocationPendingTransfer?.actionId===4">
+                        <div class="form-group col-sm-6">
+                            <!--<label for="actionId">Action<span class="mand-text">*</span> </label>
+                            <div class="radio-group-list nopadtop">
+                            <input type="radio" (change)="changeFlagAccept()" value="true" formControlName="actionId"/>Accept
+                            <input type="radio" (change)="changeFlagReject()" value="false" formControlName="actionId" class="ml10"  [checked]='true' />Reject
+                            </div>
+                            <control-messages [control]="cmaform.controls.actionId"></control-messages>-->
+
+                           <div class="cust-label-div" title="RAR Day?">Action<span class="mand-text">*</span> </div>
+      <div class="radio-group-list">
+      <label class="radio-inline">
+      <input type="radio" id="yesRadio" (change)="changeFlagAccept()" value="true" formControlName="actionId"> Accept
+      </label>
+      <label class="radio-inline">
+      <input type="radio" id="noRadio" (change)="changeFlagReject()" value="false" formControlName="actionId" [checked]='true' /> Reject
+      </label>
+      <control-messages [control]="cmaform.controls.actionId"></control-messages>
+      </div>
+
+                         </div>
+                    </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="teamId" >Team<span class="mand-text">*</span> </label>
+                        <select class="form-control" formControlName="officeTeamId" id="teamId" (change)="change($event.target.options)">
+                          <option value="" >--Select--</option>
+					      <option *ngFor="let officeTeamId of teams" [value]="officeTeamId?.key" >{{officeTeamId?.value}}</option>
+                       </select>
+                        <control-messages [control]="cmaform.controls.officeTeamId"></control-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="officerId">Officer<span class="mand-text">*</span> </label>
+                        <select class="form-control" formControlName="officerId" id="officerId">
+                            <option value="">--Select--</option>
+                            <option *ngFor="let user of officerIds" [value]="user?.key">{{user?.value}}</option>
+                        </select>
+                        <control-messages [control]="cmaform.controls.officerId"></control-messages>
+                    </div>
+                    <div *ngIf="this.componentAllocationPendingTransfer?.tableId=='4'">
+                    <div class="form-group col-sm-6">
+                        <label for="bandId">Band<span class="mand-text">*</span> </label>
+                        <!--<select class="form-control" formControlName="officerId">
+					            <option value=null>--Select--</option>
+        	                <option *ngFor="let user of officerIds" [value]="user?.key">{{user?.value}}</option>
+                        </select>-->
+                         <tr-dropdown [operation] = "action" [tableId]="2548" [controlName]="'bandId'" [dropdown]="cmaform"></tr-dropdown>
+                        <control-messages [control]="cmaform.controls.bandId"></control-messages>
+                    </div>
+                    </div>
+                  <div class="form-group col-sm-6">
+                        <label for="rejectionReasonId">Rejection Reason<span class="mand-text">*</span> </label>
+                        <!--<tr-dropdown [operation] = "action" [tableId]="175" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>-->
+                           <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '4'" [tableId]="175"[controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '337'" [tableId]="182" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '17'" [tableId]="214" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '18'" [tableId]="154" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '19'" [tableId]="196" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                           <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '31'" [tableId]="147"[controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                          <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '29'" [tableId]="147" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                         <tr-dropdown [operation] = "action" *ngIf=" this.componentAllocationPendingTransfer.tableId == '38' ||  this.componentAllocationPendingTransfer.tableId == '48'" [tableId]="167" [controlName]="'rejectionReasonId'" [dropdown]="cmaform"></tr-dropdown>
+                        <control-messages [control]="cmaform.controls.rejectionReasonId"></control-messages>
+                    </div>
+
+                    <div class="form-group col-sm-12 text-right">
+                        <button class="btn btn-default btn-purple" id="saveButton" fromServerMessageValidator [form]="cmaform">save</button>
+                        <button type="button" (click)="navigateTo(['../..'])" id="cancelButton" class="btn btn-default btn-white">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+

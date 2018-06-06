@@ -1,0 +1,54 @@
+<div class="detail-view-layout">
+    <div class="row hide-heading">
+        <div class="col-sm-12">
+            <h2 class="page-title pull-left">VIEW National Search</h2>
+            <div class="pull-right">
+                    <button [routerLink]="['../..']" id="backButton" class="btn btn-default btn-purple pull-right">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="double-divider-purple mt10 hide-heading"></div>
+    <div class="grid-style" >
+
+         
+                <div class="grid-head"></div>
+                <fieldset class="three-column shrink-view">
+                    <legend> <span class="glyphicon glyphicon-flash"></span> Registration </legend>
+                    <div class="table-div">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                         <!--<th  id="nationalSearchQueryId"  ><span class="th-div">National Search Query Id<span class="glyphicon"></span></span></th> -->
+                                         <th id="crcSearchId"  title="Crc Search Id" class="text-center"><span class="th-div">No<span class="glyphicon"></span></span></th> 
+                                         <th  id="registrationDate" title="Registration Date" class="text-center"><span class="th-div">Registration Date<span  class="glyphicon"></span></span></th> 
+                                         <th  id="registrationType"  title="Registration Type"><span class="th-div">Registration Type<span class="glyphicon"></span></span></th> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let nationalSearch of nationalSearchList; let i = index">
+                                            <td class="text-center">
+                                                    <span>
+                                                         <p>{{i+1}}</p>
+                                                    </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span>
+                                                        <p>{{nationalSearch?.registrationDate}}</p>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                        <span *ngFor="let registerTypeId of registerTypeList | filter :'key' : nationalSearch?.registerType">{{registerTypeId.value}} </span>
+                                                </span>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div *ngIf="nationalSearchList?.length<=0" class="no-records">No Records Found</div>
+                        </div>
+                </fieldset>
+      
+
+    </div>
+    <!--<div *ngIf="!authorizedFlag">Not Authorized</div>-->
+</div>
